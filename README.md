@@ -24,3 +24,6 @@
 | 팀원 | 김제완 | Back-End | Jaekomplett | wanzekim@gmail.com |
 | 팀원 | 이상석 | Front-End | leesangsuk-cloud | skysangsuk@gmail.com |
 | 팀원 | 이승섭 | Front-End | seo-B | abejaseop@gmail.com |
+
+## Tech Stack
+![아키텍쳐](https://user-images.githubusercontent.com/85715932/153205847-b7b7f726-05e5-47e6-9718-e5ca034fd595.png)
