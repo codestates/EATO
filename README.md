@@ -1,19 +1,34 @@
-## Project
+## [Project EATO](https:www.eato.link)
 
 ![메인페이지](https://user-images.githubusercontent.com/85715932/153204739-3d255d4b-0f09-4cdf-b8a6-d0cf69a54b83.png)
 
 구현하고 이미지 교체
 
 ## About
-잇투는 부담되는 배달비를 다른 유저들과 나눌 수 있도록 도와주는 웹 서비스입니다.\
-배달비를 혼자 부담하는 대신, 웹을 통해 다른 유저들과 함께 부담 할 수 있는 서비스를 제공하기 위해 기획되었습니다.
+> **_잇투_** 는 부담되는 배달비를 다른 유저들과 나눌 수 있도록 도와주는 웹 서비스입니다.\
+> 배달비를 혼자 부담하는 대신, 웹을 통해 다른 유저들과 함께 부담 할 수 있는 서비스를 제공하기 위해 기획되었습니다.
 
 ## Feature
-- 배달비를 나눠 낼 수 있습니다.
-- 자신의 위치를 설정할 수 있습니다.
-- 사용자의 위치에 기반하여 주변 이웃을 찾아볼 수 있습니다.
-- 주문하고 싶은 카테고리의 음식에 맞춰 파티를 생성하거나, 파티에 참여할 수 있습니다.
-- 파티원과 실시간 채팅을 나눌 수 있습니다.
+<details>
+  <summary>배달비를 나눠 낼 수 있습니다.</summary>
+  <img src="https://user-images.githubusercontent.com/87610758/153206119-45b2b766-440b-43a3-ac8d-c9d491c04c19.png" />
+</details>
+<details>
+  <summary>자신의 위치를 설정할 수 있습니다.</summary>
+  <img src="https://user-images.githubusercontent.com/83867397/153199709-e989bda3-a2e1-48de-babe-23d00de226af.png" />
+</details>
+<details>
+  <summary>사용자의 위치에 기반하여 주변 이웃을 찾아볼 수 있습니다.</summary>
+  <img src="https://user-images.githubusercontent.com/83867397/153200039-9314294d-fb0b-4c24-8bd7-d2409629089e.png" />
+</details>
+<details>
+  <summary>주문하고 싶은 카테고리의 음식에 맞춰 파티를 생성하거나, 파티에 참여할 수 있습니다.</summary>
+  <img src="https://user-images.githubusercontent.com/83867397/153200142-11b950f1-efee-4e29-9689-4b9e6906374f.png" />
+</details>
+<details>
+  <summary>파티원과 실시간 채팅을 나눌 수 있습니다.</summary>
+  <img src="https://user-images.githubusercontent.com/83867397/153199883-40b9dd11-8bb0-4ef4-b293-e9a037fd7f32.png" />
+</details>
 
 ## Members Info
 | Role | Name | Position | Github ID | E-mail |
