@@ -20,10 +20,10 @@
 ## Members Info
 | Role | Name | Position | Github ID | E-mail |
 | :----------- | :------------: | :------------: | :------------: | :------------: |
-| 팀장👸🏼 | 정선우 | Front-End | sunwoong3 | sunw339@gmail.com |
-| 팀원 | 김제완 | Back-End | Jaekomplett | wanzekim@gmail.com |
-| 팀원 | 이상석 | Front-End | leesangsuk-cloud | skysangsuk@gmail.com |
-| 팀원 | 이승섭 | Front-End | seo-B | abejaseop@gmail.com |
+| 팀장👸🏼 | 정선우 | Front-End | [sunwoong3](https://github.com/sunwoong3) | sunw339@gmail.com |
+| 팀원 | 김제완 | Back-End | [Jaekomplett](https://github.com/Jaekomplett) | wanzekim@gmail.com |
+| 팀원 | 이상석 | Front-End | [leesangsuk-cloud](https://github.com/leesangsuk-cloud) | skysangsuk@gmail.com |
+| 팀원 | 이승섭 | Front-End | [seo-B](https://github.com/leesangsuk-cloud) | abejaseop@gmail.com |
 
 ## Tech Stack
 ![아키텍쳐](https://user-images.githubusercontent.com/85715932/153205847-b7b7f726-05e5-47e6-9718-e5ca034fd595.png)
