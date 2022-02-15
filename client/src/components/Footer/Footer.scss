@@ -1,0 +1,89 @@
+footer {
+  display: flex;
+  align-items: start;
+  flex-direction: row;
+  width: 100%;
+  height: 300px;
+  // 배경색 바꾸기
+  background-color: #F0F8FF;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 13px;
+  // font-family: "Noto Sans KR";
+  font-family: "Roboto";
+  color: #5C5B5B;
+
+  .first-box {
+    flex: 2;
+    margin: 55px 0px 30px 110px;
+    display: flex;
+    flex-direction: column;
+
+    .logo {
+      width: 155.89px;
+      height: 156px;
+      background-color: aliceblue;
+    }
+
+    .copyright {
+      width: 280px;
+      margin-top: 45px;
+    }
+    
+  }
+
+    .second-box {
+      display: flex;
+      flex-direction: column;
+      margin: 75px 115px 75px 75px;
+
+      // Project 글자 위치만 따로 재설정
+      .project {
+        margin-left: 3px;
+      }      
+    }
+    
+    .third-box {
+      display: flex;
+      flex-direction: column;
+      margin: 75px 75px 0px 75px;
+      }
+
+
+    }
+    
+    .fourth-box {
+      display: flex;
+      flex-direction: column;
+      margin: 75px 155px 75px 75px;
+    }
+    
+    
+
+// Project, Team Members, Contact 
+// 타이틀 스타일
+.box-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+
+
+}
+
+// 링크 텍스트 스타일
+.box-text {
+  margin-bottom: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: #5C5B5B;
+
+  &:hover {
+    color: #EE4E34;
+  }
+}
+
+.icon {
+  margin-right: 10px;
+}
+
