@@ -1,0 +1,225 @@
+// 반응형 breakpoint 
+// $small:320px;
+// $medium: 768px;
+// $large:1200px;
+
+@mixin intro_style {
+  width: 100%;
+  height: 600px;
+  background-color: #FFF8F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Sans KR';
+}
+
+@mixin wrapper_style {
+  display: flex;
+  align-items: center;
+
+}
+
+@mixin start_box_style {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+
+}
+
+@mixin start_btn_style {
+  font-size: 24px;
+  color: white;
+  background-color: #EE4E34;
+  padding: 16px 38px;
+  border-radius: 2rem;
+  text-decoration: none;
+  box-shadow: 2px 4px 10px 0 #A5A5A5;
+
+  &:hover {
+    transition: background-color .6s;
+    // transition: all 0.3s ease;
+    color: #EE4E34;
+    padding: 16px 38px;
+    background-color: #FFFCF8;
+    border-radius: 2rem;
+  }
+}
+
+@mixin font_style {
+  font-size: 48px;
+  font-weight: 400;
+  word-break: keep-all; 
+  text-align: center;
+  width: 335px;
+}
+
+@mixin img_box_style {
+  display: flex;
+  justify-content: end;
+}
+
+// @include : @mixin으로 저장한 속성을 적용
+
+
+.intro-1 {
+  @include intro_style;
+  // Tablet
+  @media screen and (max-width: 768px) {
+    
+  }
+  .wrapper {
+    @include wrapper_style;
+
+    .card {
+      width: 535px;
+      height: 222px;
+      margin-right: 110px;
+    }
+    
+    .start-box {
+      @include start_box_style;
+
+      .intro-text-1 {
+        @include font_style;
+        padding-bottom: 20px;
+      }
+      
+      .btn {
+        @include start_btn_style;
+      }
+    }
+  }
+
+  }
+
+
+
+.intro-2 {
+    @include intro_style;
+    background-color: #FFFCF8;
+
+    
+    .wrapper {
+      @include wrapper_style;
+
+    .intro-text-2 {
+      @include font_style;
+      margin-right: 110px;
+      width: 465px;
+      height: 175px;
+      text-align: center;
+
+
+    }
+
+    .search-bar {
+      width: 430px;
+      height: 60px;
+      background-color: #EE4E34;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .search-text {
+        font-size: 20px;
+        font-weight: 500;
+        color: white;
+        padding-left: 35px;
+      }
+      .search-icon {
+        color: white;
+        padding-right: 20px;
+      }
+    }
+  }
+}
+
+.intro-3 {
+  @include intro_style;
+
+  .wrapper {
+    @include wrapper_style;
+    .map {
+      width: 597px;
+      height: 299px;
+      margin-right: 70px;
+      border-radius: 20px;
+    }
+    .intro-text-3 {
+      @include font_style;
+      width: 430px;
+    }
+  }
+}
+
+.intro-4 {
+  @include intro_style;
+  background-color: #FFFCF8;
+
+  .wrapper {
+    @include wrapper_style;
+
+    .intro-text-4 {
+      @include font_style;
+      width: 565px;
+      margin-right: 95px;
+    }
+
+    .img-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 528.85px;
+      height: 446px;
+      
+      .img-box-l {
+        @include img_box_style;
+        justify-content: start;
+        margin-bottom: 55px;
+      }
+
+      .img-box-r {
+        @include img_box_style;
+        margin-bottom: 65px;
+
+        // 화질이 깨진 상태로 import 됨. 
+        // 크기를 figma와 똑같이 설정 => 화질 복구됨.
+        .img-2 { 
+          width: 249.8px;
+          height: 108px;
+        }
+      }
+
+      .img-box-l {
+        @include img_box_style;
+        justify-content: start;
+
+        .img-3 {
+          width: 349px;
+          height: 113px;
+        }
+      }
+    }
+  }
+  
+}
+
+.intro-5 {
+  @include intro_style;
+  .wrapper {
+    @include wrapper_style;
+    flex-direction: column;
+    .intro-text-5 {
+      @include font_style;
+      width: 480px;
+      margin-bottom: 40px;
+    }
+    .start-box {
+      @include start_box_style;
+
+      .btn {
+        @include start_btn_style;
+      }
+    }
+  }
+}
