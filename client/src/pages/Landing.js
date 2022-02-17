@@ -1,9 +1,9 @@
 import React from "react";
 import Nav from "../components/Nav/Nav";
-import Intro from "../components/Main/Intro";
+import Intro from "../components/Landing/Intro";
 import Footer from "../components/Footer/Footer";
 
-function Main() {
+function Landing() {
   return (
     <>
       <Nav></Nav>
@@ -13,4 +13,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Landing;

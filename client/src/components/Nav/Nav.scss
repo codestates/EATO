@@ -1,0 +1,126 @@
+@mixin user_button {
+  padding: 10px 14px;
+  margin-right: 10px;
+  text-decoration: none;
+  color: #251e1e;
+  display: flex;
+  &:hover {
+    transition: background-color 0.4s;
+    color: #EE4E34;
+    padding: 10px 14px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+  }
+}
+
+nav {
+  font-weight: 500;
+  width: 100%;
+  height: 130px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .logo {
+    margin-left: 50px;
+    width: 167.88px;
+    height: 74px;
+    display: flex;
+    align-items: center;
+  } 
+    // SignUp, MyPage, etc... wrapper
+    .user-access {
+      display: flex;
+      font-size: 16px;
+      margin-right: 23px;
+      position: relative;
+      // ** button과 hover의 padding값을 똑같이 설정해야 움직임이 고정된다.
+      .user-button {
+        @include user_button;
+        }
+      }
+
+      // NavNotification
+      .noti-container {
+        position: relative;
+        .noti-box {
+          position: absolute;
+          top: 3rem;
+          right: 10px;
+          background-color: white;
+          width: 300px;
+          height: 120px;
+          border-radius: 20px;
+          box-shadow: 0 2px 4px #A5A5A5;
+          display: flex;
+          flex-direction: column;
+
+          .noti-title {
+            padding: 14px 20px 8px;
+            color: #5C5B5B;
+          }
+          
+          .noti-line-style {
+            margin: auto;
+            width: 90%;
+          }
+
+          // 알림 내용 컨테이너
+          .noti-content-container {
+            width: 100%;
+            :hover {
+              background-color: #F3F3F3;
+            }
+            .noti-content-box {
+              display: flex;
+              flex: auto; 
+              // flex
+              // 아이템 크기가 각각의 width와 height 속성에 따라 정해집니다. 
+              // 플렉스 컨테이너의 크기를 넘지 않기 위해 최소 크기로 줄어들 수 있으며, 
+              // 남은 공간을 채우기 위해 늘어날 수도 있습니다. flex: 1 1 auto와 동일합니다.
+
+              font-size: 13px;
+              padding: 12px;
+              position: relative;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+
+                // 알림 X
+                .noti-none {
+                  display: flex;
+                  color: #C4C4C4;
+                }
+
+                // 알림 O
+                .noti-content {
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  color: #5C5B5B;
+                  padding-right: 20px;
+                  
+                  .noti-text {
+                    padding-left: 10px;
+                  }
+                  }
+
+                .delete-btn {
+                  :hover {
+                    color: #EE4E34;
+                  }
+                }
+              }
+
+
+
+          }   
+        }
+      }       
+    }
+
+
+
+
+

@@ -1,0 +1,71 @@
+@import "../SignUp/SignUp.scss";
+
+  .signin-right {
+    @include right;
+    .right-fork {
+      @include right_fork;
+
+    }
+
+  // 회원가입 입력 컨테이너
+  .signin-container {
+    @include right-container;
+    .signin-title-text {
+      @include right-ct-title-text;
+      padding-bottom: 40px;
+    }
+    
+    .signin-input-box {
+      @include right-ct-input-box;
+      
+        .signin-input {
+          @include right-ct-input;
+          
+        }
+        ::placeholder {
+          @include right-ct-placeholder;
+        }
+
+    }
+    .signin-btn {
+      @include signin-up-btn;
+      margin-top: 60px;
+    }
+
+    .signin-social-text {
+      @include social-text;
+      display: flex;
+      justify-content: center;
+      padding-top: 100px;
+    }
+
+    .signin-social-box {
+      @include social-box;
+      
+      .signin-naver {
+        width: 220px;
+        height: 51.64px;
+        padding-right: 20px;
+        
+      }
+      .signin-kakao {
+        width: 216px;
+        height: 51.64px;
+
+      }
+    }
+    .signup-question-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .signup-question {
+        color: #8b8b8b;
+        padding-right: 10px;
+      }
+      .go-signup {
+        color: #EE4E34;
+      }
+    }
+  }
+}

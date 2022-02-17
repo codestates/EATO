@@ -1,0 +1,262 @@
+// 전체 페이지 속성
+@mixin signin-up_wrapper {
+  display: flex;
+  flex: auto;
+}
+
+// 왼쪽 페이지 속성
+@mixin left {
+  width: 45vw;
+  height: 100vh;
+  position: relative;
+  background-color: #EE4E34;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin text_box {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  // margin-top: 350px;
+  // margin: auto;
+  font-family: "Roboto";
+  padding-bottom: 100px;
+  
+}
+@mixin left_logo {
+  width: 141px;
+  height: 42px;
+  margin: 10px;
+  }
+  
+@mixin fork_box {
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  margin-bottom: 30px;
+  }
+
+@mixin left_fork {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    // width: 241px;
+    // height: 349px;
+    width: 200px;
+    height: 289.63px;
+    }
+
+// 오른쪽 페이지 속성
+@mixin right {
+  width: 55vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5C5B5B;
+}
+
+@mixin right_fork {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 220px;
+  height: 220px;
+}
+
+@mixin right-container {
+  font-weight: 500;
+}
+
+@mixin right-ct-title-text {
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+// 인풋창 컨테이너
+@mixin right-ct-input-container {
+  // padding-top: 20px;
+  padding: 20px 0px;
+}
+
+// 인풋 개별 컴포넌트 묶음
+@mixin right-ct-input-box {
+  font-size: 16px;
+  padding: 15px 0;
+}
+
+@mixin right-ct-input-title{
+  padding-bottom: 5px;
+}
+
+@mixin right-ct-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 8px 0;
+}
+
+@mixin right-ct-placeholder {
+  font-size: 16px;
+  color: #DADADA;
+}
+
+// 소셜 가입 컨테이너
+@mixin signup-social-container {
+}
+
+@mixin social-text {
+  color: #8b8b8b;
+  padding: 20px 50px;
+}
+
+@mixin social-box {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+@mixin signin-up-btn {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  background-color: #EE4E34;
+  padding: 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  box-shadow: 2px 2px 10px 0 #A5A5A5;
+  
+  &:hover {
+    transition: background-color .6s;
+    // transition: all 0.3s ease;
+    color: #EE4E34;
+    padding: 12px 20px;
+    background-color: #FFFCF8;
+    border-radius: 20px;
+  }
+}
+
+// signin-up === 재사용 가능한 로그인, 회원가입 CSS 
+.signin-up-wrapper {
+  @include signin-up_wrapper;
+
+.signin-up-left {
+  @include left;
+  
+  .text-box {
+    @include text_box;
+
+    .welcome {
+      width: 100%;
+      font-size: 70px;
+      line-height: 120%;
+    }
+
+    .left-logo {
+      @include left_logo;
+    }
+  }
+
+  .fork-box {
+    @include fork_box;
+
+    .left-fork {
+      @include left_fork
+    }
+  }
+  }
+
+
+// 오른쪽 페이지
+.signup-right {
+  @include right;
+
+  // 포크 이미지
+  .right-fork {
+    @include right_fork;
+  }
+  
+  // 회원가입 컨테이너
+  .signup-box {
+    @include right-container;
+    // 회원가입 타이틀
+    .signup-title-text {
+      @include right-ct-title-text;
+    }
+    // 인풋 컨테이너
+    .signup-input-container {
+      @include right-ct-input-container;
+      // 인풋 박스 묶음  
+      .signup-input-box {
+          @include right-ct-input-box;
+          // width: 445px;
+          // height: 80px;
+
+          // 인풋 박스 내부 제목
+          .signup-input-title {
+            @include right-ct-input-title;
+          }
+          // 인풋창
+          .signup-input {
+            @include right-ct-input;
+          }
+          ::placeholder {
+            @include right-ct-placeholder;
+          }
+        }
+    }
+    
+    // 소셜 컨테이너 
+    .signup-social-container {
+     @include signup-social-container;
+
+      // 소셜 회원가입 텍스트
+    .signup-social-text {
+      @include social-text;
+    }
+
+    // 소셜 로그인 링크 박스 묶음
+    .signup-social-btn {
+      @include social-box;
+      .signup-naver {
+        // width: 120px;
+        // height: 28.17px;
+        // padding-right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #19CE60;
+        padding-right: 40px;
+      }
+      .signup-kakao {
+        // width: 116px;
+        // height: 27.73px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #FAE100;
+      }
+    }
+
+    // 가입하기 버튼
+    .signup-btn {
+      @include signin-up-btn;
+    }
+  }
+  } 
+}
+
+
+} 
+
+
+
+
