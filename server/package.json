@@ -4,7 +4,7 @@
   "description": "KLJ Final Project",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon --experimental-modules --es-module-specifier-resolution=node app.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "dependencies": {
     "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
+    "cookie": "^0.4.2",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
@@ -28,11 +29,13 @@
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
+    "moment": "^2.29.1",
     "mongodb": "^4.3.1",
     "mongoose": "^6.2.1",
     "morgan": "~1.9.1",
     "multer": "^1.4.4",
     "nodemon": "^2.0.15",
+    "qs": "^6.10.3",
     "sequelize": "^6.13.0",
     "sequelize-cli": "^6.4.1",
     "socket.io": "^4.4.1",
