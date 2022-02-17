@@ -1,17 +1,19 @@
-import React from "react";
+// import React from "react";
+// import Backdrop from "./Backdrop";
+// import Modal from "./Modal";
+// import { useState } from "react";
 
-function HomePost() {
-  return (
-    <>
-      <div>Footer</div>
-    </>
-  );
-}
+// const HomePost = (props) => {
+//   const [showModal, setShowModal] = useState();
 
-export default HomePost;
+//   const showModalHandler = () => {
+//     setShowModal(true);
+//   };
 
-// 1. 로고
-// 2. 저작권 텍스트
-// 3. project
-// 4. team members
-// 5. contact
+//   const closeModalHandler = () => {
+//     setShowModal(false);
+//   };
+
+//   return
+
+// export default HomePost;
