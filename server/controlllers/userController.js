@@ -1,126 +1,227 @@
-import asyncHandler from "express-async-handler";
-import User from "../models/user.js";
-import Post from "../models/post.js";
-import Chatting from "../models/chatting.js";
-import generateToken from "./auth/auth.js";
+const asyncHandler = require("express-async-handler");
+const User = require("../models/user.js");
+const generateToken = require("../support/token.js");
+const {
+  getOption,
+  getUserInfo,
+  revokeAccess,
+  updateAccessToken,
+} = require("../support/oAuth.js");
 
-// 회원가입
-const signUp = asyncHandler(async (req, res) => {
-  const { email, password, nickname } = req.body;
+module.exports = {
+  // 사용가능한 이메일인지 확인
+  // POST
+  // user/signUp
+  validEmail: asyncHandler(async (req, res) => {
+    const { email } = req.body;
 
-  const userExists = await User.findOne({ email });
+    const alreadyEmail = await User.findOne({ "profile.email": email });
 
-  if (userExists) {
-    res.status(401).json({ message: "이미 가입된 이메일 입니다." });
-  }
+    if (alreadyEmail) {
+      res.status(401).json({ message: "존재하는 이메일 입니다." });
+    } else {
+      res.status(200).send({ message: "사용가능한 이메일 입니다." });
+    }
+  }),
 
-  const user = await User.create({
-    email,
-    password,
-    nickname,
-    image: "/images/user.jpeg",
-  });
+  // 회원가입
+  // POST
+  // user/signUp
+  createUser: asyncHandler(async (req, res) => {
+    const { email, password, nickname } = req.body;
 
-  if (user) {
-    res.status(201).json({
-      message: "회원가입이 완료됐습니다.",
-    });
-  } else {
-    res.status(400).json({ message: "모든 항목을 작성해 주세요." });
-  }
-});
+    if (email && password && nickname) {
+      const user = new User({
+        profile: { email, password },
+        nickname,
+      });
+      // Mongoose에 Mixed 유형의 값이 변경되었음을 알리려면 doc.markModified(path)방금 변경한 Mixed 유형에 대한 경로를 전달하는 를 호출해야 합니다.
+      user.markModified("profile");
+      user.markModified("nickname");
+      await user.save();
 
-// 소셜 회원가입
-const socialSignUp = asyncHandler(async (req, res) => {});
+      res.status(201).json({ message: "회원가입에 성공했습니다." });
+    } else {
+      res.status(400).json({ message: "모든 항목을 작성해 주세요." });
+    }
+  }),
 
-// 소셜 로그인
-const socialLogin = asyncHandler(async (req, res) => {});
+  // 로그인
+  // POST
+  // user/login
+  userLogin: asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({ "profile.email": email });
+    const token = generateToken(user._id);
 
-// 게스트 로그인
-const guestLogin = asyncHandler(async (req, res) => {});
+    if (!user) {
+      res.status(401).json({ message: "이메일을 확인해주세요." });
+      return;
+    }
 
-// 로그인
-const login = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+    if (!user.profile.password) {
+      res.status(401).json({ message: "존재하지 않는 유저입니다." });
+      return;
+    }
 
-  const user = await User.findOne({ email });
+    if (await user.matchPassword(password)) {
+      res.json({
+        _id: user._id,
+        nickname: user.nickname,
+        cookie: sendAccessToken(res, token),
+      });
+    } else {
+      res.status(401).json({ message: "비밀번호를 확인해주세요." });
+    }
+  }),
 
-  if (user && (await user.matchPassword(password))) {
-    res.json({
-      _id: user._id,
-      nickname: user.nickname,
-      email: user.email,
-      image: user.image,
-      token: generateToken(user._id),
-    });
-  } else {
-    res.status(401).json({ message: "이메일 또는 비밀번호를 확인해 주세요" });
-  }
-});
+  // 로그아웃
+  // GET
+  // user/logout
+  logout: asyncHandler(async (req, res) => {
+    res.clearCookie();
+    res.status(200).send("로그아웃에 성공했습니다.");
+  }),
 
-// 이메일 중복검사
-const emailTest = asyncHandler(async (req, res) => {
-  const { email } = req.body;
+  // 소셜 로그인
+  // GET
+  // user/:kana
+  socialLogin: asyncHandler(async (req, res) => {
+    const { kana } = req.params;
+    const { code } = req.query; // ?
 
-  const emailExists = await User.findOne({ email });
+    const options = getOption(kana, code);
+    const token = await generateToken(options, "authorization_code");
+    const userInfo = await getUserInfo(kana, options.userInfo_url, token);
 
-  if (emailExists) {
-    res.status(401).json({ message: "중복된 이메일 입니다." });
-  }
-  res.status(200).send({ message: "사용가능한 이메일 입니다." });
-});
+    let uuid;
+    let email;
+    let nickname;
 
-// 비밀번호 확인
-const passwordTest = asyncHandler(async (req, res) => {
-  const { password } = req.body;
+    if (kana === "kakao") {
+      uuid = userInfo.id;
+      email = userInfo.kakao_account.email;
+      nickname = userInfo.kakao_account.profile.nickname;
+    }
+    if (kana === "naver") {
+      uuid = userInfo.response.id;
+      email = userInfo.response.email;
+      nickname = userInfo.response.nickname;
+    }
+    // DB와 연락하기
+    const { access_token, refresh_token } = token;
+    const cookie = sendAccessToken(res, access_token);
+    const user = await User.findOneAndUpdate(
+      {
+        [`${kana}.uuid`]: uuid,
+      },
+      {
+        [`${kana}.email`]: email,
+        [`${kana}.accessToken`]: access_token,
+        [`${kana}.refreshToken`]: refresh_token,
+      },
+      { new: true }
+    );
 
-  const user = await User.findById(req.user._id);
+    if (user) {
+      res.json({
+        _id: user._id,
+        nickname: user.nickname,
+        cookie,
+      });
+    } else {
+      const newUser = new User({
+        [`${kana}.uuid`]: uuid,
+        [`${kana}.email`]: email,
+        [`${kana}.accessToken`]: access_token,
+        [`${kana}.refreshToken`]: refresh_token,
+        nickname,
+      });
 
-  if (await user.matchPassword(password)) {
-    res.json({ message: "ok" });
-  } else {
-    res.status(401).json({ message: "비밀번호가 일치하지 않습니다." });
-  }
-});
+      await newUser.save();
+      res.json({
+        _id: newUser._id,
+        nickname: newUser.nickname,
+        cookie,
+      });
+    }
+  }),
 
-// 유저 프로필 편집 (닉네임, 지역 변경)
-const updateUserInfo = asyncHandler(async (req, res) => {
-  let message = "";
+  // 유저 프로필 수정(닉네임, 지역) // 수정해야될수도 nickname location 조건 따로 나누기
+  // PATCH
+  // user/userInfo
+  updateProfile: asyncHandler(async (req, res) => {
+    const { nickname, location } = req.body;
+    const toekn = generateAccessToken(req.user._id);
+    const cookie = sendAccessToken(res, toekn);
+    if (nickname && location) {
+      await User.findByIdAndUpdate(
+        req.user._id,
+        { nickname: nickname, location: location },
+        {
+          new: true,
+        }
+      );
+      res.status(200).json({
+        message: "프로필 업데이트가 완료 되었습니다.",
+        cookie,
+      });
+    } else {
+      res.status(400).json({
+        message: "닉네임 또는 지역을 작성해 주세요.",
+      });
+    }
+  }),
 
-  if (req.body.nickname || req.body.location) {
-    message = "회원정보 수정이 완료 되었습니다.";
-  }
-  const updatedUser = await User.findByIdAndUpdate(req.user._id, req.body, {
-    new: true,
-  });
+  // 회원 탈퇴
+  // DELETE
+  // user/userInfo
+  deleteUser: asyncHandler(async (req, res) => {
+    // 유저 본인이 탈퇴 요청
+    const user = await User.findById(req.user._id);
+    if (user.profile.email) {
+      await User.updateOne(
+        { _id: req.user._id },
+        {
+          $unset: { "profile.password": 1 },
+        },
+        {
+          upsert: true,
+        }
+      );
+      res.status(200).json({ message: "회원탈퇴가 완료 되었습니다." });
+      return;
+    }
+    const { naver, kakao } = user;
+    const kana = naver.uuid ? "naver" : kakao.uuid ? "kakao" : null;
 
-  res.status(200).json({
-    message,
-    nickname: updatedUser.nickname,
-    location: updatedUser.location,
-    token: generateToken(updatedUser._id),
-  });
-});
+    const options = getOption(kana, `${user[kana].refreshToken}`);
+    const token = await updateAccessToken(options, "refresh_token");
+    const { access_token } = token;
 
-// 회원 탈퇴
-const deleteUser = asyncHandler(async (req, res) => {
-  await Post.deleteMany({ user: req.user._id });
-  await Chatting.deleteMany({ user: req.user._id });
-  await User.findByIdAndDelete(req.user._id);
+    // 엑세스 끊기
+    const revokeRes = await revokeAccess(corp, access_token);
+    let message;
 
-  res.status(200).json({
-    message: "회원 탈퇴가 완료 되었습니다.",
-  });
-});
-
-export {
-  emailTest,
-  signUp,
-  login,
-  passwordTest,
-  updateUserInfo,
-  deleteUser,
-  socialSignUp,
-  socialLogin,
-  guestLogin,
+    if (revokeRes.data.id && kana === "kakao") {
+      message = "카카오 계정과 연결 끊기 완료";
+    }
+    if (revokeRes.data.result === "success" && kana === "naver") {
+      message = "네이버 계정과 연결 끊기 완료";
+    }
+    await User.updateOne(
+      { _id: req.user._id },
+      {
+        $unset: {
+          [`${kana}.accessToken`]: 1,
+          [`${kana}.refreshToken`]: 1,
+        },
+      },
+      // Upsert - 특정한 옵션을 주어서 수정할 대상이 없는 경우 insert 동작을 수행하도록 할 수 있습니다
+      // Upsert 기능을 하려면 update, updateOne, updateMany, replaceOne 메소드에 옵션으로 { upsert: true } 를 주면 됩니다.
+      // 또는 findAndModify, findOneAndUpdate, findOneAndReplace 메소드에 upsert: true를 추가할 수도 있습니다.
+      { upsert: true }
+    );
+    res.status(200).json(message);
+  }),
 };
