@@ -2,13 +2,11 @@ import React from "react";
 import Logo from "../../../images/logo-signup.png";
 import ForkW from "../../../images/fork_white.png";
 import ForkR from "../../../images/fork_red.png";
-import Naver from "../../../images/login_naver.png";
-import Kakao from "../../../images/login_kakao.png";
-
+import SocialLogBtn from "./SocialLogBtn";
 function SignUp() {
   return (
     <main className="signin-up-wrapper">
-      {/* 재사용 가능한 left page는 signin-up-left로 명명해놨음 */}
+      {/* 재사용 가능한 Left Page의 클래스명은 signin-up-left로 명명해놨음 */}
       <section className="signin-up-left">
         <div className="text-box">
           <h1 className="welcome">welcome</h1>
@@ -20,14 +18,16 @@ function SignUp() {
         </div>
       </section>
 
-      {/* 오른쪽 정보입력 페이지 */}
+      {/* Right Page */}
       <section className="signup-right">
         <img src={ForkR} className="right-fork" alt="fork-img" />
 
         <div className="signup-box">
           <div className="signup-title-text">회원가입</div>
-          {/* 이메일 */}
+
+          {/* Input 컨테이너 */}
           <div className="signup-input-container">
+            {/* 이메일 */}
             <article className="signup-input-box">
               <p className="signup-input-title">이메일 주소</p>
               <input
@@ -44,8 +44,8 @@ function SignUp() {
               <input
                 className="signup-input"
                 type="text"
-                minlength="1"
-                maxlength="6"
+                minLength="1"
+                maxLength="6"
                 placeholder="영문 또는 한글 1-6자"
               ></input>
               <hr color="#DADADA" />
@@ -57,8 +57,8 @@ function SignUp() {
               <input
                 className="signup-input"
                 type="password"
-                minlength="8"
-                maxlength="16"
+                minLength="8"
+                maxLength="16"
                 placeholder="영문, 숫자, 특수문자 조합 8-16자"
               ></input>
               <hr color="#DADADA" />
@@ -70,26 +70,18 @@ function SignUp() {
               <input
                 className="signup-input"
                 type="password"
-                minlength="8"
-                maxlength="16"
+                minLength="8"
+                maxLength="16"
                 placeholder="영문, 숫자, 특수문자 조합 8-16자"
               ></input>
               <hr color="#DADADA" />
             </article>
           </div>
 
+          {/* 소셜 로그인 컨테이너 */}
           <article className="signup-social-container">
-
-          <p className="signup-social-text">소셜 계정으로 간편하게 시작하기</p>
-          <div className="signup-social-btn">
-            {/* <img src={Naver} alt="naver" className="signup-naver" />
-            <img src={Kakao} alt="kakao" className="signup-kakao" /> */}
-            <label className="signup-naver"></label>
-            <label className="signup-kakao"></label>
-
-          </div>
-
-          <div className="signup-btn">가입하기</div>
+            <div className="signup-btn">가입하기</div>
+            <SocialLogBtn />
           </article>
           {/* 
           * 소셜 회원가입 버튼 클릭시
