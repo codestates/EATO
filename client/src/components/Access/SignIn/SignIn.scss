@@ -1,13 +1,12 @@
 @import "../SignUp/SignUp.scss";
 
-  .signin-right {
-    @include right;
-    .right-fork {
-      @include right_fork;
-
+.signin-right {
+  @include right;
+  .right-fork {
+    @include right_fork;
     }
 
-  // 회원가입 입력 컨테이너
+  // 로그인 컨테이너
   .signin-container {
     @include right-container;
     .signin-title-text {
@@ -29,31 +28,39 @@
     }
     .signin-btn {
       @include signin-up-btn;
-      margin-top: 60px;
+      margin-top: 20px;
     }
-
-    .signin-social-text {
-      @include social-text;
-      display: flex;
-      justify-content: center;
-      padding-top: 100px;
-    }
-
-    .signin-social-box {
-      @include social-box;
-      
-      .signin-naver {
-        width: 220px;
-        height: 51.64px;
-        padding-right: 20px;
-        
-      }
-      .signin-kakao {
-        width: 216px;
-        height: 51.64px;
-
-      }
-    }
+// 소셜 컨테이너 
+.signup-social-container {
+  @include signup-social-container;
+}
+  // 소셜 회원가입 텍스트
+  .signup-social-text {
+    @include social-text;
+  }
+  // 소셜 로그인 버튼 박스 묶음
+  .signup-social-btn-box {
+    @include social-btn-box;
+  }
+  // 네이버 로그인
+  .naver-icon-box {
+    padding-right: 40px;
+  }
+  .naver-icon-img {
+    height: 100%;
+  }
+  .naver-signup-btn {
+    @include social-btn;
+  }
+  // 카카오 로그인
+  .kakao-icon-box {
+  }
+  .kakao-icon-img {
+    height: 100%;
+  }
+  .kakao-signup-btn {
+    @include social-btn;
+  }
     .signup-question-box {
       display: flex;
       justify-content: center;
@@ -65,6 +72,9 @@
       }
       .go-signup {
         color: #EE4E34;
+        &:hover{
+          color: #ee715e;
+        }
       }
     }
   }
