@@ -9,7 +9,7 @@ const {
   deleteUser,
   updateProfile,
 } = require("../../controlllers/userController");
-const { protect } = require("../../middleware/auth");
+const { protect } = require("../../middleware/index");
 
 // users
 router.post("/signUp", createUser, validEmail);
