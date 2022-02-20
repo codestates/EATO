@@ -53,20 +53,20 @@ notificationSchema.statics.createNotice = async function (
   userList,
   notificationInfo
 ) {
-  const { id, gatheringId, type, url, target, message, title } =
+  const { id, documentId, type, url, target, message, title } =
     notificationInfo;
-  // 타입 new와 gatheringId 에 대한 알림이 이미 있다면 알림이 추가되지 않는다.
+  // 타입 new와 documentId 에 대한 알림이 이미 있다면 알림이 추가되지 않는다.
   if (type === "new") {
     await this.updateMany(
       {
         _id: userList,
         notification: {
-          $not: { $elemMatch: { $and: [{ type: "new" }, { gatheringId }] } },
+          $not: { $elemMatch: { $and: [{ type: "new" }, { documentId }] } },
         },
       },
       {
         $push: {
-          notification: { id, gatheringId, type, url, target, title, message },
+          notification: { id, documentId, type, url, target, title, message },
         },
       }
     );
@@ -77,7 +77,7 @@ notificationSchema.statics.createNotice = async function (
       },
       {
         $push: {
-          notification: { id, gatheringId, type, url, target, title, message },
+          notification: { id, documentId, type, url, target, title, message },
         },
       }
     );
@@ -89,8 +89,7 @@ notificationSchema.statics.signup = async function (userId) {
     notification: [
       {
         id: mongoose.Types.ObjectId(),
-        gatheringId: null,
-        type: "welcome",
+        documentId: null,
         url: `users/${userId}`,
         target: null,
         title: null,

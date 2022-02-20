@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+const MongoClient = require("mongodb").MongoClient;
 
 const dbConnect = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
+    await MongoClient.connect(process.env.MONGODB_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
-      autoIndex: true,
+      // autoIndex: true,
     });
     console.log("MongoDB Connected success!");
   } catch (error) {
@@ -15,4 +15,3 @@ const dbConnect = async () => {
 };
 
 module.exports = dbConnect;
-// 데이터베이스 연결

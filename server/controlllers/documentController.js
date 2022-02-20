@@ -1,65 +1,79 @@
 const asyncHandler = require("express-async-handler");
 const Document = require("../models/document");
 const Chatting = require("../models/chatting");
+const UserDocument = require("../models/userDocument");
 
 // 게시물 생성시 채팅방 생성
 
 module.exports = {
   createChatRoom: asyncHandler(async (req, res) => {
-    const { title, cerator: user_id } = req.body;
-    res.status(200).send;
+    const { title, cerator } = req.body;
+    Chatting.res.status(200).send;
   }),
 
   // 게시물 생성
-  createPost: asyncHandler(async (req, res) => {
+  createDocument: asyncHandler(async (req, res) => {
     const {
       title,
+      deliveryFee,
+      placeName,
+      date,
+      time,
+      totalNum,
       description,
       category,
-      date,
-      deliveryFee,
-      totalNum,
-      payTag,
-      deliveryTag,
-      location,
-      latitude,
-      longitude,
-    } = posting;
+    } = document;
 
-    posting = req.body;
+    document = req.body;
 
     if (!posting) {
       res.status(400).json({ message: "Failed creating post" });
     } else {
-      createChatRoom;
+      const newDocument = await Document.create({
+        title,
+        deliveryFee,
+        placeName,
+        date,
+        time,
+        totalNum,
+        description,
+        category,
+      });
+      createChatRoom();
       res.status(201).json({
         message: "success",
-        post: {
-          _id: user._id,
-          title,
-          description,
-          category,
-          date,
-          deliveryFee,
-          totalNum,
-          payTag,
-          deliveryTag,
-          location,
-          latitude,
-          longitude,
-        },
+        newDocument,
       });
     }
   }),
 
-  //게시물 삭제
-  deletePost: asyncHandler(async (req, res) => {
-    await Document.findByIdAndDelete({ post: req.post._id });
-    await Chatting.findByIdAndDelete({ chatting: req.post._id }); //포스트 삭제시 채팅방 삭제 확인해 보기!!
-    const chat = req.app.get("chat");
-    chat.to(req.post._id).emit("quit");
-    chat.in(req.post._id).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
+  // 게시물 조호ㅚ
 
+  //게시물 삭제 => 삭제시 삭제 알림 보내줌
+  deletePost: asyncHandler(async (req, res) => {
+    await Document.findByIdAndDelete({ post: req._id });
+    await Chatting.findByIdAndDelete({ chatting: req.document._id }); //포스트 삭제시 채팅방 삭제 확인해 보기!!
+    const main = req.app.get("main");
+    const chat = req.app.get("chat");
+    const _id = mongoose.Types.ObjectId();
+    const documenId = Document.findById({ doId: req._id });
+    const userId = UserDocument.find({ documenId: req._id }).populate(
+      "userId",
+      "_id"
+    ); //문법맞는지 확인하기
+    const noticeInfo = {
+      id: _id,
+      documentId: documenId,
+      url: null,
+      target: null,
+      title: documenId.title,
+      message: `게시물이 삭제 되었습니다.`,
+    };
+    Notification.createNotice(userIds, noticeInfo);
+    main.to(documentId).emit("notice", noticeInfo, userId);
+    main.to(documentId).emit("quit");
+    chat.to(documentId).emit("quit");
+    chat.in(documentId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
     res.status(200).json({
       message: "Post deleted",
     });
@@ -75,8 +89,6 @@ module.exports = {
       date,
       deliveryFee,
       totalNum,
-      payTag,
-      deliveryTag,
       location,
       latitude,
       longitude,
@@ -97,8 +109,6 @@ module.exports = {
           date,
           deliveryFee,
           totalNum,
-          payTag,
-          deliveryTag,
           location,
           latitude,
           longitude,

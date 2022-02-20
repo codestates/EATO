@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 const DocumentSchema = new Schema({
   title: String,
   deliveryFee: Number,
-  area_id: Number,
   placeName: String,
   latitude: Number,
   longitude: Number,
@@ -16,6 +15,11 @@ const DocumentSchema = new Schema({
   user_id: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
+  },
+  userDocument_id: {
+    type: Schema.Types,
+    ref: "Document",
     required: true,
   },
   done: Boolean,

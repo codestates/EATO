@@ -15,6 +15,8 @@ module.exports = {
       req.user = await User.findById(decoded.id).select(
         "-profile.password  -naver.accessToken -kakao.accessToken -naver.refreshToken -kakao.refreshToken"
       );
+      res.locals.userId = decoded.id;
+      res.locals.acessToken = token;
       next();
     } catch (err) {
       console.error(error);

@@ -5,7 +5,7 @@ const connectDB = require("./config/dbConnect.js");
 const https = require("https");
 const fs = require("fs");
 const controllers = require("./routes/index.js");
-const { realTimeUserStatus } = require("./controlllers/socketController");
+const { meetingMemberStatus } = require("./controlllers/socketController");
 const SocketIO = require("./socket");
 
 dotenv.config();
@@ -48,7 +48,7 @@ if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
   server = https.createServer(credentials, app);
 
   server.listen(HTTPS_PORT, async () => {
-    app.set("realTime", await realTimeUserStatus());
+    app.set("meetingMember", await meetingMemberStatus());
     SocketIO(server, app);
     console.log("https server runnning!!");
   });
