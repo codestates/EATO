@@ -56,7 +56,6 @@
 
 @mixin img_box_style {
   display: flex;
-  justify-content: end;
 }
 
 // @include : @mixin으로 저장한 속성을 적용
@@ -71,7 +70,7 @@
   .wrapper {
     @include wrapper_style;
 
-    .card {
+    .card-img {
       width: 535px;
       height: 222px;
       margin-right: 110px;
@@ -192,7 +191,6 @@
 
       .img-box-l {
         @include img_box_style;
-        justify-content: start;
 
         .img-3 {
           width: 349px;
