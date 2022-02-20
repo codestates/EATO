@@ -1,8 +1,18 @@
+# EATO
 ## [Project EATO](https:www.eato.link)
 
 ![메인페이지](https://user-images.githubusercontent.com/85715932/153204739-3d255d4b-0f09-4cdf-b8a6-d0cf69a54b83.png)
 
 구현하고 이미지 교체
+## Project
+![My project (1) 2 (1)](https://user-images.githubusercontent.com/87610758/153203352-ca91b859-5dfc-41dd-a6f9-ef3476458fc6.png)
+
+## Feature
+- 배달비를 나눠 낼 수 있습니다.
+- 자신의 위치를 설정할 수 있습니다.
+- 사용자의 위치에 기반하여 주변 이웃을 찾아볼 수 있습니다.
+- 주문하고 싶은 카테고리의 음식에 맞춰 파티를 생성하거나, 파티에 참여할 수 있습니다.
+- 파티원과 실시간 채팅을 나눌 수 있습니다.
 
 ## About
 > **_잇투_** 는 부담되는 배달비를 다른 유저들과 나눌 수 있도록 도와주는 웹 서비스입니다.\
