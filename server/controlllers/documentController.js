@@ -7,8 +7,12 @@ const UserDocument = require("../models/userDocument");
 
 module.exports = {
   createChatRoom: asyncHandler(async (req, res) => {
-    const { title, cerator } = req.body;
-    Chatting.res.status(200).send;
+    const { userId } = res.locals;
+    const usersParty = Document.find({ _id: userId });
+    const { _id, user_id, title } = usersParty;
+    const chatInfo = { _id: _id, cerator: user_id, title: title };
+    const chat = Chatting.create(chatInfo);
+    return res.status(200).json(chat);
   }),
 
   // 게시물 생성
@@ -26,7 +30,7 @@ module.exports = {
 
     document = req.body;
 
-    if (!posting) {
+    if (!document) {
       res.status(400).json({ message: "Failed creating post" });
     } else {
       const newDocument = await Document.create({
@@ -51,31 +55,42 @@ module.exports = {
 
   //게시물 삭제 => 삭제시 삭제 알림 보내줌
   deletePost: asyncHandler(async (req, res) => {
-    await Document.findByIdAndDelete({ post: req._id });
-    await Chatting.findByIdAndDelete({ chatting: req.document._id }); //포스트 삭제시 채팅방 삭제 확인해 보기!!
     const main = req.app.get("main");
     const chat = req.app.get("chat");
     const _id = mongoose.Types.ObjectId();
-    const documenId = Document.findById({ doId: req._id });
-    const userId = UserDocument.find({ documenId: req._id }).populate(
+    const meetingMember = req.app.get("meetingMember");
+    const documenId = Number(req.params.documenId);
+    //const documenId = Document.findById({ doId: req._id });
+    const userId = UserDocument.find({ documenId: req.params.id }).populate(
       "userId",
       "_id"
     ); //문법맞는지 확인하기
+    const userList = [];
+    for (const [key, val] of Object.entries(meetingMember[documenId])) {
+      if (val === 0) {
+        userList.push(key);
+      }
+    }
+
     const noticeInfo = {
       id: _id,
       documentId: documenId,
       url: null,
       target: null,
       title: documenId.title,
-      message: `게시물이 삭제 되었습니다.`,
+      message: "게시물이 삭제 되었습니다.",
     };
-    Notification.createNotice(userIds, noticeInfo);
-    main.to(documentId).emit("notice", noticeInfo, userId);
-    main.to(documentId).emit("quit");
-    chat.to(documentId).emit("quit");
-    chat.in(documentId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
+
+    await Document.findOneAndDelete({ _id: req.params.id });
+    await Chatting.findOneAndDelete({ _id: req.document._id });
+    Notification.createNotice(userList, noticeInfo);
+    main.to(documenId).emit("notice", noticeInfo, userId);
+    main.to(documenId).emit("quit");
+    chat.to(documenId).emit("quit");
+    chat.in(documenId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
+    delete meetingMember[documenId];
     res.status(200).json({
-      message: "Post deleted",
+      message: "게시물이 삭제 되었습니다.",
     });
   }),
 
@@ -92,11 +107,11 @@ module.exports = {
       location,
       latitude,
       longitude,
-    } = posting;
+    } = document;
 
-    posting = req.body;
+    document = req.body;
 
-    if (!posting) {
+    if (!document) {
       res.status(400).json({ message: "Failed to update Post" });
     } else {
       res.status(201).json({

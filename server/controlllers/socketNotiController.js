@@ -6,7 +6,7 @@ const {
   findUser,
   currentTime,
   modifyDocument,
-} = require("../controlllers/socketController");
+} = require("./function");
 const Notification = require("../models/notification");
 const mongoose = require("mongoose");
 
@@ -16,12 +16,12 @@ module.exports = {
     const { userId } = res.locals;
     const documentId = Number(req.params.documentId);
     try {
-      const [_, result] = await findOrCreateUser_document({
+      const result = await findOrCreateUser_document({
         userId,
         documentId,
       });
       if (!result) {
-        return res.status(400).json({ message: "already participating" });
+        return res.status(400).json({ message: "이미 참여중입니다." });
       }
       const documentInfo = await findDocument(documentId);
       const { totalNum, currentNum, done, date, title } = documentInfo;
@@ -66,7 +66,7 @@ module.exports = {
       DBERROR(res, err);
     }
   },
-  leaveGathering: async (req, res) => {
+  leaveParty: async (req, res) => {
     const { userId } = res.locals; // 토큰에 있는 유저 아이디
     const { userId: targetUserId } = req.params; // 도큐먼트 아이디와 타겟 유저 아이디
     const documenId = Number(req.params.documenId);
