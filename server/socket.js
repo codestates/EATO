@@ -7,7 +7,7 @@ const Notification = require("./models/notification");
 const {
   currentTime,
   vaildDocumentId,
-} = require("./controlllers/socketController");
+} = require("./controlllers/socketNotiController");
 
 module.exports = (server, app) => {
   const meetingMember = app.get("meetingMember");
@@ -17,7 +17,7 @@ module.exports = (server, app) => {
       origin: "*",
       credentials: true,
     },
-    serveClient: false, // TODO: 클라이언트에서 socket 설치하면 false 로 바꿔주기
+    serveClient: false, // TODO: 클라이언git x트에서 socket 설치하면 false 로 바꿔주기
   });
   const main = io.of("/");
   const chat = io.of("/chat");
@@ -36,7 +36,7 @@ module.exports = (server, app) => {
     }
     // 로그인 후 소켓 연결 시 소켓 객체에 유저 아이디를 저장
     socket.userId = decoded.id;
-    // 유저 아이디로부터 참여중인 게더링(done=0) 아이디들을 전부 불러온 후 전부 룸으로 참여시킴.
+    // 유저 아이디로부터 참여중인 파티(done=0) 아이디들을 전부 불러온 후 전부 룸으로 참여시킴.
     const roomIds = await vaildDocumentId(decoded.id);
     socket.join(roomIds);
     next();
@@ -100,7 +100,7 @@ module.exports = (server, app) => {
       const { id: userId, nickname, image } = userInfo;
       const date = currentTime();
       const _id = mongoose.Types.ObjectId(); // 채팅로그의 _id + 알림의 _id 동시에 사용
-      const gatheringInfo = await Chatting.typeChat(
+      const documentInfo = await Chatting.typeChat(
         socket.curRoom,
         _id,
         userId,
@@ -121,17 +121,17 @@ module.exports = (server, app) => {
 
       const noticeInfo = {
         id: _id,
-        gatheringId: socket.curRoom,
+        documentId: socket.curRoom,
         type: "new",
         url: `/chat/${socket.curRoom}`,
         target: null,
-        title: gatheringInfo.title,
+        title: documentInfo.title,
         message: `새로운 메세지가 도착했습니다.`,
       };
 
       await Notification.createNotice(userList, noticeInfo); // userList: 유저 아이디가 담긴 배열, noticeInfo: 알림의 정보가 담긴 객체
-      // 메인에 notice 알림, new 타입의 경우에 이미 해당 gathering의 new 타입 메시지가 있을 경우에 notification 목록에 추가 생성되지않음
-      // 그래서 클라이언트에서도 이미 new 타입과 gatheringId가 같은 알림을 이미 가지고 있다면 스테이트에 추가하면 안됨.!
+      // 메인에 notice 알림, new 타입의 경우에 이미 해당 document의 new 타입 메시지가 있을 경우에 notification 목록에 추가 생성되지않음
+      // 그래서 클라이언트에서도 이미 new 타입과 documentgId가 같은 알림을 이미 가지고 있다면 스테이트에 추가하면 안됨.!
       main.to(socket.curRoom).emit("notice", noticeInfo);
     });
 

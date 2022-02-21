@@ -5,7 +5,7 @@ const connectDB = require("./config/dbConnect.js");
 const https = require("https");
 const fs = require("fs");
 const controllers = require("./routes/index.js");
-const { meetingMemberStatus } = require("./controlllers/socketController");
+const { meetingMemberStatus } = require("./controlllers/socketNotiController");
 const SocketIO = require("./socket");
 
 dotenv.config();
