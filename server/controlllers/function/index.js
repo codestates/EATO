@@ -1,5 +1,5 @@
-const UserDocument = require("../models/userDocument");
-const Document = require("../models/document");
+const UserDocument = require("../../models/userDocument");
+const Document = require("../../models/document");
 const asyncHandler = require("express-async-handler");
 module.exports = {
   vaildDocumentId: asyncHandler(async (userId) => {
@@ -33,16 +33,6 @@ module.exports = {
     return today.toISOString().replace("T", " ").substring(0, 16);
   },
 
-  ////////////////////////////// 밑에 함수 수정하기
-
-  // getGatheringIdsOfUser: async (userId) => {
-  //   const gatheringIds = await Document.find(
-  //     { user_id: userId },
-  //     { _id: true, title: true }
-  //   );
-  //   return gatheringIds.map((el) => ({ id: el._id, title: el.title }));
-  // }, => drop user에서 사용
-
   findAllDocument: async (queries) => {
     const createor = await Document.find({ _id: queries }).populate(
       "user_id",
@@ -71,13 +61,13 @@ module.exports = {
   },
 
   findOrCreateUser_document: async (queries) => {
-    UserDocument.find({ queries }),
-      function (err, data) {
-        if (err) return err;
-        if (!data) {
-          UserDocument.create({ userId, documentId });
-        }
-      };
+    const userId = UserDocument.find({ queries }).populate("userId", "_id");
+    const documenId = UserDocument.find({ queries }).populate(
+      "documentId",
+      "_id"
+    );
+
+    return { userId, documenId };
   },
 
   User_findDocument: async (queries) => {

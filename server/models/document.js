@@ -12,13 +12,15 @@ const DocumentSchema = new Schema({
   currentNum: Number,
   description: String,
   category: Number,
+  datePeriod: String, // 사용자 설정 모집 시간
+  categoryImg: String,
   user_id: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
   userDocument_id: {
-    type: Schema.Types,
+    type: Schema.Types.ObjectId,
     ref: "Document",
     required: true,
   },
