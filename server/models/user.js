@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+mongoose.set("bufferCommands", true);
 // 1999년에 publish된 password-hashing function이다.
 // Blowfish 암호를 기반으로 설계된 암호화 함수이며 현재까지 사용중인 가장 강력한 해시 메커니즘 중 하나이다.
 const bcrypt = require("bcrypt");
@@ -40,17 +41,15 @@ const userSchema = new Schema(
       minlength: [2, "2자 이상 입력해주세요."],
       maxlength: [10, "10자 이하로 입력해주세요."],
     },
-    profile_img: {
-      type: String,
-    },
     location: {
       type: String,
     },
   },
   {
     versionKey: false,
-  }
+  },
   // __v 안보이게 하고싶을때
+  { bufferCommands: false }
 );
 
 userSchema.methods.matchPassword = async function (enteredPassword) {

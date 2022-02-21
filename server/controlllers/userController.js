@@ -37,7 +37,7 @@ module.exports = {
       });
       // Mongoose에 Mixed 유형의 값이 변경되었음을 알리려면 doc.markModified(path)방금 변경한 Mixed 유형에 대한 경로를 전달하는 를 호출해야 합니다.
       user.markModified("profile");
-      user.markModified("nickname");
+      // user.markModified("nickname");
       await user.save();
 
       res.status(201).json({ message: "회원가입에 성공했습니다." });
