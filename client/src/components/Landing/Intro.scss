@@ -38,7 +38,6 @@
 
   &:hover {
     transition: background-color .6s;
-    // transition: all 0.3s ease;
     color: #EE4E34;
     padding: 16px 38px;
     background-color: #FFFCF8;
@@ -58,7 +57,6 @@
   display: flex;
 }
 
-// @include : @mixin으로 저장한 속성을 적용
 
 
 .intro-1 {
@@ -69,11 +67,16 @@
   }
   .wrapper {
     @include wrapper_style;
+    
+    .wrapper-ani {
+      width: 100%;
 
     .card-img {
       width: 535px;
       height: 222px;
       margin-right: 110px;
+    }
+      
     }
     
     .start-box {
@@ -82,6 +85,7 @@
       .intro-text-1 {
         @include font_style;
         padding-bottom: 20px;
+        
       }
       
       .btn {
@@ -89,8 +93,7 @@
       }
     }
   }
-
-  }
+}
 
 
 
@@ -98,7 +101,6 @@
     @include intro_style;
     background-color: #FFFCF8;
 
-    
     .wrapper {
       @include wrapper_style;
 
@@ -108,8 +110,6 @@
       width: 465px;
       height: 175px;
       text-align: center;
-
-
     }
 
     .search-bar {
@@ -120,6 +120,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       .search-text {
         font-size: 20px;
         font-weight: 500;
@@ -139,12 +140,44 @@
 
   .wrapper {
     @include wrapper_style;
-    .map {
+
+    .intro-3-map-box {
+      position: relative;
       width: 597px;
       height: 299px;
       margin-right: 70px;
       border-radius: 20px;
+
+      .intro-3-map {
+        width: 100%;
+        height: 100%;
+      }
+      .intro-3-pin-box {
+        position: absolute;
+        inset: 0px; // 박스 겹치기
+        width: 100%;
+        height: 100%;
+        .pin-one {
+          position: absolute;
+          width: 12%;
+          top: -10%;
+          left: calc(70% + 0.25rem);
+        }
+        .pin-two {
+          position: absolute;
+          width: 12%;
+          top: calc(30% - 0.5rem);
+          left: calc(35% + 0.25rem);
+        }
+        .pin-three {
+          position: absolute;
+          width: 12%;
+          top: calc(65% - 0.5rem);
+          left: calc(80% + 0.25rem);
+        }
+      }
     }
+
     .intro-text-3 {
       @include font_style;
       width: 430px;
@@ -173,25 +206,23 @@
       
       .img-box-l {
         @include img_box_style;
-        justify-content: start;
         margin-bottom: 55px;
       }
 
       .img-box-r {
         @include img_box_style;
-        margin-bottom: 65px;
+        margin-bottom: 45px;
+        justify-content: flex-end;
 
-        // 화질이 깨진 상태로 import 됨. 
-        // 크기를 figma와 똑같이 설정 => 화질 복구됨.
+        .img-1 {
+          width: 453px;
+          height: 105px;
+        }
         .img-2 { 
-          width: 249.8px;
+          width: 250px;
           height: 108px;
         }
       }
-
-      .img-box-l {
-        @include img_box_style;
-
         .img-3 {
           width: 349px;
           height: 113px;
@@ -199,8 +230,7 @@
       }
     }
   }
-  
-}
+
 
 .intro-5 {
   @include intro_style;

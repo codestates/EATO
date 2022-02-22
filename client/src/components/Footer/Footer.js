@@ -3,13 +3,16 @@ import { TiDocumentText } from "react-icons/ti";
 import { BsGithub } from "react-icons/bs";
 import { FiMail } from "react-icons/fi";
 
-import Logo from "../../images/Footer_Logo.png";
+import Logo from "../../images/logo-footer.png";
 function Footer() {
   return (
     <>
       <footer>
         <section className="first-box">
-          <img src={Logo} className="logo" alt="logo"></img>
+          <div className="logo-box">
+            <img src={Logo} className="logo" alt="logo"></img>
+            <p className="footer-logotext">EAT TOGETHER</p>
+          </div>
           <span className="copyright">
             © Copyright 2022 KLJ. All rights reserved.
           </span>
@@ -71,11 +74,11 @@ function Footer() {
         <section className="fourth-box">
           <div className="box-title">Contact</div>
           <div className="box-text">
-            <FiMail size="18" className="icon"/>
+            <FiMail size="18" className="icon" />
             sunw339@gmail.com
           </div>
           <div className="box-text">
-            <FiMail size="18" className="icon"/>
+            <FiMail size="18" className="icon" />
             skysangsuk@gmail.com
           </div>
           <div className="box-text">
@@ -83,7 +86,7 @@ function Footer() {
             wanzekim@gmail.com
           </div>
           <div className="box-text">
-            <FiMail size="18" className="icon"/>
+            <FiMail size="18" className="icon" />
             abejaseop@gmail.com
           </div>
         </section>
