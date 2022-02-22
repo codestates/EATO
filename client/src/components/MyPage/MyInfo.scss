@@ -1,0 +1,183 @@
+
+@mixin edit-btn {
+  border: 0;
+  border-radius: 20px;
+  padding: 3px 14px;
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.mypage {
+  // height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mypage-whole-container {
+  width: 864.8px;
+  height: 460px;
+  padding: 50px 60px;
+  border-radius: 15px;
+  box-shadow: 2px 4px 10px 0 #A5A5A5; 
+}
+
+.mypage-container-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .mypage-img-box {
+    .mypage-img{
+      flex: auto;
+      width: 102px;
+      height: 102px;
+      background-color: rgb(238, 203, 217);
+      border-radius: 50%;
+    }
+  }
+}
+// .mypage-line-box {
+//   height: 100%;
+//   width: 100px;
+//   .mypage-line {
+//     padding: 100%;
+//     background-color: #803b3b;
+//   }
+// }
+      .mypage-userinfo-box {
+        display: flex;
+        flex-direction: column;
+        padding-left: 35px;
+        .mypage-ub-top-box {
+          display: flex;
+          .mypage-ub-tb-nickname {
+            font-size: 30px;
+          }
+          .mypage-ub-tb-edit-box {
+            display: flex;
+            align-items: center;
+            padding-top: 5px;
+            padding-left: 15px;
+            .mypage-ub-tb-edit-btn {
+              @include edit-btn;
+              color: black;
+              background-color: #E5E5E5;
+              &:hover {
+                background-color: #d8d8d8;
+              }
+            
+            }
+            .mypage-ub-tb-delete-btn {
+              @include edit-btn;
+              color: white;
+              background-color: #f05d47;
+              &:hover {
+                background-color: #f07c6b;
+              }
+            
+            }
+          }
+        }
+          .mypage-bb-location{
+            width: 100%;
+            padding-top: 10px;
+        }
+      }
+      .mypage-delivery-fee {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: auto;
+
+        .mypage-df-text {
+          font-size: 20px;
+        }
+      }
+    
+    .mypage-container-bottom {
+      padding: 0 15px;
+        .mypage-cb-title {
+          display: flex;
+          font-size: 20px;
+          padding-left: 5px;
+        }
+
+        .mypage-chatpost-box {
+          display: flex;
+          flex-direction: column;
+          font-weight: 500;
+          padding-top: 20px;
+          // border: solid 1px;
+        
+        .mypage-cb-card-list {
+          display:inline-flex;
+          overflow-x: scroll;
+          padding-top: 20px;
+          &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+          }
+          &::-webkit-scrollbar-thumb {
+            border-radius: 3.5px;
+            background-color: #ced4da;
+        
+          &:hover {
+            background-color: #adb5bd;
+            }
+          }
+          &::-webkit-scrollbar-track {
+            background: #ffffff;
+          }
+        }
+        .mypage-cb-card-view {
+          float: left;
+          width: 120px;
+          text-decoration: none;
+        }
+        .mypage-cb-card-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 20px 15px 0;
+        }
+        .mypage-cb-card {
+          display: flex;
+          align-items: center;
+          font-size: 17px;
+          width: 200px;
+          height: 90px;
+          border-radius: 8px;
+          box-shadow: 1px 2px 5px #A5A5A5; 
+          .mypage-cb-card-content {
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+          }
+          .mypage-cb-img {
+            width: 50px;
+            height: 50px;
+            background-color: #A5A5A5;
+            border-radius: 50%;
+          }
+          .mypage-cb-chatname {
+            padding: 0 16px;
+          }
+        
+          .mypage-cb-leftbox{
+            padding-left: 20px;
+            .mypage-cb-lb-fee{
+            font-size: 24px;
+            font-weight: bold;
+            }
+          }
+        
+          .mypage-cb-rightbox {
+            display: flex;
+            flex-direction: column;
+            //  .mypage-cb-rb-btn{
+            // }
+          }
+        }
+      }
+    } 
+

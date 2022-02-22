@@ -1,9 +1,64 @@
 import React from "react";
+import axios from "axios";
+// import IsSignupState from "../../../states/SignupState";
 import Logo from "../../../images/logo-signup.png";
 import ForkW from "../../../images/fork_white.png";
 import ForkR from "../../../images/fork_red.png";
 import SocialLogBtn from "./SocialLogBtn";
+
+axios.defaults.withCredentials = false;
+
 function SignUp() {
+  // Value State
+  // const [signupInputInfo, setSignupInputInfo] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   passwordCheck: "",
+  // });
+
+  // const [errorMessage, setErrorMessage] = useState("");
+
+  // const loginHandler = (key) => (e) => {
+  //   setSignupInputInfo({ ...signupInputInfo, [key]: e.target.value });
+  // };
+
+  // const signupClickHandler = (e) => {
+  //   // Event 인터페이스의 preventDefault() 메서드는 어떤 이벤트를 명시적으로 처리하지 않은 경우,
+  //   // 해당 이벤트에 대한 사용자 에이전트의 기본 동작을 실행하지 않도록 지정합니다.
+  //   e.preventDefault();
+  //   const { email, nickname, password, passwordCheck } = signupInputInfo;
+  //   const emailregExp =
+  //     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  //   const digitsregExp = /\d/;
+
+  //   if (!signupInputInfo) {
+  //     setErrorMessage("모든 항목은 필수입니다");
+  //   } else if (!emailregExp.test(email)) {
+  //     setErrorMessage("이메일 형식이 올바르지 않습니다");
+  //   } else if (!digitsregExp.test(password)) {
+  //     setErrorMessage("비밀번호에 숫자기 하나 이상 포함되어야 합니다");
+  //   } else if (password !== passwordCheck) {
+  //     setErrorMessage("비밀번호가 동일해야 합니다");
+  //   } else {
+  //     axios
+  //       .post(
+  //         "http://localhost:3000/signup",
+  //         { email, nickname, password },
+  //         {
+  //           "Content-Type": "application/json",
+  //           withCredentials: false,
+  //         }
+  //       )
+  //       .then((data) => {
+  //         if (data.data.message === "Email exists") {
+  //           setErrorMessage("이미 가입된 이메일입니다.");
+  //         } else {
+  //         }
+  //       });
+  //   }
+  // };
+
   return (
     <main className="signin-up-wrapper">
       {/* 재사용 가능한 Left Page의 클래스명은 signin-up-left로 명명해놨음 */}

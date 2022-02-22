@@ -4,7 +4,6 @@
   flex: auto;
 }
 
-
 // 1. 왼쪽 페이지 속성
 @mixin left {
   width: 40vw;
@@ -33,8 +32,8 @@
 @mixin fork_box {
   width: 100%;
   display: flex;
-  align-items: end;
-  justify-content: end;
+  // align-items: end;
+  // justify-content: end;
   margin-bottom: 30px;
   }
 

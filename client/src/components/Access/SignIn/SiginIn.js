@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../../images/logo-signup.png";
 import ForkW from "../../../images/fork_white.png";
 import ForkR from "../../../images/fork_red.png";
 import SocialLogBtn from "../SignUp/SocialLogBtn";
 const SiginIn = () => {
+  useEffect(() => {
+    const local = localStorage.getItem("recoil-persist");
+    console.log(local);
+    const res = JSON.parse(local || "{}").LoginState;
+    console.log(res);
+
+    if (res) window.location.reload();
+  }, []);
+
   return (
     <main className="signin-up-wrapper">
       {/* 재사용 가능한 left page는 signin-up-left로 명명해놨음 */}
