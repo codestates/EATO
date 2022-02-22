@@ -1,29 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Card from "./UI/Card";
 import { GoSearch } from "react-icons/go";
 import "./HomePageSearchBar.scss";
-import logo from "../../images/logo.png";
 
 function HomesSearchBar() {
   return (
-    <>
-      <div>
-        <Card className="homeSearch">
-          <div>
-            <img src={logo} />
-            <input
-              className="homeSearchBar"
-              type="text"
-              placeholder="가까운 배달 크루 찾으러가기"
-            />
-            <Link to="/map">
-              <GoSearch />
-            </Link>
-          </div>
-        </Card>
+    <div className="homeSearch">
+      <div className="homeSearchBar">
+        <input
+          className="homeSearchBar-input"
+          type="text"
+          placeholder="주변에 같이 주문할 사람을 찾아볼까요?"
+        />
+        <div className="homeSerchBar-icon">
+          <Link to="/map">
+            <GoSearch size="40" color="white" />
+          </Link>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
