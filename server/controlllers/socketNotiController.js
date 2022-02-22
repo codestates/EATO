@@ -11,7 +11,7 @@ const Notification = require("../models/notification");
 const mongoose = require("mongoose");
 
 module.exports = {
-  joinDocument: async (req, res) => {
+  joinParty: async (req, res) => {
     // 유저가 이미 있는 모임에 참가 신청을 하는 Api
     const { userId } = res.locals;
     const documentId = Number(req.params.documentId);
@@ -44,7 +44,7 @@ module.exports = {
           userIds.push(key);
         }
       }
-      const _id = mongoose.Types.ObjectId();
+      //  const _id = mongoose.Types.ObjectId();
       const main = req.app.get("main");
       const noticeInfo = {
         id: _id,

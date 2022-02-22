@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "foodEmoji": "🍚",
+    "categoty": "한식"
+  },
+  {
+    "id": 2,
+    "foodEmoji": "🥟",
+    "categoty": "증식"
+  },
+  {
+    "id": 3,
+    "foodEmoji": "⚾",
+    "categoty": "양식"
+  },
+  {
+    "id": 4,
+    "foodEmoji": "🍣",
+    "categoty": "일식"
+  },
+  {
+    "id": 5,
+    "foodEmoji": "🍗",
+    "categoty": "치킨"
+  },
+  {
+    "id": 6,
+    "foodEmoji": "🍕",
+    "categoty": "피자"
+  },
+  {
+    "id": 7,
+    "foodEmoji": "🌙",
+    "categoty": "야식"
+  },
+  {
+    "id": 8,
+    "foodEmoji": "🍲",
+    "categoty": "찜 / 탕"
+  },
+  {
+    "id": 9,
+    "foodEmoji": "🍖",
+    "categoty": "족발 / 보쌈"
+  },
+  {
+    "id": 10,
+    "foodEmoji": "☕️",
+    "categoty": "카페 / 디저트"
+  },
+  {
+    "id": 11,
+    "foodEmoji": "🎸",
+    "categoty": "기타"
+  }
+]

@@ -7,6 +7,36 @@ module.exports = {
       expiresIn: "7d",
     });
   },
+  getAccessToken: (options, grantType) => {
+    if (options.state) {
+      const res = axios.post(
+        // 네이버
+        options.url,
+        qs.stringify({
+          grant_type: grantType,
+          client_id: options.client_id,
+          client_secret: options.client_secret,
+          redirect_uri: options.redirect_uri,
+          code: options.code,
+          state: options.state,
+        }),
+        config
+      );
+      return res.data;
+    }
+    const res = axios.post(
+      // 카카오
+      options.url,
+      qs.stringify({
+        grant_type: grantType,
+        client_id: options.client_id,
+        redirect_uri: options.redirect_uri,
+        code: options.code,
+      }),
+      config
+    );
+    return res.data;
+  },
 
   // 유효한 토큰인지 검증
   verifyToken: (token) => {

@@ -2,16 +2,20 @@ const asyncHandler = require("express-async-handler");
 const Document = require("../models/document");
 const Chatting = require("../models/chatting");
 const UserDocument = require("../models/userDocument");
+const Notification = require("../models/notification");
+const mongoose = require("mongoose");
 
 // 게시물 생성시 채팅방 생성
 
 module.exports = {
   createChatRoom: asyncHandler(async (req, res) => {
-    const { userId } = res.locals;
+    const userId = req.body._id;
     const usersParty = Document.find({ _id: userId });
-    const { _id, user_id, title } = usersParty;
-    const chatInfo = { _id: _id, cerator: user_id, title: title };
-    const chat = Chatting.create(chatInfo);
+    const { user_id, title } = usersParty;
+    const chatInfo = { cerator: user_id, title: title };
+
+    const chat = new Chatting(chatInfo);
+    chat.save();
     return res.status(200).json(chat);
   }),
 
@@ -26,10 +30,18 @@ module.exports = {
       totalNum,
       description,
       category,
-    } = document;
+    } = req.body;
 
-    document = req.body;
-
+    const document = {
+      title,
+      deliveryFee,
+      placeName,
+      date,
+      time,
+      totalNum,
+      description,
+      category,
+    };
     if (!document) {
       res.status(400).json({ message: "Failed creating post" });
     } else {
@@ -43,15 +55,54 @@ module.exports = {
         description,
         category,
       });
-      createChatRoom();
+      //req.app.get("meetingMember")[id] = { [creator.id]: 0 };
+      const setChatInfo = {
+        chatInfo: { title },
+        ceratorId: newDocument._id,
+      };
+      const chat = Chatting.create(setChatInfo);
       res.status(201).json({
         message: "success",
         newDocument,
+        chat,
       });
     }
   }),
 
-  // 게시물 조호ㅚ
+  // 게시물 조회
+  viewPost: asyncHandler(async (req, res) => {
+    Document.findOne({ _id: req.body._id }, (err, docu) => {
+      if (err) {
+        return res.status(400).json({ message: "failed" });
+      }
+      const {
+        title,
+        deliveryFee,
+        placeName,
+        latitude,
+        longitude,
+        date,
+        time,
+        totalNum,
+        description,
+        category,
+      } = docu;
+      return res.status(200).json({
+        documentInfo: {
+          title,
+          deliveryFee,
+          placeName,
+          latitude,
+          longitude,
+          date,
+          time,
+          totalNum,
+          description,
+          category,
+        },
+      });
+    });
+  }),
 
   //게시물 삭제 => 삭제시 삭제 알림 보내줌
   deletePost: asyncHandler(async (req, res) => {
@@ -66,14 +117,14 @@ module.exports = {
       "_id"
     ); //문법맞는지 확인하기
     const userList = [];
-    for (const [key, val] of Object.entries(meetingMember[documenId])) {
-      if (val === 0) {
-        userList.push(key);
-      }
-    }
+    // for (const [key, val] of Object.entries(meetingMember[documenId])) {
+    //   if (val === 0) {
+    //     userList.push(key);
+    //   }
+    // }
 
     const noticeInfo = {
-      id: _id,
+      // id: _id,
       documentId: documenId,
       url: null,
       target: null,
@@ -82,7 +133,7 @@ module.exports = {
     };
 
     await Document.findOneAndDelete({ _id: req.params.id });
-    await Chatting.findOneAndDelete({ _id: req.document._id });
+    await Chatting.findOneAndDelete({ ceratorId: req.params.id });
     Notification.createNotice(userList, noticeInfo);
     main.to(documenId).emit("notice", noticeInfo, userId);
     main.to(documenId).emit("quit");
@@ -107,17 +158,24 @@ module.exports = {
       location,
       latitude,
       longitude,
-    } = document;
+    } = req.body;
 
-    document = req.body;
-
-    if (!document) {
+    if (
+      !title ||
+      !description ||
+      !category ||
+      !date ||
+      !deliveryFee ||
+      !totalNum
+      //  !location ||    => 카카오맵
+      // !latitude ||
+      // !longitude
+    ) {
       res.status(400).json({ message: "Failed to update Post" });
     } else {
       res.status(201).json({
         message: "success",
-        post: {
-          _id: user._id,
+        document: {
           title,
           description,
           category,

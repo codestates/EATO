@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const chatSchema = new Schema({
   id: {
     type: String,
-    required: true,
+    //required: true,
   },
   message: {
     type: String,
@@ -16,20 +16,16 @@ const chatSchema = new Schema({
 });
 const chattingSchema = new Schema(
   {
-    _id: {
-      type: Number,
-      required: true,
-    },
     chatInfo: {
       type: Object,
     },
     chatLog: {
       type: [chatSchema],
-      required: true,
+      // required: true,
     },
     creatorId: {
       type: String,
-      required: true,
+      //  required: true,
     },
   },
   { versionKey: false }
