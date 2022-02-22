@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user.js");
-const generateToken = require("../support/token.js");
+//const generateToken = require("../support/token.js");
 const {
   getOption,
   getUserInfo,
@@ -32,13 +32,15 @@ module.exports = {
 
     if (email && password && nickname) {
       const user = new User({
-        profile: { email, password },
+        // profile: { email, password },
+        email,
+        password,
         nickname,
       });
       // Mongoose에 Mixed 유형의 값이 변경되었음을 알리려면 doc.markModified(path)방금 변경한 Mixed 유형에 대한 경로를 전달하는 를 호출해야 합니다.
-      user.markModified("profile");
+      //user.markModified("profile");
       // user.markModified("nickname");
-      await user.save();
+      user.save();
 
       res.status(201).json({ message: "회원가입에 성공했습니다." });
     } else {
@@ -50,37 +52,49 @@ module.exports = {
   // POST
   // user/login
   userLogin: asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
-    const user = await User.findOne({ "profile.email": email });
-    const token = generateToken(user._id);
-
-    if (!user) {
-      res.status(401).json({ message: "이메일을 확인해주세요." });
-      return;
-    }
-
-    if (!user.profile.password) {
-      res.status(401).json({ message: "존재하지 않는 유저입니다." });
-      return;
-    }
-
-    if (await user.matchPassword(password)) {
-      res.json({
-        _id: user._id,
-        nickname: user.nickname,
-        cookie: sendAccessToken(res, token),
-      });
-    } else {
-      res.status(401).json({ message: "비밀번호를 확인해주세요." });
-    }
+    User.findOne({ email: req.body.email }, (err, user) => {
+      if (err) {
+        return res.json({
+          loginSuccess: false,
+          message: "존재하지 않는 아이디입니다.",
+        });
+      }
+      user
+        .comparePassword(req.body.password)
+        .then((isMatch) => {
+          if (!isMatch) {
+            return res.json({
+              loginSuccess: false,
+              message: "비밀번호가 일치하지 않습니다",
+            });
+          }
+          user
+            .generateToken()
+            .then((user) => {
+              res
+                .cookie("x_auth", user.token)
+                .status(200)
+                .json({ loginSuccess: true, userId: user._id });
+            })
+            .catch((err) => {
+              res.status(400).send(err);
+            });
+        })
+        .catch((err) => res.json({ loginSuccess: false, err }));
+      //비밀번호가 일치하면 토큰을 생성한다
+      //해야될것: jwt 토큰 생성하는 메소드 작성
+    });
+    // 비밀번호는 암호화되어있기때문에 암호화해서 전송해서 비교를 해야한다 .
+    //암호화 메소드는 User.js에 작성한다.
+    //로그인 암호화 비밀번호가 일치하면 jwt 토큰을 발급한다
   }),
 
   // 로그아웃
   // GET
   // user/logout
   logout: asyncHandler(async (req, res) => {
-    res.clearCookie();
-    res.status(200).send("로그아웃에 성공했습니다.");
+    res.clearCookie("x_auth");
+    res.status(200).json({ message: "로그아웃에 성공했습니다." });
   }),
 
   // 소셜 로그인
@@ -178,10 +192,10 @@ module.exports = {
   // user/userInfo
   deleteUser: asyncHandler(async (req, res) => {
     // 유저 본인이 탈퇴 요청
-    const user = await User.findById(req.user._id);
-    if (user.profile.email) {
+    const user = await User.findOne({ email: req.body.email });
+    if (user.email) {
       await User.updateOne(
-        { _id: req.user._id },
+        { _id: user._id },
         {
           $unset: { "profile.password": 1 },
         },
@@ -210,7 +224,7 @@ module.exports = {
       message = "네이버 계정과 연결 끊기 완료";
     }
     await User.updateOne(
-      { _id: req.user._id },
+      { _id: user._id },
       {
         $unset: {
           [`${kana}.accessToken`]: 1,

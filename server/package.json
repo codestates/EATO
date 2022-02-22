@@ -24,7 +24,7 @@
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
-    "dotenv": "^14.2.0",
+    "dotenv": "^14.3.2",
     "express": "^4.17.3",
     "express-async-handler": "^1.2.0",
     "express-session": "^1.17.2",
