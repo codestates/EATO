@@ -1,0 +1,44 @@
+.NewPostCard {
+  padding: 3rem 8rem;
+}
+
+.btn-modal {
+  float: right;
+  font-size: 18px;
+  width: 6rem;
+  height: 3rem;
+  background-color: #ff4234;
+  color: #ffffff;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.btn-modal:hover,
+.btn-modal:active {
+  background-color: #ff7a59;
+  border-color: #ff7a59;
+}
+
+.modal,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay {
+  background: rgba(49, 49, 49, 0.8);
+}
+.modal-content {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #ffffff;
+  padding: 1rem 2rem 3rem;
+  border-radius: 3rem;
+}
