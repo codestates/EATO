@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/user.js");
-//const generateToken = require("../support/token.js");
+const getAccessToken = require("../support/token.js");
 const {
   getOption,
   getUserInfo,
@@ -105,7 +105,7 @@ module.exports = {
     const { code } = req.query; // ?
 
     const options = getOption(kana, code);
-    const token = await generateToken(options, "authorization_code");
+    const token = await getAccessToken(options, "access_token");
     const userInfo = await getUserInfo(kana, options.userInfo_url, token);
 
     let uuid;

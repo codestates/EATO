@@ -15,7 +15,7 @@ const { protect } = require("../../middleware/index");
 router.post("/signUp", createUser, validEmail);
 router.post("/login", userLogin);
 router.get("/logout", protect, logout);
-router.get("/:kana", socialLogin);
+router.post("/:kana", socialLogin);
 
 router
   .route("/userInfo")
