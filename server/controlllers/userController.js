@@ -53,7 +53,7 @@ module.exports = {
   // user/login
   userLogin: asyncHandler(async (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
-      if (err) {
+      if (!user) {
         return res.json({
           loginSuccess: false,
           message: "존재하지 않는 아이디입니다.",
