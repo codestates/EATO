@@ -58,7 +58,7 @@ module.exports = {
       //req.app.get("meetingMember")[id] = { [creator.id]: 0 };
       const setChatInfo = {
         chatInfo: { title },
-        ceratorId: newDocument._id,
+        ceratorId: req.body._id,
       };
       const chat = Chatting.create(setChatInfo);
       res.status(201).json({
