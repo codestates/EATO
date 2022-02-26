@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 // import { useSetRecoilState } from "recoil";
@@ -36,8 +36,8 @@ const SignIn = () => {
     "Content-Type": "application/json",
     withCredentials: false,
   };
-
-  // const LoginStateHandler = useSetRecoilState(IsLoginState);
+  const [emailErr, setEmailErr] = useState("");
+  const [pwdErr, setPwdErr] = useState("");
 
   const onSubmit = (data) => {
     axios
@@ -47,14 +47,14 @@ const SignIn = () => {
         config
       )
       .then((res) => {
-        // console.log(res.data);
-        // Object
-        // loginSuccess: true
-        // userId: "62162830f551062cb17d49a8"
-        // [[Prototype]]: Object
-        const userInfo = res.data;
-        localStorage.setItem("userInfo", JSON.stringify(userInfo));
-        navigate("/home");
+        console.log(res);
+        const loginCheck = res.data.message;
+        console.log(loginCheck);
+        if (loginCheck === "존재하지 않는 아이디입니다.") {
+          setEmailErr(loginCheck);
+        } else if (loginCheck === "비밀번호가 일치하지 않습니다.") {
+          setPwdErr(loginCheck);
+        } else navigate("/home");
       });
   };
 
@@ -98,9 +98,12 @@ const SignIn = () => {
                 })}
               ></input>
               <hr color="#DADADA" />
+              {/* 이메일 아이디 유효성 검사 */}
               {errors?.email && (
                 <p className="input-err-text">{errors.email.message}</p>
               )}
+              {/* 이메일 아이디 존재 확인 */}
+              <p className="input-err-text">{emailErr}</p>
             </article>
 
             {/* 비밀번호 */}
@@ -129,9 +132,12 @@ const SignIn = () => {
                 })}
               ></input>
               <hr color="#DADADA" />
+              {/* 비밀번호 유효성 검사 */}
               {errors?.password && (
                 <p className="input-err-text">{errors.password.message}</p>
               )}
+              {/* 비밀번호 일치 확인 */}
+              <p className="input-err-text">{pwdErr}</p>
             </article>
             {/* 로그인 버튼 */}
             <button className="signin-btn" type="submit">
