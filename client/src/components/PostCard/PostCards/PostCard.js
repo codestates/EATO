@@ -88,13 +88,11 @@ const PostCard = () => {
               title={postCard.title}
               date={postCard.date}
               joinTime={postCard.date}
-              // startTime={postCard.date}
-              // endTime={postCard.date}
               deliveryFee={postCard.deliveryFee}
               totalNum={postCard.totalNum}
               // located={postCard.located}
-              payTag={postCard.payTag}
               deliveryTag={postCard.deliveryTag}
+              payTag={postCard.payTag}
             />
           ))}
         </div>
