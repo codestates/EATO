@@ -1,244 +1,300 @@
+// groidd-shrink 창 작아질때 고정 1, flex-grow 창커질때
 .postLogoWrap {
-  text-align: center;
-  .postLogo {
-    width: 10rem;
-    height: 3rem;
-    display: block;
-    margin: 2rem auto;
+  width: 42vw;
+  height: 82vh;
+}
+
+.new-postCard__Nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; //왼쪽기준으로 늘어나게 설정
+  align-items: center;
+  flex: 1 1 0;
+  width: 50rem;
+  height: 6rem;
+  margin-left: 2.2rem;
+
+  .postImgLogo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 0;
+    width: 100%;
+    height: 100%;
+    margin-left: 2rem;
+
+    .postLogo {
+      width: 100%;
+      height: 70%;
+      display: block;
+      margin: 1.3rem 18rem 2rem;
+    }
   }
-  .new-postCard__actions {
-    cursor: pointer;
-    padding: 0.8rem 2rem;
-    margin: 1.5rem auto;
-    font-size: 25px;
-    border: 1px solid #ff4234;
-    background-color: #ff4234;
-    color: #ffffff;
-    border-radius: 1rem;
-  }
+
   .postCard-close {
+    margin: 0.8rem 4rem 0 0;
     cursor: pointer;
     background-color: #ffffff;
     border: none;
     float: right;
-    font-size: 30px;
-  }
-}
-
-.new-postCard {
-  width: 36vw;
-  height: 65vh;
-  margin: 10px;
-  justify-content: center;
-  align-items: center;
-
-  //Title
-  .new-postCard__title {
-    width: 100%;
-    height: fit-content;
-    border-bottom: 5px solid #c2c2c2;
-    text-align: left;
-    .new-postCard__InputTitle {
-      font-weight: bold;
-      width: 20rem;
-      height: 4rem;
-      border: none;
-      font-size: 30px;
+    font-size: 2.2rem;
+    color: #b0acac;
+    :active {
+      position: relative;
+      top: 0.2rem;
     }
   }
 }
 
-.new-postCard__Main {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
+.new-postCard__Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 0;
+  width: 50rem;
+  height: 5rem;
+
+  .new-postCard__title {
+    padding-left: 1rem;
+    width: 100%;
+    text-align: left;
+    margin: 0 2rem;
+    border-bottom: 5px solid #c2c2c2;
+
+    .new-postCard__InputTitle {
+      font-weight: bold;
+      border: none;
+      font-size: 2rem;
+    }
+    &:hover,
+    &:focus {
+      border-bottom-color: #ff7a59;
+    }
+  }
 }
 
+.new-postCard__Fotter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 0;
+  width: 50rem;
+  height: 5rem;
+
+  .new-postCard__actions {
+    cursor: pointer;
+    margin-top: 0.5rem;
+    width: 25%;
+    height: 60%;
+    font-size: 1.4rem;
+    letter-spacing: 0.4rem;
+    border: 1px solid #ff4234;
+    background-color: #ff4234;
+    color: #ffffff;
+    border-radius: 1rem;
+    z-index: 1;
+  }
+  .new-postCard__actions:active {
+    position: relative;
+    top: 0.2rem;
+    background-color: #ff7a59;
+    .new-postCard__actions:focus .new-postCard__actions:hover {
+      border-color: #ff7a59;
+    }
+  }
+}
+
+.new-postCard__Body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: 1 1 0;
+  width: 50rem;
+  height: 32rem;
+}
 .new-postCard__Left {
   display: grid;
-  grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr;
-  width: 18rem;
-  height: 30rem;
-  padding-right: 1em;
+  grid-template-rows: 2.2fr 1.1fr 1fr 1fr 1fr 1fr 0.8fr;
+  width: 40%;
+  height: 32rem;
 
   //Description
   .new-postCard__description {
-    margin: 1rem 0;
     width: 100%;
     height: fit-content;
     text-align: center;
     .new-postCard__InputDescription {
-      width: 18rem;
+      width: 20rem;
       padding-left: 5px;
       height: 8rem;
       border: 2px solid #818181;
+      box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
       border-radius: 1rem;
       font-size: 20px;
-    }
-  }
-
-  //Category
-  .new-postCard__category {
-    margin: 0.5rem 0;
-    width: 100%;
-    height: fit-content;
-    text-align: center;
-    .new-postCard__InputCategory {
-      justify-content: center;
-      width: 18rem;
-      height: 3rem;
-      border: 2px solid #818181;
-      border-radius: 1rem;
-      font-size: 20px;
-      text-align: center;
-      text-align-last: center;
-    }
-  }
-
-  //Date
-  .new-postCard__date {
-    margin: 0.2rem 0;
-    width: 100%;
-    height: fit-content;
-    text-align: center;
-    .new-postCard__InputDate {
-      justify-content: center;
-      width: 18rem;
-      height: 3rem;
-      border: 2px solid #818181;
-      border-radius: 1rem;
-      font-size: 20px;
-      text-align: center;
-      text-align-last: center;
-    }
-  }
-  // Time
-  .new-postCard__time {
-    margin: 0.2rem 0;
-    width: 100%;
-    height: fit-content;
-    text-align: center;
-    .new-postCard__InputTime {
-      justify-content: center;
-      width: 18rem;
-      height: 3rem;
-      border: 2px solid #818181;
-      border-radius: 1rem;
-      font-size: 20px;
-      text-align: center;
-    }
-  }
-
-  //DeliverPay
-  .new-postCard__deliveryFee {
-    margin: 0.2rem 0;
-    width: 100%;
-    height: fit-content;
-    text-align: center;
-    .new-postCard__InputDeliveryFee {
-      justify-content: center;
-      width: 18rem;
-      height: 3rem;
-      border: 2px solid #818181;
-      border-radius: 1rem;
-      font-size: 20px;
-      text-align: center;
-      text-align-last: center;
-    }
-  }
-  //Person
-  .new-postCard__person {
-    margin: 0.2rem 0;
-    width: 100%;
-    height: fit-content;
-    text-align: center;
-    .new-postCard__InputPerson {
-      justify-content: center;
-      width: 18rem;
-      height: 3rem;
-      border: 2px solid #818181;
-      border-radius: 1rem;
-      font-size: 20px;
-      text-align: center;
-      text-align-last: center;
+      overflow-y: scroll;
+      &:hover,
+      &:focus {
+        border-color: #ff7a59;
+        border-radius: 1rem;
+      }
     }
   }
 }
 
+//todo datapivker plugin 나중에 css  작업
+.new-postCard__date {
+  z-index: 5;
+  width: 100%;
+  text-align: center;
+
+  .new-postCard__InputDate {
+    &:hover,
+    &:focus {
+      border-bottom-color: #ff7a59;
+    }
+    padding-top: 0.3rem;
+    border: none;
+    justify-content: center;
+    font-size: 1.4rem;
+    text-align: center;
+    text-align-last: center;
+  }
+}
+
+// Time
+.new-postCard__time {
+  z-index: 4;
+  width: 100%;
+  height: 2.9rem;
+  text-align: center;
+  &:hover,
+  &:focus {
+    border-bottom-color: #ff7a59;
+  }
+  .new-postCard__InputTime {
+    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+    justify-content: center;
+    width: 99%;
+    height: 96%;
+    border: 2px solid #818181;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    text-align: center;
+    &:hover,
+    &:focus {
+      border-color: #ff7a59;
+      border-radius: 1rem;
+    }
+  }
+}
+.new-postCard__tag {
+  width: 100%;
+  height: 2.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+//DeliverPay
+// .new-postCard__deliveryFee {
+//   z-index: 3;
+//   margin: 0.2rem 0;
+//   width: 100%;
+//   height: fit-content;
+//   text-align: center;
+
+//   .new-postCard__InputDeliveryFee {
+//     box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+//     justify-content: center;
+//     width: 20rem;
+//     height: 3rem;
+//     border: 2px solid #818181;
+//     border-radius: 1rem;
+//     font-size: 20px;
+//     text-align: center;
+//     text-align-last: center;
+//     &:hover,
+//     &:focus {
+//       border-color: #ff7a59;
+//       border-radius: 1rem;
+//     }
+//   }
+// }
+//Person
+// .new-postCard__person {
+//   z-index: 2;
+//   margin: 0.2rem 0;
+//   width: 100%;
+//   height: fit-content;
+//   text-align: center;
+//   .new-postCard__InputPerson {
+//     box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+//     justify-content: center;
+//     width: 20rem;
+//     height: 3rem;
+//     border: 2px solid #818181;
+//     border-radius: 1rem;
+//     font-size: 20px;
+//     text-align: center;
+//     text-align-last: center;
+//     box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+//     &:hover,
+//     &:focus {
+//       border-color: #ff7a59;
+//       border-radius: 1rem;
+//     }
+//   }
+// }
+
 .new-postCard__right {
-  display: grid;
-  grid-template-rows: 1.5fr 1fr 7fr;
-  width: 18rem;
-  height: 30rem;
+  width: 23rem;
+  height: 32rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
   .new-postCard__postMap {
-    margin: 1rem 1rem 0 0.5rem;
-    width: 100%;
+    margin-right: 1rem;
+    width: 97%;
     height: fit-content;
     text-align: center;
     .new-postCard__InputPostMap {
       justify-content: center;
       padding-left: 0.5rem;
-      width: 14rem;
-      height: 2.5rem;
+      width: 100%;
+      height: 3rem;
       border: 2px solid #818181;
       border-radius: 1rem;
-      font-size: 16px;
+      font-size: 1.1rem;
       text-align: left;
-    }
-  }
-  .new-postCard__rightTop {
-    display: grid;
-    grid-template-columns: 6fr 1fr 1fr;
-  }
-  //PayTag
-  .new-postCard__PayTag {
-    margin: 1rem 0;
-    width: 100%;
-    height: fit-content;
-    text-align: center;
-    .new-postCard__InputPayTag {
-      justify-content: center;
-      width: 4rem;
-      height: 2.5rem;
-      border: 1px solid #ff4234;
-      background-color: #ff4234;
-      color: #ffffff;
-      border-radius: 1rem;
-      font-size: 18px;
-      text-align: center;
-      text-align-last: center;
+      box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+      &:hover,
+      &:focus {
+        border-color: #ff7a59;
+        border-radius: 1rem;
+      }
     }
   }
 
-  //DeliveryTag
-  .new-postCard__deliveryTag {
-    margin: 1rem 0.2rem;
-    width: 100%;
-    height: fit-content;
-    text-align: center;
-    .new-postCard__InputDeliveryTag {
-      justify-content: center;
-      width: 4rem;
-      height: 2.5rem;
-      border: 1px solid #ff4234;
-      background-color: #ff4234;
-      color: #ffffff;
-      border-radius: 1rem;
-      font-size: 18px;
-      text-align: center;
-      text-align-last: center;
-    }
-  }
   .new-postCard__titleMap {
     padding: 1rem;
-    margin: 0.5rem 0.5rem;
     text-align: left;
+    z-index: 1;
   }
 
   .new-postCard__map {
-    padding-left: 1rem;
+    text-align: left;
+    width: 90%;
+    padding: 1rem;
+    height: 22rem;
     border: 2px solid #818181;
     border-radius: 1rem;
-    margin: 0.5rem 1rem;
+    z-index: 1;
+    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
   }
 }
 
@@ -254,57 +310,122 @@
   text-align: left;
 }
 
-// input[type="number"]::-webkit-inner-spin-button,
-// input[type="number"]::-webkit-outer-spin-button {
+// DatePicker
+.react-datepicker__header {
+  margin-top: 0.2rem;
+  background-color: #ffffff;
+}
+.react-datepicker__input-container {
+  width: 99%;
+  height: 2.7rem;
+  border: 2px solid #818181;
+  border-radius: 1rem;
+  &:hover,
+  &:focus {
+    border-color: #ff7a59;
+    border-radius: 1rem;
+  }
+}
+
+.react-datepicker__current-month {
+  color: #000;
+  font-size: 1.15rem;
+}
+.react-datepicker__month-container {
+  display: grid;
+  font-size: 1rem;
+  width: 20rem;
+}
+.react-datepicker {
+  font-size: 0.8rem;
+  width: 20.5rem;
+  padding-left: 0.2rem;
+  background-color: #ffffff;
+  color: #000;
+  border: 1px solid red;
+  border-radius: 1rem;
+  display: flex;
+}
+
+.react-datepicker {
+  background-color: #ffffff;
+  border: 1px solid black;
+}
+.react-datepicker__month-container {
+  > * {
+    border: 0;
+  }
+}
+.react-datepicker__navigation {
+  margin: 0.8rem 0.5rem;
+}
+
+.react-datepicker__day-name {
+  font-size: 1rem;
+  width: 2rem;
+  line-height: 1.4rem;
+  margin: 0.5rem 0.2rem;
+  color: #818181;
+}
+.react-datepicker__week {
+  > * {
+    border-radius: 0.4rem;
+    color: #818181;
+    font-size: 1rem;
+    width: 2rem;
+    line-height: 1.8rem;
+  }
+
+  .react-datepicker__day--disabled {
+    opacity: 0.3;
+    :hover {
+      background-color: transparent;
+    }
+  }
+  .react-datepicker__day--selected {
+    color: #ffffff;
+    border: 1px solid #ff4234;
+    border-radius: 1rem;
+    font-weight: bold;
+    background-color: #ff4234;
+    :hover {
+      background-color: #ff4234;
+    }
+  }
+  .react-datepicker__day--today {
+    border: 1px solid #c2c2c2;
+  }
+  .react-datepicker__day--keyboard-selected,
+  .react-datepicker__month-text--keyboard-selected,
+  .react-datepicker__quarter-text--keyboard-selected,
+  .react-datepicker__year-text--keyboard-selected {
+    border-radius: 0.3rem;
+    background-color: #ffffff;
+  }
+}
+
+//input 화살표 제거
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+select {
+  border-radius: 0; /* 아이폰 사파리 보더 없애기 */
+  -webkit-appearance: none; /* 화살표 없애기 for chrome*/
+  -moz-appearance: none; /* 화살표 없애기 for firefox*/
+  appearance: none; /* 화살표 없애기 공통*/
+}
+
+// input[type="date"]::-webkit-datetime-edit-month-field {
 //   -webkit-appearance: none;
+//   display: none;
 // }
-
-// .number-input {
-//   border: 2px solid #ddd;
-//   display: inline-flex;
-// }
-
-// .number-input,
-// .number-input * {
-//   box-sizing: border-box;
-// }
-
-// .number-input button {
-//   outline: none;
+// input[type="date"]::-webkit-datetime-edit-day-field {
 //   -webkit-appearance: none;
-//   background-color: transparent;
-//   border: none;
-//   align-items: center;
-//   justify-content: center;
-//   width: 3rem;
-//   height: 3rem;
-//   cursor: pointer;
-//   margin: 0;
-//   position: relative;
+//   display: none;
 // }
-
-// .number-input button:before,
-// .number-input button:after {
-//   display: inline-block;
-//   position: absolute;
-//   content: "";
-//   width: 1rem;
-//   height: 2px;
-//   background-color: #212121;
-//   transform: translate(-50%, -50%);
-// }
-// .number-input button.plus:after {
-//   transform: translate(-50%, -50%) rotate(90deg);
-// }
-
-// .number-input input[type="number"] {
-//   font-family: sans-serif;
-//   max-width: 5rem;
-//   padding: 0.5rem;
-//   border: solid #ddd;
-//   border-width: 0 2px;
-//   font-size: 2rem;
-//   height: 3rem;
-//   font-weight: bold;
-//   text-align: center;
+// input[type="date"]::-webkit-datetime-edit-year-field {
+//   -webkit-appearance: none;
+//   display: none;
 // }

@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./PostCardDate.scss";
-
 const PostCardDate = (props) => {
   const date = props.date.toLocaleDateString("ko-kr");
 
