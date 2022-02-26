@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PostCardForm from "./PostCardForm";
+// import PostCardCheck from "../PostCardRead/PostCardCheck";
+import { FaPencilAlt } from "react-icons/fa";
 import "./NewPostCard.scss";
 
 const NewPostCard = (props) => {
@@ -12,7 +14,7 @@ const NewPostCard = (props) => {
   const savePostCardDataHandler = (enteredPostCardData) => {
     const postCardData = {
       ...enteredPostCardData,
-      id: Math.random().toString(),
+      id: Math.random().toString(), //???
     };
 
     props.onAddPostCard(postCardData);
@@ -26,7 +28,8 @@ const NewPostCard = (props) => {
   return (
     <div class="NewPostCard">
       <button onClick={toggleModal} className="btn-modal">
-        글쓰기
+        <FaPencilAlt />
+        &nbsp;글작성
       </button>
       {modal && (
         <div className="modal">
