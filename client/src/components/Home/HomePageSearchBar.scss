@@ -16,6 +16,7 @@
   background-color: #ee4e34;
   margin: 1rem auto;
   display: flex;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
 }
 
 .homeSearchBar-input {
@@ -29,6 +30,10 @@
   align-items: center;
   justify-content: center;
   background-color: transparent;
+}
+.homeSearchBar-input:focus,
+.homeSearchBar-input:active {
+  background-color: #ff7a59;
 }
 
 input:focus {
@@ -47,4 +52,8 @@ input:focus {
   margin: 0.5rem 1rem 1rem;
   border: #ee4e34;
   background-color: transparent;
+  :active {
+    position: relative;
+    top: 0.1rem;
+  }
 }
