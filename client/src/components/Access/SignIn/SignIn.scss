@@ -11,7 +11,7 @@
     @include right-container;
     .signin-title-text {
       @include right-ct-title-text;
-      padding-bottom: 40px;
+      padding: 10% 0 40px 0;
     }
     
     .signin-input-box {
@@ -25,10 +25,15 @@
           @include right-ct-placeholder;
         }
 
+        .signin-validation {
+          font-size: 13px;
+          color: #EE4E34;
+        }
     }
     .signin-btn {
       @include signin-up-btn;
       margin-top: 20px;
+      width: 100%;
     }
 // 소셜 컨테이너 
 .signup-social-container {
@@ -53,29 +58,13 @@
     @include social-btn;
   }
   // 카카오 로그인
-  .kakao-icon-box {
-  }
+  // .kakao-icon-box {
+  // }
   .kakao-icon-img {
     height: 100%;
   }
   .kakao-signup-btn {
     @include social-btn;
   }
-    .signup-question-box {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .signup-question {
-        color: #8b8b8b;
-        padding-right: 10px;
-      }
-      .go-signup {
-        color: #EE4E34;
-        &:hover{
-          color: #ee715e;
-        }
-      }
-    }
   }
 }

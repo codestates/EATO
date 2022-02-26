@@ -1,63 +1,72 @@
-import React from "react";
+import React, { useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import axios from "axios";
-// import IsSignupState from "../../../states/SignupState";
 import Logo from "../../../images/logo-signup.png";
 import ForkW from "../../../images/fork_white.png";
 import ForkR from "../../../images/fork_red.png";
 import SocialLogBtn from "./SocialLogBtn";
 
-axios.defaults.withCredentials = false;
+axios.defaults.withCredentials = true;
 
 function SignUp() {
-  // Value State
-  // const [signupInputInfo, setSignupInputInfo] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   passwordCheck: "",
-  // });
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  // console.log(watch("password"));
 
-  // const [errorMessage, setErrorMessage] = useState("");
+  // 유효성 검사 정규 표현식
+  const emailExp =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const nicknameExp = /^([a-zA-Z0-9가-힣]){1,6}$/;
+  const pwdExp =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
 
-  // const loginHandler = (key) => (e) => {
-  //   setSignupInputInfo({ ...signupInputInfo, [key]: e.target.value });
+  // Input창 passwordCheck (비밀번호 확인)에서 사용됨
+  const password = useRef();
+  password.current = watch("password");
+
+  // <form> 태그안에 속하는 <input> 값들을 출력해주는 함수
+  // const onSubmit = (data) => {
+  //   console.log("data", data);
   // };
 
-  // const signupClickHandler = (e) => {
-  //   // Event 인터페이스의 preventDefault() 메서드는 어떤 이벤트를 명시적으로 처리하지 않은 경우,
-  //   // 해당 이벤트에 대한 사용자 에이전트의 기본 동작을 실행하지 않도록 지정합니다.
-  //   e.preventDefault();
-  //   const { email, nickname, password, passwordCheck } = signupInputInfo;
-  //   const emailregExp =
-  //     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-  //   const digitsregExp = /\d/;
+  // axios config
+  const config = {
+    "Content-Type": "application/json",
+    withCredentials: false,
+  };
 
-  //   if (!signupInputInfo) {
-  //     setErrorMessage("모든 항목은 필수입니다");
-  //   } else if (!emailregExp.test(email)) {
-  //     setErrorMessage("이메일 형식이 올바르지 않습니다");
-  //   } else if (!digitsregExp.test(password)) {
-  //     setErrorMessage("비밀번호에 숫자기 하나 이상 포함되어야 합니다");
-  //   } else if (password !== passwordCheck) {
-  //     setErrorMessage("비밀번호가 동일해야 합니다");
-  //   } else {
-  //     axios
-  //       .post(
-  //         "http://localhost:3000/signup",
-  //         { email, nickname, password },
-  //         {
-  //           "Content-Type": "application/json",
-  //           withCredentials: false,
-  //         }
-  //       )
-  //       .then((data) => {
-  //         if (data.data.message === "Email exists") {
-  //           setErrorMessage("이미 가입된 이메일입니다.");
-  //         } else {
-  //         }
-  //       });
+  // const checkEmail = (data) => {
+  //   data.preventDefault();
+  //   axios
+  //     .post("http://localhost:27017/user/signup",
+  //     { email: data.email }, config)
+  //     .then((res) => {
+  //       console.log(res);
+  //     });
   //   }
-  // };
+  const onSubmit = (data) => {
+    axios
+      .post(
+        "http://localhost:27017/user/signup",
+        {
+          email: data.email,
+          password: data.password,
+          nickname: data.nickname,
+        },
+        config
+      )
+      .then((res) => {
+        console.log("여기", res);
+        alert("회원가입 완료!");
+        navigate("/home");
+      });
+  };
 
   return (
     <main className="signin-up-wrapper">
@@ -78,66 +87,139 @@ function SignUp() {
         <img src={ForkR} className="right-fork" alt="fork-img" />
 
         <div className="signup-box">
-          <div className="signup-title-text">회원가입</div>
+          <p className="signup-title-text">회원가입</p>
 
           {/* Input 컨테이너 */}
-          <div className="signup-input-container">
-            {/* 이메일 */}
-            <article className="signup-input-box">
-              <p className="signup-input-title">이메일 주소</p>
-              <input
-                className="signup-input"
-                type="email"
-                placeholder="예) eato@gmail.com"
-              ></input>
-              <hr color="#DADADA" />
-            </article>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="signup-input-container">
+              {/* 이메일 */}
+              <article className="signup-input-box">
+                <p className="signup-input-title">이메일 주소</p>
+                <input
+                  name="email"
+                  type="email"
+                  className="signup-input"
+                  placeholder="예) eato@gmail.com"
+                  {...register("email", {
+                    required: {
+                      value: true,
+                      message: "이메일을 입력해주세요.",
+                    },
+                    pattern: {
+                      value: emailExp,
+                      message: "이메일 형식으로 입력해주세요.",
+                    },
+                  })}
+                ></input>
+                <hr color="#DADADA" />
+                {errors?.email && (
+                  <p className="input-err-text">{errors.email.message}</p>
+                )}
+              </article>
 
-            {/* 닉네임 */}
-            <article className="signup-input-box">
-              <p className="signup-input-title">닉네임</p>
-              <input
-                className="signup-input"
-                type="text"
-                minLength="1"
-                maxLength="6"
-                placeholder="영문 또는 한글 1-6자"
-              ></input>
-              <hr color="#DADADA" />
-            </article>
+              {/* 닉네임 */}
+              <article className="signup-input-box">
+                <p className="signup-input-title">닉네임</p>
+                <input
+                  name="nickname"
+                  type="text"
+                  className="signup-input"
+                  minLength="1"
+                  maxLength="6"
+                  placeholder="영문 또는 한글 1-6자"
+                  {...register("nickname", {
+                    required: {
+                      value: true,
+                      message: "닉네임을 입력해주세요.",
+                    },
+                    pattern: {
+                      value: nicknameExp,
+                      message: "올바른 닉네임을 입력해주세요.",
+                    },
+                  })}
+                ></input>
+                <hr color="#DADADA" />
+                {errors?.nickname && (
+                  <p className="input-err-text">{errors.nickname.message}</p>
+                )}
+              </article>
 
-            {/* 비밀번호 */}
-            <article className="signup-input-box">
-              <p className="signup-input-title">비밀번호</p>
-              <input
-                className="signup-input"
-                type="password"
-                minLength="8"
-                maxLength="16"
-                placeholder="영문, 숫자, 특수문자 조합 8-16자"
-              ></input>
-              <hr color="#DADADA" />
-            </article>
+              {/* 비밀번호 */}
+              <article className="signup-input-box">
+                <p className="signup-input-title">비밀번호</p>
+                <input
+                  name="password"
+                  className="signup-input"
+                  type="password"
+                  minLength="8"
+                  maxLength="16"
+                  placeholder="영문, 숫자, 특수문자 조합 8-16자"
+                  {...register("password", {
+                    required: {
+                      value: true,
+                      message: "비밀번호를 입력해주세요.",
+                    },
+                    minLength: {
+                      value: 8,
+                      message: "비밀번호는 8자 이상 입력해주세요.",
+                    },
+                    pattern: {
+                      value: pwdExp,
+                      message:
+                        "영문, 숫자, 특수문자를 포함한 8-16자를 입력해주세요.",
+                    },
+                  })}
+                ></input>
+                <hr color="#DADADA" />
+                {errors?.password && (
+                  <p className="input-err-text">{errors.password.message}</p>
+                )}
+              </article>
 
-            {/* 비밀번호 확인*/}
-            <article className="signup-input-box">
-              <p className="signup-input-title">비밀번호 확인</p>
-              <input
-                className="signup-input"
-                type="password"
-                minLength="8"
-                maxLength="16"
-                placeholder="영문, 숫자, 특수문자 조합 8-16자"
-              ></input>
-              <hr color="#DADADA" />
-            </article>
-          </div>
+              {/* 비밀번호 확인*/}
+              <article className="signup-input-box">
+                <p className="signup-input-title">비밀번호 확인</p>
+                <input
+                  name="passwordCheck"
+                  className="signup-input"
+                  type="password"
+                  minLength="8"
+                  maxLength="16"
+                  placeholder="영문, 숫자, 특수문자 조합 8-16자"
+                  {...register("passwordCheck", {
+                    required: {
+                      value: true,
+                      message: "비밀번호를 입력해주세요.",
+                    },
+                    validate: (value) =>
+                      value === password.current ||
+                      "동일한 비밀번호를 입력해주세요.",
+                  })}
+                ></input>
+                <hr color="#DADADA" />
+                {errors?.passwordCheck && (
+                  <p className="input-err-text">
+                    {errors.passwordCheck.message}
+                  </p>
+                )}
+              </article>
+              <button type="submit" className="signup-btn">
+                가입하기
+              </button>
+            </div>
+          </form>
 
           {/* 소셜 로그인 컨테이너 */}
           <article className="signup-social-container">
-            <div className="signup-btn">가입하기</div>
             <SocialLogBtn />
+            <div className="signup-question-box">
+              <p className="signup-question">이미 회원이신가요?</p>
+              <Link to="/signin" className="go-signup">
+                로그인하기
+              </Link>
+            </div>
           </article>
+
           {/* 
           * 소셜 회원가입 버튼 클릭시
           1. 네이버 or 카카오 oauth 연결
@@ -153,4 +235,5 @@ function SignUp() {
     </main>
   );
 }
+
 export default SignUp;
