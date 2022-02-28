@@ -132,7 +132,7 @@
       padding-left: 5px;
       height: 8rem;
       border: 2px solid #818181;
-      box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+      box-shadow: 2px 4px 10px 0 #a5a5a5;
       border-radius: 1rem;
       font-size: 20px;
       overflow-y: scroll;
@@ -181,6 +181,7 @@
     width: 99%;
     height: 96%;
     border: 2px solid #818181;
+    box-shadow: 2px 4px 10px 0 #a5a5a5;
     border-radius: 1rem;
     font-size: 1.4rem;
     text-align: center;
@@ -271,7 +272,7 @@
       border-radius: 1rem;
       font-size: 1.1rem;
       text-align: left;
-      box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+      box-shadow: 2px 4px 10px 0 #a5a5a5;
       &:hover,
       &:focus {
         border-color: #ff7a59;
@@ -294,7 +295,7 @@
     border: 2px solid #818181;
     border-radius: 1rem;
     z-index: 1;
-    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+    box-shadow: 2px 4px 10px 0 #a5a5a5;
   }
 }
 
@@ -320,6 +321,7 @@
   height: 2.7rem;
   border: 2px solid #818181;
   border-radius: 1rem;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
   &:hover,
   &:focus {
     border-color: #ff7a59;
@@ -350,6 +352,7 @@
 .react-datepicker {
   background-color: #ffffff;
   border: 1px solid black;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
 }
 .react-datepicker__month-container {
   > * {
@@ -387,6 +390,7 @@
     border: 1px solid #ff4234;
     border-radius: 1rem;
     font-weight: bold;
+    box-shadow: 2px 4px 10px 0 #a5a5a5;
     background-color: #ff4234;
     :hover {
       background-color: #ff4234;
@@ -394,6 +398,7 @@
   }
   .react-datepicker__day--today {
     border: 1px solid #c2c2c2;
+    box-shadow: 2px 4px 10px 0 #a5a5a5;
   }
   .react-datepicker__day--keyboard-selected,
   .react-datepicker__month-text--keyboard-selected,
@@ -402,6 +407,13 @@
     border-radius: 0.3rem;
     background-color: #ffffff;
   }
+}
+
+.saturday {
+  color: blue;
+}
+.sunday {
+  color: red;
 }
 
 //input 화살표 제거

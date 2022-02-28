@@ -13,7 +13,7 @@
   border-radius: 1rem;
   cursor: pointer;
   letter-spacing: 5px;
-  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
   &:hover {
     box-shadow: 5px 5px 5px;
   }
@@ -43,11 +43,11 @@
   background: rgba(138, 135, 135, 0.76);
 }
 .modal-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr 7fr 1fr;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
-  width: 50rem;
+  width: 30rem;
   height: 50rem;
   position: absolute;
   top: 48%;

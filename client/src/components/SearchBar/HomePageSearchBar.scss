@@ -1,0 +1,59 @@
+.homeSearch {
+  margin-bottom: 4rem;
+  width: 100%;
+  height: 18rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeSearchBar {
+  width: 750px;
+  height: 50px;
+  padding: 1rem;
+  // box-shadow: 0.2rem 0.2rem 0.2rem #000808;
+  border-radius: 3rem;
+  background-color: #ee4e34;
+  margin: 1rem auto;
+  display: flex;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
+}
+
+.homeSearchBar-input {
+  width: 100vw;
+  height: 50px;
+  font-size: 30px;
+  color: white;
+  border: #ee4e34;
+  border-radius: 10px;
+  margin-left: 1rem;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+.homeSearchBar-input:focus,
+.homeSearchBar-input:active {
+  background-color: #ff7a59;
+}
+
+input:focus {
+  outline: none;
+}
+
+.homeSearchBar-input::placeholder {
+  color: white;
+  font-size: 100%;
+  font-style: italic;
+}
+
+.homeSerchBar-icon {
+  width: 50px;
+  height: 60px;
+  margin: 0.5rem 1rem 1rem;
+  border: #ee4e34;
+  background-color: transparent;
+  :active {
+    position: relative;
+    top: 0.1rem;
+  }
+}
