@@ -107,7 +107,6 @@ module.exports = (server, app) => {
         message,
         date
       );
-      console.log(message);
       chat
         .to(socket.curRoom)
         .emit("message", { _id, id: userId, message, nickname, image, date });

@@ -2,7 +2,7 @@ const Notification = require("../models/notification");
 
 module.exports = {
   getNotifications: async (req, res) => {
-    const { userId } = res.locals;
+    const { userId } = res.cookie;
     const notificationsOfUser = await Notification.findOne(
       { _id: userId },
       { _id: 0 }
@@ -16,7 +16,7 @@ module.exports = {
   },
   deleteNotification: async (req, res) => {
     const { notificationId } = req.params;
-    const { userId } = res.locals;
+    const { userId } = res.cookie;
     const notificationOfUser = await Notification.findOneAndUpdate(
       { _id: userId },
       { $pull: { notification: { id: notificationId } } },

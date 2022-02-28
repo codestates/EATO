@@ -17,6 +17,11 @@ const userDocumentSchema = new Schema({
     ref: "Document",
     required: true,
   },
+  chattingId: {
+    type: Schema.Types.ObjectId,
+    ref: "Chatting",
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("UserDocument", userDocumentSchema);

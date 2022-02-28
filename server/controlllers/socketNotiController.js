@@ -13,7 +13,7 @@ const mongoose = require("mongoose");
 module.exports = {
   joinParty: async (req, res) => {
     // 유저가 이미 있는 모임에 참가 신청을 하는 Api
-    const { userId } = res.locals;
+    const { userId } = res.cookie;
     const documentId = Number(req.params.documentId);
     try {
       const result = await findOrCreateUser_document({
@@ -67,7 +67,7 @@ module.exports = {
     }
   },
   leaveParty: async (req, res) => {
-    const { userId } = res.locals; // 토큰에 있는 유저 아이디
+    const { userId } = res.cookie; // 토큰에 있는 유저 아이디
     const { userId: targetUserId } = req.params; // 도큐먼트 아이디와 타겟 유저 아이디
     const documenId = Number(req.params.documenId);
 

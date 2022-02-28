@@ -10,7 +10,10 @@ const DocumentSchema = new Schema(
     date: Date,
     time: String, //Number로 변경할수도
     totalNum: Number,
-    currentNum: Number,
+    currentNum: {
+      default: 1,
+      type: Number,
+    },
     description: String,
     category: Number,
     categoryImg: String,
@@ -18,14 +21,21 @@ const DocumentSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       //required: true,
-    },
+    }, // 작성자
     userDocument_id: {
       type: Schema.Types.ObjectId,
-      ref: "Document",
+      ref: "UserDocument",
       //required: true,
+    }, //
+    chatting_id: {
+      type: Schema.Types.ObjectId,
+      ref: "Chatting",
+      //required: true,
+    }, //
+    done: {
+      default: 0,
+      type: Boolean,
     },
-
-    done: Boolean,
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
   },

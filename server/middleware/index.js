@@ -12,7 +12,6 @@ module.exports = {
         if (!user) return res.json({ isAuth: false, error: true });
         req.token = token;
         req.user = user;
-        res.locals.userId = req.body._id;
         next();
       })
       .catch((err) => {
