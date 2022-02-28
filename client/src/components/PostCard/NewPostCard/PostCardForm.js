@@ -5,13 +5,15 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import { IoClose } from "react-icons/io5";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { FcClock, FcPlanner } from "react-icons/fc";
+// import { FcClock, FcPlanner } from "react-icons/fc";
 import PostCategory from "../PostCards/PostCategory";
 import DropdownT from "../PostCards/DropDownT";
 import postLogo from "../../../images/Logo.png";
 import DeliveryPay from "../PostCards/DeliveryPay";
 import CountPeople from "../PostCards/CountPeople";
+import { categoryOptions } from "../../../resource/datas";
 import "./PostCardForm.scss";
+import axios from "axios";
 
 const PostCardForm = (props) => {
   // const time = "00:00";
@@ -38,19 +40,6 @@ const PostCardForm = (props) => {
   const toggleModal = () => {
     setModal(!modal);
   };
-  const categoryOptions = [
-    "한식",
-    "중식",
-    "양식",
-    "일식",
-    "치킨",
-    "피자",
-    "야식",
-    "찜 / 탕",
-    "족발 / 보쌈",
-    "카페 / 디저트",
-    "기타",
-  ];
 
   const deliveryTagOptions = ["배달", "포장"];
   const payTagOptions = ["선불", "후불"];
@@ -93,9 +82,9 @@ const PostCardForm = (props) => {
     setEnteredDescription(event.target.value);
   };
 
-  const deliveryFeeChangeHandler = (event) => {
-    setEnteredDeliveryFee(event.target.value);
-  };
+  // const deliveryFeeChangeHandler = (event) => {
+  //   setEnteredDeliveryFee(event.target.value);
+  // };
 
   const joinTimeChangeHandler = (event) => {
     setEnteredJoinTime(event.target.value);
@@ -103,6 +92,15 @@ const PostCardForm = (props) => {
 
   const locatedChangeHandler = (event) => {
     setEnteredLocated(event.target.value);
+  };
+
+  const getDayName = (date) => {
+    return date.toLocaleDateString("ko-KR", { weekday: "long" }).substr(0, 1);
+  };
+  const createDate = (date) => {
+    return new Date(
+      new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
+    );
   };
 
   const submitHandler = (event) => {
@@ -190,6 +188,13 @@ const PostCardForm = (props) => {
               FcPlanner
               dateFormat="yyyy년 MM월 dd일"
               dateFormatCalendar={"yyyy년 MM월"}
+              dayClassName={(date) =>
+                getDayName(createDate(date)) === "토"
+                  ? "saturday"
+                  : getDayName(createDate(date)) === "일"
+                  ? "sunday"
+                  : undefined
+              }
             />
           </div>
 

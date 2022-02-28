@@ -1,5 +1,4 @@
 .postCard-item {
-  border: 2px solid black;
   border-radius: 1rem;
   display: grid;
   grid-template-columns: 4fr 1.5fr 2fr;
@@ -8,7 +7,7 @@
   width: 30rem;
   height: 12rem;
   background-color: #fcfcfc;
-  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
 }
 .postCard-item:active {
   position: relative;
@@ -92,7 +91,6 @@
     margin: 2px;
     font-size: 15px;
     color: #ffffff;
-    border: 1px solid #ff4234;
     background-color: #ff4234;
     border-radius: 1rem;
   }
@@ -101,7 +99,6 @@
     margin: 2px;
     font-size: 15px;
     color: #ffffff;
-    border: 1px solid #ff4234;
     background-color: #ff4234;
     border-radius: 1rem;
   }
