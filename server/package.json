@@ -39,6 +39,7 @@
     "node-schedule": "^2.1.0",
     "nodemon": "^2.0.15",
     "qs": "^6.10.3",
+    "redis": "^4.0.4",
     "sequelize": "^6.13.0",
     "sequelize-cli": "^6.4.1",
     "socket.io": "^4.4.1",

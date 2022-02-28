@@ -4,6 +4,7 @@ mongoose.set("bufferCommands", true);
 // Blowfish 암호를 기반으로 설계된 암호화 함수이며 현재까지 사용중인 가장 강력한 해시 메커니즘 중 하나이다.
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const res = require("express/lib/response");
 const saltRounds = 10;
 const { Schema } = mongoose;
 const userSchema = new Schema(
@@ -19,19 +20,6 @@ const userSchema = new Schema(
     password: {
       type: String,
     },
-    //},
-    naver: {
-      uuid: { type: String },
-      email: { type: String },
-      accessToken: { type: String },
-      refreshToken: { type: String },
-    },
-    kakao: {
-      uuid: { type: Number },
-      email: { type: String },
-      accessToken: { type: String },
-      refreshToken: { type: String },
-    },
     nickname: {
       type: String,
       required: true,
@@ -46,6 +34,10 @@ const userSchema = new Schema(
     },
     tokenExp: {
       type: Number,
+    },
+    authStatus: {
+      type: Boolean,
+      default: 0,
     },
   },
   {
@@ -80,9 +72,12 @@ userSchema.methods.comparePassword = function (plainPassword) {
     .catch((err) => err);
 };
 userSchema.methods.generateToken = function () {
-  // let user = this;
-  const token = jwt.sign(this._id.toHexString(), process.env.JWT_SECRET_KEY);
+  const token = jwt.sign(
+    (this._id.toHexString(), this.nickname),
+    process.env.JWT_SECRET_KEY
+  );
   this.token = token;
+
   return this.save()
     .then((user) => user)
     .catch((err) => err);

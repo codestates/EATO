@@ -4,7 +4,8 @@ const {
   validEmail,
   createUser,
   userLogin,
-  socialLogin,
+  kakaoSignin,
+  naverSignin,
   logout,
   deleteUser,
   updateProfile,
@@ -12,10 +13,11 @@ const {
 const { protect } = require("../../middleware/index");
 
 // users
-router.post("/signUp", createUser, validEmail);
+router.post("/signUp", createUser);
 router.post("/login", userLogin);
 router.get("/logout", protect, logout);
-router.post("/:kana", socialLogin);
+router.post("/kakao", kakaoSignin);
+router.post("/naver", naverSignin);
 
 router
   .route("/userInfo")

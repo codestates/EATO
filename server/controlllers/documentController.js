@@ -8,17 +8,6 @@ const mongoose = require("mongoose");
 // 게시물 생성시 채팅방 생성
 
 module.exports = {
-  createChatRoom: asyncHandler(async (req, res) => {
-    const userId = req.body._id;
-    const usersParty = Document.find({ _id: userId });
-    const { user_id, title } = usersParty;
-    const chatInfo = { cerator: user_id, title: title };
-
-    const chat = new Chatting(chatInfo);
-    chat.save();
-    return res.status(200).json(chat);
-  }),
-
   // 게시물 생성
   createDocument: asyncHandler(async (req, res) => {
     const {
@@ -27,6 +16,7 @@ module.exports = {
       placeName,
       date,
       time,
+      currentNum,
       totalNum,
       description,
       category,
@@ -38,6 +28,7 @@ module.exports = {
       placeName,
       date,
       time,
+      currentNum,
       totalNum,
       description,
       category,
@@ -69,11 +60,11 @@ module.exports = {
     }
   }),
 
-  // 게시물 조회
-  viewPost: asyncHandler(async (req, res) => {
-    Document.findOne({ _id: req.body._id }, (err, docu) => {
+  //전체 게시물 조회
+  showPost: asyncHandler(async (req, res) => {
+    Document.find({ done: 0 }, (err, docu) => {
       if (err) {
-        return res.status(400).json({ message: "failed" });
+        return res.status(400).json({ message: console.log(err) });
       }
       const {
         title,
@@ -84,6 +75,7 @@ module.exports = {
         date,
         time,
         totalNum,
+        currentNum,
         description,
         category,
       } = docu;
@@ -96,10 +88,50 @@ module.exports = {
           longitude,
           date,
           time,
+          currentNum,
           totalNum,
           description,
           category,
         },
+        message: console.log(docu),
+      });
+    });
+  }),
+
+  // 게시물 조회
+  viewPost: asyncHandler(async (req, res) => {
+    Document.findOne({ _id: req.params.postId }, (err, docu) => {
+      if (err) {
+        return res.status(400).json({ message: console.log(err) });
+      }
+      const {
+        title,
+        deliveryFee,
+        placeName,
+        latitude,
+        longitude,
+        date,
+        time,
+        totalNum,
+        currentNum,
+        description,
+        category,
+      } = docu;
+      return res.status(200).json({
+        documentInfo: {
+          title,
+          deliveryFee,
+          placeName,
+          latitude,
+          longitude,
+          date,
+          time,
+          currentNum,
+          totalNum,
+          description,
+          category,
+        },
+        message: console.log(docu),
       });
     });
   }),
@@ -112,7 +144,7 @@ module.exports = {
     const meetingMember = req.app.get("meetingMember");
     const documenId = Number(req.params.documenId);
     //const documenId = Document.findById({ doId: req._id });
-    const userId = UserDocument.find({ documenId: req.params.id }).populate(
+    const userId = UserDocument.find({ documenId: req.params.postId }).populate(
       "userId",
       "_id"
     ); //문법맞는지 확인하기
@@ -132,8 +164,8 @@ module.exports = {
       message: "게시물이 삭제 되었습니다.",
     };
 
-    await Document.findOneAndDelete({ _id: req.params.id });
-    await Chatting.findOneAndDelete({ ceratorId: req.params.id });
+    await Document.findOneAndDelete({ _id: req.params.postId });
+    await Chatting.findOneAndDelete({ ceratorId: req.params.postId });
     Notification.createNotice(userList, noticeInfo);
     main.to(documenId).emit("notice", noticeInfo, userId);
     main.to(documenId).emit("quit");

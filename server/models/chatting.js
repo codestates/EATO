@@ -24,8 +24,9 @@ const chattingSchema = new Schema(
       // required: true,
     },
     creatorId: {
-      type: String,
-      //  required: true,
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      //required: true,
     },
   },
   { versionKey: false }
