@@ -20,13 +20,9 @@
     rel="stylesheet" />
 
   <title>EATO</title>
-  <!-- 카카오 로그인 -->
-  <!-- JavaScript 키  -->
-  <!-- 선우님: 32999d6520e747ba0baa452bcdfd00c7  -->
-  <!-- 제완: fc0c438f31924f3cab594416ba440d09  -->
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <script>
-    window.Kakao.init("fc0c438f31924f3cab594416ba440d09");
+    window.Kakao.init("process.env.REACT_APP_KAKAO_CLIENT_ID");
   </script>
 
   <!-- 네이버 로그인 -->
@@ -35,6 +31,7 @@
 </head>
 
 <body>
+
   <div id="root"></div>
 </body>
 
