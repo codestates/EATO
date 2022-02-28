@@ -1,6 +1,6 @@
 @mixin user_button {
   padding: 10px 14px;
-  margin-right: 10px;
+  margin-right: 25px;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
@@ -35,7 +35,6 @@ nav {
     // SignUp, MyPage, etc... wrapper
     .user-access {
       display: flex;
-      font-size: 16px;
       margin-right: 23px;
       position: relative;
       // ** button과 hover의 padding값을 똑같이 설정해야 움직임이 고정된다.
