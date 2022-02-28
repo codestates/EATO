@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-// import { useSetRecoilState } from "recoil";
-// import IsLoginState from "../../../states/SignInState";
+import IsLoginState from "../../../states/IsLoginState";
+import { useRecoilState } from "recoil";
 import axios from "axios";
 import Logo from "../../../images/logo-signup.png";
 import ForkW from "../../../images/fork_white.png";
@@ -12,8 +12,8 @@ import SocialLogBtn from "../SignUp/SocialLogBtn";
 axios.defaults.withCredentials = true;
 
 const SignIn = () => {
+  // true
   const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
@@ -36,8 +36,9 @@ const SignIn = () => {
     "Content-Type": "application/json",
     withCredentials: false,
   };
-  const [emailErr, setEmailErr] = useState("");
-  const [pwdErr, setPwdErr] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  // recoil 전역상태 false
+  const [isLogin, setIsLogin] = useRecoilState(IsLoginState);
 
   const onSubmit = (data) => {
     axios
@@ -47,14 +48,14 @@ const SignIn = () => {
         config
       )
       .then((res) => {
-        console.log(res);
-        const loginCheck = res.data.message;
-        console.log(loginCheck);
-        if (loginCheck === "존재하지 않는 아이디입니다.") {
-          setEmailErr(loginCheck);
-        } else if (loginCheck === "비밀번호가 일치하지 않습니다.") {
-          setPwdErr(loginCheck);
-        } else navigate("/home");
+        const loginFalse = res.data.loginSuccess;
+        if (loginFalse === false) {
+          setErrMsg("아이디와 비밀번호를 정확하게 적어주세요.");
+        } else {
+          // 로그인 시 recoil 전역상태 true로 전환
+          setIsLogin(true);
+          navigate("/home");
+        }
       });
   };
 
@@ -83,7 +84,6 @@ const SignIn = () => {
             <article className="signin-input-box">
               <input
                 name="email"
-                type="email"
                 className="signin-input"
                 placeholder="이메일 아이디"
                 {...register("email", {
@@ -102,8 +102,6 @@ const SignIn = () => {
               {errors?.email && (
                 <p className="input-err-text">{errors.email.message}</p>
               )}
-              {/* 이메일 아이디 존재 확인 */}
-              <p className="input-err-text">{emailErr}</p>
             </article>
 
             {/* 비밀번호 */}
@@ -137,7 +135,7 @@ const SignIn = () => {
                 <p className="input-err-text">{errors.password.message}</p>
               )}
               {/* 비밀번호 일치 확인 */}
-              <p className="input-err-text">{pwdErr}</p>
+              <p className="input-err-text">{errMsg}</p>
             </article>
             {/* 로그인 버튼 */}
             <button className="signin-btn" type="submit">

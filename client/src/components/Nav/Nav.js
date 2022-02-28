@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import SignInState from "../../states/SignInState";
+import IsLoginState from "../../states/IsLoginState";
 import Logo from "../../images/Logo.png";
 import Notification from "./NavNotification";
 
@@ -17,40 +17,33 @@ function Nav() {
   // 이는 브라우저의 뒤로가기를 눌렀을 때 그 차이를 확실히 알 수 있습니다.
   // const [userInfo, setUserInfo] = useState({});
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useRecoilState(SignInState);
 
+  // recoil 전역상태 false
+  const [isLogin, setIsLogin] = useRecoilState(IsLoginState);
+
+  const config = {
+    "Content-Type": "application/json",
+    withCredentials: false,
+  };
+
+  // isLogin false 설정
   const logoutHandler = () => {
-    // axios 요청
-    axios.get("http://localhost:27017/user/logout").then((res) => {
-      if (res.status === 200) {
-        setIsLogin(false);
-        navigate("/");
-        alert("로그아웃이 완료되었습니다.");
-      }
-      // localStorage.removeItem("userInfo");
-      // window.location.replace("/");
+    axios.get("http://localhost:27017/user/logout", config).then(() => {
+      // 로그아웃 버튼 클릭 시 recoil 전역상태 false로 전환
+      setIsLogin(false);
+      navigate("/", { replace: true });
+      alert("로그아웃이 완료되었습니다.");
     });
   };
 
-  // const userInfo = localStorage.getItem("eatoUserInfo");
-  // const logoutHandler = () => {
-  //   // axios 요청
-  //   axios.get("http://localhost:27017/user/logout").then(() => {
-  //     localStorage.removeItem("eatoUserInfo");
-  //     setIsLogin(false);
-  //     window.location.reload();
-  //     alert("로그아웃이 완료되었습니다.");
-  //   });
-  // };
-
   return (
-    <nav>
-      <Link to="/">
-        <img src={Logo} className="logo" alt="Logo"></img>
-      </Link>
-      <div className="user-access">
-        {!isLogin ? (
-          <>
+    <>
+      {isLogin ? (
+        <nav>
+          <Link to="/home">
+            <img src={Logo} className="logo" alt="Logo"></img>
+          </Link>
+          <div className="user-access">
             <Notification />
             <Link to="/mypage" className="user-button">
               마이페이지
@@ -58,19 +51,24 @@ function Nav() {
             <button className="user-button" onClick={logoutHandler}>
               로그아웃
             </button>
-          </>
-        ) : (
-          <>
+          </div>
+        </nav>
+      ) : (
+        <nav>
+          <Link to="/">
+            <img src={Logo} className="logo" alt="Logo"></img>
+          </Link>
+          <div className="user-access">
             <Link to="/signin" className="user-button">
               로그인
             </Link>
             <Link to="/signup" className="user-button">
               회원가입
             </Link>
-          </>
-        )}
-      </div>
-    </nav>
+          </div>
+        </nav>
+      )}
+    </>
   );
 }
 
