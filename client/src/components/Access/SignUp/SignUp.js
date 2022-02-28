@@ -1,6 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import IsLoginState from "../../../states/IsLoginState";
+import { useRecoilState } from "recoil";
 import axios from "axios";
 import Logo from "../../../images/logo-signup.png";
 import ForkW from "../../../images/fork_white.png";
@@ -35,21 +37,15 @@ function SignUp() {
   //   console.log("data", data);
   // };
 
-  // axios config
+  const [emailErr, setEmailErr] = useState("");
+
   const config = {
     "Content-Type": "application/json",
     withCredentials: false,
   };
 
-  // const checkEmail = (data) => {
-  //   data.preventDefault();
-  //   axios
-  //     .post("http://localhost:27017/user/signup",
-  //     { email: data.email }, config)
-  //     .then((res) => {
-  //       console.log(res);
-  //     });
-  //   }
+  const [isLogin, setIsLogin] = useRecoilState(IsLoginState);
+
   const onSubmit = (data) => {
     axios
       .post(
@@ -62,10 +58,19 @@ function SignUp() {
         config
       )
       .then((res) => {
-        console.log("여기", res);
-        alert("회원가입 완료!");
-        navigate("/home");
-      });
+        console.log(res)
+        if(res.status === 201){
+          alert("Welcome to EATO!");
+          setIsLogin(true);
+          navigate("/home");
+        }
+      })
+      .catch(err => {
+        if(err.response.status === 401){
+          setEmailErr('이미 사용중인 이메일이에요.')
+        }
+      })
+      ;
   };
 
   return (
@@ -115,6 +120,7 @@ function SignUp() {
                 {errors?.email && (
                   <p className="input-err-text">{errors.email.message}</p>
                 )}
+                <p className="input-err-text">{emailErr}</p>
               </article>
 
               {/* 닉네임 */}
