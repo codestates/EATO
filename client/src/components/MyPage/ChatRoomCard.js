@@ -15,6 +15,7 @@ export default function ChatRoomCard() {
             <div className="mypage-cb-card-container">
               <div className="mypage-cb-card">
                 <div className="mypage-cb-card-content">
+                  {/* 유저 랜덤 이미지 get*/}
                   <div className="mypage-cb-img" alt="user-img" />
                   <p className="mypage-cb-chatname">교촌치킨</p>
                 </div>
@@ -59,6 +60,7 @@ export default function ChatRoomCard() {
             <article className="mypage-cb-card-container">
               <div className="mypage-cb-card">
                 <div className="mypage-cb-leftbox">
+                  {/* document/:userid 제목, 배달비*/}
                   <p className="mypage-cb-lb-title">빌리프커피로스터스</p>
                   <p className="mypage-cb-lb-fee">4,000원</p>
                 </div>
