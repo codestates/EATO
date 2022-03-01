@@ -62,7 +62,7 @@ function SignUp() {
         if(res.status === 201){
           alert("Welcome to EATO!");
           setIsLogin(true);
-          navigate("/home");
+          navigate("/signin");
         }
       })
       .catch(err => {

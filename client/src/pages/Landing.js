@@ -4,6 +4,7 @@ import Intro from "../components/Landing/Intro";
 import Footer from "../components/Footer/Footer";
 
 function Landing() {
+
   return (
     <>
       <Nav></Nav>
