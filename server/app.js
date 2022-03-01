@@ -55,7 +55,11 @@ if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
     console.log("https server runnning!!");
   });
 } else {
-  server = app.listen(HTTPS_PORT, () => console.log("http server runnning"));
+  server = app.listen(
+    HTTPS_PORT,
+    () => SocketIO(server, app),
+    console.log("http server runnning")
+  );
 }
 
 module.exports = server;
