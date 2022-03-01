@@ -20,7 +20,7 @@ router.post("/kakao", kakaoSignin);
 router.post("/naver", naverSignin);
 
 router
-  .route("/userInfo")
+  .route("/userInfo/:userId")
   .patch(protect, updateProfile)
   .delete(protect, deleteUser);
 

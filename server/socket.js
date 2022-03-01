@@ -17,6 +17,7 @@ module.exports = (server, app) => {
       origin: "*",
       credentials: true,
     },
+    allowEIO3: true,
     serveClient: false, // TODO: 클라이언git x트에서 socket 설치하면 false 로 바꿔주기
   });
   const main = io.of("/");

@@ -1,4 +1,5 @@
 const asyncHandler = require("express-async-handler");
+const { cookie } = require("express/lib/response");
 const User = require("../models/user.js");
 const {
   getOption,
@@ -57,18 +58,10 @@ module.exports = {
           user
             .generateToken()
             .then((user) => {
-              res
-                .cookie("x_auth", user.token)
-                .cookie("userId", user._id)
-                .status(200)
-                .json({
-                  loginSuccess: console
-                    .log
-                    // res.cookie.split("=")[1].split(";")[0]
-                    // document.cookie
-                    (),
-                  userId: user._id,
-                });
+              res.cookie("x_auth", user.token).status(200).json({
+                accessToken: user.token,
+                loginSuccess: true,
+              });
             })
             .catch((err) => {
               res.status(400).send(err);
@@ -224,30 +217,31 @@ module.exports = {
   // user/userInfo
   deleteUser: asyncHandler(async (req, res) => {
     // 유저 본인이 탈퇴 요청
-    const user = await User.findOne({ email: req.body.email });
-    if (user.email) {
+    const { userId } = req.params;
+    const user = await User.findOne({ _id: userId });
+    if (user) {
+      await user.deleteOne();
+      return res.status(200).json({ message: "true" });
+    } else {
+      const { naver, kakao } = user;
+      const kana = naver.uuid ? "naver" : kakao.uuid ? "kakao" : null;
+
+      const options = getOption(kana, `${user[kana].refreshToken}`);
+      const token = await updateAccessToken(options, "refresh_token");
+      const { access_token } = token;
+
+      // 엑세스 끊기
+      const revokeRes = await revokeAccess(corp, access_token);
+      let message;
+
+      if (revokeRes.data.id && kana === "kakao") {
+        message = "카카오 계정과 연결 끊기 완료";
+      }
+      if (revokeRes.data.result === "success" && kana === "naver") {
+        message = "네이버 계정과 연결 끊기 완료";
+      }
       await User.deleteOne({ _id: user._id });
-      res.status(200).json({ message: "회원탈퇴가 완료 되었습니다." });
-      return;
+      res.status(200).json(message);
     }
-    const { naver, kakao } = user;
-    const kana = naver.uuid ? "naver" : kakao.uuid ? "kakao" : null;
-
-    const options = getOption(kana, `${user[kana].refreshToken}`);
-    const token = await updateAccessToken(options, "refresh_token");
-    const { access_token } = token;
-
-    // 엑세스 끊기
-    const revokeRes = await revokeAccess(corp, access_token);
-    let message;
-
-    if (revokeRes.data.id && kana === "kakao") {
-      message = "카카오 계정과 연결 끊기 완료";
-    }
-    if (revokeRes.data.result === "success" && kana === "naver") {
-      message = "네이버 계정과 연결 끊기 완료";
-    }
-    await User.deleteOne({ _id: user._id });
-    res.status(200).json(message);
   }),
 };

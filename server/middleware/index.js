@@ -6,10 +6,9 @@ const User = require("../models/user");
 module.exports = {
   protect: async (req, res, next) => {
     let token = req.cookies.x_auth;
-
     User.findByToken(token)
       .then((user) => {
-        if (!user) return res.json({ isAuth: false, error: true });
+        if (!user) return res.json({ isAuth: false, error: console.log(req) });
         req.token = token;
         req.user = user;
         next();
