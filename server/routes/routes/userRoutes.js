@@ -9,6 +9,7 @@ const {
   logout,
   deleteUser,
   updateProfile,
+  getUserInfo,
 } = require("../../controlllers/userController");
 const { protect } = require("../../middleware/index");
 
@@ -18,6 +19,7 @@ router.post("/login", userLogin);
 router.get("/logout", protect, logout);
 router.post("/kakao", kakaoSignin);
 router.post("/naver", naverSignin);
+router.get("/mypage/:userId", protect, getUserInfo);
 
 router
   .route("/userInfo/:userId")

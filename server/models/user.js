@@ -39,6 +39,12 @@ const userSchema = new Schema(
       type: Boolean,
       default: 0,
     },
+    createDocument: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Document",
+      },
+    ],
   },
   {
     versionKey: false,

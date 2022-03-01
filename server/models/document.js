@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const DocumentSchema = new Schema(
   {
-    title: String,
+    title: {
+      type: String,
+      default: "",
+    },
     deliveryFee: Number,
     placeName: String,
     latitude: Number,
@@ -17,11 +20,13 @@ const DocumentSchema = new Schema(
     description: String,
     category: Number,
     categoryImg: String,
-    user_id: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      //required: true,
-    }, // 작성자
+    user_id: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        //required: true,
+      },
+    ], // 작성자
     userDocument_id: {
       type: Schema.Types.ObjectId,
       ref: "UserDocument",
