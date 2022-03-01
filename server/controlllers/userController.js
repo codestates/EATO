@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const { cookie } = require("express/lib/response");
 const User = require("../models/user.js");
+const Document = require("../models/document");
 const {
   getOption,
   revokeAccess,
@@ -8,6 +9,26 @@ const {
 } = require("../support/oAuth.js");
 
 module.exports = {
+  getUserInfo: asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+    const user = await User.findOne({ _id: userId });
+    if (user) {
+      const { _id, nickname, location } = user;
+      const userDocu = await Document.findOne({ user_id: _id });
+      if (!userDocu) {
+        return res.status(200).json({
+          user: { _id, nickname, location },
+        });
+      }
+      const { title, deliveryFee } = userDocu;
+      return res.status(200).json({
+        user: { _id, nickname, location },
+        document: { title, deliveryFee },
+      });
+    } else {
+      return res.status(400).json({ message: "failed" });
+    }
+  }),
   // 회원가입
   // POST
   // user/signUp
@@ -60,6 +81,7 @@ module.exports = {
             .then((user) => {
               res.cookie("x_auth", user.token).status(200).json({
                 accessToken: user.token,
+                userId: user._id,
                 loginSuccess: true,
               });
             })
@@ -217,11 +239,12 @@ module.exports = {
   // user/userInfo
   deleteUser: asyncHandler(async (req, res) => {
     // 유저 본인이 탈퇴 요청
-    const { userId } = req.params;
-    const user = await User.findOne({ _id: userId });
+    const { accesstoken } = req.headers;
+
+    const user = await User.findOne({ token: accesstoken });
     if (user) {
       await user.deleteOne();
-      return res.status(200).json({ message: "true" });
+      return res.status(200).json({ message: console.log(user) });
     } else {
       const { naver, kakao } = user;
       const kana = naver.uuid ? "naver" : kakao.uuid ? "kakao" : null;
