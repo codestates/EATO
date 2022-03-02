@@ -49,7 +49,7 @@ function SignUp() {
   const onSubmit = (data) => {
     axios
       .post(
-        "http://localhost:27017/user/signup",
+        "http://localhost:3000/user/signup",
         {
           email: data.email,
           password: data.password,

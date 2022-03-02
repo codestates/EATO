@@ -10,7 +10,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Noto Sans KR';
 }
 
 @mixin wrapper_style {
@@ -47,7 +46,7 @@
 
 @mixin font_style {
   font-size: 48px;
-  font-weight: 400;
+  font-weight: 500;
   word-break: keep-all; 
   text-align: center;
   width: 335px;
@@ -62,8 +61,9 @@
 .intro-1 {
   @include intro_style;
   // Tablet
+
   @media screen and (max-width: 768px) {
-    
+
   }
   .wrapper {
     @include wrapper_style;
@@ -79,16 +79,15 @@
       
     }
     
-    .start-box {
+    .start-box-top {
       @include start_box_style;
 
       .intro-text-1 {
         @include font_style;
         padding-bottom: 20px;
-        
       }
       
-      .btn {
+      .start-btn-top {
         @include start_btn_style;
       }
     }
@@ -242,10 +241,10 @@
       width: 480px;
       margin-bottom: 40px;
     }
-    .start-box {
+    .start-box-bottom {
       @include start_box_style;
 
-      .btn {
+      .start-btn-bottom {
         @include start_btn_style;
       }
     }
