@@ -20,23 +20,17 @@ const DocumentSchema = new Schema(
     description: String,
     category: Number,
     categoryImg: String,
-    user_id: [
+    creatorId: {
+      type: String,
+      ref: "User",
+    },
+    // 작성자 아이디
+    users: [
       {
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "User",
-        //required: true,
       },
-    ], // 작성자
-    userDocument_id: {
-      type: Schema.Types.ObjectId,
-      ref: "UserDocument",
-      //required: true,
-    }, //
-    chatting_id: {
-      type: Schema.Types.ObjectId,
-      ref: "Chatting",
-      //required: true,
-    }, //
+    ],
     done: {
       default: 0,
       type: Boolean,

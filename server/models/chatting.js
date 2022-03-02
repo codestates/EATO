@@ -10,6 +10,7 @@ const chatSchema = new Schema({
     type: String,
     required: true,
   },
+
   date: {
     type: String,
   },
@@ -21,13 +22,15 @@ const chattingSchema = new Schema(
     },
     chatLog: {
       type: [chatSchema],
-      // required: true,
     },
     creatorId: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      //required: true,
-    },
+    }, // 게시물 작성자
+    documentChatId: {
+      type: Schema.Types.ObjectId,
+      ref: "Document",
+    }, // 채팅이랑 연결된 게시물
   },
   { versionKey: false }
 );
@@ -36,13 +39,14 @@ chattingSchema.statics.typeChat = async function (
   room,
   _id,
   userId,
+  nickname,
   message,
   date
 ) {
   const AddedChatInfo = await this.findOneAndUpdate(
     { _id: room },
     {
-      $push: { chatLog: { _id, id: userId, message, date } },
+      $push: { chatLog: { _id, id: userId, message, nickname, date } },
     },
     { returnDocument: "after" }
   );

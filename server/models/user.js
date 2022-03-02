@@ -41,8 +41,13 @@ const userSchema = new Schema(
     },
     createDocument: [
       {
-        type: Schema.Types.ObjectId,
+        type: Object,
         ref: "Document",
+      },
+    ],
+    userChat: [
+      {
+        type: Object,
       },
     ],
   },

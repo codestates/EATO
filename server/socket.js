@@ -4,6 +4,7 @@ const { verifyToken } = require("./support/token");
 const mongoose = require("mongoose");
 const Chatting = require("./models/chatting");
 const Notification = require("./models/notification");
+const meetingMemberStatus = require("./controlllers/function/index");
 const {
   currentTime,
   vaildDocumentId,
@@ -25,6 +26,7 @@ module.exports = (server, app) => {
 
   app.set("main", main);
   app.set("chat", chat);
+  app.set("meetingMember", await meetingMemberStatus());
 
   main.use(async (socket, next) => {
     const { jwt } = cookie.parse(socket.handshake.headers.cookie || "");

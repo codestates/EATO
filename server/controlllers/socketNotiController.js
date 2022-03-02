@@ -8,123 +8,107 @@ const {
   modifyDocument,
 } = require("./function");
 const Notification = require("../models/notification");
+const Document = require("../models/document");
+const User = require("../models/user");
 const mongoose = require("mongoose");
 
 module.exports = {
   joinParty: async (req, res) => {
     // 유저가 이미 있는 모임에 참가 신청을 하는 Api
-    const { userId } = res.cookie;
-    const documentId = Number(req.params.documentId);
-    try {
-      const result = await findOrCreateUser_document({
-        userId,
-        documentId,
-      });
-      if (!result) {
-        return res.status(400).json({ message: "이미 참여중입니다." });
-      }
-      const documentInfo = await findDocument(documentId);
-      const { totalNum, currentNum, done, date, title } = documentInfo;
+    const { userId } = req.cookies;
+    const { documentId } = req.params;
+    const findDocu = Document.findOne({ users: userId });
+
+    const docuId = Number(req.params.documentId);
+
+    if (findDocu) {
+      return res.status(400).json({ message: "이미 참여중입니다." });
+    } else {
+      const docu = await Document.findOne({ _id: req.params.documentId });
+      const { totalNum, currentNum, done, date, title } = docu;
       const documentSetDay = +new Date(date);
       const currentDay = +new Date(currentTime().split(" ")[0]);
       if (totalNum <= currentNum || done === 1 || documentSetDay < currentDay) {
         // 파티에 참여할 수 없는 조건
         return res
           .status(400)
-          .json({ message: "모임에 인원이 다 찼거나 종료된 모임입니다" });
+          .json({ message: "참여인원이 다 찼거나 종료되었습니다." });
       }
-      // TODO: 유저가 파티에 참여했다는 이벤트를 모든 참여자에게 알림 + 유저 관리 객체에 해당 유저 추가
-      // 이벤트
-      const userInfo = await findUser(userId);
-      const { nickname } = userInfo;
+      const user = await User.findOne({ _id: ObjectId(userId) });
       const meetingMember = req.app.get("meetingMember");
       const userIds = [];
-      for (const [key, val] of Object.entries(meetingMember[documentId])) {
+      for (const [key, val] of Object.entries(meetingMember[docuId])) {
         if (val === 0) {
           userIds.push(key);
         }
       }
-      //  const _id = mongoose.Types.ObjectId();
       const main = req.app.get("main");
       const noticeInfo = {
         id: _id,
-        documentId: documentId,
-        url: `/chat/${documentId}`,
+        documentId: docuId,
+        url: `/chat/${docuId}`,
         target: userId,
         title: title,
-        message: `${nickname}님이 파티에 참여했습니다`,
+        message: `${user.nickname}님이 파티에 참여했습니다`,
       };
-      // 채팅 시스템 알람이 없기 때문에 채팅에 참여중인 사람도 같이 알람을 받아야 함
+
       Notification.createNotice(userIds, noticeInfo);
-      main.to(documentId).emit("notice", noticeInfo);
-      meetingMember[documentId][userId] = 0;
+      main.to(docuId).emit("notice", noticeInfo);
+      meetingMember[docuId][userId] = 0;
       // 이벤트
-      await documentInfo.update({ currentNum: currentNum + 1 });
-      const joinedDocumentInfo = await findAllDocument(documentId);
-      return res.status(201).json(modifyDocument(joinedDocumentInfo)[0]);
-    } catch (err) {
-      DBERROR(res, err);
+      await docu.update({ currentNum }, { $inc: { currentNum: 1 } });
+      return res.status(201).json({ message: "참여완료" });
     }
   },
+
   leaveParty: async (req, res) => {
-    const { userId } = res.cookie; // 토큰에 있는 유저 아이디
-    const { userId: targetUserId } = req.params; // 도큐먼트 아이디와 타겟 유저 아이디
-    const documenId = Number(req.params.documenId);
+    const { userId } = req.cookies; // 토큰에 있는 유저 아이디
+    const { documentId } = req.params;
+    const findDocu = Document.findOne({ users: userId }); //string타입
+    const targetUserId = Document.findOne(
+      { _id: documentId },
+      { creatorId: 1 }
+    ); //object타입
 
-    try {
-      // 해당 유저의 documentUserInfo 정보가 없다면 그 유저는 참여중이 아님
-      const documentUserInfo = await User_findDocument({
-        userId: targetUserId,
-        documenId,
-      });
-      if (!documentUserInfo) {
-        return res.status(400).json({ message: "참여중인 유저가 아닙니다." });
-      }
+    if (!findDocu) {
+      return res.status(400).json({ message: "참여중인 유저가 아닙니다." });
+    } else {
+      const docuId = Number(documentId);
+      const { currentNum, title, user_id } = findDocu;
+      const user = User.findOne({ _id: ObjectId(userId) });
+      const host = targetUserId.equals(userId); //ObjectId타입이랑 string타입이랑 비교해서 boolean값 반환시켜줌
 
-      const documentInfo = await findDocument(documenId);
-      const { currentNum, title, user_id } = documentInfo;
-
-      const userInfo = await findUser({ id: targetUserId });
-      const { nickname } = userInfo;
-
-      // 토큰의 유저아이디와 해당 document의 user_id가 같다면 요청한 유저는 호스트
-      const host = userId === user_id;
-      // 호스트가 아니면서 타켓유저아이디와 토큰에 유저아이디가 다르다면 권한이 없음
-      if (!host && targetUserId !== userId) {
-        return res.status(400).json({ message: "You don't have permission" });
-      }
-
+      const noticeType = host ? "ban" : "leave";
       const noticeMessage = host
-        ? `${nickname}님이 강퇴 되었습니다.`
-        : `${nickname}님이 채팅방을 나갔습니다.`;
+        ? `${user.nickname}님이 모임에서 추방되었습니다.`
+        : `${user.nickname}님이 모임을 떠났습니다.`;
 
       const meetingMember = req.app.get("meetingMember");
-      delete meetingMember[documenId][userId];
-      const userIds = Object.keys(meetingMember[documenId]);
+
+      delete meetingMember[docuId][userId];
+
+      const userIds = Object.keys(meetingMember[docuId]);
+
       const _id = mongoose.Types.ObjectId();
       const main = req.app.get("main");
       const chat = req.app.get("chat");
       const noticeInfo = {
         id: _id,
-        documenId: documenId,
-        url: `/chat/${documenId}`,
+        documentId: docuId,
+        type: noticeType,
+        url: `/chat/${docuId}`,
         target: targetUserId,
         title: title,
         message: noticeMessage,
       };
-      // 채팅 시스템 알람이 없기 때문에 채팅에 참여중인 사람도 같이 알람을 받아야 함
 
       Notification.createNotice(userIds, noticeInfo);
-      main.to(documenId).emit("notice", noticeInfo);
-      chat.to(documenId).emit("leave", targetUserId);
-      // 이벤트
+      main.to(docuId).emit("notice", noticeInfo);
+      chat.to(docuId).emit("leave", targetUserId);
 
-      await documentUserInfo.remove();
-      documentInfo.update({ currentNum }, { $inc: { currentNum: -1 } });
-      const leftDocumentInfo = await findAllDocument(documenId);
-      return res.status(200).json(modifyDocument(leftDocumentInfo)[0]);
-    } catch (err) {
-      DBERROR(res, err);
+      await findDocu.deleteOne();
+      findDocu.update({ currentNum }, { $inc: { currentNum: -1 } });
+      return res.status(200).json({ message: "채팅방을 나갔습니다." });
     }
   },
 };

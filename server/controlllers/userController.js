@@ -79,11 +79,16 @@ module.exports = {
           user
             .generateToken()
             .then((user) => {
-              res.cookie("x_auth", user.token).status(200).json({
-                accessToken: user.token,
-                userId: user._id,
-                loginSuccess: true,
-              });
+              res
+                .cookie("x_auth", user.token)
+                .cookie("userId", user._id)
+                .status(200)
+                .json({
+                  accessToken: user.token,
+                  userId: user._id,
+                  nickname: user.nickname,
+                  loginSuccess: true,
+                });
             })
             .catch((err) => {
               res.status(400).send(err);
