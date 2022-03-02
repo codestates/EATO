@@ -9,19 +9,15 @@ module.exports = {
     );
     return [...usersDocument];
   }),
-  meetingMemberStatus: asyncHandler(async () => {
-    const documentList = await Document.find(
-      { done: 0 },
-      { _id: true }
-    ).populate("user_id", "_id");
 
+  meetingMemberStatus: asyncHandler(async () => {
+    const findDocu = await Document.find({ done: false });
+    const userList = await Document.find({ done: false }, { users: 1 });
     const result = {};
 
-    documentList.forEach((document) => {
-      result[document._id] = {};
-      document.user_id.forEach((userDocument) => {
-        result[document._id][userDocument._id] = 0;
-      });
+    userList.map((user) => {
+      result[findDocu._id] = {};
+      result[findDocu._id][user.userId] = 0;
     });
 
     return result;

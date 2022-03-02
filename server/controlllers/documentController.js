@@ -1,15 +1,15 @@
 const asyncHandler = require("express-async-handler");
 const Document = require("../models/document");
 const Chatting = require("../models/chatting");
-const UserDocument = require("../models/userDocument");
 const Notification = require("../models/notification");
-const mongoose = require("mongoose");
+const User = require("../models/user");
 
 // 게시물 생성시 채팅방 생성
 
 module.exports = {
   // 게시물 생성
   createDocument: asyncHandler(async (req, res) => {
+    const { userId } = req.cookies;
     const {
       title,
       deliveryFee,
@@ -45,17 +45,35 @@ module.exports = {
         totalNum,
         description,
         category,
+        ceratorId: userId,
+        users: userId,
       });
-      //req.app.get("meetingMember")[id] = { [creator.id]: 0 };
+
+      await User.updateOne(
+        { _id: userId },
+        {
+          createDocument: {
+            _id: newDocument._id,
+            title: newDocument.title,
+            deliveryFee: newDocument.deliveryFee,
+          },
+          userChat: {
+            _id: newDocument._id,
+            title: newDocument.title,
+          },
+        }
+      );
+      // //req.app.get("meetingMember")[id] = { [creator.id]: 0 };
       const setChatInfo = {
         chatInfo: { title },
-        ceratorId: req.body._id,
+        ceratorId: userId,
+        documentChatId: newDocument._id,
       };
-      const chat = Chatting.create(setChatInfo);
+      await Chatting.create(setChatInfo);
+
       res.status(201).json({
-        message: "success",
+        message: console.log(req.cookies.userId),
         newDocument,
-        chat,
       });
     }
   }),
@@ -78,6 +96,9 @@ module.exports = {
         currentNum,
         description,
         category,
+        categoryImg,
+        creatorId,
+        createdAt,
       } = docu;
       return res.status(200).json({
         documentInfo: {
@@ -92,13 +113,16 @@ module.exports = {
           totalNum,
           description,
           category,
+          categoryImg,
+          creatorId,
+          createdAt,
         },
-        message: console.log(docu),
+        message: "게시물 조회 성공!",
       });
     });
   }),
 
-  // 게시물 조회
+  // 게시물 상세 조회
   viewPost: asyncHandler(async (req, res) => {
     Document.findOne({ _id: req.params.postId }, (err, docu) => {
       if (err) {
@@ -116,6 +140,9 @@ module.exports = {
         currentNum,
         description,
         category,
+        categoryImg,
+        creatorId,
+        createdAt,
       } = docu;
       return res.status(200).json({
         documentInfo: {
@@ -126,12 +153,15 @@ module.exports = {
           longitude,
           date,
           time,
-          currentNum,
           totalNum,
+          currentNum,
           description,
           category,
+          categoryImg,
+          creatorId,
+          createdAt,
         },
-        message: console.log(docu),
+        message: "게시물 상세 조회 성공!",
       });
     });
   }),
@@ -140,74 +170,63 @@ module.exports = {
   deletePost: asyncHandler(async (req, res) => {
     const main = req.app.get("main");
     const chat = req.app.get("chat");
-    const _id = mongoose.Types.ObjectId();
+    const documentId = Number(req.params.documentId);
     const meetingMember = req.app.get("meetingMember");
-    const documenId = Number(req.params.documenId);
-    //const documenId = Document.findById({ doId: req._id });
-    const userId = UserDocument.find({ documenId: req.params.postId }).populate(
-      "userId",
-      "_id"
-    ); //문법맞는지 확인하기
+
+    const Docu = Document.find({ _id: req.params.documentId });
+    const userId = Docu.creatorId;
     const userList = [];
-    // for (const [key, val] of Object.entries(meetingMember[documenId])) {
-    //   if (val === 0) {
-    //     userList.push(key);
-    //   }
-    // }
+    for (const [key, val] of Object.entries(meetingMember[documentId])) {
+      if (val === 0) {
+        userList.push(key);
+      }
+    }
+    const _id = mongoose.Types.ObjectId();
 
     const noticeInfo = {
-      // id: _id,
-      documentId: documenId,
+      id: _id,
+      documentId: Docu._id,
       url: null,
       target: null,
-      title: documenId.title,
+      type: "deleteParty",
+      title: Docu.title,
       message: "게시물이 삭제 되었습니다.",
     };
 
-    await Document.findOneAndDelete({ _id: req.params.postId });
-    await Chatting.findOneAndDelete({ ceratorId: req.params.postId });
+    await Docu.deleteOne(); //게시물 삭제
+    await Chatting.findOneAndDelete({ documentChatId: Docu._id }); //게시물 연결된 채팅방 삭제
+
     Notification.createNotice(userList, noticeInfo);
-    main.to(documenId).emit("notice", noticeInfo, userId);
-    main.to(documenId).emit("quit");
-    chat.to(documenId).emit("quit");
-    chat.in(documenId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
-    delete meetingMember[documenId];
+    main.to(documentId).emit("notice", noticeInfo, userId);
+    main.to(documentId).emit("quit");
+    chat.to(documentId).emit("quit");
+    chat.in(documentId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
+    delete meetingMember[documentId];
     res.status(200).json({
       message: "게시물이 삭제 되었습니다.",
     });
   }),
 
   // 게시물 수정
-  // ?? 게시물 수정시 유저 아이디 일치 여부 확인? 토큰으로 확인?
   updatePost: asyncHandler(async (req, res) => {
-    const {
-      title,
-      description,
-      category,
-      date,
-      deliveryFee,
-      totalNum,
-      location,
-      latitude,
-      longitude,
-    } = req.body;
+    const { documentId } = req.body.params;
+    const findDocu = await Document.findOne({ _id: documentId });
+    if (findDocu) {
+      const {
+        title,
+        description,
+        category,
+        date,
+        deliveryFee,
+        totalNum,
+        location,
+        latitude,
+        longitude,
+      } = req.body;
 
-    if (
-      !title ||
-      !description ||
-      !category ||
-      !date ||
-      !deliveryFee ||
-      !totalNum
-      //  !location ||    => 카카오맵
-      // !latitude ||
-      // !longitude
-    ) {
-      res.status(400).json({ message: "Failed to update Post" });
-    } else {
-      res.status(201).json({
-        message: "success",
-        document: {
+      await Document.findOneAndUpdate(
+        { _id: documentId },
+        {
           title,
           description,
           category,
@@ -217,8 +236,11 @@ module.exports = {
           location,
           latitude,
           longitude,
-        },
-      });
+        }
+      );
+      return res.status(200).json({ message: "게시물 수정 완료!" });
+    } else {
+      return res.status(400).json({ message: "게시물이 존재하지 않습니다" });
     }
   }),
 };
