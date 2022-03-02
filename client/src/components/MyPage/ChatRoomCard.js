@@ -21,30 +21,6 @@ export default function ChatRoomCard() {
                 </div>
               </div>
             </div>
-            <div className="mypage-cb-card-container">
-              <div className="mypage-cb-card">
-                <div className="mypage-cb-card-content">
-                  <div className="mypage-cb-img" alt="user-img" />
-                  <p className="mypage-cb-chatname">교촌치킨</p>
-                </div>
-              </div>
-            </div>
-            <div className="mypage-cb-card-container">
-              <div className="mypage-cb-card">
-                <div className="mypage-cb-card-content">
-                  <div className="mypage-cb-img" alt="user-img" />
-                  <p className="mypage-cb-chatname">교촌치킨</p>
-                </div>
-              </div>
-            </div>
-            <div className="mypage-cb-card-container">
-              <div className="mypage-cb-card">
-                <div className="mypage-cb-card-content">
-                  <div className="mypage-cb-img" alt="user-img" />
-                  <p className="mypage-cb-chatname">교촌치킨</p>
-                </div>
-              </div>
-            </div>
 
             {/*  */}
           </article>

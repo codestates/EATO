@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -12,17 +12,30 @@ export default function MyPage() {
 
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useRecoilState(IsLoginState);
-  
+  const [isMypage, setIsMypage] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    nickname: '',
+    location: '',
+  })
+
+
+  // isEditMode ? nickname, location 이 input으로 변환
+  // : p 태그
   const config = {
     "Content-Type": "application/json",
     withCredentials: true,
   };
 
+  // const editHandler = () => {
+  //   axios
+  //   .patch(`http://localhost:3000/user/userInfo/${userId}`)
+  // }
+
   const deleteHandler = () => {
-    if(window.confirm("정말 탈퇴하실 건가요...?")) {
+    if(window.confirm("정말 탈퇴하실 건가요...? :(")) {
       const userId = localStorage.getItem("userId")
       axios
-      .delete(`http://localhost:27017/user/userInfo/${userId}`,
+      .delete(`http://localhost:3000/user/userInfo/${userId}`,
       config
       )
       .then(res => {
