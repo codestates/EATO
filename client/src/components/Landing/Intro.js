@@ -23,7 +23,7 @@ function Intro() {
     });
 
     // intro-1 시작하기
-    gsap.from(".start-box", {
+    gsap.from(".start-box-top", {
       y: -100,
       opacity: 0,
       duration: 1.5,
@@ -47,7 +47,6 @@ function Intro() {
       scrollTrigger: {
         trigger: ".intro-3",
         start: "top 70%",
-        end: "bottom 100%",
         toggleActions: "restart none reverse none",
       },
       y: -50,
@@ -58,7 +57,6 @@ function Intro() {
       scrollTrigger: {
         trigger: ".intro-3",
         start: "top 70%",
-        end: "bottom 100%",
         toggleActions: "restart none reverse none",
       },
       y: -50,
@@ -69,7 +67,6 @@ function Intro() {
       scrollTrigger: {
         trigger: ".intro-3",
         start: "top 70%",
-        end: "bottom 100%",
         toggleActions: "restart none reverse none",
       },
       y: -50,
@@ -82,7 +79,6 @@ function Intro() {
       scrollTrigger: {
         trigger: ".intro-4",
         start: "top 70%",
-        end: "bottom 100%",
         toggleActions: "restart none reverse none",
       },
       x: -100,
@@ -94,7 +90,6 @@ function Intro() {
       scrollTrigger: {
         trigger: ".intro-4",
         start: "top 70%",
-        end: "bottom 100%",
         toggleActions: "restart none reverse none",
       },
       x: 100,
@@ -105,7 +100,6 @@ function Intro() {
       scrollTrigger: {
         trigger: ".intro-4",
         start: "top 70%",
-        end: "bottom 100%",
         toggleActions: "restart none reverse none",
       },
       x: -100,
@@ -114,16 +108,24 @@ function Intro() {
     });
 
     // intro-5 시작하기
-    gsap.from(".intro-5 .wrapper", {
+    gsap.from(".intro-text-5", {
       scrollTrigger: {
-        trigger: ".intro-4",
+        trigger: ".intro-5",
         start: "top 70%",
-        end: "bottom 100%",
         toggleActions: "restart none reverse none",
       },
-      x: -100,
       opacity: 0,
-      delay: 1.3,
+      delay: 0.8,
+    });
+
+    gsap.from(".start-box-bottom", {
+      scrollTrigger: {
+        trigger: ".intro-5",
+        start: "top 70%",
+        toggleActions: "restart none reverse none",
+      },
+      opacity: 0,
+      delay: 0.8,
     });
   }, []);
 
@@ -135,9 +137,9 @@ function Intro() {
             <img className="card-img" src={CardImg} alt="card-img"></img>
           </div>
 
-          <div className="start-box">
+          <div className="start-box-top">
             <h1 className="intro-text-1">이웃과 배달비를 나눠 보세요</h1>
-            <Link to="/signin" className="btn">
+            <Link to="/signin" className="start-btn-top">
               시작하기
             </Link>
           </div>
@@ -198,8 +200,8 @@ function Intro() {
       <div className="intro-5">
         <div className="wrapper">
           <h1 className="intro-text-5">지금 바로 시작해 보세요</h1>
-          <div className="start-box">
-            <Link to="/signin" className="btn">
+          <div className="start-box-bottom">
+            <Link to="/signin" className="start-btn-bottom">
               시작하기
             </Link>
           </div>
