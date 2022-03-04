@@ -5,12 +5,14 @@ import { ko } from "date-fns/esm/locale";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import PostCategory from "../PostCards/PostCategory";
 import DropdownT from "../PostCards/DropDownT";
+import PostMap from "../../Map/PostMap";
 import postLogo from "../../../images/Logo.png";
 import DeliveryPay from "../PostCards/DeliveryPay";
 import CountPeople from "../PostCards/CountPeople";
 import { categoryOptions, deOption, paOptions } from "../../../resource/datas";
 import "./PostCardForm.scss";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const PostCardForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -82,8 +84,12 @@ const PostCardForm = (props) => {
       new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
     );
   };
+  const config = {
+    "Content-Type": "application/json",
+    withCredentials: false,
+  };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     const postCardData = {
@@ -109,6 +115,29 @@ const PostCardForm = (props) => {
     setEnteredTotalNum("");
     setEnteredDeliveryTag("");
     setEnteredPayTag("");
+    console.log("postDatd", postCardData);
+    axios
+      .post(
+        "http://localhost:3000/document",
+        {
+          title: postCardData.title,
+          deliveryFee: postCardData.deliveryFee,
+          placeName: postCardData.placeName,
+          currentNum: postCardData.currentNum,
+          date: postCardData.date,
+          currentNum: postCardData.currentNum,
+          totalNum: postCardData.totalNum,
+          description: postCardData.description,
+          category: postCardData.category,
+        },
+        config
+      )
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          alert("모임이 등록되었습니다!");
+        }
+      });
   };
   return (
     <>
@@ -185,6 +214,11 @@ const PostCardForm = (props) => {
                 selected={enteredDeliveryTag}
                 setSelected={setEnteredDeliveryTag}
               />
+              {/* <DropdownT
+                options={deOption}
+                selected={enteredDeliveryTag}
+                setSelected={setEnteredDeliveryTag}
+              /> */}
             </div>
             <div className="new-postCard__tag">
               <DropdownT
@@ -192,17 +226,27 @@ const PostCardForm = (props) => {
                 selected={enteredPayTag}
                 setSelected={setEnteredPayTag}
               />
+              {/* <DropdownT
+                options={paOptions}
+                selected={enteredPayTag}
+                setSelected={setEnteredPayTag}
+              /> */}
             </div>
           </section>
           <section className="new-postCard__right">
             <div className="new-postCard__postMap">
-              <input
+              <div
+                className="new-postCard__InputPostMap"
+                value={enteredLocated}
+                placeholder="만날 장소를 입력해 주세요."
+              ></div>
+              {/* <input
                 className="new-postCard__InputPostMap"
                 type="text"
                 value={enteredLocated}
                 placeholder="만날 장소를 입력해 주세요."
                 onChange={locatedChangeHandler}
-              />
+              /> */}
             </div>
             <div className="new-postCard__titleMap">
               <FaMapMarkerAlt size="1.4rem" color="#ff4234" />

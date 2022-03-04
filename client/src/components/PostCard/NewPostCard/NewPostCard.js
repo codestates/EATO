@@ -14,7 +14,6 @@ const NewPostCard = (props) => {
   const savePostCardDataHandler = (enteredPostCardData) => {
     const postCardData = {
       ...enteredPostCardData,
-      id: Math.random().toString(), //???
     };
 
     props.onAddPostCard(postCardData);

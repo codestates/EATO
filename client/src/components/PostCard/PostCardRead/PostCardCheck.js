@@ -15,8 +15,6 @@ const PostCardCheck = (props) => {
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
 
-  const editHandler = () => {};
-
   return (
     <div className="postInfoWrap">
       <article className="postInfo__Nav">
@@ -30,7 +28,7 @@ const PostCardCheck = (props) => {
           <div className="postInfo__InputTitle">{props.posts.title}</div>
         </div>
         <div className="postInfo__work">
-          <HiOutlineDotsVertical size="1.5rem" onClick={editHandler} />
+          <HiOutlineDotsVertical size="1.5rem" />
         </div>
       </article>
 
