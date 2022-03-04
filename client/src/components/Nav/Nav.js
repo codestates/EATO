@@ -28,8 +28,7 @@ function Nav() {
 
   // isLogin false 설정
   const logoutHandler = () => {
-    axios.get("http://localhost:3000/user/logout", 
-    config).then(() => {
+    axios.get("http://localhost:3000/user/logout", config).then(() => {
       // 로그아웃 버튼 클릭 시 recoil 전역상태 false로 전환
       setIsLogin(false);
       localStorage.clear();

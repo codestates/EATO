@@ -58,19 +58,18 @@ function SignUp() {
         config
       )
       .then((res) => {
-        console.log(res)
-        if(res.status === 201){
+        console.log(res);
+        if (res.status === 201) {
           alert("Welcome to EATO!");
           setIsLogin(true);
           navigate("/signin");
         }
       })
-      .catch(err => {
-        if(err.response.status === 401){
-          setEmailErr('이미 사용중인 이메일이에요.')
+      .catch((err) => {
+        if (err.response.status === 401) {
+          setEmailErr("이미 사용중인 이메일이에요.");
         }
-      })
-      ;
+      });
   };
 
   return (

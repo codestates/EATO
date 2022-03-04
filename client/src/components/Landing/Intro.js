@@ -115,7 +115,7 @@ function Intro() {
         toggleActions: "restart none reverse none",
       },
       opacity: 0,
-      delay: 0.8
+      delay: 0.8,
     });
 
     gsap.from(".start-box-bottom", {
@@ -125,7 +125,7 @@ function Intro() {
         toggleActions: "restart none reverse none",
       },
       opacity: 0,
-      delay: 0.8
+      delay: 0.8,
     });
   }, []);
 

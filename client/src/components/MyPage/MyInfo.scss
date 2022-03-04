@@ -24,6 +24,7 @@
 }
 
 .mypage-container-top {
+  // height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -44,23 +45,50 @@
   align-items: center;
   justify-content: flex-end;
   margin-left: 10px;
+  
   .mypage-line {
     height: 80%;
     border-right: solid 1px #E0D9D9;
+
   }
 }
+.mypage-ub-tb-err-msg {
+  color: #ee7b6a;
+  font-size: 13px;
+}
+
       .mypage-userinfo-box {
+        height: 100%;
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
         padding-left: 35px;
+      }
         .mypage-ub-top-box {
+
           display: flex;
+          margin-bottom: 20px;
+
           .mypage-ub-tb-nickbox {
             width: 170px;
-          
           .mypage-ub-tb-nickname {
             font-size: 30px;
-          }}
+          }
+
+          .mypage-ub-tb-nickname-input {
+            width: 100%;
+            border: 0;
+            outline: none;
+            font-size: 30px;
+            &::-webkit-input-placeholder {
+              color: #c7c7c7;
+            }
+            
+
+          }
+
+          }
           .mypage-ub-tb-edit-box {
             display: flex;
             align-items: center;
@@ -88,9 +116,20 @@
         }
           .mypage-bb-location{
             width: 100%;
-            padding-top: 10px;
-        }
-      }
+            height: 100%;
+          }
+          .mypage-bb-location-input{
+            width: 100%;
+            height: 100%;
+            height: 100%;
+            border: 0;
+            font-size: 16px;
+            outline: none;
+            &::-webkit-input-placeholder {
+              color: #c7c7c7;
+            }
+          }
+      
       .mypage-delivery-fee {
         display: flex;
         align-items: center;
