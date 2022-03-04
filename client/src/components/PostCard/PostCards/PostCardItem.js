@@ -3,12 +3,21 @@ import PostCardDate from "./PostCardDate";
 import PostCardCheck from "../PostCardRead/PostCardCheck";
 import { IoClose } from "react-icons/io5";
 import "./PostCardItem.scss";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const PostCardItem = (props) => {
   const joinTime = props.date.toTimeString().substr(0, 5);
   const [isClick, setIsClick] = useState(false);
+  const config = {
+    "Content-Type": "application/json",
+    withCredentials: false,
+  };
 
   const handleCardClick = () => {
+    axios.get("http://localhost:3000/document", config).then((res) => {
+      console.log("res", res);
+    });
     setIsClick(!isClick);
   };
 
