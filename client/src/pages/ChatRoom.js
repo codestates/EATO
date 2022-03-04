@@ -1,12 +1,15 @@
-import React from "react";
+import React from 'react'
 import Nav from "../components/Nav/Nav";
+import Chatting from "../components/ChatRoom/Chatting";
 
-function ChatRoom () {
+export default function ChatRoom() {
   return (
     <>
-      <Nav></Nav>
+      <Nav />
+      <Chatting />
     </>
   );
 }
 
-export default ChatRoom;
+
+

@@ -1,34 +1,31 @@
 // groidd-shrink 창 작아질때 고정 1, flex-grow 창커질때
 .postLogoWrap {
-  width: 42vw;
-  height: 82vh;
+  width: 100%;
+  height: 100%;
 }
 
 .new-postCard__Nav {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start; //왼쪽기준으로 늘어나게 설정
+  justify-content: center;
   align-items: center;
   flex: 1 1 0;
-  width: 50rem;
-  height: 6rem;
-  margin-left: 2.2rem;
+  width: 100%;
+  height: 6.5rem;
 
   .postImgLogo {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    flex: 1 1 0;
     width: 100%;
     height: 100%;
-    margin-left: 2rem;
 
     .postLogo {
       width: 100%;
       height: 70%;
       display: block;
-      margin: 1.3rem 18rem 2rem;
+      margin: 3rem 19.5rem 2rem 18rem;
     }
   }
 
@@ -53,9 +50,9 @@
   justify-content: center;
   align-items: center;
   flex: 1 1 0;
-  width: 50rem;
-  height: 5rem;
-
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 0.5rem;
   .new-postCard__title {
     padding-left: 1rem;
     width: 100%;
@@ -64,9 +61,8 @@
     border-bottom: 5px solid #c2c2c2;
 
     .new-postCard__InputTitle {
-      font-weight: bold;
       border: none;
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
     &:hover,
     &:focus {
@@ -81,7 +77,7 @@
   justify-content: center;
   align-items: center;
   flex: 1 1 0;
-  width: 50rem;
+  width: 100%;
   height: 5rem;
 
   .new-postCard__actions {
@@ -112,165 +108,83 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  flex: 1 1 0;
-  width: 50rem;
-  height: 32rem;
+  width: 100%;
+  height: 65%;
 }
 .new-postCard__Left {
-  display: grid;
-  grid-template-rows: 2.2fr 1.1fr 1fr 1fr 1fr 1fr 0.8fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 40%;
-  height: 32rem;
+  height: 28rem;
 
   //Description
   .new-postCard__description {
-    width: 100%;
-    height: fit-content;
-    text-align: center;
+    display: flex;
     .new-postCard__InputDescription {
-      width: 20rem;
-      padding-left: 5px;
-      height: 8rem;
-      border: 2px solid #818181;
-      box-shadow: 2px 4px 10px 0 #a5a5a5;
-      border-radius: 1rem;
-      font-size: 20px;
-      overflow-y: scroll;
       &:hover,
       &:focus {
         border-color: #ff7a59;
         border-radius: 1rem;
       }
+      width: 100%;
+      height: 8rem;
+      padding-left: 0.2rem;
+      border: #ffffff;
+      box-shadow: 2px 4px 10px 0 #a5a5a5;
+      border-radius: 1rem;
+      font-size: 1.1rem;
+      overflow-y: scroll;
     }
   }
 }
 
-//todo datapivker plugin 나중에 css  작업
 .new-postCard__date {
-  z-index: 5;
+  z-index: 50;
   width: 100%;
-  text-align: center;
-
-  .new-postCard__InputDate {
-    &:hover,
-    &:focus {
-      border-bottom-color: #ff7a59;
-    }
-    padding-top: 0.3rem;
-    border: none;
-    justify-content: center;
-    font-size: 1.4rem;
-    text-align: center;
-    text-align-last: center;
-  }
-}
-
-// Time
-.new-postCard__time {
-  z-index: 4;
-  width: 100%;
-  height: 2.9rem;
   text-align: center;
   &:hover,
   &:focus {
     border-bottom-color: #ff7a59;
   }
-  .new-postCard__InputTime {
-    box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+
+  .new-postCard__InputDate {
+    padding-top: 0.4rem;
+    border: none;
     justify-content: center;
-    width: 99%;
-    height: 96%;
-    border: 2px solid #818181;
-    box-shadow: 2px 4px 10px 0 #a5a5a5;
-    border-radius: 1rem;
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     text-align: center;
-    &:hover,
-    &:focus {
-      border-color: #ff7a59;
-      border-radius: 1rem;
-    }
+  }
+
+  .new-postCard__tag {
+    width: 100%;
+    height: 2.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
-.new-postCard__tag {
-  width: 100%;
-  height: 2.8rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-//DeliverPay
-// .new-postCard__deliveryFee {
-//   z-index: 3;
-//   margin: 0.2rem 0;
-//   width: 100%;
-//   height: fit-content;
-//   text-align: center;
-
-//   .new-postCard__InputDeliveryFee {
-//     box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
-//     justify-content: center;
-//     width: 20rem;
-//     height: 3rem;
-//     border: 2px solid #818181;
-//     border-radius: 1rem;
-//     font-size: 20px;
-//     text-align: center;
-//     text-align-last: center;
-//     &:hover,
-//     &:focus {
-//       border-color: #ff7a59;
-//       border-radius: 1rem;
-//     }
-//   }
-// }
-//Person
-// .new-postCard__person {
-//   z-index: 2;
-//   margin: 0.2rem 0;
-//   width: 100%;
-//   height: fit-content;
-//   text-align: center;
-//   .new-postCard__InputPerson {
-//     box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
-//     justify-content: center;
-//     width: 20rem;
-//     height: 3rem;
-//     border: 2px solid #818181;
-//     border-radius: 1rem;
-//     font-size: 20px;
-//     text-align: center;
-//     text-align-last: center;
-//     box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
-//     &:hover,
-//     &:focus {
-//       border-color: #ff7a59;
-//       border-radius: 1rem;
-//     }
-//   }
-// }
 
 .new-postCard__right {
-  width: 23rem;
-  height: 32rem;
+  width: 45%;
+  height: 28rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+
   .new-postCard__postMap {
-    margin-right: 1rem;
-    width: 97%;
+    width: 100%;
     height: fit-content;
     text-align: center;
     .new-postCard__InputPostMap {
       justify-content: center;
-      padding-left: 0.5rem;
       width: 100%;
       height: 3rem;
-      border: 2px solid #818181;
+      border: none;
       border-radius: 1rem;
-      font-size: 1.1rem;
+      font-size: 1rem;
+      text-indent: 0.5rem;
       text-align: left;
       box-shadow: 2px 4px 10px 0 #a5a5a5;
       &:hover,
@@ -282,7 +196,8 @@
   }
 
   .new-postCard__titleMap {
-    padding: 1rem;
+    width: 100%;
+    padding: 1rem 0;
     text-align: left;
     z-index: 1;
   }
@@ -292,7 +207,7 @@
     width: 90%;
     padding: 1rem;
     height: 22rem;
-    border: 2px solid #818181;
+    border: none;
     border-radius: 1rem;
     z-index: 1;
     box-shadow: 2px 4px 10px 0 #a5a5a5;
@@ -317,9 +232,9 @@
   background-color: #ffffff;
 }
 .react-datepicker__input-container {
-  width: 99%;
-  height: 2.7rem;
-  border: 2px solid #818181;
+  width: 100%;
+  height: 2.6rem;
+  border: none;
   border-radius: 1rem;
   box-shadow: 2px 4px 10px 0 #a5a5a5;
   &:hover,
@@ -336,46 +251,47 @@
 .react-datepicker__month-container {
   display: grid;
   font-size: 1rem;
-  width: 20rem;
+  width: 18rem;
 }
 .react-datepicker {
   font-size: 0.8rem;
-  width: 20.5rem;
-  padding-left: 0.2rem;
+  width: 24.5rem;
   background-color: #ffffff;
   color: #000;
-  border: 1px solid red;
-  border-radius: 1rem;
+  border: none;
+  border-radius: 2rem;
   display: flex;
-}
-
-.react-datepicker {
-  background-color: #ffffff;
-  border: 1px solid black;
   box-shadow: 2px 4px 10px 0 #a5a5a5;
 }
+
 .react-datepicker__month-container {
   > * {
     border: 0;
   }
 }
 .react-datepicker__navigation {
-  margin: 0.8rem 0.5rem;
+  margin: 0.8rem 4.5rem 0 3rem;
 }
-
+.react-datepicker__time-container {
+  overflow-y: hidden;
+}
+.react-datepicker__time-list-item {
+  font-size: 1rem;
+}
 .react-datepicker__day-name {
   font-size: 1rem;
-  width: 2rem;
+  width: 1.5rem;
   line-height: 1.4rem;
-  margin: 0.5rem 0.2rem;
+  margin: 0.5rem 0.3rem;
   color: #818181;
 }
 .react-datepicker__week {
   > * {
     border-radius: 0.4rem;
+    margin: 0.3rem;
     color: #818181;
     font-size: 1rem;
-    width: 2rem;
+    width: 1.5rem;
     line-height: 1.8rem;
   }
 
@@ -392,9 +308,6 @@
     font-weight: bold;
     box-shadow: 2px 4px 10px 0 #a5a5a5;
     background-color: #ff4234;
-    :hover {
-      background-color: #ff4234;
-    }
   }
   .react-datepicker__day--today {
     border: 1px solid #c2c2c2;

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PostCardDate from "../PostCards/PostCardDate";
-import PostCardTime from "../PostCards/PostCardTime";
 import postLogo from "../../../images/Logo.png";
-import { IoClose } from "react-icons/io5";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import "./PostCardCheck.scss";
@@ -13,6 +11,10 @@ const PostCardCheck = (props) => {
     setModal(!modal);
   };
 
+  const finalPay = `${props.posts.deliveryFee
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
+
   const editHandler = () => {};
 
   return (
@@ -20,16 +22,6 @@ const PostCardCheck = (props) => {
       <article className="postInfo__Nav">
         <div className="imgLogo">
           <img src={postLogo} className="postLogo" alt="postLogo"></img>
-        </div>
-        <div className="postClose-btn">
-          <button
-            className="postCard-close"
-            onClick={toggleModal}
-            data-backdrop="static"
-            data-keyboard="false"
-          >
-            <IoClose />
-          </button>
         </div>
       </article>
 
@@ -56,24 +48,12 @@ const PostCardCheck = (props) => {
 
           <div className="postInfo__list">
             <div className="postInfo__InputList">
-              {/* <div className="postInfo__InputDate1"> */}
               <PostCardDate date={props.posts.date} />
             </div>
-            {/* </div> */}
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__InputList">
-              {/* <div className="postInfo__InputTime1"> */}
-              <PostCardTime date={props.posts.joinTime} />
-            </div>
-            {/* </div> */}
-          </div>
-
-          <div className="postInfo__list">
-            <div className="postInfo__InputList">
-              {props.posts.deliveryFee}원
-            </div>
+            <div className="postInfo__InputList">{finalPay}</div>
           </div>
 
           <div className="postInfo__list">
@@ -81,24 +61,22 @@ const PostCardCheck = (props) => {
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__tag">
-              <div className="postInfo__inputTag">
-                {props.posts.deliveryTag}
-              </div>
-              <div className="postInfo__inputTag">{props.posts.payTag}</div>
-            </div>
+            <div className="postInfo__inputTag">{props.posts.deliveryTag}</div>
+          </div>
+          <div className="postInfo__list">
+            <div className="postInfo__inputTag">{props.posts.payTag}</div>
           </div>
         </section>
 
         <section className="postInfo__right">
           <div className="postInfo__postMap">
             <div className="postInfo__InputPostMap">
-              {props.posts.postMap}postMap
+              만날 장소를 입력해주세요.
             </div>
           </div>
           <div className="postInfo__titleMap">
-            <FaMapMarkerAlt size="1.2rem" />
-            주소
+            <FaMapMarkerAlt size="1.2rem" color="#ff4234" />
+            &nbsp;주소{props.posts.postMap}
           </div>
           <div className="postInfo__map">지도</div>
         </section>

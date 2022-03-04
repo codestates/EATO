@@ -1,8 +1,8 @@
 .payInput {
   position: relative;
   width: 100%;
-  height: 2.8rem;
-  z-index: 4;
+  height: 2.6rem;
+  z-index: 16;
 }
 
 .payInput-btn {
@@ -11,18 +11,19 @@
   flex-direction: row;
   justify-content: center;
   height: 100%;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   align-items: center;
-  border: 2px solid #818181;
+  border: none;
   border-radius: 1rem;
-  letter-spacing: 0.25rem;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
+  letter-spacing: 0.1rem;
 }
 
 .payInput-content {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  font-size: 1.6rem;
+  font-size: 1.25rem;
   align-items: center;
   margin-top: 0.3rem;
   width: 100%;

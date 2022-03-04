@@ -1,33 +1,30 @@
 .postInfoWrap {
-  width: 42vw;
-  height: 82vh;
+  width: 100%;
+  height: 100%;
 }
 
 .postInfo__Nav {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start; //왼쪽기준으로 늘어나게 설정
+  justify-content: center;
   align-items: center;
   flex: 1 1 0;
-  width: 50rem;
-  height: 6rem;
-  margin-left: 2.2rem;
+  width: 100%;
+  height: 6.5rem;
 
   .imgLogo {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    flex: 1 1 0;
     width: 100%;
     height: 100%;
-    margin-left: 2rem;
 
     .postLogo {
       width: 100%;
       height: 70%;
       display: block;
-      margin: 1.3rem 18rem 2rem;
+      margin: 3rem 19.5rem 2rem 18rem;
     }
   }
 
@@ -51,26 +48,30 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 50rem;
-  height: 4rem;
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 0.5rem;
+
   .postInfo__title {
-    padding-left: 1rem;
+    width: 90%;
+    text-align: left;
     border-bottom: 5px solid #ff7a59;
     .postInfo__InputTitle {
+      margin-left: 0.5rem;
       font-weight: bold;
-      width: 40rem;
-      height: 3rem;
       border: none;
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
 
   .postInfo__work {
-    width: 4rem;
+    position: absolute;
+    margin: 0 2rem 1rem 36rem;
+    width: 2rem;
     height: 3rem;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     border-bottom: 5px solid #ff7a59;
   }
@@ -81,7 +82,7 @@
   justify-content: center;
   align-items: center;
   flex: 1 1 0;
-  width: 50rem;
+  width: 100%;
   height: 5rem;
 
   .postInfo__actions {
@@ -113,9 +114,8 @@
   justify-content: space-evenly;
   align-items: center;
   flex: 1 1 0;
-  width: 50rem;
-  height: 32rem;
-  margin-top: 1rem;
+  width: 100%;
+  height: 65%;
 }
 
 .postInfo__Left {
@@ -124,19 +124,22 @@
   justify-content: space-between;
   align-items: center;
   width: 40%;
-  height: 32rem;
+  height: 28rem;
 
   //Description
   .postInfo__description {
-    width: 20rem;
+    display: flex;
+    width: 100%;
     text-align: left;
     .postInfo__InputDescription {
       width: 100%;
-      height: 8rem;
+      height: 7.5rem;
+      padding: 0.5rem 1rem;
       border-radius: 1rem;
-      line-height: 3rem;
-      text-align: center;
-      font-size: 20px;
+      line-height: 2rem;
+      text-align: left;
+      word-break: keep-all;
+      font-size: 1.1rem;
       overflow-x: hidden;
       overflow-y: hidden;
       display: inline-block;
@@ -146,67 +149,64 @@
 
   .postInfo__list {
     width: 100%;
-    height: 3rem;
+    height: 2.9rem;
     .postInfo__InputList {
       width: 100%;
       height: 100%;
       border-radius: 1rem;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       line-height: 3rem;
       text-align: center;
       box-shadow: 2px 4px 10px 0 #a5a5a5;
     }
 
-    .postInfo__tag {
+    .postInfo__inputTag {
       width: 100%;
-      height: 3rem;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      .postInfo__inputTag {
-        width: 8.5rem;
-        height: 2.5rem;
-        background-color: #ffffff;
-        border-radius: 1rem;
-        font-size: 1.5rem;
-        padding-left: 1rem;
-        letter-spacing: 1rem;
-        line-height: 2.5rem;
-        text-align: center;
-        box-shadow: 2px 4px 10px 0 #a5a5a5;
-      }
+      height: 2.6rem;
+      background-color: #ffffff;
+      border-radius: 1rem;
+      font-size: 1.25rem;
+      letter-spacing: 1rem;
+      text-indent: 1rem;
+      line-height: 2.5rem;
+      text-align: center;
+      box-shadow: 2px 4px 10px 0 #a5a5a5;
     }
   }
 }
 
 .postInfo__right {
-  width: 23rem;
-  height: 32rem;
+  width: 45%;
+  height: 28rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   .postInfo__postMap {
-    margin-right: 1rem;
-    width: 97%;
+    width: 100%;
     height: fit-content;
     text-align: center;
     .postInfo__InputPostMap {
       justify-content: center;
-      padding-left: 0.5rem;
       width: 100%;
-      height: 3rem;
+      height: 2.2rem;
+      padding-top: 0.8rem;
       border-radius: 1rem;
-      font-size: 1.1rem;
+      font-size: 1rem;
+      text-indent: 0.5rem;
       text-align: left;
+      color: #c4c4c4;
       box-shadow: 2px 4px 10px 0 #a5a5a5;
     }
   }
 }
 .postInfo__titleMap {
-  padding: 1rem;
+  width: 100%;
+  height: 3rem;
+  margin: 1rem 0 0;
+  padding-top: 0.5rem;
   text-align: left;
+  text-indent: 0.5rem;
 }
 
 .postInfo__map {

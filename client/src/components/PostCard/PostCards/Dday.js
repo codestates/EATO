@@ -49,7 +49,11 @@ const Dday = () => {
   return (
     <>
       <div>
-        {timeLeft === "마감" ? <div>종료</div> : <div>{{timeInfo.props.slice(0, 10).replace(/-/g, ". ")}}</div>}
+        {timeLeft === "마감" ? (
+          <div>종료</div>
+        ) : (
+          <div>{timeInfo.props.slice(0, 10).replace(/-/g, ". ")}</div>
+        )}
       </div>
     </>
   );
@@ -58,7 +62,8 @@ export default Dday;
 // import React from "react";
 // import Presenter from "./presenter";
 
-// class Container extends React.Component {
+// Container
+
 //   state = {
 //     days: "0",
 //     hours: "0",

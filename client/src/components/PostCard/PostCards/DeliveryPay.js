@@ -41,7 +41,7 @@ const DeliveryPay = ({ pay, setPay }) => {
         ) : (
           <div className="payInput-content">
             <FcExpand onClick={decreaseHandler}>-</FcExpand>
-            {finalPay}
+            500원
             <FcCollapse onClick={increaseHandler}>+</FcCollapse>
           </div>
         ))}

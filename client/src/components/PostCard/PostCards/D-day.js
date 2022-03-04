@@ -24,4 +24,3 @@ const addTime = (date, paramType, param) => {
   const b = new Date(new Date(date).getTime() + unit * param);
   return b;
 };
-console.log("a : ", a, "b : ", b);

@@ -1,60 +1,29 @@
-import React, { useState, useRef } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import { IoClose } from "react-icons/io5";
 import { FaMapMarkerAlt } from "react-icons/fa";
-// import { FcClock, FcPlanner } from "react-icons/fc";
 import PostCategory from "../PostCards/PostCategory";
 import DropdownT from "../PostCards/DropDownT";
 import postLogo from "../../../images/Logo.png";
 import DeliveryPay from "../PostCards/DeliveryPay";
 import CountPeople from "../PostCards/CountPeople";
-import { categoryOptions } from "../../../resource/datas";
+import { categoryOptions, deOption, paOptions } from "../../../resource/datas";
 import "./PostCardForm.scss";
 import axios from "axios";
 
 const PostCardForm = (props) => {
-  // const time = "00:00";
-  // const chooeseCategory = "Category";
-
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm();
-  // console.log(watch("password"));
-
-  // // passwordCheck (비밀번호 확인)에서 사용됨
-  // const password = useRef();
-  // password.current = watch("password");
-
-  // const onSubmit = (data) => {
-  //   console.log("data", data);
-  // };
-
-  const [modal, setModal] = useState(false);
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
-  const deliveryTagOptions = ["배달", "포장"];
-  const payTagOptions = ["선불", "후불"];
-
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredCategory, setEnteredCategory] = useState("");
   const [enteredDeliveryFee, setEnteredDeliveryFee] = useState(0);
+  const [enteredCurrentNum, setEnteredCurrentNum] = useState(1);
   const [enteredTotalNum, setEnteredTotalNum] = useState(1);
   const [enteredDate, setEnteredDate] = useState(new Date());
-  const [enteredJoinTime, setEnteredJoinTime] = useState();
   const [enteredLocated, setEnteredLocated] = useState("");
   const [enteredDeliveryTag, setEnteredDeliveryTag] = useState("배달");
   const [enteredPayTag, setEnteredPayTag] = useState("선불");
-
+  const [submitting, setSubmitting] = useState(false);
   // const [postCardInput, setPostCardInput] = useState({
   //   enteredTitle: "",
   //   enteredDescription: "",
@@ -65,6 +34,21 @@ const PostCardForm = (props) => {
   //   enteredEndTime: endSetTime,
   //   enteredLocated: ""
   // })
+
+  useEffect(() => {
+    if (submitting) {
+      if (
+        submitting &&
+        enteredTitle !== "" &&
+        enteredCategory !== "" &&
+        enteredDate !== "" &&
+        enteredDeliveryFee !== 0 &&
+        enteredTotalNum !== 1
+      ) {
+        setSubmitting(true);
+      }
+    }
+  }, []);
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -82,13 +66,9 @@ const PostCardForm = (props) => {
     setEnteredDescription(event.target.value);
   };
 
-  // const deliveryFeeChangeHandler = (event) => {
-  //   setEnteredDeliveryFee(event.target.value);
+  // const joinTimeChangeHandler = (event) => {
+  //   setEnteredJoinTime(event.target.value);
   // };
-
-  const joinTimeChangeHandler = (event) => {
-    setEnteredJoinTime(event.target.value);
-  };
 
   const locatedChangeHandler = (event) => {
     setEnteredLocated(event.target.value);
@@ -112,8 +92,9 @@ const PostCardForm = (props) => {
       description: enteredDescription,
       deliveryFee: enteredDeliveryFee,
       date: new Date(enteredDate),
-      joinTime: enteredJoinTime,
+      currentNum: enteredCurrentNum,
       totalNum: enteredTotalNum,
+      located: enteredLocated,
       deliveryTag: enteredDeliveryTag,
       payTag: enteredPayTag,
     };
@@ -124,142 +105,126 @@ const PostCardForm = (props) => {
     setEnteredDescription("");
     setEnteredDeliveryFee("");
     setEnteredDate("");
-    setEnteredJoinTime("");
+    setEnteredCurrentNum("");
     setEnteredTotalNum("");
     setEnteredDeliveryTag("");
     setEnteredPayTag("");
   };
-
   return (
-    <form className="postLogoWrap" onSubmit={submitHandler}>
-      <article className="new-postCard__Nav">
-        <div className="postImgLogo">
-          <img src={postLogo} className="postLogo" alt="postLogo"></img>
-        </div>
-        <div className="postClose-btn">
-          <button className="postCard-close" onClick={toggleModal}>
-            <IoClose />
-          </button>
-        </div>
-      </article>
-
-      <article className="new-postCard__Header">
-        <section className="new-postCard__title">
-          <input
-            className="new-postCard__InputTitle"
-            type="text"
-            value={enteredTitle}
-            maxLength="20"
-            placeholder="모임 제목을 작성해주세요."
-            onChange={titleChangeHandler}
-          />
-        </section>
-      </article>
-
-      <article className="new-postCard__Body">
-        <section className="new-postCard__Left">
-          <div className="new-postCard__description">
+    <>
+      <form className="postLogoWrap" onSubmit={submitHandler}>
+        <article className="new-postCard__Nav">
+          <div className="postImgLogo">
+            <img src={postLogo} className="postLogo" alt="postLogo"></img>
+          </div>
+        </article>
+        <article className="new-postCard__Header">
+          <section className="new-postCard__title">
             <input
-              className="new-postCard__InputDescription"
+              className="new-postCard__InputTitle"
               type="text"
-              value={enteredDescription}
-              maxLength="100"
-              placeholder="모임에 대해 간략히 설명해주세요."
-              onChange={descriptionChangeHandler}
+              value={enteredTitle}
+              maxLength="20"
+              placeholder="모임 제목을 작성해주세요."
+              onChange={titleChangeHandler}
             />
-          </div>
-          {/* <div className="new-postCard__category"> */}
-          <PostCategory
-            options={categoryOptions}
-            selected={enteredCategory}
-            setSelected={setEnteredCategory}
-          />
-          {/* </div> */}
-
-          {/* //todo datepicker plugin 나중에  css 작업 */}
-          <div className="new-postCard__date">
-            <DatePicker
-              className="new-postCard__InputDate"
-              selected={enteredDate}
-              onChange={(date) => setEnteredDate(date)}
-              enteredDate={enteredDate}
-              minDate={new Date()}
-              locale={ko}
-              FcPlanner
-              dateFormat="yyyy년 MM월 dd일"
-              dateFormatCalendar={"yyyy년 MM월"}
-              dayClassName={(date) =>
-                getDayName(createDate(date)) === "토"
-                  ? "saturday"
-                  : getDayName(createDate(date)) === "일"
-                  ? "sunday"
-                  : undefined
-              }
+          </section>
+        </article>
+        <article className="new-postCard__Body">
+          <section className="new-postCard__Left">
+            <div className="new-postCard__description">
+              <input
+                className="new-postCard__InputDescription"
+                type="text"
+                value={enteredDescription}
+                maxLength="100"
+                placeholder="모임에 대해 간략히 설명해주세요."
+                onChange={descriptionChangeHandler}
+              />
+            </div>
+            <PostCategory
+              options={categoryOptions}
+              selected={enteredCategory}
+              setSelected={setEnteredCategory}
+              placeholder="분류"
             />
-          </div>
+            {/* //todo datepicker plugin 나중에  css 작업 */}
+            <div className="new-postCard__date">
+              <DatePicker
+                className="new-postCard__InputDate"
+                selected={enteredDate}
+                onChange={(date) => setEnteredDate(date)}
+                showTimeSelect
+                minDate={new Date()}
+                locale={ko}
+                dateFormat="yy. MM. dd. hh:mm"
+                dateFormatCalendar={"yyyy. MM."}
+                dayClassName={(date) =>
+                  getDayName(createDate(date)) === "토"
+                    ? "saturday"
+                    : getDayName(createDate(date)) === "일"
+                    ? "sunday"
+                    : undefined
+                }
+              />
+            </div>
 
-          <div className="new-postCard__time">
-            <input
-              className="new-postCard__InputTime"
-              value={enteredJoinTime}
-              placeholder="시간입니다"
-              onChange={joinTimeChangeHandler}
+            <DeliveryPay
+              pay={enteredDeliveryFee}
+              setPay={setEnteredDeliveryFee}
+              placeholder="배달비용"
             />
-          </div>
-
-          {/* <div className="new-postCard__deliveryFee"> */}
-          <DeliveryPay
-            pay={enteredDeliveryFee}
-            setPay={setEnteredDeliveryFee}
-          />
-          {/* </div> */}
-          {/* <div className="new-postCard__person"> */}
-          <CountPeople num={enteredTotalNum} setNum={setEnteredTotalNum} />
-          {/* </div> */}
-
-          <div className="new-postCard__tag">
-            <div className="deliveryTag">
+            <CountPeople
+              num={enteredTotalNum}
+              setNum={setEnteredTotalNum}
+              placeholder="참여인원"
+            />
+            <div className="new-postCard__tag">
               <DropdownT
-                options={deliveryTagOptions}
+                options={deOption}
                 selected={enteredDeliveryTag}
                 setSelected={setEnteredDeliveryTag}
               />
             </div>
-            <div className="payTag">
+            <div className="new-postCard__tag">
               <DropdownT
-                options={payTagOptions}
+                options={paOptions}
                 selected={enteredPayTag}
                 setSelected={setEnteredPayTag}
               />
             </div>
-          </div>
-        </section>
-
-        <section className="new-postCard__right">
-          <div className="new-postCard__postMap">
-            <input
-              className="new-postCard__InputPostMap"
-              type="text"
-              value={enteredLocated}
-              placeholder="만날 장소를 입력해 주세요."
-              onChange={locatedChangeHandler}
-            />
-          </div>
-
-          <div className="new-postCard__titleMap">
-            <FaMapMarkerAlt size="1.2rem" />
-            주소
-          </div>
-          <div className="new-postCard__map">지도</div>
-        </section>
-      </article>
-
-      <article className="new-postCard__Fotter">
-        <button className="new-postCard__actions" type="submit">
-          &nbsp;등록하기
-        </button>
-      </article>
-    </form>
+          </section>
+          <section className="new-postCard__right">
+            <div className="new-postCard__postMap">
+              <input
+                className="new-postCard__InputPostMap"
+                type="text"
+                value={enteredLocated}
+                placeholder="만날 장소를 입력해 주세요."
+                onChange={locatedChangeHandler}
+              />
+            </div>
+            <div className="new-postCard__titleMap">
+              <FaMapMarkerAlt size="1.4rem" color="#ff4234" />
+              주소
+            </div>
+            <div className="new-postCard__map">지도</div>
+          </section>
+        </article>
+        <article className="new-postCard__Fotter">
+          {/* <button disabled={disabled} className="new-postCard__actions">
+          등록하기
+        </button> */}
+          <button
+            className="new-postCard__actions"
+            type="submit"
+            disabled={submitting}
+          >
+            등록하기
+          </button>
+        </article>
+      </form>
+    </>
   );
 };
 

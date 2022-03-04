@@ -218,11 +218,11 @@ module.exports = {
   // user/userInfo
   updateProfile: asyncHandler(async (req, res) => {
     const { nickname, location } = req.body;
-    const toekn = generateAccessToken(req.user._id);
-    const cookie = sendAccessToken(res, toekn);
+    const cookie = res.cookie.userId;
+    // 쿠키에 있는 userid ?
     if (nickname && location) {
       await User.findByIdAndUpdate(
-        req.user._id,
+        req.cookies.userId,
         { nickname: nickname, location: location },
         {
           new: true,

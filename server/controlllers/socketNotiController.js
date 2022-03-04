@@ -74,7 +74,7 @@ module.exports = {
       return res.status(400).json({ message: "참여중인 유저가 아닙니다." });
     } else {
       const docuId = Number(documentId);
-      const { currentNum, title, user_id } = findDocu;
+      const { currentNum, title } = findDocu;
       const user = User.findOne({ _id: ObjectId(userId) });
       const host = targetUserId.equals(userId); //ObjectId타입이랑 string타입이랑 비교해서 boolean값 반환시켜줌
 

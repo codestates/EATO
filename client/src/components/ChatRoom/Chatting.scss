@@ -1,0 +1,218 @@
+.chatroom-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .chatroom {
+    // background-color: rgb(174, 218, 218);
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+
+    .chatroom-left {
+      display: flex;
+      width: 500px;
+      padding: 20px 0px 40px 40px;
+      .get-msg-container {
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        .msg-box {
+          display: flex;
+          align-items: center;
+          background-color: white;
+          font-weight: 500;
+          height: 60px;
+          padding: 10px;
+          margin: 10px;
+          border-radius: 8px;
+          box-shadow: 1px 3px 6px #A5A5A5; 
+
+          .chatroom-user-img {
+            width: 45px;
+            height: 45px;
+            background-color: #A5A5A5;
+            border-radius: 50%;
+          }
+          .msg-title {
+            margin-left: 20px;
+            flex: auto;
+          }
+          .time-alert-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            font-size: 13px;
+            text-align: end;
+            margin-right: 5px;
+            .msg-time{
+              padding-bottom: 10px;
+              color: #8C939F;
+            }
+            .msg-alert-box{
+              display: flex;
+              justify-content: flex-end;
+              .msg-alert-circle{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 20px;
+                height: 20px;
+                background-color: #EE4E34;
+                color: white;
+                border-radius: 50%;  
+              }
+            }
+          }
+        }
+      }
+    }
+  
+    .chatroom-right {
+        width: 100%;
+        padding: 20px 50px 40px 50px;
+      .chatroom-right-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      .chatroom-title-box {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2px;
+        .chat-title {
+          font-size: 24px;
+          flex: auto;
+          margin-bottom: 5px;
+        }
+        .chat-user-info {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          color: rgb(157, 162, 170);
+
+          .chat-person-num {
+            font-size: 18px;
+            padding-right: 3px;
+          }
+          .dot-box {
+            padding-left: 5px;
+            color: #C4C4C4;
+          }
+        }
+      }
+
+      .chatroom-inner-container {
+        height: calc(100% - 7rem);
+        color: #41454A;
+        flex: auto;
+        display: flex;
+        flex-direction: column;
+
+        .inner-container-padding {
+          height: 100%;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          overflow-y: scroll;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        }
+        .chatroom-msg-container {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+        .chatroom-msg-box {
+          display: flex;
+          margin-bottom: 20px;
+          .chatroom-mb-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 10px;
+            .chatroom-user-img {
+              width: 45px;
+              height: 45px;
+              background-color: #A5A5A5;
+              border-radius: 50%;
+  
+            }
+            .chatroom-time {
+            }
+          }
+
+          .chatting-mb-right {
+            margin-left: 10px;
+          }
+          .chatting-nickname {
+            font-weight: 500;
+            margin-bottom: 10px;
+          }
+          .chatting-msg-container {
+            width: 100%;
+            .chatting-msg-box {
+              // max-width를 사용하면 글자수만큼 채팅창이 flexive 하게 늘어납니다.
+              max-width: 400px;
+              height: 100%;
+              background-color: #EFECEF;
+              border-radius: 25px;
+              padding: 18px;
+
+              .chatting-msg {
+                font-weight: 500;
+                // 메시지 대량으로 입력 후에 채팅창 영역을 벗어나면 사용하기
+                // overflow-wrap: break-word;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  }
+}
+
+.chatting-input-container {    
+  box-shadow: 1px 3px 6px #A5A5A5; 
+  border-radius: 15px;
+  width: 100%;
+}
+
+.chatting-input-box {
+  width: 100%;
+  height: 100%;
+  .input-padding-box{
+    display: flex;
+    align-items: center;
+    padding: 12px;
+  }
+  .emoji {
+    display: flex;
+    color: #a8a8a8;
+  }
+  .chatting-input {
+    flex: auto;
+    font-size: 15px;
+    font-weight: 500px;
+    border: 0;
+    padding: 0 10px;
+    &::-webkit-input-placeholder {color:#a8a8a8}
+  }
+  .add-picture-box {
+
+  }
+  .sending-msg-box {  
+    display: flex;
+  }
+  .sending-msg-btn {
+    width: 38px;
+    height: 39px;
+    background-color: white;
+    border: 0;
+  }
+}
+

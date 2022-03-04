@@ -23,11 +23,10 @@ const PostCard = () => {
     return (
       await axios.get("http://localhost:27017/poset"),
       config.then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
       })
     );
   };
-
   return (
     <div className="postCard">
       <NewPostCard onAddPostCard={addPostCardHandler} />
@@ -40,10 +39,11 @@ const PostCard = () => {
               description={postCard.description}
               title={postCard.title}
               date={postCard.date}
-              joinTime={postCard.date}
+              joinTime={postCard.joinTime}
               deliveryFee={postCard.deliveryFee}
               totalNum={postCard.totalNum}
-              // located={postCard.located}
+              currentNum={postCard.currentNum}
+              located={postCard.located}
               deliveryTag={postCard.deliveryTag}
               payTag={postCard.payTag}
             />
