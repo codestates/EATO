@@ -28,18 +28,19 @@ function Nav() {
 
   // isLogin false 설정
   const logoutHandler = () => {
-    axios.get("http://localhost:27017/user/logout", config).then(() => {
+    axios.get("http://localhost:3000/user/logout", config).then(() => {
       // 로그아웃 버튼 클릭 시 recoil 전역상태 false로 전환
       setIsLogin(false);
+      localStorage.clear();
       navigate("/", { replace: true });
-      alert("로그아웃이 완료되었습니다.");
+      alert("로그아웃이 완료되었어요.");
     });
   };
 
   return (
     <>
       {isLogin ? (
-        <nav>
+        <header>
           <Link to="/home">
             <img src={Logo} className="logo" alt="Logo"></img>
           </Link>
@@ -52,9 +53,9 @@ function Nav() {
               로그아웃
             </button>
           </div>
-        </nav>
+        </header>
       ) : (
-        <nav>
+        <header>
           <Link to="/">
             <img src={Logo} className="logo" alt="Logo"></img>
           </Link>
@@ -66,7 +67,7 @@ function Nav() {
               회원가입
             </Link>
           </div>
-        </nav>
+        </header>
       )}
     </>
   );
