@@ -43,20 +43,21 @@ const SignIn = () => {
   const onSubmit = (data) => {
     axios
       .post(
-        "http://localhost:27017/user/login",
+        "http://localhost:3000/user/login",
         { email: data.email, password: data.password },
         config
       )
       .then((res) => {
-        console.log("로그인",res)
+        console.log("로그인", res);
         const loginFalse = res.data.loginSuccess;
         if (loginFalse === false) {
           setErrMsg("아이디와 비밀번호를 정확하게 적어주세요.");
         } else {
-          // 로그인 시 
+          // 로그인 시
           // 로컬스토리지에 쿠키 저장, recoil 전역 로그인 상태 true로 변환
           localStorage.setItem("token", res.data.accessToken);
           localStorage.setItem("userId", res.data.userId);
+          localStorage.setItem("nickname", res.data.nickname);
           setIsLogin(true);
           navigate("/home");
         }

@@ -49,7 +49,7 @@ function SignUp() {
   const onSubmit = (data) => {
     axios
       .post(
-        "http://localhost:27017/user/signup",
+        "http://localhost:3000/user/signup",
         {
           email: data.email,
           password: data.password,
@@ -58,19 +58,18 @@ function SignUp() {
         config
       )
       .then((res) => {
-        console.log(res)
-        if(res.status === 201){
+        console.log(res);
+        if (res.status === 201) {
           alert("Welcome to EATO!");
           setIsLogin(true);
           navigate("/signin");
         }
       })
-      .catch(err => {
-        if(err.response.status === 401){
-          setEmailErr('이미 사용중인 이메일이에요.')
+      .catch((err) => {
+        if (err.response.status === 401) {
+          setEmailErr("이미 사용중인 이메일이에요.");
         }
-      })
-      ;
+      });
   };
 
   return (

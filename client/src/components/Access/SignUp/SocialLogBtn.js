@@ -5,13 +5,10 @@ import Kakao from "../../../images/login_kakao_icon.png";
 import { KAKAO_AUTH_URL } from "../../OAuth/kakao";
 
 export default function SocialLogBtn() {
-
   const HandleKakaoLogin = async () => {
-    await window.location.assign(
-     KAKAO_AUTH_URL
-    );
+    await window.location.assign(KAKAO_AUTH_URL);
   };
-  
+
   // const kakaoLogin = () => {
   //   window.Kakao.Auth.login({
   //     scope: 'profile_nickname, profile_image, account_email',
@@ -33,9 +30,12 @@ export default function SocialLogBtn() {
       <article className="signup-social-btn-box">
         {/* Naver Login */}
         <div className="naver-icon-box">
-          <button className="naver-signup-btn" onClick={() => HandleKakaoLogin()}>
+          <button
+            className="naver-signup-btn"
+            onClick={() => HandleKakaoLogin()}
+          >
             {/* <a href={NAVER_AUTH_URL}> */}
-              <img src={Naver} alt="naver" className="naver-icon-img" />
+            <img src={Naver} alt="naver" className="naver-icon-img" />
             {/* </a> */}
           </button>
         </div>
