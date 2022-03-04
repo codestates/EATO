@@ -1,0 +1,80 @@
+export const categoryOptions = [
+  "한식",
+  "중식",
+  "양식",
+  "일식",
+  "치킨",
+  "피자",
+  "야식",
+  "찜 / 탕",
+  "족발 / 보쌈",
+  "카페 / 디저트",
+  "기타",
+];
+
+export const tagName = [{ text: "배달" }, { text: "포장" }];
+export const payTagName = [{ text: "선불" }, { text: "후불" }];
+export const deOption = ["배달", "포장"];
+export const paOptions = ["선불", "후불"];
+
+export const DUMMY_POSTCARDS = [
+  {
+    id: "1",
+    category: "카페 / 디저트",
+    title: "빌리프커피로스터스",
+    description: "아침 커피로 시작하실 분 기다립니다.",
+    located: "서울특별시 합정동",
+    deliveryFee: 4000,
+    date: new Date(2022, 2, 14, 9, 24, 0),
+    joinTime: new Date(2022, 2, 14, 9, 24, 0),
+    currentNum: 1,
+    totalNum: 3,
+    payTag: "선불",
+    deliveryTag: "배달",
+  },
+  {
+    id: "2",
+    category: "야식",
+    title: "투다리",
+    description: "꼬지 드실분 구합니다.",
+    located: "서울특별시 망원동",
+    deliveryFee: 5000,
+    date: new Date(2022, 2, 12, 20, 10, 40),
+    joinTime: new Date(2022, 2, 12, 20, 10, 40),
+    currentNum: 2,
+    totalNum: 5,
+    payTag: "후불",
+    deliveryTag: "포장",
+  },
+  {
+    id: "3",
+    category: "카페 / 디저트",
+    title: "소디스에스프레소바",
+    description: "연남동 새로 생긴 카페입니다. 웨이팅 길어요 빨리 들어오세요!!",
+    located: "서울특별시 연남동",
+    deliveryFee: 2000,
+    date: new Date(2022, 2, 28, 12, 40, 58),
+    joinTime: new Date(2022, 2, 28, 12, 40, 58),
+    startTime: new Date(2022, 2, 28, 12, 40, 58),
+    endTime: new Date(2022, 2, 28, 12, 40, 58),
+    currentNum: 2,
+    totalNum: 4,
+    payTag: "후불",
+    deliveryTag: "배달",
+  },
+  {
+    id: "4",
+    category: "카페 / 디저트",
+    title: "멜로우선샤인",
+    description:
+      "여기 디저트 맛있어요! 간식 드실분 구합니다. 제가 직접 가지러 가요!",
+    located: "서울특별시 연남동",
+    deliveryFee: 3000,
+    date: new Date(2022, 5, 12, 16, 20, 20),
+    joinTime: new Date(2022, 5, 12, 16, 20, 20),
+    currentNum: 6,
+    totalNum: 6,
+    payTag: "선불",
+    deliveryTag: "포장",
+  },
+];

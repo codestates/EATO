@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GoSearch } from "react-icons/go";
-import { tagName, payTagName } from "../resource/datas";
+import { tagName, payTagName } from "../../resource/datas";
 import "./MapPageSearchBar.scss";
 
 const MapPageSearchBar = () => {
