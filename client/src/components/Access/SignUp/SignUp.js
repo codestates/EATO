@@ -24,7 +24,7 @@ function SignUp() {
   // 유효성 검사 정규 표현식
   const emailExp =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const nicknameExp = /^([a-zA-Z0-9가-힣]){1,6}$/;
+  const nicknameExp = /^([a-zA-Z0-9가-힣]){2,6}$/;
   const pwdExp =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
 
@@ -58,7 +58,6 @@ function SignUp() {
         config
       )
       .then((res) => {
-        console.log(res);
         if (res.status === 201) {
           alert("Welcome to EATO!");
           setIsLogin(true);
@@ -129,9 +128,9 @@ function SignUp() {
                   name="nickname"
                   type="text"
                   className="signup-input"
-                  minLength="1"
+                  minLength="2"
                   maxLength="6"
-                  placeholder="영문 또는 한글 1-6자"
+                  placeholder="영문 또는 한글 2-6자"
                   {...register("nickname", {
                     required: {
                       value: true,
