@@ -13,9 +13,7 @@ module.exports = {
     const {
       title,
       deliveryFee,
-      placeName,
       date,
-      time,
       currentNum,
       totalNum,
       description,
@@ -25,9 +23,7 @@ module.exports = {
     const document = {
       title,
       deliveryFee,
-      placeName,
       date,
-      time,
       currentNum,
       totalNum,
       description,
@@ -39,9 +35,7 @@ module.exports = {
       const newDocument = await Document.create({
         title,
         deliveryFee,
-        placeName,
         date,
-        time,
         totalNum,
         description,
         category,
@@ -80,62 +74,29 @@ module.exports = {
 
   //전체 게시물 조회
   showPost: asyncHandler(async (req, res) => {
-    Document.find({ done: 0 }, (err, docu) => {
+    Document.find({ done: false }, (err, docu) => {
       if (err) {
         return res.status(400).json({ message: console.log(err) });
       }
-      const {
-        title,
-        deliveryFee,
-        placeName,
-        latitude,
-        longitude,
-        date,
-        time,
-        totalNum,
-        currentNum,
-        description,
-        category,
-        categoryImg,
-        creatorId,
-        createdAt,
-      } = docu;
       return res.status(200).json({
-        documentInfo: {
-          title,
-          deliveryFee,
-          placeName,
-          latitude,
-          longitude,
-          date,
-          time,
-          currentNum,
-          totalNum,
-          description,
-          category,
-          categoryImg,
-          creatorId,
-          createdAt,
-        },
-        message: "게시물 조회 성공!",
+        message: "게시물 조회 성공",
+        documentList: docu,
       });
     });
   }),
 
   // 게시물 상세 조회
   viewPost: asyncHandler(async (req, res) => {
-    Document.findOne({ _id: req.params.postId }, (err, docu) => {
+    Document.findOne({ _id: req.params.documentId }, (err, docu) => {
       if (err) {
         return res.status(400).json({ message: console.log(err) });
       }
       const {
         title,
         deliveryFee,
-        placeName,
         latitude,
         longitude,
         date,
-        time,
         totalNum,
         currentNum,
         description,
@@ -148,11 +109,9 @@ module.exports = {
         documentInfo: {
           title,
           deliveryFee,
-          placeName,
           latitude,
           longitude,
           date,
-          time,
           totalNum,
           currentNum,
           description,
