@@ -19,7 +19,7 @@ router.post("/login", userLogin);
 router.get("/logout", protect, logout);
 router.post("/kakao", kakaoSignin);
 router.post("/naver", naverSignin);
-router.get("/mypage/:userId", protect, getUserInfo);
+router.get("/mypage/:userId", getUserInfo);
 
 router
   .route("/userInfo/:userId")
