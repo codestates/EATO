@@ -5,19 +5,8 @@ import "./MapPageSearchBar.scss";
 
 const MapPageSearchBar = () => {
   const [currentTag, setcurrentTag] = useState(0);
-  // const tagName = [{ text: "배달" }, { text: "포장" }];
   const [currentPayTag, setcurrentPayTag] = useState(0);
-  // const payTagName = [{ text: "선불" }, { text: "후불" }];
 
-  //   const tagList = tagNames.map((tag) => (
-  //     <li
-  //       className={tagColor ? "mapSearchBar__tagIcon" : "mapSearchBar__icon"}
-  //       key={tag.id}
-  //       onClick={handleChangeColor}
-  //     >
-  //       {tag.text}
-  //     </li>
-  //   ));
   const handleChangeColor = (index) => {
     setcurrentTag(index);
   };
