@@ -3,21 +3,22 @@ import PostCardDate from "./PostCardDate";
 import PostCardCheck from "../PostCardRead/PostCardCheck";
 import { IoClose } from "react-icons/io5";
 import "./PostCardItem.scss";
-import axios from "axios";
-axios.defaults.withCredentials = true;
+// import axios from "axios";
+// axios.defaults.withCredentials = true;
 
 const PostCardItem = (props) => {
+  console.log("id : ", props);
   const joinTime = props.date.toTimeString().substr(0, 5);
   const [isClick, setIsClick] = useState(false);
-  const config = {
-    "Content-Type": "application/json",
-    withCredentials: false,
-  };
+  // const config = {
+  //   "Content-Type": "application/json",
+  //   withCredentials: true,
+  // };
 
   const handleCardClick = () => {
-    axios.get("http://localhost:3000/document", config).then((res) => {
-      console.log("res", res);
-    });
+    // axios.get("http://localhost:3000/document", config).then((res) => {
+    //   console.log("res", res);
+    // });
     setIsClick(!isClick);
   };
 
@@ -44,7 +45,7 @@ const PostCardItem = (props) => {
           </div>
         </section>
       )}
-      <section className="postCard-item__left">
+      <section className="postCard-item__left" key={props.id}>
         <div className="postCard-item__leftListC">{props.category}</div>
         <div className="postCard-item__leftListT">{props.title}</div>
         <div className="postCard-item__leftListL">{props.located}</div>

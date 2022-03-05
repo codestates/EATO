@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import PostCardItem from "./PostCardItem";
 import NewPostCard from "../NewPostCard/NewPostCard";
@@ -7,26 +7,32 @@ import "./PostCard.scss";
 
 const PostCard = () => {
   const [postCards, setPostCards] = useState(DUMMY_POSTCARDS);
-
+  const config = {
+    "Content-Type": "application/json",
+    withCredentials: true,
+  };
   const addPostCardHandler = (postCard) => {
+    axios.get("http://localhost:3000/document", {
+      postCards: postCards,
+    });
     setPostCards((prevPostCards) => {
       return [postCard, ...prevPostCards];
     });
   };
+  console.log("postCard id : ", postCards);
 
-  const config = {
-    "Content-Type": "application/json",
-    withCredentials: false,
-  };
+  useEffect(() => {
+    window.localStorage.setItem("postCards", JSON.stringify(postCards));
+  }, [postCards]);
 
-  const axiosTest = async () => {
-    return (
-      await axios.get("http://localhost:27017/poset"),
-      config.then((res) => {
-        // console.log(res.data);
-      })
-    );
-  };
+  // useEffect(() => {
+  //   setPostCards(JSON.parse(window.localStorage.getItem("postCards")));
+  // }, []);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem("postCards", postCards);
+  // }, [postCards]);
+
   return (
     <div className="postCard">
       <NewPostCard onAddPostCard={addPostCardHandler} />
@@ -34,7 +40,7 @@ const PostCard = () => {
         <div className="postCards">
           {postCards.map((postCard) => (
             <PostCardItem
-              key={postCard.id}
+              id={postCard.id}
               category={postCard.category}
               description={postCard.description}
               title={postCard.title}

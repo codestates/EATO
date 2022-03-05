@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import PostCardDate from "../PostCards/PostCardDate";
 import postLogo from "../../../images/Logo.png";
+import PostMap from "../../Map/PostMap";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import "./PostCardCheck.scss";
 
 const PostCardCheck = (props) => {
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+  // const deleteHandler = () => {
+  //   if (window.confirm("모임을 삭제 할까요?")) {
+  //     axios
+  //       .delete(`http://localhost:3000/user/userInfo/${userId}`, config)
+  //       .then((res) => {
+  //         localStorage.clear();
+  //         setIsLogin(false);
+  //         alert("삭제완료");
+  //       });
+  //   }
+  // };
 
   const finalPay = `${props.posts.deliveryFee
     .toString()
@@ -68,15 +76,15 @@ const PostCardCheck = (props) => {
 
         <section className="postInfo__right">
           <div className="postInfo__postMap">
-            <div className="postInfo__InputPostMap">
-              만날 장소를 입력해주세요.
-            </div>
+            <div className="postInfo__InputPostMap">{props.posts.located}</div>
           </div>
           <div className="postInfo__titleMap">
             <FaMapMarkerAlt size="1.2rem" color="#ff4234" />
-            &nbsp;주소{props.posts.postMap}
+            &nbsp;{props.posts.located}
           </div>
-          <div className="postInfo__map">지도</div>
+          <div className="postInfo__map">
+            <PostMap />
+          </div>
         </section>
       </article>
 

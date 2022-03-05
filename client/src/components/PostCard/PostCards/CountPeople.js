@@ -1,19 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { FcCollapse, FcConferenceCall, FcExpand } from "react-icons/fc";
+import { BsCheckCircle } from "react-icons/bs";
 import "./CountPeople.scss";
 
 const CountPeople = ({ num, setNum }) => {
   const [isActive, setIsActive] = useState(false);
-  // const [num, setNum] = useState(1);
-
-  const stackNum = useRef(null);
-  //   const increase = () => {
-  //     setNum(num + 1);
-  //   };
-  //   const decrease = () => {
-  //     setNum(num - 1);
-  //   };
-
   return (
     <div className="actInput">
       <div className="actInput-btn" onClick={(e) => setIsActive(!isActive)}>
@@ -21,6 +12,8 @@ const CountPeople = ({ num, setNum }) => {
           <>
             <FcConferenceCall size="2.4rem" />
             &nbsp; 총 {num} 명
+            {/* &nbsp;&nbsp;&nbsp;
+            <BsCheckCircle /> */}
           </>
         ) : (
           <>
