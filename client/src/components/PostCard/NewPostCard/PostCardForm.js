@@ -12,6 +12,8 @@ import CountPeople from "../PostCards/CountPeople";
 import { categoryOptions, deOption, paOptions } from "../../../resource/datas";
 import "./PostCardForm.scss";
 import axios from "axios";
+import PostAddress from "../../Map/PostAddress";
+
 axios.defaults.withCredentials = true;
 
 const PostCardForm = (props) => {
@@ -25,32 +27,44 @@ const PostCardForm = (props) => {
   const [enteredLocated, setEnteredLocated] = useState("");
   const [enteredDeliveryTag, setEnteredDeliveryTag] = useState("배달");
   const [enteredPayTag, setEnteredPayTag] = useState("선불");
-  const [submitting, setSubmitting] = useState(false);
+  const [disabled, setDisabled] = useState("disabled");
+
   // const [postCardInput, setPostCardInput] = useState({
   //   enteredTitle: "",
   //   enteredDescription: "",
-  //   enteredDeliveryFee: "",
-  //   enteredDate: today,
-  // enteredJoinTime: ""
-  //   enteredStartTime: startSetTime,
-  //   enteredEndTime: endSetTime,
-  //   enteredLocated: ""
-  // })
+  //   enteredCategory: "",
+  //   enteredDeliveryFee: 0,
+  //   enteredCurrentNum: 1,
+  //   enteredTotalNum: 1,
+  //   enteredDeliveryTag: "배달",
+  //   enteredDate: new Date(),
+  //   enteredLocated: "",
+  //   enteredPayTag: "선불",
+  //   disabled: "disabled",
+  // });
 
   useEffect(() => {
-    if (submitting) {
-      if (
-        submitting &&
-        enteredTitle !== "" &&
-        enteredCategory !== "" &&
-        enteredDate !== "" &&
-        enteredDeliveryFee !== 0 &&
-        enteredTotalNum !== 1
-      ) {
-        setSubmitting(true);
-      }
+    disable();
+  }, [
+    enteredTitle,
+    enteredCategory,
+    enteredDescription,
+    enteredDeliveryFee,
+    enteredTotalNum,
+    enteredCurrentNum,
+  ]);
+
+  const disable = () => {
+    if (
+      enteredTitle !== "" &&
+      enteredCategory !== "" &&
+      enteredDescription !== "" &&
+      enteredDeliveryFee !== "" &&
+      enteredTotalNum > enteredCurrentNum
+    ) {
+      setDisabled("");
     }
-  }, []);
+  };
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -68,10 +82,6 @@ const PostCardForm = (props) => {
     setEnteredDescription(event.target.value);
   };
 
-  // const joinTimeChangeHandler = (event) => {
-  //   setEnteredJoinTime(event.target.value);
-  // };
-
   const locatedChangeHandler = (event) => {
     setEnteredLocated(event.target.value);
   };
@@ -86,7 +96,7 @@ const PostCardForm = (props) => {
   };
   const config = {
     "Content-Type": "application/json",
-    withCredentials: false,
+    withCredentials: true,
   };
 
   const submitHandler = async (event) => {
@@ -115,29 +125,38 @@ const PostCardForm = (props) => {
     setEnteredTotalNum("");
     setEnteredDeliveryTag("");
     setEnteredPayTag("");
-    console.log("postDatd", postCardData);
-    axios
-      .post(
-        "http://localhost:3000/document",
-        {
-          title: postCardData.title,
-          deliveryFee: postCardData.deliveryFee,
-          placeName: postCardData.placeName,
-          currentNum: postCardData.currentNum,
-          date: postCardData.date,
-          currentNum: postCardData.currentNum,
-          totalNum: postCardData.totalNum,
-          description: postCardData.description,
-          category: postCardData.category,
-        },
-        config
-      )
-      .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
-          alert("모임이 등록되었습니다!");
-        }
-      });
+
+    if (
+      postCardData.title !== "" &&
+      postCardData.description !== "" &&
+      postCardData.category !== "" &&
+      postCardData.totalNum > postCardData.currentNum &&
+      postCardData.deliveryFee !== ""
+    ) {
+      axios
+        .post(
+          "http://localhost:3000/document",
+          {
+            title: postCardData.title,
+            deliveryFee: postCardData.deliveryFee,
+            currentNum: postCardData.currentNum,
+            date: postCardData.date,
+            totalNum: postCardData.totalNum,
+            description: postCardData.description,
+            category: postCardData.category,
+          },
+          config
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.status === 200) {
+            alert("모임이 등록되었습니다!");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   return (
     <>
@@ -214,11 +233,6 @@ const PostCardForm = (props) => {
                 selected={enteredDeliveryTag}
                 setSelected={setEnteredDeliveryTag}
               />
-              {/* <DropdownT
-                options={deOption}
-                selected={enteredDeliveryTag}
-                setSelected={setEnteredDeliveryTag}
-              /> */}
             </div>
             <div className="new-postCard__tag">
               <DropdownT
@@ -226,11 +240,6 @@ const PostCardForm = (props) => {
                 selected={enteredPayTag}
                 setSelected={setEnteredPayTag}
               />
-              {/* <DropdownT
-                options={paOptions}
-                selected={enteredPayTag}
-                setSelected={setEnteredPayTag}
-              /> */}
             </div>
           </section>
           <section className="new-postCard__right">
@@ -238,8 +247,9 @@ const PostCardForm = (props) => {
               <div
                 className="new-postCard__InputPostMap"
                 value={enteredLocated}
-                placeholder="만날 장소를 입력해 주세요."
-              ></div>
+              >
+                <PostAddress />
+              </div>
               {/* <input
                 className="new-postCard__InputPostMap"
                 type="text"
@@ -252,7 +262,9 @@ const PostCardForm = (props) => {
               <FaMapMarkerAlt size="1.4rem" color="#ff4234" />
               주소
             </div>
-            <div className="new-postCard__map">지도</div>
+            <div className="new-postCard__map">
+              <PostMap />
+            </div>
           </section>
         </article>
         <article className="new-postCard__Fotter">
@@ -262,7 +274,7 @@ const PostCardForm = (props) => {
           <button
             className="new-postCard__actions"
             type="submit"
-            disabled={submitting}
+            disabled={disabled}
           >
             등록하기
           </button>
