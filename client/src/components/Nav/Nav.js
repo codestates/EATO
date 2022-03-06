@@ -5,7 +5,7 @@ import { useRecoilState } from "recoil";
 import IsLoginState from "../../states/IsLoginState";
 import Logo from "../../images/Logo.png";
 import Notification from "./NavNotification";
-
+import { BsFillChatDotsFill } from "react-icons/bs";
 // * 알림창 참고
 // https://github.com/codestates/sweatmate/blob/dev/client/src/components/Notification.jsx
 axios.defaults.withCredentials = true;
@@ -23,7 +23,7 @@ function Nav() {
 
   const config = {
     "Content-Type": "application/json",
-    withCredentials: false,
+    withCredentials: true,
   };
 
   // isLogin false 설정
@@ -46,6 +46,9 @@ function Nav() {
           </Link>
           <div className="user-access">
             <Notification />
+            <Link to="/chatroom">
+              <BsFillChatDotsFill className="user-button" size="1.5rem" />
+            </Link>
             <Link to="/mypage" className="user-button">
               마이페이지
             </Link>

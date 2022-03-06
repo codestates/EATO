@@ -32,16 +32,11 @@ function SignUp() {
   const password = useRef();
   password.current = watch("password");
 
-  // <form> 태그안에 속하는 <input> 값들을 출력해주는 함수
-  // const onSubmit = (data) => {
-  //   console.log("data", data);
-  // };
-
   const [emailErr, setEmailErr] = useState("");
 
   const config = {
     "Content-Type": "application/json",
-    withCredentials: false,
+    withCredentials: true,
   };
 
   const [isLogin, setIsLogin] = useRecoilState(IsLoginState);
@@ -66,7 +61,7 @@ function SignUp() {
       })
       .catch((err) => {
         if (err.response.status === 401) {
-          setEmailErr("이미 사용중인 이메일이에요.");
+          setEmailErr(isLogin, "이미 사용중인 이메일이에요.");
         }
       });
   };
@@ -223,17 +218,6 @@ function SignUp() {
               </Link>
             </div>
           </article>
-
-          {/* 
-          * 소셜 회원가입 버튼 클릭시
-          1. 네이버 or 카카오 oauth 연결
-
-          * 가입하기 버튼 클릭시 
-          - 참고
-          https://github.com/codestates/sweatmate/blob/9fc177e5dc605d0c686f8570a16e32a400d9fbcb/client/src/components/Signing.jsx
-          1. 입력 데이터 DB에 저장
-          2. 홈페이지로 라우팅 
-          */}
         </div>
       </section>
     </main>
