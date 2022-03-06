@@ -20,13 +20,14 @@
   color: white;
   display: flex;
   flex-direction: column;
-  padding-bottom: 100px;
-  
+  padding: 3rem;
+
 }
 
 @mixin left_logo {
   width: 141px;
   height: 42px;
+  margin-top: 1rem;
   }
   
 @mixin fork_box {
@@ -55,6 +56,9 @@
   justify-content: center;
   color: #5C5B5B;
   overflow-y: scroll;  
+  @media screen and (max-width: 900px){
+   width: 100vw;
+  }
 }
 
 @mixin right_fork {
@@ -62,6 +66,13 @@
   top: 0;
   right: 0;
   height: 35%;
+  @media screen and (max-width: 900px){
+    height: 35%;
+  }
+
+  @media screen and (max-width: 580px){
+    height: 15%;
+  }
 }
 
 // 2-1 회원가입 컨테이너
@@ -69,6 +80,13 @@
 @mixin right-container {
   width: 420px;
   font-weight: 500;
+  @media screen and (max-width: 900px){
+    width: 50%;
+  }
+
+  @media screen and (max-width: 580px){
+    font-size: 0.9rem;
+  }
 }
 
 // 2-1-1 회원가입 타이틀
@@ -77,7 +95,9 @@
   font-weight: bold;
   display: flex;
   justify-content: center;
-}
+  @media screen and (max-width: 580px){
+    font-size: 1.8rem;
+  }}
 
 // 2-1-2 인풋창 컨테이너
 @mixin right-ct-input-container {
@@ -86,6 +106,7 @@
   flex-direction: column;
   width: 100%;
   padding: 20px 0px;
+
 }
 
 // 2-1-2-1 인풋 개별 컴포넌트 묶음
@@ -109,6 +130,10 @@
 @mixin right-ct-placeholder {
   font-size: 16px;
   color: #DADADA;
+
+  @media screen and (max-width: 580px){
+    font-size: 0.8rem;
+  }
 }
 
 // 2-1-3 소셜 로그인 컨테이너
@@ -123,6 +148,11 @@
   justify-content: center;
   color: #8b8b8b;
   padding: 20px 0px;
+  @media screen and (max-width: 580px){
+    word-break: keep-all;
+    text-align: center;
+    
+  }
 }
 
 // 소셜 로그인 버튼 박스
@@ -131,6 +161,7 @@
   align-items: center;
   justify-content: center;
   padding-bottom: 20px;
+
 }
 
 // 소셜 로그인 네이버, 카카오 버튼
@@ -150,6 +181,7 @@
   display: flex;
   justify-content: center;
   font-size: 20px;
+  font-weight: 600;
   margin-top: 20px;
   padding: 12px;
   border: 0;
@@ -159,7 +191,9 @@
   text-decoration: none;
   box-shadow: 2px 2px 10px 0 #A5A5A5;
   cursor: pointer;
-  
+  @media screen and (max-width: 580px){
+    font-size: 1rem;
+  }
   &:hover {
     background-color: #d43f28;
   }
@@ -173,6 +207,9 @@
   // 왼쪽 페이지
   .signin-up-left {
     @include left;
+    @media screen and (max-width: 900px){
+      display: none;
+    }
   }
   .text-box {
     @include text_box;
@@ -181,6 +218,9 @@
     width: 100%;
     font-size: 70px;
     line-height: 120%;
+    @media screen and (max-width: 900px){
+      display: none;
+    }
   }
 
   .left-logo {
@@ -202,17 +242,22 @@
   // 포크 이미지
   .right-fork {
     @include right_fork;
+
   }
   
   // 회원가입 컨테이너
   .signup-box {
     @include right-container;
-    padding-bottom: 10%;
+    padding: 20% 0;
   }
       // 회원가입 타이틀
     .signup-title-text {
       @include right-ct-title-text;
       padding-top: 60%;
+
+      @media screen and (max-width: 580px){
+        padding-top: 100%;
+      }
     }
       // 인풋 컨테이너
     .signup-input-container {
@@ -279,9 +324,17 @@
       justify-content: center;
       align-items: center;
 
+      @media screen and (max-width: 580px){
+        flex-direction: column;
+      }
+      
       .signup-question {
         color: #8b8b8b;
         padding-right: 10px;
+        @media screen and (max-width: 580px){
+          flex-direction: column;
+          padding: 0 0 0.5rem 0;
+        }
       }
       .go-signup {
         color: #EE4E34;

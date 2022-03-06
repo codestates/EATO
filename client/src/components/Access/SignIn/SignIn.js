@@ -48,10 +48,9 @@ const SignIn = () => {
         config
       )
       .then((res) => {
-        console.log("로그인", res);
         const loginFalse = res.data.loginSuccess;
         if (loginFalse === false) {
-          setErrMsg("아이디와 비밀번호를 정확하게 적어주세요.");
+          setErrMsg(isLogin, "아이디와 비밀번호를 정확하게 적어주세요.");
         } else {
           // 로그인 시
           // 로컬스토리지에 쿠키 저장, recoil 전역 로그인 상태 true로 변환
@@ -69,8 +68,10 @@ const SignIn = () => {
       {/* 재사용 가능한 left page는 signin-up-left로 명명해놨음 */}
       <section className="signin-up-left">
         <div className="text-box">
-          <h1 className="welcome">welcome</h1>
-          <h1 className="welcome">EAt TOgether!</h1>
+          <h1 className="welcome">
+            welcome <br />
+            EAt TOgether!
+          </h1>
           <img src={Logo} className="left-logo" alt="logo"></img>
         </div>
         <div className="fork-box">

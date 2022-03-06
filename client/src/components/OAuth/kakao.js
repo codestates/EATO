@@ -1,3 +1,2 @@
-export const KAKAO_CLIENT_ID= `${process.env.REACT_APP_KAKAO_CLIENT_ID}`;
-export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}/kakao`;
 //카카오 로그인 버튼에 href로 링크걸어서 연결해주기
+export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_KEY}&redirect_uri=http://localhost:3001/kakao&response_type=code`;

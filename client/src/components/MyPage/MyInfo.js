@@ -51,6 +51,7 @@ export default function MyPage() {
       axios
         .delete(`http://localhost:3000/user/userInfo/${userId}`, config)
         .then((res) => {
+          console.log(res);
           localStorage.clear();
           setIsLogin(false);
           alert("탈퇴");
@@ -72,8 +73,8 @@ export default function MyPage() {
       )
       .then((res) => {
         if (res.status === 200) {
-          const nickname = res.data.userInfo.nickname;
-          const location = res.data.userInfo.location;
+          const nickname = res.data.user.nickname;
+          const location = res.data.user.location;
           setUserNick(nickname);
           setUserLoca(location);
           localStorage.setItem("nickname", nickname);
