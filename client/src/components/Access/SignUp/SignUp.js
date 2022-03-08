@@ -61,7 +61,7 @@ function SignUp() {
       })
       .catch((err) => {
         if (err.response.status === 401) {
-          setEmailErr(isLogin, "이미 사용중인 이메일이에요.");
+          setEmailErr("이미 사용중인 이메일이에요.",isLogin);
         }
       });
   };
