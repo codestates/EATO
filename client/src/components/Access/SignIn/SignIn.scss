@@ -4,7 +4,7 @@
   @include right;
   .right-fork {
     @include right_fork;
-    }
+  }
 
   // 로그인 컨테이너
   .signin-container {
@@ -13,58 +13,58 @@
       @include right-ct-title-text;
       padding: 10% 0 40px 0;
     }
-    
+
     .signin-input-box {
       @include right-ct-input-box;
-      
-        .signin-input {
-          @include right-ct-input;
-          
-        }
-        ::placeholder {
-          @include right-ct-placeholder;
-        }
 
-        .signin-validation {
-          font-size: 13px;
-          color: #EE4E34;
-        }
+      .signin-input {
+        @include right-ct-input;
+      }
+      ::placeholder {
+        @include right-ct-placeholder;
+      }
+
+      .signin-validation {
+        font-size: 13px;
+        color: #ee4e34;
+      }
     }
     .signin-btn {
       @include signin-up-btn;
       margin-top: 20px;
       width: 100%;
     }
-// 소셜 컨테이너 
-.signup-social-container {
-  @include signup-social-container;
-}
-  // 소셜 회원가입 텍스트
-  .signup-social-text {
-    @include social-text;
-  }
-  // 소셜 로그인 버튼 박스 묶음
-  .signup-social-btn-box {
-    @include social-btn-box;
-  }
-  // 네이버 로그인
-  .naver-icon-box {
-    padding-right: 40px;
-  }
-  .naver-icon-img {
-    height: 100%;
-  }
-  .naver-signup-btn {
-    @include social-btn;
-  }
-  // 카카오 로그인
-  // .kakao-icon-box {
-  // }
-  .kakao-icon-img {
-    height: 100%;
-  }
-  .kakao-signup-btn {
-    @include social-btn;
-  }
+    // 소셜 컨테이너
+    .signup-social-container {
+      @include signup-social-container;
+    }
+    // 소셜 회원가입 텍스트
+    .signup-social-text {
+      @include social-text;
+    }
+    // 소셜 로그인 버튼 박스 묶음
+    .signup-social-btn-box {
+      @include social-btn-box;
+    }
+    // 네이버 로그인
+    .naver-icon-box {
+      padding-right: 40px;
+    }
+
+    .naver-icon-img {
+      height: 100%;
+    }
+    .naver-signup-btn {
+      @include social-btn;
+    }
+    // 카카오 로그인
+    // .kakao-icon-box {
+    // }
+    .kakao-icon-img {
+      height: 100%;
+    }
+    .kakao-signup-btn {
+      @include social-btn;
+    }
   }
 }
