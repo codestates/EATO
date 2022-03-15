@@ -23,7 +23,6 @@ function Nav() {
 
   const config = {
     "Content-Type": "application/json",
-    withCredentials: true,
   };
 
   // isLogin false 설정
