@@ -1,4 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import axios from "axios";
 import Landing from "./pages/Landing";
 import SignIn from "./pages/SignInPage";
 import SignUp from "./pages/SignUpPage";
@@ -7,6 +9,19 @@ import Home from "./pages/Home";
 import Map from "./pages/Map";
 import ChatRoom from "./pages/ChatRoom";
 function App() {
+  const [documentData, setDocumentData] = useState(null);
+
+  const render = async () => {
+    await axios
+      .get("http://localhost:3000/document")
+      .then((res) => setDocumentData(res.data.documentList));
+  };
+
+  useEffect(() => {
+    render();
+    console.log("ddd", documentData);
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
