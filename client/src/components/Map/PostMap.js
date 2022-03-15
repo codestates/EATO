@@ -1,45 +1,51 @@
 import React, { useEffect } from "react";
 const { kakao } = window; // or /*global kakao */
 
-const PostMap = () => {
+const PostMap = (props) => {
   useEffect(() => {
-    const mapContainer = document.getElementById("map"); // 지도를 표시할 div
+    const mapContainer = document.getElementById("map");
     const mapOption = {
-      center: new kakao.maps.LatLng(37.558895633730444, 126.926793078452), // 지도의 중심좌표
-      level: 7, // 지도의 확대 레벨
+      center: new kakao.maps.LatLng(
+        props.address.latitude,
+        props.address.longitude
+      ),
+      level: 5,
     };
-
-    // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    const makerName = props.address.title;
     const map = new kakao.maps.Map(mapContainer, mapOption);
-
-    const geocoder = new kakao.maps.servies.Geocoder();
-
-    // 주소로 좌표를 검색합니다
-    geocoder.addressSearch(
-      "서울 마포구 양화로11길 50",
-      function (result, status) {
-        // 정상적으로 검색이 완료됐으면
-        if (status === kakao.maps.services.Status.OK) {
-          const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-          // 결과값으로 받은 위치를 마커로 표시합니다
-          const marker = new kakao.maps.Marker({
-            map: map,
-            position: coords,
-          });
-
-          // 인포윈도우로 장소에 대한 설명을 표시합니다
-          const infowindow = new kakao.maps.InfoWindow({
-            content:
-              '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>',
-          });
-          infowindow.open(map, marker);
-
-          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-          map.setCenter(coords);
-        }
-      }
+    const images =
+      "https://media.discordapp.net/attachments/935903391253692419/947743102028906496/My_project_4.png?width=686&height=686";
+    const imageSize = new kakao.maps.Size(40, 50);
+    const imageOption = { offset: new kakao.maps.Point(27, 69) };
+    const markerImage = new kakao.maps.MarkerImage(
+      images,
+      imageSize,
+      imageOption
     );
+    const markerPosition = mapOption.center;
+
+    const marker = new kakao.maps.Marker({
+      map: map,
+      position: markerPosition,
+      image: markerImage,
+    });
+
+    marker.setMap(map);
+
+    const iwContent =
+      `<div style= "text-indent:0.5rem">` + `${makerName}` + `</div>`;
+
+    const infowindow = new kakao.maps.InfoWindow({
+      content: iwContent,
+    });
+
+    kakao.maps.event.addListener(marker, "mouseover", function () {
+      infowindow.open(map, marker);
+    });
+
+    kakao.maps.event.addListener(marker, "mouseout", function () {
+      infowindow.close();
+    });
   }, []);
 
   return (
