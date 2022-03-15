@@ -23,7 +23,7 @@ router.get("/mypage/:userId", getUserInfo);
 
 router
   .route("/userInfo/:userId")
-  .patch(protect, updateProfile)
-  .delete(protect, deleteUser);
+  .patch(updateProfile)
+  .delete(deleteUser);
 
 module.exports = router;
