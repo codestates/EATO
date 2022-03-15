@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import PostCardDate from "./PostCardDate";
-import PostCardCheck from "../PostCardRead/PostCardCheck";
+
+import MapCheck from "./MapCheck";
 import { IoClose } from "react-icons/io5";
-import "./PostCardItem.scss";
+
 // import axios from "axios";
 // axios.defaults.withCredentials = true;
 
-const PostCardItem = (props) => {
-  const joinTime = props.date.toTimeString().substr(0, 5);
+const MapList = (props) => {
+  // const joinTime = props.date.toTimeString().substr(0, 5);
   const [isClick, setIsClick] = useState(false);
   // const config = {
   //   "Content-Type": "application/json",
@@ -18,9 +18,9 @@ const PostCardItem = (props) => {
     setIsClick(!isClick);
   };
 
-  const payKr = `${props.deliveryFee
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
+  // const payKr = `${props.deliveryFee
+  //   .toString()
+  //   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
 
   return (
     <>
@@ -29,11 +29,9 @@ const PostCardItem = (props) => {
           <div className="postCard-item__leftListC">{props.category}</div>
           <div className="postCard-item__leftListT">{props.title}</div>
           <div className="postCard-item__leftListL">{props.located}</div>
-          <div className="postCard-item__leftListD">{payKr}</div>
+          <div className="postCard-item__leftListD"></div>
         </section>
-        <section className="postCard-item__center">
-          <PostCardDate date={props.date} />
-        </section>
+        <section className="postCard-item__center"></section>
         <section className="postCard-item__right">
           <div className="postCard-item__listN">
             {props.currentNum} / {props.totalNum}
@@ -41,7 +39,7 @@ const PostCardItem = (props) => {
           <div className="postCard-item__listState">
             {props.totalNum > props.currentNum ? "모집중" : "모집완료"}
           </div>
-          <div className="postCard-item__listTime">{joinTime}</div>
+          <div className="postCard-item__listTime"></div>
 
           <div className="postCard-item__Tag">
             <div className="postCard-item__deliveryTag">
@@ -65,7 +63,7 @@ const PostCardItem = (props) => {
                 <IoClose />
               </button>
             </div>
-            <PostCardCheck posts={props} />
+            <MapCheck posts={props} />
           </div>
         </section>
       )}
@@ -73,4 +71,4 @@ const PostCardItem = (props) => {
   );
 };
 
-export default PostCardItem;
+export default MapList;

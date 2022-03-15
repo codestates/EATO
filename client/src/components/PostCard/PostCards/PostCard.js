@@ -19,19 +19,10 @@ const PostCard = () => {
       return [postCard, ...prevPostCards];
     });
   };
-  console.log("postCard id : ", postCards);
 
   useEffect(() => {
     window.localStorage.setItem("postCards", JSON.stringify(postCards));
   }, [postCards]);
-
-  // useEffect(() => {
-  //   setPostCards(JSON.parse(window.localStorage.getItem("postCards")));
-  // }, []);
-
-  // useEffect(() => {
-  //   window.localStorage.setItem("postCards", postCards);
-  // }, [postCards]);
 
   return (
     <div className="postCard">
@@ -40,7 +31,7 @@ const PostCard = () => {
         <div className="postCards">
           {postCards.map((postCard) => (
             <PostCardItem
-              id={postCard.id}
+              _id={postCard.id}
               category={postCard.category}
               description={postCard.description}
               title={postCard.title}
@@ -50,6 +41,8 @@ const PostCard = () => {
               totalNum={postCard.totalNum}
               currentNum={postCard.currentNum}
               located={postCard.located}
+              latitude={postCard.latitude}
+              longitude={postCard.longitude}
               deliveryTag={postCard.deliveryTag}
               payTag={postCard.payTag}
             />

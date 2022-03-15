@@ -1,9 +1,10 @@
-.postInfoWrap {
+.mapInfoWrap {
   width: 100%;
   height: 100%;
+  z-index: 1000;
 }
 
-.postInfo__Nav {
+.mapInfo__Nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -43,7 +44,7 @@
   }
 }
 
-.postInfo__Header {
+.mapInfo__Header {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -52,11 +53,11 @@
   height: 3rem;
   margin-bottom: 0.5rem;
 
-  .postInfo__title {
+  .mapInfo__title {
     width: 90%;
     text-align: left;
     border-bottom: 5px solid #ff7a59;
-    .postInfo__InputTitle {
+    .mapInfo__InputTitle {
       margin-left: 0.5rem;
       font-weight: bold;
       border: none;
@@ -64,7 +65,7 @@
     }
   }
 }
-.postInfo__work {
+.mapInfo__work {
   position: absolute;
   margin: 0 2rem 1rem 32rem;
   width: 4rem;
@@ -95,7 +96,7 @@
   }
 }
 
-.postInfo__Footer {
+.mapInfo__Footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -105,7 +106,7 @@
   height: 5rem;
 }
 
-.postInfo__actions {
+.mapInfo__actions {
   margin-top: 0.5rem;
   width: 25%;
   height: 60%;
@@ -146,7 +147,7 @@
   }
 }
 
-.postInfo__Body {
+.mapInfo__Body {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -156,7 +157,7 @@
   height: 65%;
 }
 
-.postInfo__Left {
+.mapInfo__Left {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -165,11 +166,11 @@
   height: 28rem;
 
   //Description
-  .postInfo__description {
+  .mapInfo__description {
     display: flex;
     width: 100%;
     text-align: left;
-    .postInfo__InputDescription {
+    .mapInfo__InputDescription {
       width: 100%;
       height: 7.5rem;
       padding: 0.5rem 1rem;
@@ -185,10 +186,10 @@
     }
   }
 
-  .postInfo__list {
+  .mapInfo__list {
     width: 100%;
     height: 2.9rem;
-    .postInfo__InputList {
+    .mapInfo__InputList {
       width: 100%;
       height: 100%;
       border-radius: 1rem;
@@ -198,7 +199,7 @@
       box-shadow: 2px 4px 10px 0 #a5a5a5;
     }
 
-    .postInfo__inputTag {
+    .mapInfo__inputTag {
       width: 100%;
       height: 2.6rem;
       background-color: #ffffff;
@@ -213,18 +214,18 @@
   }
 }
 
-.postInfo__right {
+.mapInfo__right {
   width: 45%;
   height: 28rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  .postInfo__postMap {
+  .mapInfo__postMap {
     width: 100%;
     height: fit-content;
     text-align: center;
-    .postInfo__InputPostMap {
+    .mapInfo__InputPostMap {
       justify-content: center;
       width: 100%;
       height: 2.2rem;
@@ -238,7 +239,7 @@
     }
   }
 }
-.postInfo__titleMap {
+.mapInfo__titleMap {
   width: 100%;
   height: 3rem;
   margin: 1rem 0 0;
@@ -247,7 +248,7 @@
   text-indent: 0.5rem;
 }
 
-.postInfo__map {
+.mapInfo__map {
   width: 100%;
   height: 22rem;
   border-radius: 1rem;
