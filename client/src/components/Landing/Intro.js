@@ -37,7 +37,7 @@ function Intro() {
         end: "bottom 100%",
         toggleActions: "restart none reverse none",
       },
-      x: 100,
+      x: -100,
       opacity: 0,
       duration: 0.7,
     });
@@ -131,82 +131,92 @@ function Intro() {
 
   return (
     <>
-      <section className="intro-1">
-        <div className="wrapper">
-          <div className="wrapper-ani">
-            <img className="card-img" src={CardImg} alt="card-img"></img>
-          </div>
-
-          <div className="start-box-top">
-            <h1 className="intro-text-1">이웃과 배달비를 나눠 보세요</h1>
-            <Link to="/signin" className="start-btn-top">
-              시작하기
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="intro-2">
-        <div className="wrapper">
-          <h1 className="intro-text-2">
-            오래 기다릴 필요없어요 포장하는 이웃과 JOIN해 보세요
-          </h1>
-
-          <div className="search-bar">
-            <div className="search-text">서울특별시 동작구 대방동 포장</div>
-            <FaSearch className="search-icon" size="32" />
-          </div>
-        </div>
-      </section>
-
-      <section className="intro-3">
-        <div className="wrapper">
-          <div className="intro-3-map-box">
-            <img className="intro-3-map" src={MapImg} alt="map-img" />
-            <article className="intro-3-pin-box">
-              <img src={Pin} className="pin-one" alt="pin-img" />
-              <img src={Pin} className="pin-two" alt="pin-img" />
-              <img src={Pin} className="pin-three" alt="pin-img" />
-            </article>
-          </div>
-
-          <h1 className="intro-text-3">
-            주변에서 함께 주문할 이웃을 찾아보세요
-          </h1>
-        </div>
-      </section>
-
-      <section className="intro-4">
-        <div className="wrapper">
-          <h1 className="intro-text-4">
-            무엇을 먹을지 고민된다면 동네 이웃들과 소통해 보세요
-          </h1>
-          <div className="img-wrapper">
-            <div className="img-box-l">
-              <img src={Text1} alt="text-img" className="img-1" />
+      <main className="intro-all-container">
+        <section className="intro-1">
+          <div className="wrapper">
+            <div className="start-box-top">
+              <h1 className="intro-text-1">
+                이웃과 <span className="join">배달비</span>를 <br />
+                나눠 보세요
+              </h1>
+              <Link to="/signin" className="start-btn-top">
+                시작하기
+              </Link>
             </div>
-
-            <div className="img-box-r">
-              <img src={Text2} alt="text-img" className="img-2" />
-            </div>
-
-            <div className="img-box-l">
-              <img src={Text3} alt="text-img" className="img-3" />
+            <div className="wrapper-ani">
+              <img className="card-img" src={CardImg} alt="card-img"></img>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <div className="intro-5">
-        <div className="wrapper">
-          <h1 className="intro-text-5">지금 바로 시작해 보세요</h1>
-          <div className="start-box-bottom">
-            <Link to="/signin" className="start-btn-bottom">
-              시작하기
-            </Link>
+        <section className="intro-2">
+          <div className="wrapper">
+            <div className="search-bar">
+              <div className="search-text">서울특별시 동작구 대방동 포장</div>
+              <FaSearch className="search-icon" size="32" />
+            </div>
+            <h1 className="intro-text-2">
+              오래 기다릴 필요없어요 포장하는 이웃과 <br />
+              <span className="join">JOIN</span>해 보세요
+            </h1>
+          </div>
+        </section>
+
+        <section className="intro-3">
+          <div className="wrapper">
+            <h1 className="intro-text-3">
+              <span className="join">주변</span>
+              에서 함께 주문할 이웃을 찾아보세요
+            </h1>
+            <div className="intro-3-map-box">
+              <img className="intro-3-map" src={MapImg} alt="map-img" />
+              <article className="intro-3-pin-box">
+                <img src={Pin} className="pin-one" alt="pin-img" />
+                <img src={Pin} className="pin-two" alt="pin-img" />
+                <img src={Pin} className="pin-three" alt="pin-img" />
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className="intro-4">
+          <div className="wrapper">
+            <div className="img-wrapper">
+              <div className="img-box-l">
+                <img src={Text1} alt="text-img" className="img-1" />
+              </div>
+
+              <div className="img-box-r">
+                <img src={Text2} alt="text-img" className="img-2" />
+              </div>
+
+              <div className="img-box-l">
+                <img src={Text3} alt="text-img" className="img-3" />
+              </div>
+            </div>
+            <h1 className="intro-text-4">
+              무엇을 먹을지 고민된다면 <br />
+              <span className="join">동네 이웃</span>과{" "}
+              <span className="join">소통</span>해 보세요
+            </h1>
+          </div>
+        </section>
+
+        <div className="intro-5">
+          <div className="wrapper">
+            <h1 className="intro-text-5">
+              Let's <br />
+              <span className="join">EA</span>t <span className="join">TO</span>
+              gether!
+            </h1>
+            <div className="start-box-bottom">
+              <Link to="/signin" className="start-btn-bottom">
+                시작하기
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

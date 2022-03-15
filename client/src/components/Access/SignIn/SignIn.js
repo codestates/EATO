@@ -9,7 +9,7 @@ import ForkW from "../../../images/fork_white.png";
 import ForkR from "../../../images/fork_red.png";
 import SocialLogBtn from "../SignUp/SocialLogBtn";
 
-axios.defaults.withCredentials = true;
+axios.defaults.withCredentials = false;
 
 const SignIn = () => {
   // true
@@ -34,7 +34,6 @@ const SignIn = () => {
 
   const config = {
     "Content-Type": "application/json",
-    withCredentials: false,
   };
   const [errMsg, setErrMsg] = useState("");
   // recoil 전역상태 false
@@ -48,10 +47,13 @@ const SignIn = () => {
         config
       )
       .then((res) => {
-        console.log("로그인", res);
-        const loginFalse = res.data.loginSuccess;
-        if (loginFalse === false) {
-          setErrMsg("아이디와 비밀번호를 정확하게 적어주세요.");
+        const matchInfo = res.data.message;
+        // const loginFalse = res.data.loginSuccess;
+        if (
+          matchInfo === "존재하지 않는 아이디입니다." ||
+          matchInfo === "비밀번호가 일치하지 않습니다."
+        ) {
+          setErrMsg(matchInfo, isLogin);
         } else {
           // 로그인 시
           // 로컬스토리지에 쿠키 저장, recoil 전역 로그인 상태 true로 변환
@@ -69,8 +71,10 @@ const SignIn = () => {
       {/* 재사용 가능한 left page는 signin-up-left로 명명해놨음 */}
       <section className="signin-up-left">
         <div className="text-box">
-          <h1 className="welcome">welcome</h1>
-          <h1 className="welcome">EAt TOgether!</h1>
+          <h1 className="welcome">
+            welcome <br />
+            EAt TOgether!
+          </h1>
           <img src={Logo} className="left-logo" alt="logo"></img>
         </div>
         <div className="fork-box">

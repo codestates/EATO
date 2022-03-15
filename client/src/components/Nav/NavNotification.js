@@ -13,11 +13,13 @@ export default function NavNotificationModal() {
   };
   return (
     <div className="noti-container">
-      <FaBell
-        size="24"
-        className="user-button"
-        onClick={HandleClickNoti}
-      ></FaBell>
+      <span className="user-button-icon-box">
+        <FaBell
+          size="1.5rem"
+          className="user-button"
+          onClick={HandleClickNoti}
+        ></FaBell>
+      </span>
 
       {/* 종모양 클릭시 알림창 Open*/}
       {isNotiClicked ? (

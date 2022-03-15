@@ -7,18 +7,16 @@ const DocumentSchema = new Schema(
       default: "",
     },
     deliveryFee: Number,
-    placeName: String,
     latitude: Number,
     longitude: Number,
     date: Date,
-    time: String, //Number로 변경할수도
     totalNum: Number,
     currentNum: {
       default: 1,
       type: Number,
     },
     description: String,
-    category: Number,
+    category: String,
     categoryImg: String,
     creatorId: {
       type: String,

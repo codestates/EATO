@@ -219,10 +219,10 @@ module.exports = {
   updateProfile: asyncHandler(async (req, res) => {
     const { nickname, location } = req.body;
     const cookie = res.cookie.userId;
-    // 쿠키에 있는 userid ?
     if (nickname && location) {
       await User.findByIdAndUpdate(
-        req.cookies.userId,
+        { _id: ObjectId(req.params.userId) },
+
         { nickname: nickname, location: location },
         {
           new: true,
@@ -230,6 +230,7 @@ module.exports = {
       );
       res.status(200).json({
         message: "프로필 업데이트가 완료 되었습니다.",
+        userInfo: { nickname: nickname, location: location },
         cookie,
       });
     } else {

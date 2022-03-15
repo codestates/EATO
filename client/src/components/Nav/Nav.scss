@@ -2,42 +2,66 @@
   padding: 10px 14px;
   margin-right: 25px;
   text-decoration: none;
+  background-color: transparent;
   font-size: 16px;
   font-weight: 500;
   border: 0;
-  background-color: white;
-  color: #251e1e;
+  color: #4d3b3b;
   display: flex;
+  @media screen and (max-width: 700px){
+    font-size: 0.8rem;
+    margin: 0;
+    padding: 0.6rem;
+
+  }
   &:hover {
     transition: background-color 0.4s;
     color: #EE4E34;
     padding: 10px 14px;
     background-color: #f3f3f3;
     border-radius: 10px;
+    @media screen and (max-width: 700px){
+      padding: 0.6rem;
+      
+    }
   }
 }
 
 header {
-  font-weight: 500;
-  width: 100%;
   height: 120px;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 700px){
+    height: 100%;
+    flex-direction: column;
+    padding-bottom: 1.5rem;
+  }
   .logo {
     margin-left: 50px;
     width: 167.88px;
     height: 74px;
     display: flex;
     align-items: center;
+    @media screen and (max-width: 700px){
+      width: 7.063rem;
+      height: 3.113rem;
+      margin: 1rem 0 1.5rem 0;
+    }
   } 
     // SignUp, MyPage, etc... wrapper
     .user-access {
       display: flex;
+      align-items: center;
+      justify-content: center;
       margin-right: 23px;
       position: relative;
       // ** button과 hover의 padding값을 똑같이 설정해야 움직임이 고정된다.
+      @media screen and (max-width: 700px){
+        margin: 0;
+        gap: 1.2rem;
+      }
       .user-button {
         @include user_button;
         }

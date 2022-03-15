@@ -24,7 +24,7 @@ function SignUp() {
   // 유효성 검사 정규 표현식
   const emailExp =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const nicknameExp = /^([a-zA-Z0-9가-힣]){1,6}$/;
+  const nicknameExp = /^([a-zA-Z0-9가-힣]){2,6}$/;
   const pwdExp =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
 
@@ -32,16 +32,11 @@ function SignUp() {
   const password = useRef();
   password.current = watch("password");
 
-  // <form> 태그안에 속하는 <input> 값들을 출력해주는 함수
-  // const onSubmit = (data) => {
-  //   console.log("data", data);
-  // };
-
   const [emailErr, setEmailErr] = useState("");
 
   const config = {
     "Content-Type": "application/json",
-    withCredentials: false,
+    withCredentials: true,
   };
 
   const [isLogin, setIsLogin] = useRecoilState(IsLoginState);
@@ -58,7 +53,6 @@ function SignUp() {
         config
       )
       .then((res) => {
-        console.log(res);
         if (res.status === 201) {
           alert("Welcome to EATO!");
           setIsLogin(true);
@@ -67,7 +61,7 @@ function SignUp() {
       })
       .catch((err) => {
         if (err.response.status === 401) {
-          setEmailErr("이미 사용중인 이메일이에요.");
+          setEmailErr("이미 사용중인 이메일이에요.",isLogin);
         }
       });
   };
@@ -129,9 +123,9 @@ function SignUp() {
                   name="nickname"
                   type="text"
                   className="signup-input"
-                  minLength="1"
+                  minLength="2"
                   maxLength="6"
-                  placeholder="영문 또는 한글 1-6자"
+                  placeholder="영문 또는 한글 2-6자"
                   {...register("nickname", {
                     required: {
                       value: true,
@@ -224,17 +218,6 @@ function SignUp() {
               </Link>
             </div>
           </article>
-
-          {/* 
-          * 소셜 회원가입 버튼 클릭시
-          1. 네이버 or 카카오 oauth 연결
-
-          * 가입하기 버튼 클릭시 
-          - 참고
-          https://github.com/codestates/sweatmate/blob/9fc177e5dc605d0c686f8570a16e32a400d9fbcb/client/src/components/Signing.jsx
-          1. 입력 데이터 DB에 저장
-          2. 홈페이지로 라우팅 
-          */}
         </div>
       </section>
     </main>

@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import IsLoginState from "../../states/IsLoginState";
 import { userLocation, userNickname } from "../../states/UserInfoState";
 import ChatRoomCard from "./ChatRoomCard";
+import user1 from "../../../src/images/1.png";
 
 axios.defaults.withCredentials = true;
 
@@ -43,7 +44,7 @@ export default function MyPage() {
         localStorage.getItem("nickname");
         localStorage.getItem("location");
       });
-  }, []);
+  });
 
   // DELETE 회원탈퇴 요청
   const deleteHandler = () => {
@@ -51,6 +52,7 @@ export default function MyPage() {
       axios
         .delete(`http://localhost:3000/user/userInfo/${userId}`, config)
         .then((res) => {
+          console.log(res);
           localStorage.clear();
           setIsLogin(false);
           alert("탈퇴");
@@ -72,15 +74,18 @@ export default function MyPage() {
       )
       .then((res) => {
         if (res.status === 200) {
-          const nickname = res.data.userInfo.nickname;
-          const location = res.data.userInfo.location;
+          const nickname = res.data.user.nickname;
+          const location = res.data.user.location;
           setUserNick(nickname);
           setUserLoca(location);
           localStorage.setItem("nickname", nickname);
           localStorage.setItem("location", location);
           setIsEditMode(false);
-          alert("수정완료");
+          alert("회원정보가 수정되었습니다.");
         }
+      })
+      .catch((err) => {
+        console.log(err, isLogin);
       });
   };
 
@@ -96,9 +101,10 @@ export default function MyPage() {
     <section className="mypage">
       <div className="mypage-whole-container">
         <div className="mypage-container-top">
-          <div className="mypage-img-box">
-            <div className="mypage-img" alt="user-img" />
-          </div>
+          {/* <div className="mypage-img-box"> */}
+          {/* <div className="mypage-img" alt="user-img" /> */}
+          <img src={user1} className="mypage-img" alt="user-img" />
+          {/* </div> */}
           <div className="mypage-line-box">
             <div className="mypage-line"></div>
           </div>
