@@ -28,7 +28,6 @@
       margin: 3rem 19.5rem 2rem 18rem;
     }
   }
-
   .postCard-close {
     margin: 0.8rem 4rem 0 0;
     cursor: pointer;
@@ -79,34 +78,35 @@
   flex: 1 1 0;
   width: 100%;
   height: 5rem;
+}
 
-  .new-postCard__actions {
-    cursor: pointer;
-    margin-top: 0.5rem;
-    width: 25%;
-    height: 60%;
-    font-size: 1.4rem;
-    letter-spacing: 0.4rem;
-    border: 1px solid #ff4234;
-    background-color: #ff4234;
-    color: #ffffff;
-    border-radius: 1rem;
-    z-index: 1;
+.new-postCard__actions {
+  cursor: pointer;
+  margin-top: 0.5rem;
+  width: 25%;
+  height: 60%;
+  font-size: 1.4rem;
+  letter-spacing: 0.6rem;
+  text-indent: 0.6rem;
+  border: 1px solid #ff4234;
+  background-color: #ff4234;
+  color: #ffffff;
+  border-radius: 1rem;
+  z-index: 1;
+}
+.new-postCard__actions:active {
+  position: relative;
+  top: 0.2rem;
+  background-color: #ff7a59;
+  .new-postCard__actions:focus .new-postCard__actions:hover {
+    border-color: #ff7a59;
   }
-  .new-postCard__actions:active {
-    position: relative;
-    top: 0.2rem;
-    background-color: #ff7a59;
-    .new-postCard__actions:focus .new-postCard__actions:hover {
-      border-color: #ff7a59;
-    }
-  }
-  .new-postCard__actions:disabled {
-    position: relative;
-    top: 0.2rem;
-    background-color: #b0acac;
-    border: none;
-  }
+}
+.new-postCard__actions:disabled {
+  position: relative;
+  top: 0.2rem;
+  background-color: #b0acac;
+  border: none;
 }
 
 .new-postCard__Body {
@@ -193,6 +193,7 @@
     width: 100%;
     height: fit-content;
     text-align: center;
+    border: none;
     .new-postCard__InputPostMap {
       justify-content: center;
       width: 100%;
@@ -205,7 +206,6 @@
       box-shadow: 2px 4px 10px 0 #a5a5a5;
       &:hover,
       &:focus {
-        border-color: #ff7a59;
         border-radius: 1rem;
       }
     }
@@ -215,7 +215,6 @@
     width: 100%;
     padding: 1rem 0;
     text-align: left;
-    z-index: 1;
   }
 
   .new-postCard__map {
@@ -224,7 +223,6 @@
     height: 22rem;
     border: none;
     border-radius: 1rem;
-    z-index: 1;
     box-shadow: 2px 4px 10px 0 #a5a5a5;
   }
 }

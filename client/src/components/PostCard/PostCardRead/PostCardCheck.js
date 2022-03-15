@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PostCardDate from "../PostCards/PostCardDate";
 import postLogo from "../../../images/Logo.png";
 import PostMap from "../../Map/PostMap";
@@ -7,6 +7,18 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import "./PostCardCheck.scss";
 
 const PostCardCheck = (props) => {
+  const [count, setCount] = useState(1);
+  const [isClick, setIsClick] = useState(false);
+  const plusCurNum = () => {
+    setCount(count + 1);
+  };
+
+  const showClicked = () => {
+    setIsClick(!isClick);
+  };
+  const deleteHandler = () => {
+    console.log("del clicked");
+  };
   // const deleteHandler = () => {
   //   if (window.confirm("모임을 삭제 할까요?")) {
   //     axios
@@ -18,6 +30,10 @@ const PostCardCheck = (props) => {
   //       });
   //   }
   // };
+
+  // const deleteHandler = () => {
+
+  // }
 
   const finalPay = `${props.posts.deliveryFee
     .toString()
@@ -36,7 +52,14 @@ const PostCardCheck = (props) => {
           <div className="postInfo__InputTitle">{props.posts.title}</div>
         </div>
         <div className="postInfo__work">
-          <HiOutlineDotsVertical size="1.5rem" />
+          <HiOutlineDotsVertical size="1.5rem" onClick={showClicked} />
+          {isClick && (
+            <div className="delete-box">
+              <button className="del-btn" onClick={deleteHandler}>
+                삭제
+              </button>
+            </div>
+          )}
         </div>
       </article>
 
@@ -63,7 +86,9 @@ const PostCardCheck = (props) => {
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__InputList">{props.posts.totalNum}명</div>
+            <div className="postInfo__InputList">
+              {props.posts.currentNum} / {props.posts.totalNum}명
+            </div>
           </div>
 
           <div className="postInfo__list">
@@ -83,13 +108,15 @@ const PostCardCheck = (props) => {
             &nbsp;{props.posts.located}
           </div>
           <div className="postInfo__map">
-            <PostMap />
+            <PostMap address={props.posts} />
           </div>
         </section>
       </article>
 
       <article className="postInfo__Footer">
-        <button className="postInfo__actions">&nbsp;참여하기</button>
+        <button className="postInfo__actions" onClick={plusCurNum}>
+          &nbsp;참여하기
+        </button>
       </article>
     </div>
   );

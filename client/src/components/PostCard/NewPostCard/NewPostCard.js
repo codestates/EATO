@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PostCardForm from "./PostCardForm";
-// import PostCardCheck from "../PostCardRead/PostCardCheck";
+import { IoClose } from "react-icons/io5";
 import { FaPencilAlt } from "react-icons/fa";
 import "./NewPostCard.scss";
 
@@ -9,8 +9,10 @@ const NewPostCard = (props) => {
 
   const toggleModal = () => {
     setModal(!modal);
+    localStorage.removeItem("address");
   };
 
+  // const removeAddress = () => {};
   const savePostCardDataHandler = (enteredPostCardData) => {
     const postCardData = {
       ...enteredPostCardData,
@@ -21,12 +23,8 @@ const NewPostCard = (props) => {
     setModal(false);
   };
 
-  const stopEditingHandler = () => {
-    setModal(false);
-  };
-
   return (
-    <div class="NewPostCard">
+    <div className="NewPostCard">
       <button onClick={toggleModal} className="btn-modal">
         <FaPencilAlt />
         &nbsp;글작성
@@ -35,10 +33,17 @@ const NewPostCard = (props) => {
         <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
-            <PostCardForm
-              onSavePostCardData={savePostCardDataHandler}
-              onCancel={stopEditingHandler}
-            />
+            <div className="postClose-btn">
+              <button
+                className="postCard-close"
+                data-backdrop="static"
+                data-keyboard="false"
+                onClick={toggleModal}
+              >
+                <IoClose />
+              </button>
+            </div>
+            <PostCardForm onSavePostCardData={savePostCardDataHandler} />
           </div>
         </div>
       )}

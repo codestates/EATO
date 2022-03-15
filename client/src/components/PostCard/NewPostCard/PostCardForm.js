@@ -13,6 +13,7 @@ import { categoryOptions, deOption, paOptions } from "../../../resource/datas";
 import "./PostCardForm.scss";
 import axios from "axios";
 import PostAddress from "../../Map/PostAddress";
+import MapPreview from "../../Map/MapPreview";
 
 axios.defaults.withCredentials = true;
 
@@ -28,6 +29,13 @@ const PostCardForm = (props) => {
   const [enteredDeliveryTag, setEnteredDeliveryTag] = useState("배달");
   const [enteredPayTag, setEnteredPayTag] = useState("선불");
   const [disabled, setDisabled] = useState("disabled");
+  const [popUp, setPopUp] = useState(false);
+  const [getAddress, setGetAddress] = useState(null);
+  const address = localStorage.getItem("address");
+
+  const changeAddress = () => {
+    setGetAddress(address);
+  };
 
   // const [postCardInput, setPostCardInput] = useState({
   //   enteredTitle: "",
@@ -86,6 +94,10 @@ const PostCardForm = (props) => {
     setEnteredLocated(event.target.value);
   };
 
+  const popUpHandler = () => {
+    setPopUp(true);
+  };
+
   const getDayName = (date) => {
     return date.toLocaleDateString("ko-KR", { weekday: "long" }).substr(0, 1);
   };
@@ -94,6 +106,7 @@ const PostCardForm = (props) => {
       new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
     );
   };
+
   const config = {
     "Content-Type": "application/json",
     withCredentials: true,
@@ -144,6 +157,8 @@ const PostCardForm = (props) => {
             totalNum: postCardData.totalNum,
             description: postCardData.description,
             category: postCardData.category,
+            deliveryTag: postCardData.deliveryTag,
+            payTag: postCardData.payTag,
           },
           config
         )
@@ -244,33 +259,26 @@ const PostCardForm = (props) => {
           </section>
           <section className="new-postCard__right">
             <div className="new-postCard__postMap">
-              <div
+              <input
                 className="new-postCard__InputPostMap"
-                value={enteredLocated}
-              >
-                <PostAddress />
-              </div>
-              {/* <input
-                className="new-postCard__InputPostMap"
-                type="text"
-                value={enteredLocated}
-                placeholder="만날 장소를 입력해 주세요."
-                onChange={locatedChangeHandler}
-              /> */}
+                placeholder="만날 장소 검색해보세요!"
+                onClick={popUpHandler}
+                readOnly
+              />
+              {popUp ? (
+                <PostAddress onClose={setPopUp} onChange={changeAddress} />
+              ) : null}
             </div>
             <div className="new-postCard__titleMap">
               <FaMapMarkerAlt size="1.4rem" color="#ff4234" />
-              주소
+              {address}
             </div>
             <div className="new-postCard__map">
-              <PostMap />
+              <MapPreview />
             </div>
           </section>
         </article>
         <article className="new-postCard__Fotter">
-          {/* <button disabled={disabled} className="new-postCard__actions">
-          등록하기
-        </button> */}
           <button
             className="new-postCard__actions"
             type="submit"
