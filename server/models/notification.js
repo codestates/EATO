@@ -13,11 +13,9 @@ const notificationListSchema = new Schema(
     chattingId: {
       type: Schema.Types.ObjectId,
       ref: "Chatting",
-      required: true,
     },
     type: {
       type: String,
-      required: true,
     },
     url: {
       type: String,
@@ -82,21 +80,6 @@ notificationSchema.statics.createNotice = async function (
       }
     );
   }
-};
-notificationSchema.statics.signup = async function (userId) {
-  await this.create({
-    _id: userId,
-    notification: [
-      {
-        id: mongoose.Types.ObjectId(),
-        documentId: null,
-        url: `users/${userId}`,
-        target: null,
-        title: null,
-        message: "알림이 존재하지 않습니다",
-      },
-    ],
-  });
 };
 
 notificationSchema.statics.removeUser = async function (userId) {

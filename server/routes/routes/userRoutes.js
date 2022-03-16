@@ -4,22 +4,26 @@ const {
   validEmail,
   createUser,
   userLogin,
-  socialLogin,
+  kakaoSignin,
+  naverSignin,
   logout,
   deleteUser,
   updateProfile,
+  getUserInfo,
 } = require("../../controlllers/userController");
 const { protect } = require("../../middleware/index");
 
 // users
-router.post("/signUp", createUser, validEmail);
+router.post("/signUp", createUser);
 router.post("/login", userLogin);
 router.get("/logout", protect, logout);
-router.get("/:kana", socialLogin);
+router.post("/kakao", kakaoSignin);
+router.post("/naver", naverSignin);
+router.get("/mypage/:userId", getUserInfo);
 
 router
-  .route("/userInfo")
-  .patch(protect, updateProfile)
-  .delete(protect, deleteUser);
+  .route("/userInfo/:userId")
+  .patch(updateProfile)
+  .delete(deleteUser);
 
 module.exports = router;

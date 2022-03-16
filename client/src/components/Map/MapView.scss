@@ -1,0 +1,154 @@
+.mapPage__area {
+  width: 100vw;
+  height: 86vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  .mapPage__header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mapView__area {
+    width: 100%;
+    height: 75vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0.5rem;
+
+    // 카드 리스트 컨테이너
+
+    // .mapView__content {
+    //   height: 100%;
+    //   display: flex;
+    //   flex-direction: column;
+    //   justify-content: space-between;
+    //   align-items: center;
+    //   background-color: #ffffff;
+    // }
+
+    // .mapView__lists {
+    //   width: 0%;
+    //   height: 100%;
+    //   padding-left: 2rem;
+    //   overflow-y: scroll;
+    //   &::-webkit-scrollbar {
+    //     display: none;
+    //   }
+    //   .mapCard-item {
+    //     width: 100%;
+    //     border-radius: 1rem;
+    //     display: grid;
+    //     grid-template-columns: 4fr 1.5fr 2fr;
+    //     padding: 0.5rem;
+    //     margin: 1rem 0;
+    //     width: 30rem;
+    //     height: 12rem;
+    //     background-color: #fcfcfc;
+    //     box-shadow: 2px 4px 10px 0 #a5a5a5;
+    //   }
+    //   .mapCard-item:active {
+    //     position: relative;
+    //     top: 0.2rem;
+    //     background-color: #f5f2f1;
+    //     .mapCard-item:focus .mapCard-item:hover {
+    //       border-color: #f5f2f1;
+    //     }
+    //   }
+
+    //   .mapCard-item__main {
+    //     width: 8rem;
+    //   }
+
+    //   .mapCard-item__left {
+    //     display: grid;
+    //     grid-template-rows: 1fr 1fr 1.5fr 1.5fr;
+    //     text-align: left;
+    //     padding-left: 1rem;
+    //     .mapCard-item__leftListC {
+    //       padding-top: 5px;
+    //       font-size: 16px;
+    //     }
+    //   }
+    //   .mapCard-item__leftListT {
+    //     font-size: 25px;
+    //     font-weight: bold;
+    //     padding-left: 0.5rem;
+    //   }
+
+    //   .mapCard-item__leftListL {
+    //     padding: 0.5rem;
+    //     font-size: 16px;
+    //   }
+
+    //   .mapCard-item__leftListD {
+    //     font-size: 30px;
+    //     font-weight: bold;
+    //   }
+
+    //   .mapCard-item__center {
+    //     border-right: 2px solid #e7e2e2;
+    // padding-right: 5px;
+    // }
+
+    // .mapCard-item__left {
+    //   display: grid;
+    //   grid-template-rows: 1fr 1fr 1.5fr 1.5fr;
+    //   text-align: left;
+    //   padding-left: 1rem;
+    //   .mapCard-item__leftListC {
+    //     padding-top: 5px;
+    //     font-size: 16px;
+    //   }
+    // }
+
+    .mapCard-item__right {
+      display: grid;
+      grid-template-rows: 1.5fr 1fr 1fr 1fr;
+      text-align: center;
+      // align-items: center;
+      .mapCard-item__listN {
+        padding-top: 0.5rem;
+        font-size: 30px;
+        font-weight: bold;
+      }
+      .mapCard-item__listState {
+        padding-top: 0.5rem;
+        font-size: 18px;
+      }
+    }
+
+    .mapCard-item__Tag {
+      padding: 5px;
+      letter-spacing: 2px;
+      text-align: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      .mapCard-item__payTag {
+        margin: 2px;
+        font-size: 15px;
+        color: #ffffff;
+        background-color: #ff4234;
+        border-radius: 1rem;
+      }
+
+      .mapCard-item__deliveryTag {
+        margin: 2px;
+        font-size: 15px;
+        color: #ffffff;
+        background-color: #ff4234;
+        border-radius: 1rem;
+      }
+    }
+  }
+
+  .mapView__map {
+    width: 100%;
+    height: 100%;
+  }
+}

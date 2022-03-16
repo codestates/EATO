@@ -1,0 +1,21 @@
+.map {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  background-color: #fff8ef;
+}
+
+.mapWrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+.mapCards {
+  display: grid;
+  grid-template-columns: 5fr 5fr;
+  grid-gap: 3rem;
+  justify-content: center;
+}

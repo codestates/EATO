@@ -4,12 +4,12 @@
   flex: auto;
 }
 
-// 왼쪽 페이지 속성
+// 1. 왼쪽 페이지 속성
 @mixin left {
-  width: 45vw;
+  width: 40vw;
   height: 100vh;
   position: relative;
-  background-color: #EE4E34;
+  background-color: #ee4e34;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,79 +20,104 @@
   color: white;
   display: flex;
   flex-direction: column;
-  // margin-top: 350px;
-  // margin: auto;
-  font-family: "Roboto";
-  padding-bottom: 100px;
-  
+  padding: 3rem;
 }
+
 @mixin left_logo {
   width: 141px;
   height: 42px;
-  margin: 10px;
-  }
-  
+  margin-top: 1rem;
+}
+
 @mixin fork_box {
   width: 100%;
   display: flex;
-  align-items: end;
-  justify-content: end;
+  // align-items: end;
+  // justify-content: end;
   margin-bottom: 30px;
-  }
+}
 
 @mixin left_fork {
-    position: absolute;
-    right: 0;
-    bottom: 10px;
-    // width: 241px;
-    // height: 349px;
-    width: 200px;
-    height: 289.63px;
-    }
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  height: 37%;
+  // width: 241px;
+  // height: 349px;
+}
 
-// 오른쪽 페이지 속성
+// 2. 오른쪽 페이지 속성
 @mixin right {
-  width: 55vw;
+  width: 60vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #5C5B5B;
+  color: #5c5b5b;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media screen and (max-width: 900px) {
+    width: 100vw;
+  }
 }
 
 @mixin right_fork {
   position: absolute;
   top: 0;
   right: 0;
-  width: 220px;
-  height: 220px;
+  height: 35%;
+  @media screen and (max-width: 900px) {
+    height: 35%;
+  }
+
+  @media screen and (max-width: 580px) {
+    height: 15%;
+  }
 }
+
+// 2-1 회원가입 컨테이너
 
 @mixin right-container {
+  width: 420px;
   font-weight: 500;
+  @media screen and (max-width: 900px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 580px) {
+    font-size: 0.9rem;
+  }
 }
 
+// 2-1-1 회원가입 타이틀
 @mixin right-ct-title-text {
   font-size: 30px;
   font-weight: bold;
   display: flex;
   justify-content: center;
-  padding-bottom: 20px;
+  @media screen and (max-width: 580px) {
+    font-size: 1.8rem;
+  }
 }
 
-// 인풋창 컨테이너
+// 2-1-2 인풋창 컨테이너
 @mixin right-ct-input-container {
   // padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   padding: 20px 0px;
 }
 
-// 인풋 개별 컴포넌트 묶음
+// 2-1-2-1 인풋 개별 컴포넌트 묶음
 @mixin right-ct-input-box {
   font-size: 16px;
   padding: 15px 0;
 }
 
-@mixin right-ct-input-title{
+@mixin right-ct-input-title {
   padding-bottom: 5px;
 }
 
@@ -101,162 +126,220 @@
   outline: none;
   width: 100%;
   padding: 8px 0;
+  font-size: 16px;
 }
 
 @mixin right-ct-placeholder {
   font-size: 16px;
-  color: #DADADA;
+  color: #dadada;
+
+  @media screen and (max-width: 580px) {
+    font-size: 0.8rem;
+  }
 }
 
-// 소셜 가입 컨테이너
+// 2-1-3 소셜 로그인 컨테이너
 @mixin signup-social-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @mixin social-text {
-  color: #8b8b8b;
-  padding: 20px 50px;
-}
-
-@mixin social-box {
   display: flex;
   justify-content: center;
-  padding-bottom: 30px;
+  color: #8b8b8b;
+  padding: 20px 0px;
+  @media screen and (max-width: 580px) {
+    word-break: keep-all;
+    text-align: center;
+  }
 }
 
+// 소셜 로그인 버튼 박스
+@mixin social-btn-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+// 소셜 로그인 네이버, 카카오 버튼
+@mixin social-btn {
+  border: 0;
+  height: 60px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 2px 4px 6px #a5a5a5;
+  }
+}
+
+// 로그인, 가입 버튼 스타일
 @mixin signin-up-btn {
   display: flex;
   justify-content: center;
-  font-size: 24px;
-  color: white;
-  background-color: #EE4E34;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 20px;
   padding: 12px;
+  border: 0;
+  color: white;
+  background-color: #ee4e34;
   border-radius: 20px;
   text-decoration: none;
-  box-shadow: 2px 2px 10px 0 #A5A5A5;
-  
+  box-shadow: 2px 2px 10px 0 #a5a5a5;
+  cursor: pointer;
+  @media screen and (max-width: 580px) {
+    font-size: 1rem;
+  }
   &:hover {
-    transition: background-color .6s;
-    // transition: all 0.3s ease;
-    color: #EE4E34;
-    padding: 12px 20px;
-    background-color: #FFFCF8;
-    border-radius: 20px;
+    background-color: #d43f28;
   }
 }
 
-// signin-up === 재사용 가능한 로그인, 회원가입 CSS 
+// signin-up === 재사용 가능한 로그인, 회원가입 CSS
+// 전체페이지
 .signin-up-wrapper {
   @include signin-up_wrapper;
 
-.signin-up-left {
-  @include left;
-  
+  // 왼쪽 페이지
+  .signin-up-left {
+    @include left;
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
+  }
   .text-box {
     @include text_box;
-
-    .welcome {
-      width: 100%;
-      font-size: 70px;
-      line-height: 120%;
-    }
-
-    .left-logo {
-      @include left_logo;
+  }
+  .welcome {
+    width: 100%;
+    font-size: 70px;
+    line-height: 120%;
+    @media screen and (max-width: 900px) {
+      display: none;
     }
   }
 
+  .left-logo {
+    @include left_logo;
+  }
   .fork-box {
     @include fork_box;
-
-    .left-fork {
-      @include left_fork
-    }
   }
+  .left-fork {
+    @include left_fork;
   }
 
-
-// 오른쪽 페이지
-.signup-right {
-  @include right;
+  // 오른쪽 페이지
+  .signup-right {
+    @include right;
+    // 오른쪽 페이지가 지정 범위를 넘어갔을 때 스크롤 속성 부여
+  }
 
   // 포크 이미지
   .right-fork {
     @include right_fork;
   }
-  
+
   // 회원가입 컨테이너
   .signup-box {
     @include right-container;
-    // 회원가입 타이틀
-    .signup-title-text {
-      @include right-ct-title-text;
-    }
-    // 인풋 컨테이너
-    .signup-input-container {
-      @include right-ct-input-container;
-      // 인풋 박스 묶음  
-      .signup-input-box {
-          @include right-ct-input-box;
-          // width: 445px;
-          // height: 80px;
+    padding: 20% 0;
+  }
+  // 회원가입 타이틀
+  .signup-title-text {
+    @include right-ct-title-text;
+    padding-top: 60%;
 
-          // 인풋 박스 내부 제목
-          .signup-input-title {
-            @include right-ct-input-title;
-          }
-          // 인풋창
-          .signup-input {
-            @include right-ct-input;
-          }
-          ::placeholder {
-            @include right-ct-placeholder;
-          }
-        }
-    }
-    
-    // 소셜 컨테이너 
-    .signup-social-container {
-     @include signup-social-container;
-
-      // 소셜 회원가입 텍스트
-    .signup-social-text {
-      @include social-text;
-    }
-
-    // 소셜 로그인 링크 박스 묶음
-    .signup-social-btn {
-      @include social-box;
-      .signup-naver {
-        // width: 120px;
-        // height: 28.17px;
-        // padding-right: 20px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: #19CE60;
-        padding-right: 40px;
-      }
-      .signup-kakao {
-        // width: 116px;
-        // height: 27.73px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: #FAE100;
-      }
-    }
-
-    // 가입하기 버튼
-    .signup-btn {
-      @include signin-up-btn;
+    @media screen and (max-width: 580px) {
+      padding-top: 100%;
     }
   }
-  } 
+  // 인풋 컨테이너
+  .signup-input-container {
+    @include right-ct-input-container;
+  }
+  // 인풋 박스 묶음
+  .signup-input-box {
+    @include right-ct-input-box;
+  }
+  // 인풋 박스 내부 제목
+  .signup-input-title {
+    @include right-ct-input-title;
+  }
+  // 인풋창
+  .signup-input {
+    @include right-ct-input;
+  }
+  ::placeholder {
+    @include right-ct-placeholder;
+  }
+  .input-err-text {
+    color: #ee7b6a;
+    font-size: 13px;
+  }
+
+  // 소셜 컨테이너
+  .signup-social-container {
+    @include signup-social-container;
+  }
+  // 소셜 회원가입 텍스트
+  .signup-social-text {
+    @include social-text;
+  }
+  // 소셜 로그인 버튼 박스 묶음
+  .signup-social-btn-box {
+    @include social-btn-box;
+  }
+  // 네이버 로그인
+  .naver-icon-box {
+    padding-right: 40px;
+  }
+  .naver-icon-img {
+    height: 100%;
+  }
+  .naver-signup-btn {
+    @include social-btn;
+  }
+  // 카카오 로그인
+  // .kakao-icon-box {
+  // }
+  .kakao-icon-img {
+    height: 100%;
+  }
+  .kakao-signup-btn {
+    @include social-btn;
+  }
+  // 가입하기 버튼
+  .signup-btn {
+    @include signin-up-btn;
+  }
+
+  .signup-question-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 580px) {
+      flex-direction: column;
+    }
+
+    .signup-question {
+      color: #8b8b8b;
+      padding-right: 10px;
+      @media screen and (max-width: 580px) {
+        flex-direction: column;
+        padding: 0 0 0.5rem 0;
+      }
+    }
+    .go-signup {
+      color: #ee4e34;
+      &:hover {
+        color: #ee715e;
+      }
+    }
+  }
 }
-
-
-} 
-
-
-
-

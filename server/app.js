@@ -1,24 +1,17 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const cors = require("cors");
+const http = require("http");
+const socketio = require("socket.io");
 const connectDB = require("./config/dbConnect.js");
-const https = require("https");
-const fs = require("fs");
-const controllers = require("./routes/index.js");
-const { meetingMemberStatus } = require("./controlllers/socketController");
-const SocketIO = require("./socket");
-
-dotenv.config();
-connectDB();
-
+const PORT = 3000;
 const app = express();
-app.use(express.urlencoded({ extended: true }));
-// extended 옵션의 경우, true일 경우, 객체 형태로 전달된 데이터내에서 또다른 중첩된 객체를 허용한다는 말이며, false인 경우에는 허용하지 않는 다는의미이다.
-// bodyParser 미들웨어의 여러 옵션 중에 하나로 false 값일 시 node.js에 기본으로 내장된 queryString, true 값일 시 따로 설치가 필요한 npm qs 라이브러리를 사용한다.
-// queryString 과 qs 라이브러리 둘 다 url 쿼리 스트링을 파싱해주는 같은 맥락에 있으나 qs가 추가적인 보안이 가능한 말 그대로 extended 확장된 형태이다.
-// 기본이 true 값이니 qs 모듈을 설치하지 않는다면 아래와 같이 false 값으로 따로 설정을 해주어야 한다.
-app.use(express.json());
-
+const mongoose = require("mongoose");
+const cors = require("cors");
+const controllers = require("./routes/index.js");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(
   cors({
     origin: "*",
@@ -27,33 +20,59 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.send("EATO API ON!!");
+const server = http.createServer(app);
+const io = socketio(server, {
+  path: "/socket.io",
+  cors: {
+    origin: "*",
+    credentials: true,
+  },
+  serveClient: false, // TODO: 클라이언트에서 socket 설치하면 false 로 바꿔주기
 });
 
-// 라우트 연결
+const Chatting = require("./models/chatting");
+const { currentTime } = require("./controlllers/function");
+
+dotenv.config();
+connectDB();
+
+server.listen(PORT, () => {
+  console.log(`start server ${PORT}`);
+});
+
 app.use("/user", controllers.user);
-app.use("/chat", controllers.chat);
+app.use("/chatRoom", controllers.chat);
 app.use("/document", controllers.document);
 app.use("/notification", controllers.notification);
 
-const HTTPS_PORT = process.env.HTTPS_PORT || 3000;
+io.on("connection", async (socket) => {
+  console.log(`채팅 접속 : ${socket.client.id}`);
 
-let server;
-if (fs.existsSync("./key.pem") && fs.existsSync("./cert.pem")) {
-  const privateKey = fs.readFileSync(__dirname + "/key.pem", "utf8");
-  const certificate = fs.readFileSync(__dirname + "/cert.pem", "utf8");
-  const credentials = { key: privateKey, cert: certificate };
+  let roomId;
+  const param = {
+    id: socket.client.id,
+  };
 
-  server = https.createServer(credentials, app);
-
-  server.listen(HTTPS_PORT, async () => {
-    app.set("meetingMember", await meetingMemberStatus());
-    SocketIO(server, app);
-    console.log("https server runnning!!");
+  socket.on("join", (data) => {
+    roomId = data.id;
+    socket.leaveAll();
+    socket.join(roomId);
+    socket.broadcast.to(roomId).emit("connectUser", param);
   });
-} else {
-  server = app.listen(HTTPS_PORT, () => console.log("http server runnning"));
-}
 
-module.exports = server;
+  socket.on("disconnect", () => {
+    console.log("연결해제");
+    socket.broadcast.to(roomId).emit("disconnectUser", param);
+  });
+
+  socket.on("message", async (userInfo, message) => {
+    // 채팅창에 접속중인 유저들에 대한 이벤트
+    const { id: userId, nickname } = userInfo;
+    const date = currentTime();
+    const _id = mongoose.Types.ObjectId(); // 채팅로그의 _id + 알림의 _id 동시에 사용
+    await Chatting.typeChat(socket.curRoom, _id, userId, message, date);
+    socket
+      .to(socket.curRoom)
+      .emit("message", { _id, id: userId, message, nickname, date });
+  });
+});

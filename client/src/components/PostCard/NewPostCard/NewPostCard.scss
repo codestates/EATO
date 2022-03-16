@@ -1,0 +1,92 @@
+.NewPostCard {
+  padding: 5rem 12rem;
+}
+
+.btn-modal {
+  float: right;
+  font-size: 24px;
+  width: 9rem;
+  height: 3rem;
+  background-color: #ff4234;
+  border-color: #ff4234;
+  color: #ffffff;
+  border-radius: 1rem;
+  cursor: pointer;
+  letter-spacing: 5px;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
+  &:hover {
+    box-shadow: 5px 5px 5px;
+  }
+}
+.btn-modal:active {
+  position: relative;
+  top: 0.2rem;
+  background-color: #ff7a59;
+  .btn-modal:focus {
+    border-color: #ff7a59;
+  }
+}
+.postCard-close {
+  position: relative;
+  margin: 0.8rem 4rem 0 0;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: none;
+  float: right;
+  font-size: 2.2rem;
+  color: #b0acac;
+  :active {
+    position: relative;
+    top: 0.2rem;
+  }
+}
+.modal,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  box-shadow: 3px 3px 10px 6px rgba(0, 0, 0, 0.06);
+}
+
+.overlay {
+  background: rgba(138, 135, 135, 0.76);
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 40rem;
+  height: 45rem;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #ffffff;
+  border-radius: 3rem;
+  box-shadow: 2px 2px 10px 2px #ff7a59;
+}
+
+.postCard-close {
+  display: flex;
+  position: absolute;
+  justify-content: left;
+  margin: 2.5rem 36rem;
+  align-content: center;
+  width: 2rem;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: none;
+  float: right;
+  font-size: 2.2rem;
+  color: #b0acac;
+  :active {
+    position: relative;
+    top: 0.2rem;
+  }
+}

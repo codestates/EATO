@@ -1,5 +1,5 @@
 import React from "react";
-import SignIn from "../components/Access/SignIn/SiginIn";
+import SignIn from "../components/Access/SignIn/SignIn";
 
 function SignInPage() {
   return (

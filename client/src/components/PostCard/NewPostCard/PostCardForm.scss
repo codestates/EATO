@@ -1,0 +1,369 @@
+// groidd-shrink 창 작아질때 고정 1, flex-grow 창커질때
+.postLogoWrap {
+  width: 100%;
+  height: 100%;
+}
+
+.new-postCard__Nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 0;
+  width: 100%;
+  height: 6.5rem;
+
+  .postImgLogo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .postLogo {
+      width: 100%;
+      height: 70%;
+      display: block;
+      margin: 3rem 19.5rem 2rem 18rem;
+    }
+  }
+  .postCard-close {
+    margin: 0.8rem 4rem 0 0;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: none;
+    float: right;
+    font-size: 2.2rem;
+    color: #b0acac;
+    :active {
+      position: relative;
+      top: 0.2rem;
+    }
+  }
+}
+
+.new-postCard__Header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 0;
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 0.5rem;
+  .new-postCard__title {
+    padding-left: 1rem;
+    width: 100%;
+    text-align: left;
+    margin: 0 2rem;
+    border-bottom: 5px solid #c2c2c2;
+
+    .new-postCard__InputTitle {
+      border: none;
+      font-size: 1.5rem;
+    }
+    &:hover,
+    &:focus {
+      border-bottom-color: #ff7a59;
+    }
+  }
+}
+
+.new-postCard__Fotter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 0;
+  width: 100%;
+  height: 5rem;
+}
+
+.new-postCard__actions {
+  cursor: pointer;
+  margin-top: 0.5rem;
+  width: 25%;
+  height: 60%;
+  font-size: 1.4rem;
+  letter-spacing: 0.6rem;
+  text-indent: 0.6rem;
+  border: 1px solid #ff4234;
+  background-color: #ff4234;
+  color: #ffffff;
+  border-radius: 1rem;
+  z-index: 1;
+}
+.new-postCard__actions:active {
+  position: relative;
+  top: 0.2rem;
+  background-color: #ff7a59;
+  .new-postCard__actions:focus .new-postCard__actions:hover {
+    border-color: #ff7a59;
+  }
+}
+.new-postCard__actions:disabled {
+  position: relative;
+  top: 0.2rem;
+  background-color: #b0acac;
+  border: none;
+}
+
+.new-postCard__Body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 65%;
+}
+.new-postCard__Left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40%;
+  height: 28rem;
+
+  //Description
+  .new-postCard__description {
+    display: flex;
+    .new-postCard__InputDescription {
+      &:hover,
+      &:focus {
+        border-color: #ff7a59;
+        border-radius: 1rem;
+      }
+      width: 100%;
+      height: 8rem;
+      padding-left: 0.2rem;
+      border: #ffffff;
+      box-shadow: 2px 4px 10px 0 #a5a5a5;
+      border-radius: 1rem;
+      font-size: 1.1rem;
+      overflow-y: scroll;
+    }
+  }
+}
+
+.new-postCard__date {
+  z-index: 50;
+  width: 100%;
+  text-align: center;
+  &:hover,
+  &:focus {
+    border-bottom-color: #ff7a59;
+  }
+
+  .new-postCard__InputDate {
+    padding-top: 0.4rem;
+    border: none;
+    justify-content: center;
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  .new-postCard__detag {
+    width: 100%;
+    height: 2.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .new-postCard__patag {
+    width: 100%;
+    height: 2.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+}
+
+.new-postCard__right {
+  width: 45%;
+  height: 28rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  .new-postCard__postMap {
+    width: 100%;
+    height: fit-content;
+    text-align: center;
+    border: none;
+    .new-postCard__InputPostMap {
+      justify-content: center;
+      width: 100%;
+      height: 3rem;
+      border: none;
+      border-radius: 1rem;
+      font-size: 1rem;
+      text-indent: 0.5rem;
+      text-align: left;
+      box-shadow: 2px 4px 10px 0 #a5a5a5;
+      &:hover,
+      &:focus {
+        border-radius: 1rem;
+      }
+    }
+  }
+
+  .new-postCard__titleMap {
+    width: 100%;
+    padding: 1rem 0;
+    text-align: left;
+  }
+
+  .new-postCard__map {
+    text-align: left;
+    width: 100%;
+    height: 22rem;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 2px 4px 10px 0 #a5a5a5;
+  }
+}
+
+.new-postCard__InputTitle::placeholder {
+  font-size: 100%;
+  color: #c4c4c4;
+  text-align: left;
+}
+
+.new-postCard__InputDescription::placeholder {
+  font-size: 100%;
+  color: #c4c4c4;
+  text-align: left;
+}
+
+// DatePicker
+.react-datepicker__header {
+  margin-top: 0.2rem;
+  background-color: #ffffff;
+}
+.react-datepicker__input-container {
+  width: 100%;
+  height: 2.6rem;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
+  &:hover,
+  &:focus {
+    border-color: #ff7a59;
+    border-radius: 1rem;
+  }
+}
+
+.react-datepicker__current-month {
+  color: #000;
+  font-size: 1.15rem;
+}
+.react-datepicker__month-container {
+  display: grid;
+  font-size: 1rem;
+  width: 18rem;
+}
+.react-datepicker {
+  font-size: 0.8rem;
+  width: 24.5rem;
+  background-color: #ffffff;
+  color: #000;
+  border: none;
+  border-radius: 2rem;
+  display: flex;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
+}
+
+.react-datepicker__month-container {
+  > * {
+    border: 0;
+  }
+}
+.react-datepicker__navigation {
+  margin: 0.8rem 4.5rem 0 3rem;
+}
+.react-datepicker__time-container {
+  overflow-y: hidden;
+}
+.react-datepicker__time-list-item {
+  font-size: 1rem;
+}
+.react-datepicker__day-name {
+  font-size: 1rem;
+  width: 1.5rem;
+  line-height: 1.4rem;
+  margin: 0.5rem 0.3rem;
+  color: #818181;
+}
+.react-datepicker__week {
+  > * {
+    border-radius: 0.4rem;
+    margin: 0.3rem;
+    color: #818181;
+    font-size: 1rem;
+    width: 1.5rem;
+    line-height: 1.8rem;
+  }
+
+  .react-datepicker__day--disabled {
+    opacity: 0.3;
+    :hover {
+      background-color: transparent;
+    }
+  }
+  .react-datepicker__day--selected {
+    color: #ffffff;
+    border: 1px solid #ff4234;
+    border-radius: 1rem;
+    font-weight: bold;
+    box-shadow: 2px 4px 10px 0 #a5a5a5;
+    background-color: #ff4234;
+  }
+  .react-datepicker__day--today {
+    border: 1px solid #c2c2c2;
+    box-shadow: 2px 4px 10px 0 #a5a5a5;
+  }
+  .react-datepicker__day--keyboard-selected,
+  .react-datepicker__month-text--keyboard-selected,
+  .react-datepicker__quarter-text--keyboard-selected,
+  .react-datepicker__year-text--keyboard-selected {
+    border-radius: 0.3rem;
+    background-color: #ffffff;
+  }
+}
+
+.saturday {
+  color: blue;
+}
+.sunday {
+  color: red;
+}
+
+//input 화살표 제거
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+select {
+  border-radius: 0; /* 아이폰 사파리 보더 없애기 */
+  -webkit-appearance: none; /* 화살표 없애기 for chrome*/
+  -moz-appearance: none; /* 화살표 없애기 for firefox*/
+  appearance: none; /* 화살표 없애기 공통*/
+}
+
+// input[type="date"]::-webkit-datetime-edit-month-field {
+//   -webkit-appearance: none;
+//   display: none;
+// }
+// input[type="date"]::-webkit-datetime-edit-day-field {
+//   -webkit-appearance: none;
+//   display: none;
+// }
+// input[type="date"]::-webkit-datetime-edit-year-field {
+//   -webkit-appearance: none;
+//   display: none;
+// }
