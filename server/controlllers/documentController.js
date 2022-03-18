@@ -18,6 +18,11 @@ module.exports = {
       totalNum,
       description,
       category,
+      deliveryTag,
+      payTag,
+      located,
+      latitude,
+      longitude,
     } = req.body;
 
     const document = {
@@ -28,6 +33,11 @@ module.exports = {
       totalNum,
       description,
       category,
+      deliveryTag,
+      payTag,
+      located,
+      latitude,
+      longitude,
     };
     if (!document) {
       res.status(400).json({ message: "Failed creating post" });
@@ -39,8 +49,13 @@ module.exports = {
         totalNum,
         description,
         category,
-        ceratorId: userId,
+        creatorId: userId,
         users: userId,
+        deliveryTag,
+        payTag,
+        located,
+        latitude,
+        longitude,
       });
 
       await User.updateOne(
@@ -60,7 +75,7 @@ module.exports = {
       // //req.app.get("meetingMember")[id] = { [creator.id]: 0 };
       const setChatInfo = {
         chatInfo: { title },
-        ceratorId: userId,
+        creatorId: userId,
         documentChatId: newDocument._id,
       };
       await Chatting.create(setChatInfo);
@@ -104,6 +119,8 @@ module.exports = {
         categoryImg,
         creatorId,
         createdAt,
+        deliveryTag,
+        payTag,
       } = docu;
       return res.status(200).json({
         documentInfo: {
@@ -119,6 +136,8 @@ module.exports = {
           categoryImg,
           creatorId,
           createdAt,
+          deliveryTag,
+          payTag,
         },
         message: "게시물 상세 조회 성공!",
       });
@@ -178,9 +197,11 @@ module.exports = {
         date,
         deliveryFee,
         totalNum,
-        location,
+        located,
         latitude,
         longitude,
+        deliveryTag,
+        payTag,
       } = req.body;
 
       await Document.findOneAndUpdate(
@@ -192,9 +213,11 @@ module.exports = {
           date,
           deliveryFee,
           totalNum,
-          location,
+          located,
           latitude,
           longitude,
+          deliveryTag,
+          payTag,
         }
       );
       return res.status(200).json({ message: "게시물 수정 완료!" });
