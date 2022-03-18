@@ -1,101 +1,70 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import PostCategory from "../PostCards/PostCategory";
+import postLogo from "../../../images/Logo.png";
+import DeliveryPay from "../PostCards/DeliveryPay";
+import CountPeople from "../PostCards/CountPeople";
+import { DeliveryTag, PayTag } from "../PostCards/DropdownTag";
+import { categoryOptions, deOption, paOptions } from "../../../resource/datas";
+import PostAddress from "../../Map/PostAddress";
+import MapPreview from "../../Map/MapPreview";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import PostCategory from "../PostCards/PostCategory";
-import DropdownT from "../PostCards/DropDownT";
-import PostMap from "../../Map/PostMap";
-import postLogo from "../../../images/Logo.png";
-import DeliveryPay from "../PostCards/DeliveryPay";
-import CountPeople from "../PostCards/CountPeople";
-import { categoryOptions, deOption, paOptions } from "../../../resource/datas";
+import { useRecoilState } from "recoil";
+import { CardState } from "../../../states/PostCardState";
 import "./PostCardForm.scss";
-import axios from "axios";
-import PostAddress from "../../Map/PostAddress";
-import MapPreview from "../../Map/MapPreview";
-
-axios.defaults.withCredentials = true;
 
 const PostCardForm = (props) => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredDescription, setEnteredDescription] = useState("");
-  const [enteredCategory, setEnteredCategory] = useState("");
-  const [enteredDeliveryFee, setEnteredDeliveryFee] = useState(0);
-  const [enteredCurrentNum, setEnteredCurrentNum] = useState(1);
-  const [enteredTotalNum, setEnteredTotalNum] = useState(1);
-  const [enteredDate, setEnteredDate] = useState(new Date());
-  const [enteredLocated, setEnteredLocated] = useState("");
-  const [enteredDeliveryTag, setEnteredDeliveryTag] = useState("배달");
-  const [enteredPayTag, setEnteredPayTag] = useState("선불");
+  const [cardInput, setCardInput] = useState({
+    title: "",
+    description: "",
+    category: "",
+    deliveryFee: 0,
+    currentNum: 1,
+    totalNum: 1,
+    date: new Date(),
+    located: "",
+    deliveryTag: "수령방법",
+    payTag: "지불방법",
+  });
   const [disabled, setDisabled] = useState("disabled");
   const [popUp, setPopUp] = useState(false);
-  const [getAddress, setGetAddress] = useState(null);
-  const address = localStorage.getItem("address");
-
-  const changeAddress = () => {
-    setGetAddress(address);
-  };
-
-  // const [postCardInput, setPostCardInput] = useState({
-  //   enteredTitle: "",
-  //   enteredDescription: "",
-  //   enteredCategory: "",
-  //   enteredDeliveryFee: 0,
-  //   enteredCurrentNum: 1,
-  //   enteredTotalNum: 1,
-  //   enteredDeliveryTag: "배달",
-  //   enteredDate: new Date(),
-  //   enteredLocated: "",
-  //   enteredPayTag: "선불",
-  //   disabled: "disabled",
-  // });
-
-  useEffect(() => {
-    disable();
-  }, [
-    enteredTitle,
-    enteredCategory,
-    enteredDescription,
-    enteredDeliveryFee,
-    enteredTotalNum,
-    enteredCurrentNum,
-  ]);
-
+  const address = cardInput.located;
   const disable = () => {
     if (
-      enteredTitle !== "" &&
-      enteredCategory !== "" &&
-      enteredDescription !== "" &&
-      enteredDeliveryFee !== "" &&
-      enteredTotalNum > enteredCurrentNum
+      cardInput.title !== "" &&
+      cardInput.category !== "" &&
+      cardInput.description !== "" &&
+      cardInput.deliveryFee !== "" &&
+      cardInput.totalNum > cardInput.currentNum
     ) {
       setDisabled("");
     }
   };
 
   const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
-    // setPostCardInput({
-    //   ...postCardInput,
-    //   enteredTitle: event.target.value,
-    // });
-    // or
-    // setPostCardInput((prevState) => {
-    //   return { ...prevState, enteredTitle: event.target.value };
-    // });
+    setCardInput((prevState) => {
+      return { ...prevState, title: event.target.value };
+    });
   };
 
   const descriptionChangeHandler = (event) => {
-    setEnteredDescription(event.target.value);
+    setCardInput((prevState) => {
+      return { ...prevState, description: event.target.value };
+    });
   };
 
-  const locatedChangeHandler = (event) => {
-    setEnteredLocated(event.target.value);
+  const locatedChangeHandler = (address) => {
+    setCardInput((prevState) => {
+      return { ...prevState, located: address };
+    });
+    console.log("여기 오니", cardInput);
   };
 
   const popUpHandler = () => {
-    setPopUp(true);
+    setPopUp(!popUp);
   };
 
   const getDayName = (date) => {
@@ -111,33 +80,28 @@ const PostCardForm = (props) => {
     "Content-Type": "application/json",
     withCredentials: true,
   };
+  axios.defaults.withCredentials = true;
 
   const submitHandler = async (event) => {
     event.preventDefault();
 
     const postCardData = {
-      title: enteredTitle,
-      category: enteredCategory,
-      description: enteredDescription,
-      deliveryFee: enteredDeliveryFee,
-      date: new Date(enteredDate),
-      currentNum: enteredCurrentNum,
-      totalNum: enteredTotalNum,
-      located: enteredLocated,
-      deliveryTag: enteredDeliveryTag,
-      payTag: enteredPayTag,
+      title: cardInput.title,
+      category: cardInput.category,
+      description: cardInput.description,
+      deliveryFee: cardInput.deliveryFee,
+      date: new Date(cardInput.date),
+      currentNum: cardInput.currentNum,
+      totalNum: cardInput.totalNum,
+      located: cardInput.located,
+      // latitude: cardInput.latitude,
+      // longitude: cardInput.longitude,
+      deliveryTag: cardInput.deliveryTag,
+      payTag: cardInput.payTag,
     };
 
     props.onSavePostCardData(postCardData);
-    setEnteredTitle("");
-    setEnteredCategory("");
-    setEnteredDescription("");
-    setEnteredDeliveryFee("");
-    setEnteredDate("");
-    setEnteredCurrentNum("");
-    setEnteredTotalNum("");
-    setEnteredDeliveryTag("");
-    setEnteredPayTag("");
+    setCardInput();
 
     if (
       postCardData.title !== "" &&
@@ -159,6 +123,9 @@ const PostCardForm = (props) => {
             category: postCardData.category,
             deliveryTag: postCardData.deliveryTag,
             payTag: postCardData.payTag,
+            located: postCardData.located,
+            latitude: postCardData.latitude,
+            longitude: postCardData.longitude,
           },
           config
         )
@@ -173,6 +140,11 @@ const PostCardForm = (props) => {
         });
     }
   };
+
+  useEffect(() => {
+    disable();
+  }, [cardInput]);
+
   return (
     <>
       <form className="postLogoWrap" onSubmit={submitHandler}>
@@ -186,7 +158,7 @@ const PostCardForm = (props) => {
             <input
               className="new-postCard__InputTitle"
               type="text"
-              value={enteredTitle}
+              value={cardInput.title}
               maxLength="20"
               placeholder="모임 제목을 작성해주세요."
               onChange={titleChangeHandler}
@@ -199,7 +171,7 @@ const PostCardForm = (props) => {
               <input
                 className="new-postCard__InputDescription"
                 type="text"
-                value={enteredDescription}
+                value={cardInput.description}
                 maxLength="100"
                 placeholder="모임에 대해 간략히 설명해주세요."
                 onChange={descriptionChangeHandler}
@@ -207,16 +179,19 @@ const PostCardForm = (props) => {
             </div>
             <PostCategory
               options={categoryOptions}
-              selected={enteredCategory}
-              setSelected={setEnteredCategory}
-              placeholder="분류"
+              selected={cardInput.category}
+              setSelected={setCardInput}
             />
-            {/* //todo datepicker plugin 나중에  css 작업 */}
+
             <div className="new-postCard__date">
               <DatePicker
                 className="new-postCard__InputDate"
-                selected={enteredDate}
-                onChange={(date) => setEnteredDate(date)}
+                selected={cardInput.date}
+                onChange={(date) =>
+                  setCardInput((prevState) => {
+                    return { ...prevState, date: date };
+                  })
+                }
                 showTimeSelect
                 minDate={new Date()}
                 locale={ko}
@@ -233,27 +208,27 @@ const PostCardForm = (props) => {
             </div>
 
             <DeliveryPay
-              pay={enteredDeliveryFee}
-              setPay={setEnteredDeliveryFee}
+              pay={cardInput.deliveryFee}
+              setPay={setCardInput}
               placeholder="배달비용"
             />
             <CountPeople
-              num={enteredTotalNum}
-              setNum={setEnteredTotalNum}
+              num={cardInput.totalNum}
+              setNum={setCardInput}
               placeholder="참여인원"
             />
             <div className="new-postCard__tag">
-              <DropdownT
+              <DeliveryTag
                 options={deOption}
-                selected={enteredDeliveryTag}
-                setSelected={setEnteredDeliveryTag}
+                selected={cardInput.deliveryTag}
+                setSelected={setCardInput}
               />
             </div>
             <div className="new-postCard__tag">
-              <DropdownT
+              <PayTag
                 options={paOptions}
-                selected={enteredPayTag}
-                setSelected={setEnteredPayTag}
+                selected={cardInput.payTag}
+                setSelected={setCardInput}
               />
             </div>
           </section>
@@ -266,15 +241,15 @@ const PostCardForm = (props) => {
                 readOnly
               />
               {popUp ? (
-                <PostAddress onClose={setPopUp} onChange={changeAddress} />
+                <PostAddress onClose={setPopUp} onChange={setCardInput} />
               ) : null}
             </div>
             <div className="new-postCard__titleMap">
               <FaMapMarkerAlt size="1.4rem" color="#ff4234" />
-              {address}
+              {cardInput.located}
             </div>
             <div className="new-postCard__map">
-              <MapPreview />
+              <MapPreview addr={address} />
             </div>
           </section>
         </article>
