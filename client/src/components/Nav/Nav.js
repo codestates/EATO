@@ -27,13 +27,15 @@ function Nav() {
 
   // isLogin false 설정
   const logoutHandler = () => {
-    axios.get("http://localhost:3000/user/logout", config).then(() => {
-      // 로그아웃 버튼 클릭 시 recoil 전역상태 false로 전환
-      setIsLogin(false);
-      localStorage.clear();
-      navigate("/", { replace: true });
-      alert("로그아웃이 완료되었어요.");
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/user/logout`, config)
+      .then(() => {
+        // 로그아웃 버튼 클릭 시 recoil 전역상태 false로 전환
+        setIsLogin(false);
+        localStorage.clear();
+        navigate("/", { replace: true });
+        alert("로그아웃이 완료되었어요.");
+      });
   };
 
   return (

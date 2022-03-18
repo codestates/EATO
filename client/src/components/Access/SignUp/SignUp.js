@@ -44,7 +44,7 @@ function SignUp() {
   const onSubmit = (data) => {
     axios
       .post(
-        "http://localhost:3000/user/signup",
+        `${process.env.REACT_APP_API_URL}/user/signup`,
         {
           email: data.email,
           password: data.password,
@@ -61,7 +61,7 @@ function SignUp() {
       })
       .catch((err) => {
         if (err.response.status === 401) {
-          setEmailErr("이미 사용중인 이메일이에요.",isLogin);
+          setEmailErr("이미 사용중인 이메일이에요.", isLogin);
         }
       });
   };
