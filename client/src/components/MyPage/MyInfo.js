@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import IsLoginState from "../../states/IsLoginState";
 import { userLocation, userNickname } from "../../states/UserInfoState";
-import ChatRoomCard from "./ChatRoomCard";
-import user1 from "../../../src/images/1.png";
+import myImg from "../../../src/images/1.png";
+import ChatRoomCardList from "./ChatRoomCardList";
 
 axios.defaults.withCredentials = true;
 
@@ -35,7 +35,7 @@ export default function MyPage() {
   // 처음 접속시 유저 정보 불러오기
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/user/mypage/${userId}`, config)
+      .get(`${process.env.REACT_APP_API_URL}/user/mypage/${userId}`, config)
       .then((res) => {
         const initNick = res.data.user.nickname;
         const initLoca = res.data.user.location;
@@ -50,7 +50,10 @@ export default function MyPage() {
   const deleteHandler = () => {
     if (window.confirm("정말 탈퇴하실 건가요...? :(")) {
       axios
-        .delete(`http://localhost:3000/user/userInfo/${userId}`, config)
+        .delete(
+          `${process.env.REACT_APP_API_URL}/user/userInfo/${userId}`,
+          config
+        )
         .then((res) => {
           console.log(res);
           localStorage.clear();
@@ -65,7 +68,7 @@ export default function MyPage() {
   const onSubmit = (data) => {
     axios
       .patch(
-        `http://localhost:3000/user/userInfo/${userId}`,
+        `${process.env.REACT_APP_API_URL}/user/userInfo/${userId}`,
         {
           nickname: data.nickname,
           location: data.location,
@@ -103,7 +106,7 @@ export default function MyPage() {
         <div className="mypage-container-top">
           {/* <div className="mypage-img-box"> */}
           {/* <div className="mypage-img" alt="user-img" /> */}
-          <img src={user1} className="mypage-img" alt="user-img" />
+          <img src={myImg} className="mypage-img" alt="user-img" />
           {/* </div> */}
           <div className="mypage-line-box">
             <div className="mypage-line"></div>
@@ -196,7 +199,7 @@ export default function MyPage() {
             </p> */}
           </div>
         </div>
-        <ChatRoomCard />
+        <ChatRoomCardList />
       </div>
     </section>
   );
