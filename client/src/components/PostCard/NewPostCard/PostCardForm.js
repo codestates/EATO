@@ -12,8 +12,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { useRecoilState } from "recoil";
-import { CardState } from "../../../states/PostCardState";
 import "./PostCardForm.scss";
 
 const PostCardForm = (props) => {
@@ -33,14 +31,17 @@ const PostCardForm = (props) => {
   });
   const [disabled, setDisabled] = useState("disabled");
   const [popUp, setPopUp] = useState(false);
-  const address = cardInput.located;
+
   const disable = () => {
     if (
       cardInput.title !== "" &&
-      cardInput.category !== "" &&
       cardInput.description !== "" &&
-      cardInput.deliveryFee !== "" &&
-      cardInput.totalNum > cardInput.currentNum
+      cardInput.category !== "" &&
+      cardInput.totalNum > cardInput.currentNum &&
+      cardInput.deliveryFee !== 0 &&
+      cardInput.deliveryTag !== "수령방법" &&
+      cardInput.payTag !== "지불방법" &&
+      cardInput.located !== ""
     ) {
       setDisabled("");
     }
@@ -56,13 +57,6 @@ const PostCardForm = (props) => {
     setCardInput((prevState) => {
       return { ...prevState, description: event.target.value };
     });
-  };
-
-  const locatedChangeHandler = (address) => {
-    setCardInput((prevState) => {
-      return { ...prevState, located: address };
-    });
-    console.log("여기 오니", cardInput);
   };
 
   const popUpHandler = () => {
@@ -110,9 +104,10 @@ const PostCardForm = (props) => {
       postCardData.description !== "" &&
       postCardData.category !== "" &&
       postCardData.totalNum > postCardData.currentNum &&
-      postCardData.deliveryFee !== "" &&
-      postCardData.deliveryTag !== "" &&
-      postCardData.payTag !== ""
+      postCardData.deliveryFee !== 0 &&
+      postCardData.deliveryTag !== "수령방법" &&
+      postCardData.payTag !== "지불방법" &&
+      postCardData.located !== ""
     ) {
       axios
         .post(
