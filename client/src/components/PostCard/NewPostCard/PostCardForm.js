@@ -63,6 +63,10 @@ const PostCardForm = (props) => {
     setPopUp(!popUp);
   };
 
+  const alertHandler = () => {
+    alert("등록되었습니다!");
+  };
+
   const getDayName = (date) => {
     return date.toLocaleDateString("ko-KR", { weekday: "long" }).substr(0, 1);
   };
@@ -261,9 +265,15 @@ const PostCardForm = (props) => {
             className="new-postCard__actions"
             type="submit"
             disabled={disabled}
+            onClick={alertHandler}
           >
             등록하기
           </button>
+          {disabled === "disabled" ? (
+            <div className="btn-disalbe">
+              모든 항목을 입력해야 등록버튼이 활성화됩니다.
+            </div>
+          ) : null}
         </article>
       </form>
     </>
