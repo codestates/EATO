@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { FcCalculator, FcExpand, FcCollapse } from "react-icons/fc";
+import { FcExpand, FcCollapse } from "react-icons/fc";
 import "./DeliveryPay.scss";
 
 const DeliveryPay = ({ pay, setPay }) => {
   const [isActive, setIsActive] = useState(false);
 
   const increaseHandler = () => {
-    setPay(pay + 500);
+    setPay((prevState) => {
+      return { ...prevState, deliveryFee: pay + 500 };
+    });
   };
 
   const decreaseHandler = () => {
-    setPay(pay - 500);
+    setPay((prevState) => {
+      return { ...prevState, deliveryFee: pay - 500 };
+    });
   };
 
   const finalPay = `${pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
@@ -19,21 +23,11 @@ const DeliveryPay = ({ pay, setPay }) => {
     <div className="payInput">
       <div
         className="payInput-btn"
-        onClick={(e) => {
+        onClick={() => {
           setIsActive(!isActive);
         }}
       >
-        {pay && pay > 0 ? (
-          <>
-            <FcCalculator size="1.8rem" />
-            &nbsp;&nbsp; {finalPay}
-          </>
-        ) : (
-          <>
-            <FcCalculator size="1.8rem" />
-            &nbsp;&nbsp; 배달비용
-          </>
-        )}
+        {pay && pay > 0 ? <>{finalPay}</> : <>배달비용</>}
       </div>
       {isActive &&
         (pay && pay < 0 ? (

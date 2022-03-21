@@ -27,7 +27,7 @@ const NewPostCard = (props) => {
     <div className="NewPostCard">
       <button onClick={toggleModal} className="btn-modal">
         <FaPencilAlt />
-        &nbsp;글작성
+        글작성
       </button>
       {modal && (
         <div className="modal">

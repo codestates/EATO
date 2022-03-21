@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PostCardDate from "../PostCards/PostCardDate";
 import postLogo from "../../../images/Logo.png";
 import PostMap from "../../Map/PostMap";
@@ -7,6 +7,7 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import "./PostCardCheck.scss";
 
 const PostCardCheck = (props) => {
+  console.log(props.posts);
   const [count, setCount] = useState(1);
   const [isClick, setIsClick] = useState(false);
   const plusCurNum = () => {
@@ -105,7 +106,7 @@ const PostCardCheck = (props) => {
           </div>
           <div className="postInfo__titleMap">
             <FaMapMarkerAlt size="1.2rem" color="#ff4234" />
-            &nbsp;{props.posts.located}
+            {props.posts.located}
           </div>
           <div className="postInfo__map">
             <PostMap address={props.posts} />
@@ -115,7 +116,7 @@ const PostCardCheck = (props) => {
 
       <article className="postInfo__Footer">
         <button className="postInfo__actions" onClick={plusCurNum}>
-          &nbsp;참여하기
+          참여하기
         </button>
       </article>
     </div>
