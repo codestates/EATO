@@ -5,11 +5,8 @@ const PostMap = (props) => {
   useEffect(() => {
     const mapContainer = document.getElementById("map");
     const mapOption = {
-      center: new kakao.maps.LatLng(
-        props.address.latitude,
-        props.address.longitude
-      ),
-      level: 5,
+      center: new kakao.maps.LatLng(37.52406330545825, 126.98054529969014),
+      level: 6,
     };
     const makerName = props.address.title;
     const map = new kakao.maps.Map(mapContainer, mapOption);
@@ -22,29 +19,39 @@ const PostMap = (props) => {
       imageSize,
       imageOption
     );
-    const markerPosition = mapOption.center;
 
-    const marker = new kakao.maps.Marker({
-      map: map,
-      position: markerPosition,
-      image: markerImage,
-    });
+    const geocoder = new kakao.maps.services.Geocoder();
+    geocoder.addressSearch(props.address.located, function (result, status) {
+      // 정상적으로 검색이 완료됐으면
+      if (status === kakao.maps.services.Status.OK) {
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-    marker.setMap(map);
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        const marker = new kakao.maps.Marker({
+          map: map,
+          position: coords,
+          image: markerImage,
+        });
 
-    const iwContent =
-      `<div style= "text-indent:0.5rem">` + `${makerName}` + `</div>`;
+        marker.setMap(map);
 
-    const infowindow = new kakao.maps.InfoWindow({
-      content: iwContent,
-    });
+        const iwContent =
+          `<div style= "text-indent:0.5rem">` + `${makerName}` + `</div>`;
 
-    kakao.maps.event.addListener(marker, "mouseover", function () {
-      infowindow.open(map, marker);
-    });
+        const infowindow = new kakao.maps.InfoWindow({
+          content: iwContent,
+        });
+        infowindow.open(map, marker);
+        map.setCenter(coords);
 
-    kakao.maps.event.addListener(marker, "mouseout", function () {
-      infowindow.close();
+        kakao.maps.event.addListener(marker, "mouseover", function () {
+          infowindow.open(map, marker);
+        });
+
+        kakao.maps.event.addListener(marker, "mouseout", function () {
+          infowindow.close();
+        });
+      }
     });
   }, []);
 
