@@ -26,6 +26,8 @@ const PostCardForm = (props) => {
     totalNum: 1,
     date: new Date(),
     located: "",
+    latitude: 0,
+    longitude: 0,
     deliveryTag: "수령방법",
     payTag: "지불방법",
   });
@@ -94,8 +96,8 @@ const PostCardForm = (props) => {
       currentNum: cardInput.currentNum,
       totalNum: cardInput.totalNum,
       located: cardInput.located,
-      // latitude: cardInput.latitude,
-      // longitude: cardInput.longitude,
+      latitude: cardInput.latitude,
+      longitude: cardInput.longitude,
       deliveryTag: cardInput.deliveryTag,
       payTag: cardInput.payTag,
     };
@@ -108,7 +110,9 @@ const PostCardForm = (props) => {
       postCardData.description !== "" &&
       postCardData.category !== "" &&
       postCardData.totalNum > postCardData.currentNum &&
-      postCardData.deliveryFee !== ""
+      postCardData.deliveryFee !== "" &&
+      postCardData.deliveryTag !== "" &&
+      postCardData.payTag !== ""
     ) {
       axios
         .post(
@@ -249,7 +253,11 @@ const PostCardForm = (props) => {
               {cardInput.located}
             </div>
             <div className="new-postCard__map">
-              <MapPreview addr={address} />
+              <MapPreview
+                addres={cardInput.located}
+                lat={setCardInput}
+                lon={setCardInput}
+              />
             </div>
           </section>
         </article>
