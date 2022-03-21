@@ -1,4 +1,3 @@
-
 @mixin edit-btn {
   border: 0;
   border-radius: 20px;
@@ -20,7 +19,7 @@
   height: 460px;
   padding: 50px 60px;
   border-radius: 15px;
-  box-shadow: 2px 4px 10px 0 #A5A5A5; 
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
 }
 
 .mypage-container-top {
@@ -29,7 +28,7 @@
   flex-direction: row;
   align-items: center;
   .mypage-img-box {
-    .mypage-img{
+    .mypage-img {
       flex: auto;
       width: 102px;
       height: 102px;
@@ -45,11 +44,10 @@
   align-items: center;
   justify-content: flex-end;
   margin-left: 10px;
-  
+
   .mypage-line {
     height: 80%;
-    border-right: solid 1px #E0D9D9;
-
+    border-right: solid 1px #e0d9d9;
   }
 }
 .mypage-ub-tb-err-msg {
@@ -57,174 +55,167 @@
   font-size: 13px;
 }
 
-      .mypage-userinfo-box {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        padding-left: 35px;
+.mypage-userinfo-box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 35px;
+}
+.mypage-ub-top-box {
+  display: flex;
+  margin-bottom: 20px;
+
+  .mypage-ub-tb-nickbox {
+    width: 170px;
+    .mypage-ub-tb-nickname {
+      font-size: 30px;
+    }
+
+    .mypage-ub-tb-nickname-input {
+      width: 100%;
+      border: 0;
+      outline: none;
+      font-size: 30px;
+      &::-webkit-input-placeholder {
+        color: #c7c7c7;
       }
-        .mypage-ub-top-box {
+    }
+  }
+  .mypage-ub-tb-edit-box {
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+    padding-left: 15px;
+    .mypage-ub-tb-edit-btn {
+      @include edit-btn;
+      color: #5c5b5b;
+      background-color: #e5e5e5;
+      &:hover {
+        background-color: #d8d8d8;
+      }
+    }
+    .mypage-ub-tb-delete-btn {
+      @include edit-btn;
+      color: white;
+      background-color: #f05d47;
+      &:hover {
+        background-color: #d43f28;
+      }
+    }
+  }
+}
+.mypage-bb-location {
+  width: 100%;
+  height: 100%;
+}
+.mypage-bb-location-input {
+  width: 100%;
+  height: 100%;
+  height: 100%;
+  border: 0;
+  font-size: 16px;
+  outline: none;
+  &::-webkit-input-placeholder {
+    color: #c7c7c7;
+  }
+}
 
-          display: flex;
-          margin-bottom: 20px;
+.mypage-delivery-fee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: auto;
 
-          .mypage-ub-tb-nickbox {
-            width: 170px;
-          .mypage-ub-tb-nickname {
-            font-size: 30px;
-          }
+  .mypage-df-text {
+    font-size: 20px;
+  }
+}
 
-          .mypage-ub-tb-nickname-input {
-            width: 100%;
-            border: 0;
-            outline: none;
-            font-size: 30px;
-            &::-webkit-input-placeholder {
-              color: #c7c7c7;
-            }
-            
+.mypage-container-bottom {
+  padding: 0 15px;
+  .mypage-cb-title {
+    display: flex;
+    font-size: 20px;
+    padding-left: 5px;
+  }
 
-          }
+  .mypage-chatpost-box {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    padding-top: 20px;
+    // border: solid 1px;
 
-          }
-          .mypage-ub-tb-edit-box {
-            display: flex;
-            align-items: center;
-            padding-top: 5px;
-            padding-left: 15px;
-            .mypage-ub-tb-edit-btn {
-              @include edit-btn;
-              color: black;
-              background-color: #E5E5E5;
-              &:hover {
-                background-color: #d8d8d8;
-              }
-            
-            }
-            .mypage-ub-tb-delete-btn {
-              @include edit-btn;
-              color: white;
-              background-color: #f05d47;
-              &:hover {
-                background-color: #d43f28;
-              }
-            
-            }
-          }
+    .mypage-cb-card-list {
+      display: inline-flex;
+      overflow-x: scroll;
+      padding-top: 20px;
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 3.5px;
+        background-color: #ced4da;
+
+        &:hover {
+          background-color: #adb5bd;
         }
-          .mypage-bb-location{
-            width: 100%;
-            height: 100%;
-          }
-          .mypage-bb-location-input{
-            width: 100%;
-            height: 100%;
-            height: 100%;
-            border: 0;
-            font-size: 16px;
-            outline: none;
-            &::-webkit-input-placeholder {
-              color: #c7c7c7;
-            }
-          }
-      
-      .mypage-delivery-fee {
+      }
+      &::-webkit-scrollbar-track {
+        background: #ffffff;
+      }
+    }
+    .mypage-cb-card-view {
+      float: left;
+      width: 120px;
+      text-decoration: none;
+    }
+    .mypage-cb-card-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px 15px 0;
+    }
+    .mypage-cb-card {
+      display: flex;
+      align-items: center;
+      font-size: 17px;
+      width: 200px;
+      height: 90px;
+      border-radius: 8px;
+      box-shadow: 1px 2px 5px #a5a5a5;
+      .mypage-cb-card-content {
         display: flex;
         align-items: center;
-        justify-content: center;
-        flex: auto;
+        padding-left: 10px;
+      }
+      .mypage-cb-img {
+        width: 50px;
+        height: 50px;
+        background-color: #a5a5a5;
+        border-radius: 50%;
+      }
+      .mypage-cb-chatname {
+        padding: 0 16px;
+      }
 
-        .mypage-df-text {
-          font-size: 20px;
+      .mypage-cb-leftbox {
+        padding-left: 20px;
+        font-weight: bold;
+        .mypage-cb-lb-fee {
+          font-size: 24px;
         }
       }
-    
-    .mypage-container-bottom {
-      padding: 0 15px;
-        .mypage-cb-title {
-          display: flex;
-          font-size: 20px;
-          padding-left: 5px;
-        }
 
-        .mypage-chatpost-box {
-          display: flex;
-          flex-direction: column;
-          font-weight: 500;
-          padding-top: 20px;
-          // border: solid 1px;
-        
-        .mypage-cb-card-list {
-          display:inline-flex;
-          overflow-x: scroll;
-          padding-top: 20px;
-          &::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-          }
-          &::-webkit-scrollbar-thumb {
-            border-radius: 3.5px;
-            background-color: #ced4da;
-        
-          &:hover {
-            background-color: #adb5bd;
-            }
-          }
-          &::-webkit-scrollbar-track {
-            background: #ffffff;
-          }
-        }
-        .mypage-cb-card-view {
-          float: left;
-          width: 120px;
-          text-decoration: none;
-        }
-        .mypage-cb-card-container {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 0 20px 15px 0;
-        }
-        .mypage-cb-card {
-          display: flex;
-          align-items: center;
-          font-size: 17px;
-          width: 200px;
-          height: 90px;
-          border-radius: 8px;
-          box-shadow: 1px 2px 5px #A5A5A5; 
-          .mypage-cb-card-content {
-            display: flex;
-            align-items: center;
-            padding-left: 10px;
-          }
-          .mypage-cb-img {
-            width: 50px;
-            height: 50px;
-            background-color: #A5A5A5;
-            border-radius: 50%;
-          }
-          .mypage-cb-chatname {
-            padding: 0 16px;
-          }
-        
-          .mypage-cb-leftbox{
-            padding-left: 20px;
-            .mypage-cb-lb-fee{
-            font-size: 24px;
-            font-weight: bold;
-            }
-          }
-        
-          .mypage-cb-rightbox {
-            display: flex;
-            flex-direction: column;
-            //  .mypage-cb-rb-btn{
-            // }
-          }
-        }
+      .mypage-cb-rightbox {
+        display: flex;
+        flex-direction: column;
+        //  .mypage-cb-rb-btn{
+        // }
       }
-    } 
-
+    }
+  }
+}
