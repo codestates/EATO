@@ -6,30 +6,19 @@ import { DUMMY_POSTCARDS } from "../../../resource/datas";
 import "./PostCard.scss";
 
 const PostCard = () => {
-  const [postCards, setPostCards] = useState(DUMMY_POSTCARDS);
-  const config = {
-    "Content-Type": "application/json",
-    withCredentials: true,
-  };
+  const [postCards, setPostCards] = useState([]);
+
   const addPostCardHandler = (postCard) => {
-    axios.get("http://localhost:3000/document", {
-      postCards: postCards,
-    });
     setPostCards((prevPostCards) => {
       return [postCard, ...prevPostCards];
     });
   };
-
-  useEffect(() => {
-    window.localStorage.setItem("postCards", JSON.stringify(postCards));
-  }, [postCards]);
-
   return (
     <div className="postCard">
       <NewPostCard onAddPostCard={addPostCardHandler} />
       <div className="postCardWrap">
         <div className="postCards">
-          {postCards.map((postCard) => (
+          {data.map((postCard) => (
             <PostCardItem
               _id={postCard.id}
               category={postCard.category}
