@@ -9,8 +9,8 @@ const PostCardDate = (props) => {
   const date = `${day} ${time}`;
 
   return (
-    <div className="postCard-date">
-      <div className="postCard-date__D">{date}</div>
+    <div>
+      <div>{date}</div>
     </div>
   );
 };
