@@ -51,24 +51,14 @@
 .postCard-item__center {
   border-right: 2px solid #e7e2e2;
   padding-right: 5px;
+  text-align: center;
+  word-break: keep-all;
 }
-
-// .postCard-item__left {
-//   display: grid;
-//   grid-template-rows: 1fr 1fr 1.5fr 1.5fr;
-//   text-align: left;
-//   padding-left: 1rem;
-//   .postCard-item__leftListC {
-//     padding-top: 5px;
-//     font-size: 16px;
-//   }
-// }
 
 .postCard-item__right {
   display: grid;
   grid-template-rows: 1.5fr 1fr 1fr 1fr;
   text-align: center;
-  // align-items: center;
   .postCard-item__listN {
     padding-top: 0.5rem;
     font-size: 30px;
@@ -82,12 +72,16 @@
 
 .postCard-item__Tag {
   padding: 5px;
-  letter-spacing: 2px;
+  letter-spacing: 0.5rem;
+  text-indent: 0.5rem;
   text-align: center;
   display: grid;
   grid-template-columns: 1fr 1fr;
 
   .postCard-item__payTag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 2px;
     font-size: 15px;
     color: #ffffff;
@@ -96,6 +90,9 @@
   }
 
   .postCard-item__deliveryTag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 2px;
     font-size: 15px;
     color: #ffffff;
