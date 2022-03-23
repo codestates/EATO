@@ -3,16 +3,10 @@ import PostCardDate from "./PostCardDate";
 import PostCardCheck from "../PostCardRead/PostCardCheck";
 import { IoClose } from "react-icons/io5";
 import "./PostCardItem.scss";
-// import axios from "axios";
-// axios.defaults.withCredentials = true;
 
 const PostCardItem = (props) => {
-  const joinTime = props.date.toTimeString().substr(0, 5);
+  const joinTime = props.date.substr(11, 5);
   const [isClick, setIsClick] = useState(false);
-  // const config = {
-  //   "Content-Type": "application/json",
-  //   withCredentials: true,
-  // };
 
   const handleCardClick = () => {
     setIsClick(!isClick);
@@ -32,7 +26,7 @@ const PostCardItem = (props) => {
           <div className="postCard-item__leftListD">{payKr}</div>
         </section>
         <section className="postCard-item__center">
-          <PostCardDate date={props.date} />
+          <PostCardDate meetDay={props.date} />
         </section>
         <section className="postCard-item__right">
           <div className="postCard-item__listN">
