@@ -102,7 +102,7 @@ module.exports = {
 
   // 게시물 상세 조회
   viewPost: asyncHandler(async (req, res) => {
-    Document.findOne({ _id: req.params.documentId }, (err, docu) => {
+    Document.findOne({ creatorId: req.params.creatorId }, (err, docu) => {
       if (err) {
         return res.status(400).json({ message: console.log(err) });
       }
@@ -146,40 +146,40 @@ module.exports = {
 
   //게시물 삭제 => 삭제시 삭제 알림 보내줌
   deletePost: asyncHandler(async (req, res) => {
-    const main = req.app.get("main");
-    const chat = req.app.get("chat");
+    // const main = req.app.get("main");
+    // const chat = req.app.get("chat");
     const documentId = Number(req.params.documentId);
-    const meetingMember = req.app.get("meetingMember");
+    // const meetingMember = req.app.get("meetingMember");
 
     const Docu = Document.find({ _id: req.params.documentId });
     const userId = Docu.creatorId;
-    const userList = [];
-    for (const [key, val] of Object.entries(meetingMember[documentId])) {
-      if (val === 0) {
-        userList.push(key);
-      }
-    }
-    const _id = mongoose.Types.ObjectId();
+    // const userList = [];
+    // for (const [key, val] of Object.entries(meetingMember[documentId])) {
+    //   if (val === 0) {
+    //     userList.push(key);
+    //   }
+    // }
+    // const _id = mongoose.Types.ObjectId();
 
-    const noticeInfo = {
-      id: _id,
-      documentId: Docu._id,
-      url: null,
-      target: null,
-      type: "deleteParty",
-      title: Docu.title,
-      message: "게시물이 삭제 되었습니다.",
-    };
+    // const noticeInfo = {
+    //   id: _id,
+    //   documentId: Docu._id,
+    //   url: null,
+    //   target: null,
+    //   type: "deleteParty",
+    //   title: Docu.title,
+    //   message: "게시물이 삭제 되었습니다.",
+    // };
 
     await Docu.deleteOne(); //게시물 삭제
     await Chatting.findOneAndDelete({ documentChatId: Docu._id }); //게시물 연결된 채팅방 삭제
 
-    Notification.createNotice(userList, noticeInfo);
-    main.to(documentId).emit("notice", noticeInfo, userId);
-    main.to(documentId).emit("quit");
-    chat.to(documentId).emit("quit");
-    chat.in(documentId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
-    delete meetingMember[documentId];
+    // Notification.createNotice(userList, noticeInfo);
+    // main.to(documentId).emit("notice", noticeInfo, userId);
+    // main.to(documentId).emit("quit");
+    // chat.to(documentId).emit("quit");
+    // chat.in(documentId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
+    // delete meetingMember[documentId];
     res.status(200).json({
       message: "게시물이 삭제 되었습니다.",
     });
