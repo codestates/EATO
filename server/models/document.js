@@ -7,8 +7,7 @@ const DocumentSchema = new Schema(
       default: "",
     },
     deliveryFee: Number,
-    latitude: Number,
-    longitude: Number,
+    located: String,
     date: Date,
     totalNum: Number,
     currentNum: {

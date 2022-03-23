@@ -21,8 +21,6 @@ module.exports = {
       deliveryTag,
       payTag,
       located,
-      latitude,
-      longitude,
     } = req.body;
 
     const document = {
@@ -36,8 +34,6 @@ module.exports = {
       deliveryTag,
       payTag,
       located,
-      latitude,
-      longitude,
     };
     if (!document) {
       res.status(400).json({ message: "Failed creating post" });
@@ -54,8 +50,6 @@ module.exports = {
         deliveryTag,
         payTag,
         located,
-        latitude,
-        longitude,
       });
 
       await User.updateOne(
@@ -109,8 +103,7 @@ module.exports = {
       const {
         title,
         deliveryFee,
-        latitude,
-        longitude,
+        located,
         date,
         totalNum,
         currentNum,
@@ -126,8 +119,7 @@ module.exports = {
         documentInfo: {
           title,
           deliveryFee,
-          latitude,
-          longitude,
+          located,
           date,
           totalNum,
           currentNum,
@@ -172,7 +164,7 @@ module.exports = {
     // };
 
     await Docu.deleteOne(); //게시물 삭제
-    await Chatting.findOneAndDelete({ documentChatId: Docu._id }); //게시물 연결된 채팅방 삭제
+    // await Chatting.findOneAndDelete({ documentChatId: Docu._id }); //게시물 연결된 채팅방 삭제
 
     // Notification.createNotice(userList, noticeInfo);
     // main.to(documentId).emit("notice", noticeInfo, userId);
@@ -180,9 +172,9 @@ module.exports = {
     // chat.to(documentId).emit("quit");
     // chat.in(documentId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
     // delete meetingMember[documentId];
-    res.status(200).json({
-      message: "게시물이 삭제 되었습니다.",
-    });
+    // res.status(200).json({
+    //   message: "게시물이 삭제 되었습니다.",
+    // });
   }),
 
   // 게시물 수정
