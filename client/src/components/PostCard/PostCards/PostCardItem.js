@@ -18,15 +18,14 @@ const PostCardItem = ({
   deliveryTag,
   payTag,
 }) => {
-  const joinTime = String(date).substring(11, 16);
   const [isClick, setIsClick] = useState(false);
 
   const handleCardClick = () => {
     setIsClick(!isClick);
   };
-
-  const day = String(date).substring(0, 10);
-  console.log(day);
+  const day = new Date(date).toLocaleString();
+  const strDay = String(day).substring(0, 10);
+  const joinTime = String(day).substring(12, 20);
 
   const payKr =
     String(deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
@@ -41,7 +40,7 @@ const PostCardItem = ({
           <div className="postCard-item__leftListD">{payKr}</div>
         </section>
         <section className="postCard-item__center">
-          {day}
+          {strDay}
           <div className="displayNone">
             <PostCardDate meetDay={date} />
           </div>

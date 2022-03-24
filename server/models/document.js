@@ -7,8 +7,10 @@ const DocumentSchema = new Schema(
       default: "",
     },
     deliveryFee: Number,
+    payTag: String,
+    deliveryTag: String,
     located: String,
-    date: Date,
+    date: String,
     totalNum: Number,
     currentNum: {
       default: 1,

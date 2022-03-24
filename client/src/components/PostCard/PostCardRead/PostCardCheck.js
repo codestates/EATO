@@ -22,6 +22,7 @@ const PostCardCheck = ({
 }) => {
   const [count, setCount] = useState(1);
   const [isClick, setIsClick] = useState(false);
+  console.log("date : ", date);
   const plusCurNum = () => {
     setCount(count + 1);
   };
@@ -87,7 +88,7 @@ const PostCardCheck = ({
 
           <div className="postInfo__list">
             <div className="postInfo__InputList">
-              <PostCardDate date={date} />
+              <PostCardDate meetDay={date} />
             </div>
           </div>
 

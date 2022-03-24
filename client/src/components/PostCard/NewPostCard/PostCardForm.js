@@ -24,11 +24,10 @@ const PostCardForm = (props) => {
     totalNum: 1,
     date: new Date(),
     located: "",
-    latitude: 0,
-    longitude: 0,
     deliveryTag: "수령방법",
     payTag: "지불방법",
   });
+
   const [disabled, setDisabled] = useState("disabled");
   const [popUp, setPopUp] = useState(false);
 
@@ -59,12 +58,18 @@ const PostCardForm = (props) => {
     });
   };
 
+  const dateChangeHandler = (date) => {
+    setCardInput((prevState) => {
+      return { ...prevState, date: date };
+    });
+  };
+
   const popUpHandler = () => {
     setPopUp(!popUp);
   };
 
   const alertHandler = () => {
-    alert("등록되었습니다!");
+    alert("모임이 등록되었습니다!");
   };
 
   const getDayName = (date) => {
@@ -81,21 +86,19 @@ const PostCardForm = (props) => {
     withCredentials: true,
   };
   axios.defaults.withCredentials = true;
-
   const submitHandler = async (event) => {
     event.preventDefault();
-
+    const strDate = String(cardInput.date);
+    console.log("strDate : ", strDate);
     const postCardData = {
       title: cardInput.title,
       category: cardInput.category,
       description: cardInput.description,
       deliveryFee: cardInput.deliveryFee,
-      date: new Date(cardInput.date),
+      date: strDate,
       currentNum: cardInput.currentNum,
       totalNum: cardInput.totalNum,
       located: cardInput.located,
-      latitude: cardInput.latitude,
-      longitude: cardInput.longitude,
       deliveryTag: cardInput.deliveryTag,
       payTag: cardInput.payTag,
     };
@@ -127,16 +130,11 @@ const PostCardForm = (props) => {
             deliveryTag: postCardData.deliveryTag,
             payTag: postCardData.payTag,
             located: postCardData.located,
-            latitude: postCardData.latitude,
-            longitude: postCardData.longitude,
           },
           config
         )
         .then((res) => {
           console.log(res);
-          if (res.status === 200) {
-            alert("모임이 등록되었습니다!");
-          }
         })
         .catch((err) => {
           console.log(err);
@@ -190,15 +188,17 @@ const PostCardForm = (props) => {
               <DatePicker
                 className="new-postCard__InputDate"
                 selected={cardInput.date}
-                onChange={(date) =>
-                  setCardInput((prevState) => {
-                    return { ...prevState, date: date };
-                  })
-                }
-                showTimeSelect
-                minDate={new Date()}
+                onChange={dateChangeHandler}
+                // onChange={(date) =>
+                //   setCardInput((prevState) => {
+                //     return { ...prevState, date: date };
+                //   })
+                // }
                 locale={ko}
-                dateFormat="yy. MM. dd. hh:mm"
+                showTimeSelect
+                timeIntervals={15}
+                minDate={new Date()}
+                dateFormat="yy. MM. dd. HH.mm"
                 dateFormatCalendar={"yyyy. MM."}
                 dayClassName={(date) =>
                   getDayName(createDate(date)) === "토"
@@ -207,6 +207,10 @@ const PostCardForm = (props) => {
                     ? "sunday"
                     : undefined
                 }
+                popperModifiers={{
+                  preventOverflow: { enabled: true },
+                }} // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정
+                popperPlacement="auto" // popUP 화면 중앙 위치
               />
             </div>
 
