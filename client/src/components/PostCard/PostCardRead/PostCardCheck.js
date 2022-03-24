@@ -6,8 +6,20 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import "./PostCardCheck.scss";
 
-const PostCardCheck = (props) => {
-  console.log(props.posts);
+const PostCardCheck = ({
+  id,
+  key,
+  category,
+  description,
+  title,
+  date,
+  deliveryFee,
+  totalNum,
+  currentNum,
+  located,
+  deliveryTag,
+  payTag,
+}) => {
   const [count, setCount] = useState(1);
   const [isClick, setIsClick] = useState(false);
   const plusCurNum = () => {
@@ -36,9 +48,8 @@ const PostCardCheck = (props) => {
 
   // }
 
-  const finalPay = `${props.posts.deliveryFee
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
+  const finalPay =
+    String(deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 
   return (
     <div className="postInfoWrap">
@@ -50,7 +61,7 @@ const PostCardCheck = (props) => {
 
       <article className="postInfo__Header">
         <div className="postInfo__title">
-          <div className="postInfo__InputTitle">{props.posts.title}</div>
+          <div className="postInfo__InputTitle">{title}</div>
         </div>
         <div className="postInfo__work">
           <HiOutlineDotsVertical size="1.5rem" onClick={showClicked} />
@@ -67,18 +78,16 @@ const PostCardCheck = (props) => {
       <article className="postInfo__Body">
         <section className="postInfo__Left">
           <div className="postInfo__description">
-            <div className="postInfo__InputDescription">
-              {props.posts.description}
-            </div>
+            <div className="postInfo__InputDescription">{description}</div>
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__InputList">{props.posts.category}</div>
+            <div className="postInfo__InputList">{category}</div>
           </div>
 
           <div className="postInfo__list">
             <div className="postInfo__InputList">
-              <PostCardDate date={props.posts.date} />
+              <PostCardDate date={date} />
             </div>
           </div>
 
@@ -88,28 +97,28 @@ const PostCardCheck = (props) => {
 
           <div className="postInfo__list">
             <div className="postInfo__InputList">
-              {props.posts.currentNum} / {props.posts.totalNum}명
+              {currentNum} / {totalNum}명
             </div>
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__inputTag">{props.posts.deliveryTag}</div>
+            <div className="postInfo__inputTag">{deliveryTag}</div>
           </div>
           <div className="postInfo__list">
-            <div className="postInfo__inputTag">{props.posts.payTag}</div>
+            <div className="postInfo__inputTag">{payTag}</div>
           </div>
         </section>
 
         <section className="postInfo__right">
           <div className="postInfo__postMap">
-            <div className="postInfo__InputPostMap">{props.posts.located}</div>
+            <div className="postInfo__InputPostMap">{located}</div>
           </div>
           <div className="postInfo__titleMap">
             <FaMapMarkerAlt size="1.2rem" color="#ff4234" />
-            {props.posts.located}
+            {located}
           </div>
           <div className="postInfo__map">
-            <PostMap address={props.posts} />
+            <PostMap located={located} />
           </div>
         </section>
       </article>
