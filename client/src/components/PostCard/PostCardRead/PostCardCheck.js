@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import PostCardDate from "../PostCards/PostCardDate";
 import postLogo from "../../../images/Logo.png";
 import PostMap from "../../Map/PostMap";
@@ -22,7 +24,8 @@ const PostCardCheck = ({
 }) => {
   const [count, setCount] = useState(1);
   const [isClick, setIsClick] = useState(false);
-  console.log("date : ", date);
+  const documentId = id;
+  const navigate = useNavigate();
   const plusCurNum = () => {
     setCount(count + 1);
   };
@@ -30,27 +33,27 @@ const PostCardCheck = ({
   const showClicked = () => {
     setIsClick(!isClick);
   };
+
+  const config = {
+    "Content-Type": "application/json",
+    withCredentials: true,
+  };
+  axios.defaults.withCredentials = true;
+
   const deleteHandler = () => {
     console.log("del clicked");
+    if (window.confirm("모임을 삭제 할까요?")) {
+      axios
+        .delete(`http://localhost:3000/document/${documentId}`, config)
+        .then((res) => {
+          alert("삭제완료");
+          setIsClick(!isClick);
+        });
+    }
   };
-  // const deleteHandler = () => {
-  //   if (window.confirm("모임을 삭제 할까요?")) {
-  //     axios
-  //       .delete(`http://localhost:3000/user/userInfo/${userId}`, config)
-  //       .then((res) => {
-  //         localStorage.clear();
-  //         setIsLogin(false);
-  //         alert("삭제완료");
-  //       });
-  //   }
-  // };
-
-  // const deleteHandler = () => {
-
-  // }
 
   const finalPay =
-    String(deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+    "각 " + String(deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 
   return (
     <div className="postInfoWrap">
@@ -79,34 +82,34 @@ const PostCardCheck = ({
       <article className="postInfo__Body">
         <section className="postInfo__Left">
           <div className="postInfo__description">
-            <div className="postInfo__InputDescription">{description}</div>
+            <div className="postInfo__inputDescription">{description}</div>
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__InputList">{category}</div>
+            <div className="postInfo__inputListT">{category}</div>
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__InputList">
+            <div className="postInfo__inputListD">
               <PostCardDate meetDay={date} />
             </div>
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__InputList">{finalPay}</div>
+            <div className="postInfo__inputList">{finalPay}</div>
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__InputList">
+            <div className="postInfo__inputList">
               {currentNum} / {totalNum}명
             </div>
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__inputTag">{deliveryTag}</div>
+            <div className="postInfo__inputListT">{deliveryTag}</div>
           </div>
           <div className="postInfo__list">
-            <div className="postInfo__inputTag">{payTag}</div>
+            <div className="postInfo__inputListT">{payTag}</div>
           </div>
         </section>
 

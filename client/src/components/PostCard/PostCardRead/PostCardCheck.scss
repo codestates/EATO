@@ -10,7 +10,7 @@
   align-items: center;
   flex: 1 1 0;
   width: 100%;
-  height: 6.5rem;
+  height: 5.5rem;
 
   .imgLogo {
     display: flex;
@@ -49,7 +49,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 3rem;
+  height: 2.5rem;
   margin-bottom: 0.5rem;
 
   .postInfo__title {
@@ -60,13 +60,13 @@
       margin-left: 0.5rem;
       font-weight: bold;
       border: none;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
   }
 }
 .postInfo__work {
   position: absolute;
-  margin: 0 2rem 1rem 32rem;
+  margin: 0 2rem 1rem 29rem;
   width: 4rem;
   height: 3rem;
   display: flex;
@@ -102,14 +102,14 @@
   align-items: center;
   flex: 1 1 0;
   width: 100%;
-  height: 5rem;
+  height: 3.7rem;
 }
 
 .postInfo__actions {
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
   width: 25%;
-  height: 60%;
-  font-size: 1.4rem;
+  height: 70%;
+  font-size: 1.3rem;
   border: 1px solid #ff4234;
   border-radius: 1rem;
   background-color: transparent;
@@ -153,25 +153,25 @@
   align-items: center;
   flex: 1 1 0;
   width: 100%;
-  height: 65%;
+  height: 26rem;
 }
 
 .postInfo__Left {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   width: 40%;
-  height: 28rem;
+  height: 26rem;
 
   //Description
   .postInfo__description {
     display: flex;
     width: 100%;
     text-align: left;
-    .postInfo__InputDescription {
+    .postInfo__inputDescription {
       width: 100%;
-      height: 7.5rem;
+      height: 6.3rem;
       padding: 0.5rem 1rem;
       border-radius: 1rem;
       line-height: 2rem;
@@ -187,27 +187,41 @@
 
   .postInfo__list {
     width: 100%;
-    height: 2.9rem;
-    .postInfo__InputList {
+    height: 2.4rem;
+    .postInfo__inputListD {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 100%;
       height: 100%;
       border-radius: 1rem;
-      font-size: 1.25rem;
-      line-height: 3rem;
-      text-align: center;
+      font-size: 1.1rem;
+      box-shadow: 2px 4px 10px 0 #a5a5a5;
+    }
+    .postInfo__inputList {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      border-radius: 1rem;
+      font-size: 1.1rem;
+      letter-spacing: 0.5rem;
+      text-indent: 0.5rem;
       box-shadow: 2px 4px 10px 0 #a5a5a5;
     }
 
-    .postInfo__inputTag {
+    .postInfo__inputListT {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       width: 100%;
-      height: 2.6rem;
+      height: 100%;
       background-color: #ffffff;
       border-radius: 1rem;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       letter-spacing: 1rem;
       text-indent: 1rem;
-      line-height: 2.5rem;
-      text-align: center;
       box-shadow: 2px 4px 10px 0 #a5a5a5;
     }
   }
@@ -215,14 +229,14 @@
 
 .postInfo__right {
   width: 45%;
-  height: 28rem;
+  height: 25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   .postInfo__postMap {
     width: 100%;
-    height: fit-content;
+    height: 2.5rem;
     text-align: center;
     .postInfo__InputPostMap {
       justify-content: center;
@@ -240,16 +254,15 @@
 }
 .postInfo__titleMap {
   width: 100%;
-  height: 3rem;
-  margin: 1rem 0 0;
-  padding-top: 0.5rem;
+  height: 2.5rem;
+  margin: 1rem;
   text-align: left;
   text-indent: 0.5rem;
 }
 
 .postInfo__map {
   width: 100%;
-  height: 22rem;
+  height: 100%;
   border-radius: 1rem;
   box-shadow: 2px 4px 10px 0 #a5a5a5;
 }
