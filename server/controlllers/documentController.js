@@ -172,11 +172,20 @@ module.exports = {
     // chat.to(documentId).emit("quit");
     // chat.in(documentId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
     // delete meetingMember[documentId];
-    // res.status(200).json({
-    //   message: "게시물이 삭제 되었습니다.",
-    // });
+    res.status(200).json({
+      message: "게시물이 삭제 되었습니다.",
+    });
   }),
 
+  // 회원 탈퇴 시 모든 게시물 삭제
+  deleteAllPost: asyncHandler(async (req, res) => {
+    const Docu = Document.find({ creatorId: req.params.creatorId });
+    console.log("docu", Docu);
+    await Docu.deleteMany(); // 전체 게시물 삭제
+    res.status(200).json({
+      message: "모든 게시물이 삭제 되었습니다.",
+    });
+  }),
   // 게시물 수정
   updatePost: asyncHandler(async (req, res) => {
     const { documentId } = req.body.params;

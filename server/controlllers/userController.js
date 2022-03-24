@@ -218,7 +218,6 @@ module.exports = {
   // user/userInfo
   updateProfile: asyncHandler(async (req, res) => {
     const { nickname, location } = req.body;
-    // 쿠키에 있는 userid ?
     if (nickname && location) {
       await User.findByIdAndUpdate(
         req.params.userId,

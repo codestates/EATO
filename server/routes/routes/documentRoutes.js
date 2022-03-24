@@ -4,6 +4,7 @@ const {
   updatePost,
   viewPost,
   showPost,
+  deleteAllPost,
 } = require("../../controlllers/documentController");
 const {
   joinParty,
@@ -18,6 +19,7 @@ router.get("/mypost/:creatorId", viewPost); //내 게시물 조회
 router.post("/", createDocument); //게시물 생성
 router.get("/", showPost); //전체 게시물 조회
 router.delete("/mypost/:documentId", deletePost); //게시물 삭제
+router.delete("/allpost/:creatorId", deleteAllPost); //탈퇴 시 모든 게시물 삭제
 router.patch("/:documentId", updatePost); //게시물 수정
 router.get("/:documentId", viewPost); //다른 사람 게시물 조회
 router.get("/:documentId", joinParty); //파티 참여(다른유저에게 알림보내기)
