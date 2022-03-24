@@ -1163,7 +1163,7 @@ footer {
 
 .mypage-whole-container {
   width: 864.8px;
-  height: 460px;
+  height: 500px;
   padding: 50px 60px;
   border-radius: 15px;
   box-shadow: 2px 4px 10px 0 #a5a5a5; }
@@ -1280,7 +1280,8 @@ footer {
     .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card-list {
       display: inline-flex;
       overflow-x: scroll;
-      padding-top: 20px; }
+      margin-top: 20px;
+      padding: 20px 0 0 10px; }
       .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card-list::-webkit-scrollbar {
         width: 8px;
         height: 8px; }
@@ -1291,18 +1292,42 @@ footer {
           background-color: #adb5bd; }
       .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card-list::-webkit-scrollbar-track {
         background: #ffffff; }
+      .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card-list .mypage-blank-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        color: #a5a5a5; }
+        .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card-list .mypage-blank-container .mypage-blank-img {
+          width: 10.03px;
+          height: 20px; }
+        .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card-list .mypage-blank-container .mypage-blank-text {
+          font-size: 1rem; }
+        .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card-list .mypage-blank-container .mypage-blank-btn {
+          border: 0;
+          font-size: 1rem;
+          font-weight: 500;
+          color: #f05d47;
+          margin: 1rem;
+          padding: 0.5rem 0.7rem;
+          border-radius: 1.2rem;
+          background-color: transparent;
+          cursor: pointer; }
+          .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card-list .mypage-blank-container .mypage-blank-btn:hover {
+            color: white;
+            background-color: #f05d47;
+            transition: 0.3s; }
     .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card-view {
       float: left;
       width: 120px;
       text-decoration: none; }
     .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 0 20px 15px 0; }
     .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card {
       display: flex;
-      align-items: center;
+      place-items: center;
       font-size: 17px;
       width: 200px;
       height: 90px;
@@ -1324,9 +1349,62 @@ footer {
         font-weight: bold; }
         .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card .mypage-cb-leftbox .mypage-cb-lb-fee {
           font-size: 24px; }
-      .mypage-container-bottom .mypage-chatpost-box .mypage-cb-card .mypage-cb-rightbox {
-        display: flex;
-        flex-direction: column; }
+
+.dlt-modal-backdrop {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: grid;
+  place-items: center; }
+  .dlt-modal-backdrop .dlt-modal {
+    background-color: #ffffff;
+    border-radius: 15px;
+    width: 28rem;
+    height: 10rem;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem; }
+    .dlt-modal-backdrop .dlt-modal .dlt-modal-text {
+      text-align: center;
+      color: #2c2b2b;
+      font-weight: 500; }
+    .dlt-modal-backdrop .dlt-modal .dlt-modal-emphasis-text {
+      text-align: center;
+      color: #f05d47; }
+    .dlt-modal-backdrop .dlt-modal .dlt-modal-btn-box {
+      display: flex;
+      gap: 2rem; }
+      .dlt-modal-backdrop .dlt-modal .dlt-modal-btn-box .dlt-modal-yes-btn {
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 0.7rem 2rem;
+        border: solid 1px;
+        border-radius: 1rem;
+        background-color: transparent;
+        cursor: pointer;
+        color: #f05d47; }
+        .dlt-modal-backdrop .dlt-modal .dlt-modal-btn-box .dlt-modal-yes-btn:hover {
+          background-color: #f05d47;
+          color: #ffffff; }
+      .dlt-modal-backdrop .dlt-modal .dlt-modal-btn-box .dlt-modal-no-btn {
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 0.7rem 2rem;
+        border: solid 1px;
+        border-radius: 1rem;
+        background-color: transparent;
+        cursor: pointer;
+        color: #6e6e6e; }
+        .dlt-modal-backdrop .dlt-modal .dlt-modal-btn-box .dlt-modal-no-btn:hover {
+          background-color: #a0a0a0;
+          color: #ffffff; }
 
 .chatroom-container {
   display: flex;
