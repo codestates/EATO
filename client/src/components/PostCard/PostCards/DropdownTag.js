@@ -40,8 +40,9 @@ export const PayTag = ({ options, selected, setSelected }) => {
       </div>
       {isActive && (
         <div className="dropdownT-content">
-          {options.map((option) => (
+          {options.map((option, idx) => (
             <div
+              key={idx}
               onClick={() => {
                 setSelected((prevState) => {
                   return { ...prevState, payTag: option };

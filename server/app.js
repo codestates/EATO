@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "*",
+    origin: true,
     credentials: true,
     methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
   })
@@ -24,7 +24,7 @@ const server = http.createServer(app);
 const io = socketio(server, {
   path: "/socket.io",
   cors: {
-    origin: "*",
+    origin: true,
     credentials: true,
   },
   serveClient: false, // TODO: 클라이언트에서 socket 설치하면 false 로 바꿔주기

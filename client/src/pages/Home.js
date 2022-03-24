@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Nav from "../components/Nav/Nav";
 import HomePageSearchBar from "../components/SearchBar/HomePageSearchBar";
@@ -6,24 +6,20 @@ import PostCard from "../components/PostCard/PostCards/PostCard";
 import Footer from "../components/Footer/Footer";
 
 const Home = () => {
-  const [documentData, setDocumentData] = useState(null);
-
-  const render = async () => {
-    await axios
-      .get("http://localhost:3000/document")
-      .then((res) => setDocumentData(res.data.documentList));
-  };
+  const [postData, setPostData] = useState([]);
 
   useEffect(() => {
-    render();
-    console.log("ddd", documentData);
+    axios.get("http://localhost:3000/document").then((res) => {
+      const posts = res.data.documentList;
+      setPostData(posts);
+    });
   }, []);
 
   return (
     <>
       <Nav />
       <HomePageSearchBar />
-      <PostCard />
+      <PostCard data={postData} />
       <Footer />
     </>
   );

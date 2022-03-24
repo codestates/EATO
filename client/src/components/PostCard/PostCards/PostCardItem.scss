@@ -23,29 +23,32 @@
 }
 
 .postCard-item__left {
-  display: grid;
-  grid-template-rows: 1fr 1fr 1.5fr 1.5fr;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
   text-align: left;
   padding-left: 1rem;
   .postCard-item__leftListC {
     padding-top: 5px;
     font-size: 16px;
   }
-}
-.postCard-item__leftListT {
-  font-size: 25px;
-  font-weight: bold;
-  padding-left: 0.5rem;
-}
+  .postCard-item__leftListT {
+    font-size: 25px;
+    font-weight: bold;
+    padding-left: 0.5rem;
+    word-break: keep-all;
+  }
 
-.postCard-item__leftListL {
-  padding: 0.5rem;
-  font-size: 16px;
-}
+  .postCard-item__leftListL {
+    padding: 0.5rem;
+    font-size: 16px;
+  }
 
-.postCard-item__leftListD {
-  font-size: 30px;
-  font-weight: bold;
+  .postCard-item__leftListD {
+    font-size: 30px;
+    font-weight: bold;
+  }
 }
 
 .postCard-item__center {
@@ -99,4 +102,8 @@
     background-color: #ff4234;
     border-radius: 1rem;
   }
+}
+
+.displayNone {
+  display: none;
 }
