@@ -20,7 +20,7 @@ const PostAddress = (props) => {
         <div>
           <div className="input-content">
             <DaumPostcode
-              className="postCodeStyle"
+              style={{ width: 250, height: 350 }}
               autoClose
               onComplete={handleComplete}
             />
