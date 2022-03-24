@@ -5,6 +5,7 @@ import { IoClose } from "react-icons/io5";
 import "./PostCardItem.scss";
 
 const PostCardItem = ({
+  id,
   key,
   category,
   description,
@@ -74,7 +75,20 @@ const PostCardItem = ({
                 <IoClose />
               </button>
             </div>
-            <PostCardCheck />
+            <PostCardCheck
+              key={key}
+              id={id}
+              category={category}
+              description={description}
+              title={title}
+              date={date}
+              deliveryFee={deliveryFee}
+              totalNum={totalNum}
+              currentNum={currentNum}
+              located={located}
+              deliveryTag={deliveryTag}
+              payTag={payTag}
+            />
           </div>
         </section>
       )}

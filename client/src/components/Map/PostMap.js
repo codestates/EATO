@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 const { kakao } = window; // or /*global kakao */
 
-const PostMap = (props) => {
+const PostMap = ({ located }) => {
   useEffect(() => {
     const mapContainer = document.getElementById("map");
     const mapOption = {
       center: new kakao.maps.LatLng(37.52406330545825, 126.98054529969014),
       level: 6,
     };
-    const makerName = props.address.title;
+    const makerName = "여기서 만나요!";
     const map = new kakao.maps.Map(mapContainer, mapOption);
     const images =
       "https://media.discordapp.net/attachments/935903391253692419/947743102028906496/My_project_4.png?width=686&height=686";
@@ -21,7 +21,7 @@ const PostMap = (props) => {
     );
 
     const geocoder = new kakao.maps.services.Geocoder();
-    geocoder.addressSearch(props.address.located, function (result, status) {
+    geocoder.addressSearch(located, function (result, status) {
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
