@@ -89,7 +89,6 @@ const PostCardForm = (props) => {
   const submitHandler = async (event) => {
     event.preventDefault();
     const strDate = String(cardInput.date);
-    console.log("strDate : ", strDate);
     const postCardData = {
       title: cardInput.title,
       category: cardInput.category,
@@ -160,7 +159,7 @@ const PostCardForm = (props) => {
               className="new-postCard__InputTitle"
               type="text"
               value={cardInput.title}
-              maxLength="20"
+              maxLength="16"
               placeholder="모임 제목을 작성해주세요."
               onChange={titleChangeHandler}
             />
@@ -173,7 +172,7 @@ const PostCardForm = (props) => {
                 className="new-postCard__InputDescription"
                 type="text"
                 value={cardInput.description}
-                maxLength="100"
+                maxLength="50"
                 placeholder="모임에 대해 간략히 설명해주세요."
                 onChange={descriptionChangeHandler}
               />
@@ -189,11 +188,6 @@ const PostCardForm = (props) => {
                 className="new-postCard__InputDate"
                 selected={cardInput.date}
                 onChange={dateChangeHandler}
-                // onChange={(date) =>
-                //   setCardInput((prevState) => {
-                //     return { ...prevState, date: date };
-                //   })
-                // }
                 locale={ko}
                 showTimeSelect
                 timeIntervals={15}
@@ -256,11 +250,7 @@ const PostCardForm = (props) => {
               {cardInput.located}
             </div>
             <div className="new-postCard__map">
-              <MapPreview
-                addres={cardInput.located}
-                lat={setCardInput}
-                lon={setCardInput}
-              />
+              <MapPreview addres={cardInput.located} />
             </div>
           </section>
         </article>

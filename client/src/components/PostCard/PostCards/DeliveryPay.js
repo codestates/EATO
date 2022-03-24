@@ -17,7 +17,9 @@ const DeliveryPay = ({ pay, setPay }) => {
     });
   };
 
-  const finalPay = `${pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
+  const finalPay = `각 ${pay
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
 
   return (
     <div className="payInput">
@@ -27,7 +29,11 @@ const DeliveryPay = ({ pay, setPay }) => {
           setIsActive(!isActive);
         }}
       >
-        {pay && pay > 0 ? <>{finalPay}</> : <>배달비용</>}
+        {pay && pay > 0 ? (
+          <div className="payInput-finalpay">{finalPay}</div>
+        ) : (
+          <>배달비용</>
+        )}
       </div>
       {isActive &&
         (pay && pay < 0 ? (
