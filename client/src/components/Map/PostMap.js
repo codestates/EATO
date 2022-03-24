@@ -60,8 +60,8 @@ const PostMap = ({ located }) => {
       <div
         id="map"
         style={{
-          width: "18rem",
-          height: "21.5rem",
+          width: "15.7rem",
+          height: "19.2rem",
           borderRadius: "1rem",
         }}
       />
