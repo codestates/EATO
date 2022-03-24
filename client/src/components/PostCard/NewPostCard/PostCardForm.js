@@ -188,11 +188,6 @@ const PostCardForm = (props) => {
                 className="new-postCard__InputDate"
                 selected={cardInput.date}
                 onChange={dateChangeHandler}
-                // onChange={(date) =>
-                //   setCardInput((prevState) => {
-                //     return { ...prevState, date: date };
-                //   })
-                // }
                 locale={ko}
                 showTimeSelect
                 timeIntervals={15}
