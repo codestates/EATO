@@ -23,6 +23,8 @@
 }
 
 .postCard-item__left {
+  width: 240px;
+  height: 192px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -34,10 +36,12 @@
     font-size: 16px;
   }
   .postCard-item__leftListT {
+    width: 95%;
+    height: 75px;
     font-size: 25px;
     font-weight: bold;
     padding-left: 0.5rem;
-    word-break: keep-all;
+    word-break: break-all;
   }
 
   .postCard-item__leftListL {
@@ -105,5 +109,8 @@
 }
 
 .displayNone {
+  display: none;
+}
+.postCard-item__leftList {
   display: none;
 }
