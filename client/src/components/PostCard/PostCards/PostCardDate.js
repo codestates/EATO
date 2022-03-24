@@ -1,12 +1,8 @@
 import React from "react";
 
 const PostCardDate = ({ meetDay }) => {
-  const year = String(meetDay).slice(2, 4);
-  const month = String(meetDay).slice(5, 7);
-  const day = String(meetDay).slice(8, 10);
-  const hour = String(meetDay).slice(11, 13);
-  const min = String(meetDay).slice(14, 16);
-  const date = `${year}.${month}.${day} ${hour}:${min}`;
+  const strMeetDay = new Date(meetDay).toLocaleString();
+  const date = strMeetDay.slice(2, 20);
 
   return (
     <div>
