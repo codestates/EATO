@@ -89,7 +89,6 @@ const PostCardForm = (props) => {
   const submitHandler = async (event) => {
     event.preventDefault();
     const strDate = String(cardInput.date);
-    console.log("strDate : ", strDate);
     const postCardData = {
       title: cardInput.title,
       category: cardInput.category,
