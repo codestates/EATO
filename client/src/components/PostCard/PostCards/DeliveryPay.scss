@@ -1,7 +1,7 @@
 .payInput {
   position: relative;
   width: 100%;
-  height: 2.6rem;
+  height: 2.2rem;
   z-index: 16;
 }
 
@@ -11,19 +11,23 @@
   flex-direction: row;
   justify-content: center;
   height: 100%;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   align-items: center;
   border: none;
   border-radius: 1rem;
   box-shadow: 2px 4px 10px 0 #a5a5a5;
-  letter-spacing: 0.1rem;
+  letter-spacing: 1rem;
+  text-indent: 1rem;
 }
-
+.payInput-finalpay {
+  letter-spacing: 0.3rem;
+  text-indent: 0.3rem;
+}
 .payInput-content {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   align-items: center;
   margin-top: 0.3rem;
   width: 100%;
