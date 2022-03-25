@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GoSearch } from "react-icons/go";
-import { tagName, payTagName } from "../../resource/datas";
+import { deliTagName, payTagName } from "../../resource/datas";
 import "./MapPageSearchBar.scss";
 
 const MapPageSearchBar = () => {
@@ -27,9 +27,8 @@ const MapPageSearchBar = () => {
             <GoSearch size="30" color="#ff4234" />
           </div>
         </div>
-        {/* <ul className="mapSearchBar__tag">{tagList}</ul> */}
         <ul className="mapSearchBar__tag">
-          {tagName.map((ele, index) => {
+          {deliTagName.map((ele, index) => {
             return (
               <li
                 key={index}
