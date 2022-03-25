@@ -6,7 +6,6 @@ import "./PostCardItem.scss";
 
 const PostCardItem = ({
   id,
-  key,
   category,
   description,
   title,
@@ -34,7 +33,7 @@ const PostCardItem = ({
     <>
       <article className="postCard-item" onClick={handleCardClick}>
         <section className="postCard-item__left">
-          <div className="postCard-item__leftList">{key}</div>
+          {/* <div className="postCard-item__leftList">{key}</div> */}
           <div className="postCard-item__leftListC">{category}</div>
           <div className="postCard-item__leftListT">{title}</div>
           <div className="postCard-item__leftListL">{located}</div>
@@ -54,7 +53,6 @@ const PostCardItem = ({
             {totalNum > currentNum ? "모집중" : "모집완료"}
           </div>
           <div className="postCard-item__listTime">{joinTime}</div>
-
           <div className="postCard-item__Tag">
             <div className="postCard-item__deliveryTag">{deliveryTag}</div>
             <div className="postCard-item__payTag">{payTag}</div>
@@ -76,7 +74,6 @@ const PostCardItem = ({
               </button>
             </div>
             <PostCardCheck
-              key={key}
               id={id}
               category={category}
               description={description}
