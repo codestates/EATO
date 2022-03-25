@@ -11,17 +11,18 @@ export const DeliveryTag = ({ options, selected, setSelected }) => {
       </div>
       {isActive && (
         <div className="dropdownT-content">
-          {options.map((option) => (
+          {options.map((option, index) => (
             <div
+              key={index}
               onClick={() => {
                 setSelected((prevState) => {
-                  return { ...prevState, deliveryTag: option };
+                  return { ...prevState, deliveryTag: option.text };
                 });
                 setIsActive(false);
               }}
               className="dropdownT-item"
             >
-              {option}
+              {option.text}
             </div>
           ))}
         </div>
@@ -45,13 +46,13 @@ export const PayTag = ({ options, selected, setSelected }) => {
               key={idx}
               onClick={() => {
                 setSelected((prevState) => {
-                  return { ...prevState, payTag: option };
+                  return { ...prevState, payTag: option.text };
                 });
                 setIsActive(false);
               }}
               className="dropdownT-item"
             >
-              {option}
+              {option.text}
             </div>
           ))}
         </div>

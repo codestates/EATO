@@ -5,7 +5,13 @@ import postLogo from "../../../images/Logo.png";
 import DeliveryPay from "../PostCards/DeliveryPay";
 import CountPeople from "../PostCards/CountPeople";
 import { DeliveryTag, PayTag } from "../PostCards/DropdownTag";
-import { categoryOptions, deOption, paOptions } from "../../../resource/datas";
+import {
+  categoryOptions,
+  deliTagName,
+  payTagName,
+  deOption,
+  paOptions,
+} from "../../../resource/datas";
 import PostAddress from "../../Map/PostAddress";
 import MapPreview from "../../Map/MapPreview";
 import DatePicker from "react-datepicker";
@@ -168,12 +174,12 @@ const PostCardForm = (props) => {
         <article className="new-postCard__Body">
           <section className="new-postCard__Left">
             <div className="new-postCard__description">
-              <input
+              <textarea
                 className="new-postCard__InputDescription"
                 type="text"
                 value={cardInput.description}
                 maxLength="50"
-                placeholder="모임에 대해 간략히 설명해주세요."
+                placeholder="모임에 대해 설명해주세요."
                 onChange={descriptionChangeHandler}
               />
             </div>
@@ -220,14 +226,14 @@ const PostCardForm = (props) => {
             />
             <div className="new-postCard__tag">
               <DeliveryTag
-                options={deOption}
+                options={deliTagName}
                 selected={cardInput.deliveryTag}
                 setSelected={setCardInput}
               />
             </div>
             <div className="new-postCard__tag">
               <PayTag
-                options={paOptions}
+                options={payTagName}
                 selected={cardInput.payTag}
                 setSelected={setCardInput}
               />
