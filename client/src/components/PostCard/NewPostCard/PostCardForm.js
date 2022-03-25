@@ -174,12 +174,12 @@ const PostCardForm = (props) => {
         <article className="new-postCard__Body">
           <section className="new-postCard__Left">
             <div className="new-postCard__description">
-              <input
+              <textarea
                 className="new-postCard__InputDescription"
                 type="text"
                 value={cardInput.description}
                 maxLength="50"
-                placeholder="모임에 대해 간략히 설명해주세요."
+                placeholder="모임에 대해 설명해주세요."
                 onChange={descriptionChangeHandler}
               />
             </div>
