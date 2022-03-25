@@ -28,6 +28,7 @@ import etcHover from "../../../images/CategoryImgHover/CategoryHover11.png";
 import "./CategoryFilter.scss";
 
 const CategoryFilter = () => {
+  const [isClick, setIsClick] = useState(false);
   const [currentImg, setCurrentImg] = useState(null);
   const [filterCategory, setFilterCategory] = useState(null);
   const filterChangeHandler = (selectedCategory) => {
@@ -35,6 +36,7 @@ const CategoryFilter = () => {
   };
   const imgChangeHandler = (idx) => {
     setCurrentImg(idx);
+    setIsClick(!isClick);
   };
 
   const categoryImgs = [
@@ -75,7 +77,13 @@ const CategoryFilter = () => {
             <li
               className="categoryFilter_area"
               key={idx}
+              onClick={() => imgChangeHandler(idx)}
               onMouseOver={() => imgChangeHandler(idx)}
+              onMouseOut={
+                isClick
+                  ? () => imgChangeHandler(null)
+                  : () => imgChangeHandler(idx)
+              }
             >
               <img
                 className={"categoryFilter_img"}
@@ -84,7 +92,6 @@ const CategoryFilter = () => {
                     ? categoryHoverImgs[idx]
                     : categoryImgs[idx]
                 }
-                onClick={() => imgChangeHandler(idx)}
               />
               <div
                 className={
