@@ -13,6 +13,5 @@ export const categoryOptions = [
 ];
 
 export const deliTagName = [{ text: "배달" }, { text: "포장" }];
+
 export const payTagName = [{ text: "선불" }, { text: "후불" }];
-export const deOption = ["배달", "포장"];
-export const paOptions = ["선불", "후불"];
