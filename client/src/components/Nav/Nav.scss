@@ -8,7 +8,7 @@
   border: 0;
   color: #4d3b3b;
   display: flex;
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 768px) {
     font-size: 0.8rem;
     margin: 0;
     padding: 0.6rem;
@@ -19,7 +19,7 @@
     padding: 10px 14px;
     background-color: #f3f3f3;
     border-radius: 10px;
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 768px) {
       padding: 0.6rem;
     }
   }
@@ -31,10 +31,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  @media screen and (max-width: 700px) {
-    height: 100%;
-    flex-direction: column;
-    padding-bottom: 1.5rem;
+  @media screen and (max-width: 768px) {
+    height: 10vh;
+    padding: 0 0.5rem 0 1.5rem;
   }
   .logo {
     margin-left: 50px;
@@ -42,25 +41,40 @@ header {
     height: 74px;
     display: flex;
     align-items: center;
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 768px) {
       width: 7.063rem;
       height: 3.113rem;
-      margin: 1rem 0 1.5rem 0;
+      margin: 0;
     }
   }
   // SignUp, MyPage, etc... wrapper
+
   .user-access {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin-right: 23px;
-    position: relative;
+    justify-content: flex-end;
     // ** button과 hover의 padding값을 똑같이 설정해야 움직임이 고정된다.
-    @media screen and (max-width: 700px) {
-      margin: 0;
-      gap: 1.2rem;
+    @media screen and (max-width: 768px) {
+      gap: 1rem;
+    }
+    .user-buttons {
+      display: flex;
+      margin-right: 1rem;
+      @media screen and (max-width: 768px) {
+        margin: 0;
+      }
     }
     .user-button {
+      @include user_button;
+      @media screen and (max-width: 768px) {
+        display: none;
+        margin: 0;
+      }
+    }
+    .signing-button {
+      @include user_button;
+    }
+    .noti-button {
       @include user_button;
     }
   }
@@ -68,17 +82,43 @@ header {
   // NavNotification
   .noti-container {
     position: relative;
+
+    @media screen and (max-width: 768px) {
+      font-size: 0.8rem;
+    }
+
+    // 알림창 애니메이션
+    @keyframes noti {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
     .noti-box {
       position: absolute;
-      top: 3rem;
-      right: 10px;
+      top: 4.3rem;
       background-color: white;
-      width: 300px;
-      height: 120px;
+      width: 19rem;
+      height: 7.5rem;
       border-radius: 20px;
       box-shadow: 0 2px 4px #a5a5a5;
       display: flex;
       flex-direction: column;
+      overflow: auto;
+      // 알림창 애니메이션
+      animation-name: noti;
+      animation-duration: 0.4s;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      @media screen and (max-width: 768px) {
+        right: 1rem;
+        margin-left: 2rem;
+        width: calc(100vw - 8rem);
+        max-width: 19rem;
+      }
 
       .noti-title {
         padding: 14px 20px 8px;
@@ -139,4 +179,116 @@ header {
       }
     }
   }
+}
+
+@mixin hamburger-btn {
+  display: flex;
+  width: 100%;
+  height: 5px;
+  background-color: #4d3b3b;
+  justify-content: space-between;
+  border-radius: 20px;
+  transition: all 0.4s;
+}
+
+.hamburger-container {
+  display: none;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    display: flex;
+  }
+}
+.hamburger-box {
+  @media screen and (max-width: 768px) {
+    display: flex;
+    width: 30px;
+    height: 25px;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  .hamburger-toggle {
+    @include hamburger-btn;
+  }
+  .hamburger-top {
+    @include hamburger-btn;
+    transform: translateY(10px) rotate(-45deg);
+  }
+  .hamburger-mid {
+    @include hamburger-btn;
+    opacity: 0;
+  }
+  .hamburger-bot {
+    @include hamburger-btn;
+    transform: translateY(-10px) rotate(45deg);
+  }
+}
+
+// 사이드바 슬라이드 효과
+@keyframes slide {
+  from {
+    width: 0;
+  }
+  to {
+    width: 5rem;
+  }
+}
+.toggle-sidebar {
+  z-index: 999;
+  position: absolute;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px #a5a5a5;
+  top: 5rem;
+  right: 0px;
+  width: 5rem;
+  height: 17rem;
+  padding-top: 2rem;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  // 슬라이드 효과 애니메이션
+  animation-name: slide;
+  animation-duration: 0.3s;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
+
+// 사이드바 버튼 컨테이너
+@mixin sidebar-btn-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  :hover {
+    color: #ee4e34;
+    border-radius: 1rem;
+    background-color: #f3f3f3;
+  }
+}
+.sidebar-btn-box {
+  @include sidebar-btn-box;
+}
+// 사이드바 버튼
+@mixin sidebar-btn {
+  color: #4d3b3b;
+  padding: 1rem;
+}
+.sidebar-btn {
+  @include sidebar-btn;
+}
+
+// 로그아웃 버튼
+.signout-btn-box {
+  @include sidebar-btn-box;
+  :hover {
+    color: #ffffff;
+    border-radius: 1rem;
+    background-color: #ee4e34;
+  }
+}
+.signout-btn {
+  @include sidebar-btn;
+  color: #ee4e34;
 }
