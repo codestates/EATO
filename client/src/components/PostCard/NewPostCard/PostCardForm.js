@@ -5,7 +5,13 @@ import postLogo from "../../../images/Logo.png";
 import DeliveryPay from "../PostCards/DeliveryPay";
 import CountPeople from "../PostCards/CountPeople";
 import { DeliveryTag, PayTag } from "../PostCards/DropdownTag";
-import { categoryOptions, deOption, paOptions } from "../../../resource/datas";
+import {
+  categoryOptions,
+  deliTagName,
+  payTagName,
+  deOption,
+  paOptions,
+} from "../../../resource/datas";
 import PostAddress from "../../Map/PostAddress";
 import MapPreview from "../../Map/MapPreview";
 import DatePicker from "react-datepicker";
@@ -220,18 +226,17 @@ const PostCardForm = (props) => {
             />
             <div className="new-postCard__tag">
               <DeliveryTag
-                options={deOption}
+                options={deliTagName}
                 selected={cardInput.deliveryTag}
                 setSelected={setCardInput}
               />
             </div>
-            <div className="new-postCard__tag">
-              <PayTag
-                options={paOptions}
-                selected={cardInput.payTag}
-                setSelected={setCardInput}
-              />
-            </div>
+            <div className="new-postCard__tag"></div>
+            <PayTag
+              options={payTagName}
+              selected={cardInput.payTag}
+              setSelected={setCardInput}
+            />
           </section>
           <section className="new-postCard__right">
             <div className="new-postCard__postMap">
