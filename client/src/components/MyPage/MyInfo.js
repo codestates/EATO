@@ -7,7 +7,7 @@ import IsLoginState from "../../states/IsLoginState";
 import { userLocation, userNickname } from "../../states/UserInfoState";
 import myImg from "../../../src/images/1.png";
 import ChatRoomCardList from "./ChatRoomCardList";
-
+import pinImg from "../../../src/images/map-pin.png";
 axios.defaults.withCredentials = true;
 
 export default function MyPage() {
@@ -93,7 +93,6 @@ export default function MyPage() {
           localStorage.setItem("nickname", nickname);
           localStorage.setItem("location", location);
           setIsEditMode(false);
-          alert("회원정보가 수정되었습니다.");
         }
       })
       .catch((err) => {
@@ -228,9 +227,8 @@ export default function MyPage() {
             {/* user 위치 */}
           </div>
           <div className="mypage-delivery-fee">
-            {/* <p className="mypage-df-text">
-              “지금까지 배달비를 총 12,000원을 절약했어요.”
-            </p> */}
+            <img src={pinImg} alt="pinImg" className="mypage-pin" />
+            <p className="mypage-df-text">현재 위치가 어딘지 궁금한가요?</p>
           </div>
         </div>
         <ChatRoomCardList />

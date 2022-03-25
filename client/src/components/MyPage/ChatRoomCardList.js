@@ -52,7 +52,7 @@ export default function ChatRoomCardList() {
                     alt="user-img"
                     width="60"
                   />
-                  <p className="mypage-cb-chatname">교촌치킨</p>
+                  <p className="mypage-cb-chatname">모임제목은열두글자까지만</p>
                 </div>
               </div>
             </div>
