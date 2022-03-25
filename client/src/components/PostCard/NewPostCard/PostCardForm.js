@@ -231,12 +231,13 @@ const PostCardForm = (props) => {
                 setSelected={setCardInput}
               />
             </div>
-            <div className="new-postCard__tag"></div>
-            <PayTag
-              options={payTagName}
-              selected={cardInput.payTag}
-              setSelected={setCardInput}
-            />
+            <div className="new-postCard__tag">
+              <PayTag
+                options={payTagName}
+                selected={cardInput.payTag}
+                setSelected={setCardInput}
+              />
+            </div>
           </section>
           <section className="new-postCard__right">
             <div className="new-postCard__postMap">

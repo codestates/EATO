@@ -127,7 +127,6 @@
   width: 40%;
   height: 26rem;
 
-  //Description
   .new-postCard__description {
     display: flex;
     .new-postCard__InputDescription {
@@ -161,24 +160,6 @@
       border: none;
       font-size: 1.1rem;
       text-align: center;
-    }
-
-    .new-postCard__detag {
-      width: 100%;
-      height: 2.2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-    }
-
-    .new-postCard__patag {
-      width: 100%;
-      height: 2.2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1;
     }
   }
 }
