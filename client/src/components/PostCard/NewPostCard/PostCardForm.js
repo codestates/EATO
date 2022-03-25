@@ -9,8 +9,6 @@ import {
   categoryOptions,
   deliTagName,
   payTagName,
-  deOption,
-  paOptions,
 } from "../../../resource/datas";
 import PostAddress from "../../Map/PostAddress";
 import MapPreview from "../../Map/MapPreview";
