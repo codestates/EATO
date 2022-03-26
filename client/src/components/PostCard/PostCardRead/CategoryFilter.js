@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { categoryOptions } from "../../../resource/datas";
+import { categoryOptions, filterHead } from "../../../resource/datas";
+import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
 import totalImg from "../../../images/CategoryImg/Category0.png";
 import hansik from "../../../images/CategoryImg/Category1.png";
 import joongsik from "../../../images/CategoryImg/Category2.png";
@@ -27,16 +28,11 @@ import etcHover from "../../../images/CategoryImgHover/CategoryHover11.png";
 
 import "./CategoryFilter.scss";
 
-const CategoryFilter = () => {
-  const [isClick, setIsClick] = useState(false);
-  const [currentImg, setCurrentImg] = useState(null);
-  const [filterCategory, setFilterCategory] = useState(null);
-  const filterChangeHandler = (selectedCategory) => {
-    setFilterCategory(selectedCategory);
-  };
+export const CategoryFilterImg = () => {
+  const [currentImg, setCurrentImg] = useState(0);
+
   const imgChangeHandler = (idx) => {
     setCurrentImg(idx);
-    setIsClick(!isClick);
   };
 
   const categoryImgs = [
@@ -71,19 +67,13 @@ const CategoryFilter = () => {
   const categoryLists = [{ name: "전체" }, ...categoryOptions];
   return (
     <article className="categoryFilter_wrap">
-      <section className="categoryFilter" onClick={filterChangeHandler}>
+      <section className="categoryFilter">
         {categoryLists.map((category, idx) => {
           return (
             <li
               className="categoryFilter_area"
               key={idx}
               onClick={() => imgChangeHandler(idx)}
-              onMouseOver={() => imgChangeHandler(idx)}
-              onMouseOut={
-                isClick
-                  ? () => imgChangeHandler(null)
-                  : () => imgChangeHandler(idx)
-              }
             >
               <img
                 className={"categoryFilter_img"}
@@ -110,4 +100,38 @@ const CategoryFilter = () => {
   );
 };
 
-export default CategoryFilter;
+export const CategoryfilterTime = () => {
+  const [selected, setSelected] = useState("최근등록순");
+  const [isActive, setIsActive] = useState(false);
+
+  const activeChangeHandler = () => {
+    setIsActive(!isActive);
+  };
+
+  return (
+    <div className="filter-head">
+      <div className="filter-headContent" onClick={activeChangeHandler}>
+        {selected}&nbsp;
+        {isActive ? <GoTriangleDown /> : <GoTriangleUp />}
+      </div>
+      {isActive && (
+        <div className="filter-headLists">
+          {filterHead.map((head, idx) => {
+            return (
+              <li
+                className="filter-headItem"
+                key={idx}
+                onClick={() => {
+                  setSelected(head.text);
+                  setIsActive(false);
+                }}
+              >
+                {head.text}
+              </li>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+};

@@ -21,7 +21,6 @@
 
       &:hover {
         transform: scale(1.15);
-        color: #fd826e;
       }
       .categoryFilter_img {
         width: 100%;
@@ -36,5 +35,50 @@
         color: #fd826e;
       }
     }
+  }
+}
+.filter-head {
+  width: 17rem;
+  height: 2.4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.filter-headContent {
+  cursor: pointer;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
+}
+.filter-headLists {
+  height: 100%;
+}
+.filter-headItem {
+  cursor: pointer;
+  width: 8rem;
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.3rem;
+  text-indent: 0.3rem;
+  list-style: none;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
+  &:hover {
+    color: #fffefe;
+    background-color: #ff4234;
   }
 }
