@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import PostCategory from "../PostCards/PostCategory";
 import postLogo from "../../../images/Logo.png";
@@ -35,7 +35,7 @@ const PostCardForm = (props) => {
   const [disabled, setDisabled] = useState("disabled");
   const [popUp, setPopUp] = useState(false);
 
-  const disable = () => {
+  const disable = useCallback(() => {
     if (
       cardInput.title !== "" &&
       cardInput.description !== "" &&
@@ -48,7 +48,7 @@ const PostCardForm = (props) => {
     ) {
       setDisabled("");
     }
-  };
+  }, [cardInput]);
 
   const titleChangeHandler = (event) => {
     setCardInput((prevState) => {
@@ -147,7 +147,7 @@ const PostCardForm = (props) => {
 
   useEffect(() => {
     disable();
-  }, [cardInput]);
+  }, [disable, cardInput]);
 
   return (
     <>
