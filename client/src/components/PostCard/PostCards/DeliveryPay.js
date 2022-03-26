@@ -4,6 +4,9 @@ import "./DeliveryPay.scss";
 
 const DeliveryPay = ({ pay, setPay }) => {
   const [isActive, setIsActive] = useState(false);
+  const activeChangeHandler = () => {
+    setIsActive(!isActive);
+  };
 
   const increaseHandler = () => {
     setPay((prevState) => {
@@ -23,12 +26,7 @@ const DeliveryPay = ({ pay, setPay }) => {
 
   return (
     <div className="payInput">
-      <div
-        className="payInput-btn"
-        onClick={() => {
-          setIsActive(!isActive);
-        }}
-      >
+      <div className="payInput-btn" onClick={activeChangeHandler}>
         {pay && pay > 0 ? (
           <div className="payInput-finalpay">{finalPay}</div>
         ) : (
@@ -39,10 +37,10 @@ const DeliveryPay = ({ pay, setPay }) => {
         (pay && pay < 0 ? (
           setPay(0)
         ) : (
-          <div className="payInput-content">
-            <FcExpand onClick={decreaseHandler}>-</FcExpand>
+          <div className="payInput-content" onMouseLeave={activeChangeHandler}>
+            <FcExpand className="icons" onClick={decreaseHandler} />
             500원
-            <FcCollapse onClick={increaseHandler}>+</FcCollapse>
+            <FcCollapse className="icons" onClick={increaseHandler} />
           </div>
         ))}
     </div>

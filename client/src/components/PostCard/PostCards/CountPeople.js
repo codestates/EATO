@@ -4,17 +4,22 @@ import "./CountPeople.scss";
 
 const CountPeople = ({ num, setNum }) => {
   const [isActive, setIsActive] = useState(false);
+  const activeChangeHandler = () => {
+    setIsActive(!isActive);
+  };
+
   return (
     <div className="actInput">
-      <div className="actInput-btn" onClick={(e) => setIsActive(!isActive)}>
+      <div className="actInput-btn" onClick={activeChangeHandler}>
         {num && num > 1 ? <>총 {num} 명</> : <>모집인원</>}
       </div>
       {isActive &&
         (num && num < 0 ? (
           setNum(0)
         ) : (
-          <div className="actInput-content">
+          <div className="actInput-content" onMouseLeave={activeChangeHandler}>
             <FcExpand
+              className="icons"
               onClick={() =>
                 setNum((prevState) => {
                   return { ...prevState, totalNum: num - 1 };
@@ -23,6 +28,7 @@ const CountPeople = ({ num, setNum }) => {
             />
             {num}
             <FcCollapse
+              className="icons"
               onClick={() =>
                 setNum((prevState) => {
                   return { ...prevState, totalNum: num + 1 };
