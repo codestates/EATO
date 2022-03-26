@@ -6,9 +6,8 @@ const PostMap = ({ located }) => {
     const mapContainer = document.getElementById("map");
     const mapOption = {
       center: new kakao.maps.LatLng(37.52406330545825, 126.98054529969014),
-      level: 6,
+      level: 3,
     };
-    const makerName = "여기서 만나요!";
     const map = new kakao.maps.Map(mapContainer, mapOption);
     const images =
       "https://media.discordapp.net/attachments/935903391253692419/947743102028906496/My_project_4.png?width=686&height=686";
@@ -35,25 +34,25 @@ const PostMap = ({ located }) => {
 
         marker.setMap(map);
 
-        const iwContent =
-          `<div style= "text-indent:0.5rem">` + `${makerName}` + `</div>`;
+        // const makerName = "여기서 만나요!";
+        // const iwContent = makerName;
 
-        const infowindow = new kakao.maps.InfoWindow({
-          content: iwContent,
-        });
-        infowindow.open(map, marker);
+        // const infowindow = new kakao.maps.InfoWindow({
+        //   content: iwContent,
+        // });
+        // infowindow.open(map, marker);
         map.setCenter(coords);
 
-        kakao.maps.event.addListener(marker, "mouseover", function () {
-          infowindow.open(map, marker);
-        });
+        // kakao.maps.event.addListener(marker, "mouseover", function () {
+        //   infowindow.open(map, marker);
+        // });
 
-        kakao.maps.event.addListener(marker, "mouseout", function () {
-          infowindow.close();
-        });
+        // kakao.maps.event.addListener(marker, "mouseout", function () {
+        //   infowindow.close();
+        // });
       }
     });
-  }, []);
+  }, [located]);
 
   return (
     <div className="postmap">
