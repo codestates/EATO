@@ -1,21 +1,30 @@
 .postCard {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 100vw;
   background-color: #fff8ef;
 }
 
 .postCardWrap {
-  display: flex;
-  justify-content: center;
   width: 100%;
-  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.postCard-header {
+  width: 55%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4rem 0 2.5rem;
 }
 
-.postCards {
+.postCard-lists {
+  width: 60%;
   display: grid;
   grid-template-columns: 5fr 5fr;
-  grid-gap: 3rem;
+  grid-gap: 2rem 5rem;
   justify-content: center;
+  margin-bottom: 2rem;
 }
