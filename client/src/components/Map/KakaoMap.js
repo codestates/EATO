@@ -9,11 +9,10 @@ const KakaoMap = () => {
     // 지도의 옵션 설정
     const mapOption = {
       // 지도 중심 좌표 latitude, longitude
-      center: new kakao.maps.LatLng(37.55769916158911, 126.91657781720895),
+      center: new kakao.maps.LatLng(37.54526254025057, 126.97073456478535),
       // 지도의 확대 레벨
-      lever: 1,
+      level: 6,
     };
-
     // 지도를 표시할 div와 지도 욥션으로 지도 생성
     const map = new kakao.maps.Map(mapContainer, mapOption);
     var positions = [
