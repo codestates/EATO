@@ -28,7 +28,7 @@ import etcHover from "../../../images/CategoryImgHover/CategoryHover11.png";
 
 import "./CategoryFilter.scss";
 
-export const CategoryFilterImg = () => {
+export const CategoryFilter = ({ options, setOptions }) => {
   const [currentImg, setCurrentImg] = useState(0);
 
   const imgChangeHandler = (idx) => {
@@ -64,6 +64,7 @@ export const CategoryFilterImg = () => {
     cafeHover,
     etcHover,
   ];
+
   const categoryLists = [{ name: "전체" }, ...categoryOptions];
   return (
     <article className="categoryFilter_wrap">
@@ -73,7 +74,10 @@ export const CategoryFilterImg = () => {
             <li
               className="categoryFilter_area"
               key={idx}
-              onClick={() => imgChangeHandler(idx)}
+              onClick={() => {
+                imgChangeHandler(idx);
+                setOptions(category.name);
+              }}
             >
               <img
                 className={"categoryFilter_img"}
@@ -82,6 +86,9 @@ export const CategoryFilterImg = () => {
                     ? categoryHoverImgs[idx]
                     : categoryImgs[idx]
                 }
+                alt="categoryImg"
+                value={category.name}
+                value-key={idx}
               />
               <div
                 className={
@@ -89,6 +96,8 @@ export const CategoryFilterImg = () => {
                     ? "categoryFilter_clickedName"
                     : "categoryFilter_name"
                 }
+                value={category.name}
+                value-key={idx}
               >
                 {category.name}
               </div>
@@ -100,8 +109,7 @@ export const CategoryFilterImg = () => {
   );
 };
 
-export const CategoryfilterTime = () => {
-  const [selected, setSelected] = useState("최근등록순");
+export const CategoryfilterChart = ({ options, setOtions }) => {
   const [isActive, setIsActive] = useState(false);
 
   const activeChangeHandler = () => {
@@ -111,7 +119,7 @@ export const CategoryfilterTime = () => {
   return (
     <div className="filter-head">
       <div className="filter-headContent" onClick={activeChangeHandler}>
-        {selected}&nbsp;
+        {options}&nbsp;
         {isActive ? <GoTriangleDown /> : <GoTriangleUp />}
       </div>
       {isActive && (
@@ -122,7 +130,7 @@ export const CategoryfilterTime = () => {
                 className="filter-headItem"
                 key={idx}
                 onClick={() => {
-                  setSelected(head.text);
+                  setOtions(head.text);
                   setIsActive(false);
                 }}
               >
