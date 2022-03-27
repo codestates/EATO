@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { categoryOptions } from "../../../resource/datas";
+import { categoryOptions, filterHead } from "../../../resource/datas";
+import { GoTriangleUp, GoTriangleDown } from "react-icons/go";
 import totalImg from "../../../images/CategoryImg/Category0.png";
 import hansik from "../../../images/CategoryImg/Category1.png";
 import joongsik from "../../../images/CategoryImg/Category2.png";
@@ -27,12 +28,9 @@ import etcHover from "../../../images/CategoryImgHover/CategoryHover11.png";
 
 import "./CategoryFilter.scss";
 
-const CategoryFilter = () => {
-  const [currentImg, setCurrentImg] = useState(null);
-  const [filterCategory, setFilterCategory] = useState(null);
-  const filterChangeHandler = (selectedCategory) => {
-    setFilterCategory(selectedCategory);
-  };
+export const CategoryFilter = ({ options, setOptions }) => {
+  const [currentImg, setCurrentImg] = useState(0);
+
   const imgChangeHandler = (idx) => {
     setCurrentImg(idx);
   };
@@ -66,16 +64,20 @@ const CategoryFilter = () => {
     cafeHover,
     etcHover,
   ];
+
   const categoryLists = [{ name: "전체" }, ...categoryOptions];
   return (
     <article className="categoryFilter_wrap">
-      <section className="categoryFilter" onClick={filterChangeHandler}>
+      <section className="categoryFilter">
         {categoryLists.map((category, idx) => {
           return (
             <li
               className="categoryFilter_area"
               key={idx}
-              onMouseOver={() => imgChangeHandler(idx)}
+              onClick={() => {
+                imgChangeHandler(idx);
+                setOptions(category.name);
+              }}
             >
               <img
                 className={"categoryFilter_img"}
@@ -84,7 +86,9 @@ const CategoryFilter = () => {
                     ? categoryHoverImgs[idx]
                     : categoryImgs[idx]
                 }
-                onClick={() => imgChangeHandler(idx)}
+                alt="categoryImg"
+                value={category.name}
+                value-key={idx}
               />
               <div
                 className={
@@ -92,6 +96,8 @@ const CategoryFilter = () => {
                     ? "categoryFilter_clickedName"
                     : "categoryFilter_name"
                 }
+                value={category.name}
+                value-key={idx}
               >
                 {category.name}
               </div>
@@ -103,4 +109,37 @@ const CategoryFilter = () => {
   );
 };
 
-export default CategoryFilter;
+export const CategoryfilterChart = ({ options, setOtions }) => {
+  const [isActive, setIsActive] = useState(false);
+
+  const activeChangeHandler = () => {
+    setIsActive(!isActive);
+  };
+
+  return (
+    <div className="filter-head">
+      <div className="filter-headContent" onClick={activeChangeHandler}>
+        {options}&nbsp;
+        {isActive ? <GoTriangleDown /> : <GoTriangleUp />}
+      </div>
+      {isActive && (
+        <div className="filter-headLists">
+          {filterHead.map((head, idx) => {
+            return (
+              <li
+                className="filter-headItem"
+                key={idx}
+                onClick={() => {
+                  setOtions(head.text);
+                  setIsActive(false);
+                }}
+              >
+                {head.text}
+              </li>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+};

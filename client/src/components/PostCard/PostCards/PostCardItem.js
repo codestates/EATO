@@ -23,8 +23,11 @@ const PostCardItem = ({
     setIsClick(!isClick);
   };
   const day = new Date(date).toLocaleString("ko-KR");
-  const strDay = String(day).substring(0, 10);
-  const joinTime = String(day).substring(12, 20);
+  const strDay = String(day).substring(0, 12);
+  const joinTime = new Date(date).toLocaleString("ko-KR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
   const payKr =
     String(deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";

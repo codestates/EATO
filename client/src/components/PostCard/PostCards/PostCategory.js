@@ -12,15 +12,16 @@ const Dropdown = ({ options, selected, setSelected }) => {
         <div className="dropdown-content">
           {options.map((option) => (
             <div
+              key={options}
               onClick={() => {
                 setSelected((prevState) => {
-                  return { ...prevState, category: option };
+                  return { ...prevState, category: option.name };
                 });
                 setIsActive(false);
               }}
               className="dropdown-item"
             >
-              {option}
+              {option.name}
             </div>
           ))}
         </div>

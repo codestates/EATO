@@ -12,7 +12,6 @@ const NewPostCard = (props) => {
     localStorage.removeItem("address");
   };
 
-  // const removeAddress = () => {};
   const savePostCardDataHandler = (enteredPostCardData) => {
     const postCardData = {
       ...enteredPostCardData,
@@ -27,7 +26,7 @@ const NewPostCard = (props) => {
     <div className="NewPostCard">
       <button onClick={toggleModal} className="btn-modal">
         <FaPencilAlt />
-        글작성
+        &nbsp;글작성
       </button>
       {modal && (
         <div className="modal">

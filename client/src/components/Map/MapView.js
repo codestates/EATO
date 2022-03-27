@@ -2,7 +2,6 @@ import React from "react";
 import MapPageSearchBar from "../SearchBar/MapPageSearchBar";
 import Nav from "../Nav/Nav";
 import KakaoMap from "./KakaoMap";
-import MapItem from "./MapList/MapItem";
 import "./MapView.scss";
 
 const MapView = () => {

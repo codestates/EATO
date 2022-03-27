@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import PostCategory from "../PostCards/PostCategory";
 import postLogo from "../../../images/Logo.png";
@@ -9,8 +9,6 @@ import {
   categoryOptions,
   deliTagName,
   payTagName,
-  deOption,
-  paOptions,
 } from "../../../resource/datas";
 import PostAddress from "../../Map/PostAddress";
 import MapPreview from "../../Map/MapPreview";
@@ -29,7 +27,7 @@ const PostCardForm = (props) => {
     currentNum: 1,
     totalNum: 1,
     date: new Date(),
-    located: "",
+    located: " ",
     deliveryTag: "수령방법",
     payTag: "지불방법",
   });
@@ -37,7 +35,7 @@ const PostCardForm = (props) => {
   const [disabled, setDisabled] = useState("disabled");
   const [popUp, setPopUp] = useState(false);
 
-  const disable = () => {
+  const disable = useCallback(() => {
     if (
       cardInput.title !== "" &&
       cardInput.description !== "" &&
@@ -50,7 +48,7 @@ const PostCardForm = (props) => {
     ) {
       setDisabled("");
     }
-  };
+  }, [cardInput]);
 
   const titleChangeHandler = (event) => {
     setCardInput((prevState) => {
@@ -149,7 +147,7 @@ const PostCardForm = (props) => {
 
   useEffect(() => {
     disable();
-  }, [cardInput]);
+  }, [disable, cardInput]);
 
   return (
     <>
@@ -178,7 +176,7 @@ const PostCardForm = (props) => {
                 className="new-postCard__InputDescription"
                 type="text"
                 value={cardInput.description}
-                maxLength="50"
+                maxLength="43"
                 placeholder="모임에 대해 설명해주세요."
                 onChange={descriptionChangeHandler}
               />
