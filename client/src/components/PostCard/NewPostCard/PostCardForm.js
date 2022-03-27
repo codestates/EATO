@@ -27,7 +27,7 @@ const PostCardForm = (props) => {
     currentNum: 1,
     totalNum: 1,
     date: new Date(),
-    located: "",
+    located: " ",
     deliveryTag: "수령방법",
     payTag: "지불방법",
   });
@@ -176,7 +176,7 @@ const PostCardForm = (props) => {
                 className="new-postCard__InputDescription"
                 type="text"
                 value={cardInput.description}
-                maxLength="50"
+                maxLength="43"
                 placeholder="모임에 대해 설명해주세요."
                 onChange={descriptionChangeHandler}
               />
