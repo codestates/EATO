@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import PostCardItem from "./PostCardItem";
 import NewPostCard from "../NewPostCard/NewPostCard";
 import "./PostCard.scss";
@@ -7,26 +8,29 @@ import {
   CategoryfilterChart,
 } from "../PostCardRead/CategoryFilter";
 
-const PostCard = ({ data }) => {
+const PostCard = () => {
   const [postCards, setPostCards] = useState([]);
   const [cateSelected, setCateSelected] = useState("전체");
-  const [chartSelected, setChartSelected] = useState("최근등록순");
+  const [chartSelected, setChartSelected] = useState("등록순");
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/document").then((res) => {
+      const posts = res.data.documentList;
+      setPostCards(posts);
+    });
+  }, [cateSelected]);
 
   const addPostCardHandler = (postCard) => {
     setPostCards((prevPostCards) => {
-      return [postCard, ...prevPostCards];
+      return [...prevPostCards, postCard];
     });
   };
 
-  const filterCategory = data.filter((list) => {
+  const filterCategory = postCards.filter((list) => {
     return list.category === cateSelected;
   });
 
-  const filterListChart = data.filter((list) => {
-    return list.category === chartSelected;
-  });
-
-  const fullLists = data.map((postCard) => {
+  const fullLists = postCards.map((postCard) => {
     return (
       <PostCardItem
         key={postCard._id}
@@ -41,6 +45,7 @@ const PostCard = ({ data }) => {
         located={postCard.located}
         deliveryTag={postCard.deliveryTag}
         payTag={postCard.payTag}
+        creatorId={postCard.creatorId}
       />
     );
   });
@@ -65,8 +70,8 @@ const PostCard = ({ data }) => {
   });
 
   return (
-    <div className="postCard">
-      <div className="postCardWrap">
+    <article className="postCard">
+      <section className="postCardWrap">
         <CategoryFilter options={cateSelected} setOptions={setCateSelected} />
         <div className="postCard-header">
           <CategoryfilterChart
@@ -76,18 +81,28 @@ const PostCard = ({ data }) => {
           <NewPostCard onAddPostCard={addPostCardHandler} />
         </div>
         <div className="postCard-lists">
-          {cateSelected === "전체" ? (
+          {cateSelected === "전체" && fullLists}
+          {filterLists.length !== 0 && filterLists}
+        </div>
+        {cateSelected !== "전체" && filterLists.length === 0 && (
+          <div className="lists-empty">
+            <div className="lists-emptyA">해당 모임이 없습니다.</div>
+            <div className="lists-emptyB">모임을 만들어 보세요!</div>
+          </div>
+        )}
+
+        {/* {cateSelected === "전체" ? (
             fullLists
           ) : filterLists.length === 0 ? (
             <div className="lists-empty">
-              해당 모임이 없습니다. 모임을 만들어 보세요!
+              <div className="lists-emptyA">해당 모임이 없습니다.</div>
+              <div className="lists-emptyB">모임을 만들어 보세요!</div>
             </div>
           ) : (
             filterLists
-          )}
-        </div>
-      </div>
-    </div>
+          )} */}
+      </section>
+    </article>
   );
 };
 
