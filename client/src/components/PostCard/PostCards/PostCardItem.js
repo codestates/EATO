@@ -16,12 +16,10 @@ const PostCardItem = ({
   located,
   deliveryTag,
   payTag,
+  creatorId,
 }) => {
   const [isClick, setIsClick] = useState(false);
 
-  const handleCardClick = () => {
-    setIsClick(!isClick);
-  };
   const day = new Date(date).toLocaleString("ko-KR");
   const strDay = String(day).substring(0, 12);
   const joinTime = new Date(date).toLocaleString("ko-KR", {
@@ -32,11 +30,14 @@ const PostCardItem = ({
   const payKr =
     String(deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 
+  const handleCardClick = () => {
+    setIsClick(!isClick);
+  };
+
   return (
     <>
       <article className="postCard-item" onClick={handleCardClick}>
         <section className="postCard-item__left">
-          {/* <div className="postCard-item__leftList">{key}</div> */}
           <div className="postCard-item__leftListC">{category}</div>
           <div className="postCard-item__leftListT">{title}</div>
           <div className="postCard-item__leftListL">{located}</div>
@@ -88,6 +89,8 @@ const PostCardItem = ({
               located={located}
               deliveryTag={deliveryTag}
               payTag={payTag}
+              closeModal={handleCardClick}
+              creatorId={creatorId}
             />
           </div>
         </section>
