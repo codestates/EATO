@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import axios from "axios";
 import Landing from "./pages/Landing";
 import SignIn from "./pages/SignInPage";
 import SignUp from "./pages/SignUpPage";
