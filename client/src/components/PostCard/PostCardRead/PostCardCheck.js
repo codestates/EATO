@@ -21,6 +21,8 @@ const PostCardCheck = ({
   located,
   deliveryTag,
   payTag,
+  creatorId,
+  closeModal,
 }) => {
   const [count, setCount] = useState(1);
   const [isClick, setIsClick] = useState(false);
@@ -34,21 +36,32 @@ const PostCardCheck = ({
     setIsClick(!isClick);
   };
 
+  const joinHandler = () => {
+    navigate("/chatroom");
+  };
+
   const config = {
     "Content-Type": "application/json",
     withCredentials: true,
   };
   axios.defaults.withCredentials = true;
 
-  const deleteHandler = () => {
-    console.log("del clicked");
-    if (window.confirm("모임을 삭제 할까요?")) {
-      axios
-        .delete(`http://localhost:3000/document/${documentId}`, config)
-        .then((res) => {
-          alert("삭제완료");
-          setIsClick(!isClick);
-        });
+  const userId = localStorage.getItem("userId");
+
+  const deletePostCard = (deletePostHandler) => {
+    if (creatorId === userId) {
+      if (window.confirm("모임을 삭제 할까요?")) {
+        axios
+          .delete(`http://localhost:3000/document/${documentId}`, config)
+          .then((res) => {
+            alert("삭제완료");
+            setIsClick(false);
+            closeModal(false);
+          });
+      }
+    } else {
+      setIsClick(false);
+      alert("해당 작성자가 아닙니다.");
     }
   };
 
@@ -71,7 +84,7 @@ const PostCardCheck = ({
           <HiOutlineDotsVertical size="1.5rem" onClick={showClicked} />
           {isClick && (
             <div className="delete-box">
-              <button className="del-btn" onClick={deleteHandler}>
+              <button className="del-btn" onClick={deletePostCard}>
                 삭제
               </button>
             </div>
@@ -128,7 +141,10 @@ const PostCardCheck = ({
       </article>
 
       <article className="postInfo__Footer">
-        <button className="postInfo__actions" onClick={plusCurNum}>
+        <button
+          className="postInfo__actions"
+          onClick={(plusCurNum, joinHandler)}
+        >
           참여하기
         </button>
       </article>
