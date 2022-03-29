@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PostCardDate from "../PostCards/PostCardDate";
@@ -8,37 +8,29 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import "./PostCardCheck.scss";
 
-const PostCardCheck = ({
-  id,
-  key,
-  category,
-  description,
-  title,
-  date,
-  deliveryFee,
-  totalNum,
-  currentNum,
-  located,
-  deliveryTag,
-  payTag,
-  creatorId,
-  closeModal,
-}) => {
+const PostCardCheck = (props) => {
   const [count, setCount] = useState(1);
-  const [isClick, setIsClick] = useState(false);
-  const documentId = id;
+  const [isModified, setIsModified] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const userId = localStorage.getItem("userId");
+  const documentId = props.id;
   const navigate = useNavigate();
+  const joinHandler = () => {
+    navigate("/chatroom");
+  };
+
   const plusCurNum = () => {
     setCount(count + 1);
   };
 
   const showClicked = () => {
-    setIsClick(!isClick);
+    setIsModified(!isModified);
   };
 
-  const joinHandler = () => {
-    navigate("/chatroom");
-  };
+  const finalPay =
+    "각 " +
+    String(props.deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+    "원";
 
   const config = {
     "Content-Type": "application/json",
@@ -46,27 +38,44 @@ const PostCardCheck = ({
   };
   axios.defaults.withCredentials = true;
 
-  const userId = localStorage.getItem("userId");
-
-  const deletePostCard = (deletePostHandler) => {
-    if (creatorId === userId) {
+  const deletePostCard = () => {
+    if (props.creatorId === userId) {
       if (window.confirm("모임을 삭제 할까요?")) {
         axios
-          .delete(`http://localhost:3000/document/${documentId}`, config)
+          .delete(
+            `${process.env.REACT_APP_API_URL}/document/${documentId}`,
+            config
+          )
           .then((res) => {
             alert("삭제완료");
-            setIsClick(false);
-            closeModal(false);
+            setIsModified(false);
+            props.closeModal(false);
           });
       }
     } else {
-      setIsClick(false);
+      setIsModified(false);
       alert("해당 작성자가 아닙니다.");
     }
   };
 
-  const finalPay =
-    "각 " + String(deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+  // const modifiedPostCard = () => {
+  //   if (creatorId === userId) {
+  //     if (window.confirm("모임을 삭제 할까요?")) {
+  //       axios
+  //         .patch(`${process.env.REACT_APP_API_URL}/document/${documentId}`, {
+
+  //         },config)
+  //         .then((res) => {
+  //           alert("삭제완료");
+  //           setIsModified(false);
+  //           props.closeModal(false);
+  //         });
+  //     }
+  //   } else {
+  //     setIsModified(false);
+  //     alert("해당 작성자가 아닙니다.");
+  //   }
+  // };
 
   return (
     <div className="postInfoWrap">
@@ -78,12 +87,13 @@ const PostCardCheck = ({
 
       <article className="postInfo__Header">
         <div className="postInfo__title">
-          <div className="postInfo__InputTitle">{title}</div>
+          <div className="postInfo__InputTitle">{props.title}</div>
         </div>
         <div className="postInfo__work">
           <HiOutlineDotsVertical size="1.5rem" onClick={showClicked} />
-          {isClick && (
-            <div className="delete-box">
+          {isModified && (
+            <div className="modify-box" onMouseLeave={showClicked}>
+              <button className="modify-btn">편집</button>
               <button className="del-btn" onClick={deletePostCard}>
                 삭제
               </button>
@@ -95,16 +105,18 @@ const PostCardCheck = ({
       <article className="postInfo__Body">
         <section className="postInfo__Left">
           <div className="postInfo__description">
-            <div className="postInfo__inputDescription">{description}</div>
+            <div className="postInfo__inputDescription">
+              {props.description}
+            </div>
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__inputListT">{category}</div>
+            <div className="postInfo__inputListT">{props.category}</div>
           </div>
 
           <div className="postInfo__list">
             <div className="postInfo__inputListD">
-              <PostCardDate meetDay={date} />
+              <PostCardDate meetDay={props.date} />
             </div>
           </div>
 
@@ -114,28 +126,28 @@ const PostCardCheck = ({
 
           <div className="postInfo__list">
             <div className="postInfo__inputList">
-              {currentNum} / {totalNum}명
+              {props.currentNum} / {props.totalNum}명
             </div>
           </div>
 
           <div className="postInfo__list">
-            <div className="postInfo__inputListT">{deliveryTag}</div>
+            <div className="postInfo__inputListT">{props.deliveryTag}</div>
           </div>
           <div className="postInfo__list">
-            <div className="postInfo__inputListT">{payTag}</div>
+            <div className="postInfo__inputListT">{props.payTag}</div>
           </div>
         </section>
 
         <section className="postInfo__right">
           <div className="postInfo__postMap">
-            <div className="postInfo__InputPostMap">{located}</div>
+            <div className="postInfo__InputPostMap">{props.located}</div>
           </div>
           <div className="postInfo__titleMap">
             <FaMapMarkerAlt size="1.2rem" color="#ff4234" />
-            {located}
+            {props.located}
           </div>
           <div className="postInfo__map">
-            <PostMap located={located} />
+            <PostMap located={props.located} />
           </div>
         </section>
       </article>
