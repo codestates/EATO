@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import PostCardItem from "./PostCardItem";
 import NewPostCard from "../NewPostCard/NewPostCard";
@@ -13,18 +13,18 @@ const PostCard = () => {
   const [cateSelected, setCateSelected] = useState("전체");
   const [chartSelected, setChartSelected] = useState("등록순");
 
+  const addPostCardHandler = useCallback((postCard) => {
+    setPostCards((prevPostCards) => {
+      return [...prevPostCards, postCard];
+    });
+  }, []);
+
   useEffect(() => {
     axios.get("http://localhost:3000/document").then((res) => {
       const posts = res.data.documentList;
       setPostCards(posts);
     });
-  }, [cateSelected]);
-
-  const addPostCardHandler = (postCard) => {
-    setPostCards((prevPostCards) => {
-      return [...prevPostCards, postCard];
-    });
-  };
+  }, [cateSelected, addPostCardHandler]);
 
   const filterCategory = postCards.filter((list) => {
     return list.category === cateSelected;
