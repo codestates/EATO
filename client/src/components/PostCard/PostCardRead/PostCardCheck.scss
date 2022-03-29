@@ -10,7 +10,7 @@
   align-items: center;
   flex: 1 1 0;
   width: 100%;
-  height: 5.5rem;
+  height: 5rem;
 
   .imgLogo {
     display: flex;
@@ -46,16 +46,16 @@
 .postInfo__Header {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 90%;
   height: 2.5rem;
-  margin-bottom: 0.5rem;
+  margin: 0 1.8rem 0.5rem;
+  border-bottom: 5px solid #ff7a59;
 
   .postInfo__title {
-    width: 90%;
+    width: 95%;
     text-align: left;
-    border-bottom: 5px solid #ff7a59;
     .postInfo__InputTitle {
       margin-left: 0.5rem;
       font-weight: bold;
@@ -65,25 +65,27 @@
   }
 }
 .postInfo__work {
-  position: absolute;
-  margin: 0 2rem 1rem 29rem;
-  width: 4rem;
-  height: 3rem;
+  width: 10rem;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
   align-items: center;
-  .delete-box {
+  margin-right: 0.5rem;
+  cursor: pointer;
+
+  .modify-box {
+    width: 5rem;
+    height: 4.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    margin-top: 2rem;
 
+    .modify-btn,
     .del-btn {
-      position: absolute;
-      margin: 4.5rem 2rem 0 0;
       width: 100%;
-      height: 75%;
+      height: 2rem;
       background-color: #eeecec;
       border: 1px solid #cbcbcb;
       border-radius: 0.5rem;
@@ -91,6 +93,11 @@
       letter-spacing: 0.5rem;
       text-indent: 0.5rem;
       z-index: 10;
+      cursor: pointer;
+      &:hover {
+        color: #fffefe;
+        background-color: #ff4234;
+      }
     }
   }
 }

@@ -123,7 +123,7 @@ export const CategoryfilterChart = ({ options, setOtions }) => {
         {isActive ? <GoTriangleDown /> : <GoTriangleUp />}
       </div>
       {isActive && (
-        <div className="filter-headLists">
+        <div className="filter-headLists" onMouseLeave={activeChangeHandler}>
           {filterHead.map((head, idx) => {
             return (
               <li

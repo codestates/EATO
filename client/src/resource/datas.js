@@ -17,7 +17,7 @@ export const deliTagName = [{ text: "배달" }, { text: "포장" }];
 export const payTagName = [{ text: "선불" }, { text: "후불" }];
 
 export const filterHead = [
-  { text: "등록순" },
-  { text: "최신순" },
   { text: "마감임박순" },
+  { text: "최신순" },
+  { text: "등록순" },
 ];
