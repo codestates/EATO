@@ -90,6 +90,7 @@ const PostCardForm = (props) => {
     withCredentials: true,
   };
   axios.defaults.withCredentials = true;
+
   const submitHandler = async (event) => {
     event.preventDefault();
     const strDate = String(cardInput.date);
@@ -121,7 +122,7 @@ const PostCardForm = (props) => {
     ) {
       axios
         .post(
-          "http://localhost:3000/document",
+          `${process.env.REACT_APP_API_URL}/document`,
           {
             title: postCardData.title,
             deliveryFee: postCardData.deliveryFee,
@@ -137,7 +138,7 @@ const PostCardForm = (props) => {
           config
         )
         .then((res) => {
-          console.log(res);
+          console.log(res, "등록완료");
         })
         .catch((err) => {
           console.log(err);
