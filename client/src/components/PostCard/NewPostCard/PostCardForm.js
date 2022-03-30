@@ -206,10 +206,10 @@ const PostCardForm = (props) => {
                     ? "sunday"
                     : undefined
                 }
-                popperModifiers={{
-                  preventOverflow: { enabled: true },
-                }} // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정
-                popperPlacement="auto" // popUP 화면 중앙 위치
+                // popperModifiers={{
+                //   preventOverflow: { enabled: true },
+                // }} // 모바일 web 환경에서 화면을 벗어나지 않도록 하는 설정
+                // popperPlacement="auto" // popUP 화면 중앙 위치
               />
             </div>
 
