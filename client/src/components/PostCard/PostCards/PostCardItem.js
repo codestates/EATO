@@ -4,31 +4,18 @@ import PostCardCheck from "../PostCardRead/PostCardCheck";
 import { IoClose } from "react-icons/io5";
 import "./PostCardItem.scss";
 
-const PostCardItem = ({
-  id,
-  category,
-  description,
-  title,
-  date,
-  deliveryFee,
-  totalNum,
-  currentNum,
-  located,
-  deliveryTag,
-  payTag,
-  creatorId,
-}) => {
+const PostCardItem = (props) => {
   const [isClick, setIsClick] = useState(false);
 
-  const day = new Date(date).toLocaleString("ko-KR");
+  const day = new Date(props.date).toLocaleString("ko-KR");
   const strDay = String(day).substring(0, 12);
-  const joinTime = new Date(date).toLocaleString("ko-KR", {
+  const joinTime = new Date(props.date).toLocaleString("ko-KR", {
     hour: "2-digit",
     minute: "2-digit",
   });
 
   const payKr =
-    String(deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+    String(props.deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 
   const handleCardClick = () => {
     setIsClick(!isClick);
@@ -38,30 +25,30 @@ const PostCardItem = ({
     <>
       <article className="postCard-item" onClick={handleCardClick}>
         <section className="postCard-item__left">
-          <div className="postCard-item__leftListC">{category}</div>
-          <div className="postCard-item__leftListT">{title}</div>
-          <div className="postCard-item__leftListL">{located}</div>
-          <div className="postCard-item__leftListD">{payKr}</div>
-        </section>
-        <section className="postCard-item__center">
-          {strDay}
-          <div className="displayNone">
-            <PostCardDate meetDay={date} />
+          <div className="postCard-top">
+            <div className="postCard-item__leftListC">{props.category}</div>
+            <div className="postCard-item__leftListC">{strDay}</div>
           </div>
+          <div className="postCard-item__leftListT">{props.title}</div>
+          <div className="postCard-item__leftListL">{props.located}</div>
+          <div className="postCard-item__leftListD">{payKr}</div>
         </section>
         <section className="postCard-item__right">
           <div className="postCard-item__listN">
-            {currentNum} / {totalNum}
+            {props.currentNum} / {props.totalNum}
           </div>
           <div className="postCard-item__listState">
-            {totalNum > currentNum ? "모집중" : "모집완료"}
+            {props.totalNum > props.currentNum ? "모집중" : "모집완료"}
           </div>
           <div className="postCard-item__listTime">{joinTime}</div>
           <div className="postCard-item__Tag">
-            <div className="postCard-item__deliveryTag">{deliveryTag}</div>
-            <div className="postCard-item__payTag">{payTag}</div>
+            <div className="postCard-item__deliveryTag">
+              {props.deliveryTag}
+            </div>
+            <div className="postCard-item__payTag">{props.payTag}</div>
           </div>
         </section>
+        <section className="half-border-raidus"></section>
       </article>
       {isClick && (
         <section className="modal">
@@ -78,19 +65,19 @@ const PostCardItem = ({
               </button>
             </div>
             <PostCardCheck
-              id={id}
-              category={category}
-              description={description}
-              title={title}
-              date={date}
-              deliveryFee={deliveryFee}
-              totalNum={totalNum}
-              currentNum={currentNum}
-              located={located}
-              deliveryTag={deliveryTag}
-              payTag={payTag}
+              id={props.id}
+              category={props.category}
+              description={props.description}
+              title={props.title}
+              date={props.date}
+              deliveryFee={props.deliveryFee}
+              totalNum={props.totalNum}
+              currentNum={props.currentNum}
+              located={props.located}
+              deliveryTag={props.deliveryTag}
+              payTag={props.payTag}
               closeModal={handleCardClick}
-              creatorId={creatorId}
+              creatorId={props.creatorId}
             />
           </div>
         </section>

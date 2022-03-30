@@ -1,14 +1,17 @@
 .postCard-item {
   border-radius: 1rem;
-  display: grid;
-  grid-template-columns: 4fr 1.5fr 2fr;
-  padding: 0.5rem;
-  margin: 1.2rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0;
+  margin: 1rem 0;
   width: 30rem;
-  height: 12rem;
+  height: 11.5rem;
   background-color: #fcfcfc;
   box-shadow: 2px 4px 10px 0 #a5a5a5;
 }
+
 .postCard-item:active {
   position: relative;
   top: 0.2rem;
@@ -18,54 +21,57 @@
   }
 }
 
-.postCard-item__main {
-  width: 8rem;
-}
-
 .postCard-item__left {
-  width: 240px;
-  height: 192px;
+  width: 17rem;
+  height: 12rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   text-align: left;
+  margin-right: 0.3rem;
   padding-left: 1rem;
+  .postCard-top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
   .postCard-item__leftListC {
-    padding-top: 5px;
-    font-size: 16px;
+    padding-top: 0.5rem;
+    font-size: 1rem;
   }
   .postCard-item__leftListT {
-    width: 95%;
-    height: 75px;
-    font-size: 25px;
+    width: 96%;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
     font-weight: bold;
     padding-left: 0.5rem;
-    word-break: break-all;
+    word-break: keep-all;
   }
 
   .postCard-item__leftListL {
     padding: 0.5rem;
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .postCard-item__leftListD {
-    font-size: 30px;
+    font-size: 1.8rem;
     font-weight: bold;
   }
 }
 
-.postCard-item__center {
-  border-right: 2px solid #e7e2e2;
-  padding-right: 5px;
-  text-align: center;
-  word-break: keep-all;
-}
-
 .postCard-item__right {
-  display: grid;
-  grid-template-rows: 1.5fr 1fr 1fr 1fr;
-  text-align: center;
+  width: 8rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 2px solid #e7e2e2;
   .postCard-item__listN {
     padding-top: 0.5rem;
     font-size: 30px;
@@ -73,41 +79,35 @@
   }
   .postCard-item__listState {
     padding-top: 0.5rem;
-    font-size: 18px;
+    font-size: 1.2rem;
   }
 }
 
 .postCard-item__Tag {
-  padding: 5px;
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
   letter-spacing: 0.5rem;
   text-indent: 0.5rem;
-  text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-
+  .postCard-item__deliveryTag,
   .postCard-item__payTag {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2px;
-    font-size: 15px;
-    color: #ffffff;
-    background-color: #ff4234;
-    border-radius: 1rem;
-  }
-
-  .postCard-item__deliveryTag {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 2px;
-    font-size: 15px;
+    font-size: 1rem;
     color: #ffffff;
     background-color: #ff4234;
     border-radius: 1rem;
   }
 }
-
-.displayNone {
-  display: none;
+.half-border-raidus {
+  width: 3rem;
+  height: 6rem;
+  margin-left: 0.2rem;
+  background-color: #ffffff;
+  border-radius: 5rem 0 0 5rem;
+  box-shadow: inset 2px 0 7px 0 #a5a5a5;
 }
