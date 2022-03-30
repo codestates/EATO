@@ -10,9 +10,9 @@ const Dropdown = ({ options, selected, setSelected }) => {
       </div>
       {isActive && (
         <div className="dropdown-content">
-          {options.map((option) => (
+          {options.map((option, idx) => (
             <div
-              key={options}
+              key={idx}
               onClick={() => {
                 setSelected((prevState) => {
                   return { ...prevState, category: option.name };
