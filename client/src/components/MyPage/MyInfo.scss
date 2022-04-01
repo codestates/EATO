@@ -147,7 +147,7 @@
     display: flex;
     flex-direction: column;
     font-weight: 500;
-    padding-top: 20px;
+    padding-top: 30px;
     .mypage-cb-card-list {
       display: inline-flex;
       overflow-x: scroll;
@@ -172,7 +172,6 @@
         width: 100%;
         height: 100%;
         display: flex;
-        // flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 3rem;
@@ -192,7 +191,6 @@
           color: #f05d47;
           margin: 1rem;
           padding: 0.5rem 0.7rem;
-          // border: solid 1px #f05d47;
           border-radius: 1.2rem;
           background-color: transparent;
           cursor: pointer;
