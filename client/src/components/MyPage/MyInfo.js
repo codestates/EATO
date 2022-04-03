@@ -109,7 +109,9 @@ export default function MyPage() {
     <section className="mypage">
       <div className="mypage-whole-container">
         <div className="mypage-container-top">
-          <img src={myImg} className="mypage-img" alt="user-img" />
+          <div className="mypage-img-box">
+            <img src={myImg} className="mypage-img" alt="user-img" />
+          </div>
           <div className="mypage-line-box">
             <div className="mypage-line"></div>
           </div>
