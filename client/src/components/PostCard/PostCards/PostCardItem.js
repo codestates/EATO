@@ -3,36 +3,35 @@ import PostCardDate from "./PostCardDate";
 import PostCardCheck from "../PostCardRead/PostCardCheck";
 import { IoClose } from "react-icons/io5";
 import "./PostCardItem.scss";
-// import axios from "axios";
-// axios.defaults.withCredentials = true;
 
 const PostCardItem = (props) => {
-  const joinTime = props.date.toTimeString().substr(0, 5);
   const [isClick, setIsClick] = useState(false);
-  // const config = {
-  //   "Content-Type": "application/json",
-  //   withCredentials: true,
-  // };
+
+  const day = new Date(props.date).toLocaleString("ko-KR");
+  const strDay = String(day).substring(0, 12);
+  const joinTime = new Date(props.date).toLocaleString("ko-KR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const payKr =
+    String(props.deliveryFee).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 
   const handleCardClick = () => {
     setIsClick(!isClick);
   };
 
-  const payKr = `${props.deliveryFee
-    .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원`;
-
   return (
     <>
       <article className="postCard-item" onClick={handleCardClick}>
-        <section className="postCard-item__left" key={props.id}>
-          <div className="postCard-item__leftListC">{props.category}</div>
+        <section className="postCard-item__left">
+          <div className="postCard-top">
+            <div className="postCard-item__leftListC">{props.category}</div>
+            <div className="postCard-item__leftListC">{strDay}</div>
+          </div>
           <div className="postCard-item__leftListT">{props.title}</div>
           <div className="postCard-item__leftListL">{props.located}</div>
           <div className="postCard-item__leftListD">{payKr}</div>
-        </section>
-        <section className="postCard-item__center">
-          <PostCardDate date={props.date} />
         </section>
         <section className="postCard-item__right">
           <div className="postCard-item__listN">
@@ -42,7 +41,6 @@ const PostCardItem = (props) => {
             {props.totalNum > props.currentNum ? "모집중" : "모집완료"}
           </div>
           <div className="postCard-item__listTime">{joinTime}</div>
-
           <div className="postCard-item__Tag">
             <div className="postCard-item__deliveryTag">
               {props.deliveryTag}
@@ -50,6 +48,7 @@ const PostCardItem = (props) => {
             <div className="postCard-item__payTag">{props.payTag}</div>
           </div>
         </section>
+        <section className="half-border-raidus"></section>
       </article>
       {isClick && (
         <section className="modal">
@@ -65,7 +64,21 @@ const PostCardItem = (props) => {
                 <IoClose />
               </button>
             </div>
-            <PostCardCheck posts={props} />
+            <PostCardCheck
+              id={props.id}
+              category={props.category}
+              description={props.description}
+              title={props.title}
+              date={props.date}
+              deliveryFee={props.deliveryFee}
+              totalNum={props.totalNum}
+              currentNum={props.currentNum}
+              located={props.located}
+              deliveryTag={props.deliveryTag}
+              payTag={props.payTag}
+              closeModal={handleCardClick}
+              creatorId={props.creatorId}
+            />
           </div>
         </section>
       )}

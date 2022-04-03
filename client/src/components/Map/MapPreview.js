@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 const { kakao } = window; // or /*global kakao */
 
-const MapPreview = () => {
+const MapPreview = ({ addres, lat, lon }) => {
   useEffect(() => {
     const mapContainer = document.getElementById("map");
     const mapOption = {
-      center: new kakao.maps.LatLng(37.552304095917314, 126.9139941978578),
-      level: 5,
+      center: new kakao.maps.LatLng(37.52406330545825, 126.98054529969014),
+      level: 7,
     };
     const map = new kakao.maps.Map(mapContainer, mapOption);
     const images =
@@ -19,12 +19,8 @@ const MapPreview = () => {
       imageOption
     );
 
-    const address = localStorage.getItem("address");
     const geocoder = new kakao.maps.services.Geocoder();
-
-    geocoder.addressSearch(address, function (result, status) {
-      console.log("주소야 : ", address);
-      console.log(typeof address);
+    geocoder.addressSearch(addres, function (result, status) {
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
@@ -36,14 +32,14 @@ const MapPreview = () => {
           image: markerImage,
         });
 
-        const markerPosition = mapOption.center;
-
         marker.setMap(map);
 
-        const iwContent = "<div>&nbsp;</div>";
+        const iwContent = `여기서 만나요!`;
         const infowindow = new kakao.maps.InfoWindow({
           content: iwContent,
         });
+        infowindow.open(map, marker);
+        map.setCenter(coords);
 
         kakao.maps.event.addListener(marker, "mouseover", function () {
           infowindow.open(map, marker);
@@ -54,15 +50,15 @@ const MapPreview = () => {
         });
       }
     });
-  }, []);
+  }, [addres]);
 
   return (
     <div className="postmap">
       <div
         id="map"
         style={{
-          width: "18rem",
-          height: "21.5rem",
+          width: "15.7rem",
+          height: "18.5rem",
           borderRadius: "1rem",
         }}
       />

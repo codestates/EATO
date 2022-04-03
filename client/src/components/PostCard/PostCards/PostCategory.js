@@ -1,34 +1,27 @@
 import React, { useState } from "react";
-import { FcShop } from "react-icons/fc";
 import "./PostCategory.scss";
 
 const Dropdown = ({ options, selected, setSelected }) => {
   const [isActive, setIsActive] = useState(false);
-
   return (
     <div className="dropdown">
-      <div className="dropdown-btn" onClick={(e) => setIsActive(!isActive)}>
-        {selected && selected ? (
-          <>
-            <FcShop size="2.25rem" /> {selected}
-          </>
-        ) : (
-          <>
-            <FcShop size="2.25rem" /> &nbsp;Category
-          </>
-        )}
+      <div className="dropdown-btn" onClick={() => setIsActive(!isActive)}>
+        {selected && selected ? <>{selected}</> : <>Category</>}
       </div>
       {isActive && (
         <div className="dropdown-content">
-          {options.map((option) => (
+          {options.map((option, idx) => (
             <div
-              onClick={(e) => {
-                setSelected(option);
+              key={idx}
+              onClick={() => {
+                setSelected((prevState) => {
+                  return { ...prevState, category: option.name };
+                });
                 setIsActive(false);
               }}
               className="dropdown-item"
             >
-              {option}
+              {option.name}
             </div>
           ))}
         </div>

@@ -18,6 +18,9 @@ module.exports = {
       totalNum,
       description,
       category,
+      deliveryTag,
+      payTag,
+      located,
     } = req.body;
 
     const document = {
@@ -28,6 +31,9 @@ module.exports = {
       totalNum,
       description,
       category,
+      deliveryTag,
+      payTag,
+      located,
     };
     if (!document) {
       res.status(400).json({ message: "Failed creating post" });
@@ -39,8 +45,11 @@ module.exports = {
         totalNum,
         description,
         category,
-        ceratorId: userId,
+        creatorId: userId,
         users: userId,
+        deliveryTag,
+        payTag,
+        located,
       });
 
       await User.updateOne(
@@ -60,7 +69,7 @@ module.exports = {
       // //req.app.get("meetingMember")[id] = { [creator.id]: 0 };
       const setChatInfo = {
         chatInfo: { title },
-        ceratorId: userId,
+        creatorId: userId,
         documentChatId: newDocument._id,
       };
       await Chatting.create(setChatInfo);
@@ -87,15 +96,14 @@ module.exports = {
 
   // 게시물 상세 조회
   viewPost: asyncHandler(async (req, res) => {
-    Document.findOne({ _id: req.params.documentId }, (err, docu) => {
+    Document.findOne({ creatorId: req.params.creatorId }, (err, docu) => {
       if (err) {
         return res.status(400).json({ message: console.log(err) });
       }
       const {
         title,
         deliveryFee,
-        latitude,
-        longitude,
+        located,
         date,
         totalNum,
         currentNum,
@@ -104,13 +112,14 @@ module.exports = {
         categoryImg,
         creatorId,
         createdAt,
+        deliveryTag,
+        payTag,
       } = docu;
       return res.status(200).json({
         documentInfo: {
           title,
           deliveryFee,
-          latitude,
-          longitude,
+          located,
           date,
           totalNum,
           currentNum,
@@ -119,6 +128,8 @@ module.exports = {
           categoryImg,
           creatorId,
           createdAt,
+          deliveryTag,
+          payTag,
         },
         message: "게시물 상세 조회 성공!",
       });
@@ -127,45 +138,54 @@ module.exports = {
 
   //게시물 삭제 => 삭제시 삭제 알림 보내줌
   deletePost: asyncHandler(async (req, res) => {
-    const main = req.app.get("main");
-    const chat = req.app.get("chat");
+    // const main = req.app.get("main");
+    // const chat = req.app.get("chat");
     const documentId = Number(req.params.documentId);
-    const meetingMember = req.app.get("meetingMember");
+    // const meetingMember = req.app.get("meetingMember");
 
     const Docu = Document.find({ _id: req.params.documentId });
     const userId = Docu.creatorId;
-    const userList = [];
-    for (const [key, val] of Object.entries(meetingMember[documentId])) {
-      if (val === 0) {
-        userList.push(key);
-      }
-    }
-    const _id = mongoose.Types.ObjectId();
+    // const userList = [];
+    // for (const [key, val] of Object.entries(meetingMember[documentId])) {
+    //   if (val === 0) {
+    //     userList.push(key);
+    //   }
+    // }
+    // const _id = mongoose.Types.ObjectId();
 
-    const noticeInfo = {
-      id: _id,
-      documentId: Docu._id,
-      url: null,
-      target: null,
-      type: "deleteParty",
-      title: Docu.title,
-      message: "게시물이 삭제 되었습니다.",
-    };
+    // const noticeInfo = {
+    //   id: _id,
+    //   documentId: Docu._id,
+    //   url: null,
+    //   target: null,
+    //   type: "deleteParty",
+    //   title: Docu.title,
+    //   message: "게시물이 삭제 되었습니다.",
+    // };
 
     await Docu.deleteOne(); //게시물 삭제
-    await Chatting.findOneAndDelete({ documentChatId: Docu._id }); //게시물 연결된 채팅방 삭제
+    // await Chatting.findOneAndDelete({ documentChatId: Docu._id }); //게시물 연결된 채팅방 삭제
 
-    Notification.createNotice(userList, noticeInfo);
-    main.to(documentId).emit("notice", noticeInfo, userId);
-    main.to(documentId).emit("quit");
-    chat.to(documentId).emit("quit");
-    chat.in(documentId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
-    delete meetingMember[documentId];
+    // Notification.createNotice(userList, noticeInfo);
+    // main.to(documentId).emit("notice", noticeInfo, userId);
+    // main.to(documentId).emit("quit");
+    // chat.to(documentId).emit("quit");
+    // chat.in(documentId).disconnectSockets(); // 연결 끊어서 채팅 방 삭제
+    // delete meetingMember[documentId];
     res.status(200).json({
       message: "게시물이 삭제 되었습니다.",
     });
   }),
 
+  // 회원 탈퇴 시 모든 게시물 삭제
+  deleteAllPost: asyncHandler(async (req, res) => {
+    const Docu = Document.find({ creatorId: req.params.creatorId });
+    console.log("docu", Docu);
+    await Docu.deleteMany(); // 전체 게시물 삭제
+    res.status(200).json({
+      message: "모든 게시물이 삭제 되었습니다.",
+    });
+  }),
   // 게시물 수정
   updatePost: asyncHandler(async (req, res) => {
     const { documentId } = req.body.params;
@@ -178,9 +198,11 @@ module.exports = {
         date,
         deliveryFee,
         totalNum,
-        location,
+        located,
         latitude,
         longitude,
+        deliveryTag,
+        payTag,
       } = req.body;
 
       await Document.findOneAndUpdate(
@@ -192,9 +214,11 @@ module.exports = {
           date,
           deliveryFee,
           totalNum,
-          location,
+          located,
           latitude,
           longitude,
+          deliveryTag,
+          payTag,
         }
       );
       return res.status(200).json({ message: "게시물 수정 완료!" });

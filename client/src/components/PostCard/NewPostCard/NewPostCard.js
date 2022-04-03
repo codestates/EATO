@@ -12,7 +12,6 @@ const NewPostCard = (props) => {
     localStorage.removeItem("address");
   };
 
-  // const removeAddress = () => {};
   const savePostCardDataHandler = (enteredPostCardData) => {
     const postCardData = {
       ...enteredPostCardData,

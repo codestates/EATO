@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import axios from "axios";
 import Landing from "./pages/Landing";
 import SignIn from "./pages/SignInPage";
 import SignUp from "./pages/SignUpPage";
@@ -10,20 +9,7 @@ import Map from "./pages/Map";
 import ChatRoom from "./pages/ChatRoom";
 import RedirectKakao from "../src/components/OAuth/RedirectKakao";
 import RedirectNaver from "../src/components/OAuth/RedirectNaver";
-function App()
-  const [documentData, setDocumentData] = useState(null);
-
-  const render = async () => {
-    await axios
-      .get("http://localhost:3000/document")
-      .then((res) => setDocumentData(res.data.documentList));
-  };
-
-  useEffect(() => {
-    render();
-    console.log("ddd", documentData);
-  }, []);
-
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -35,7 +21,7 @@ function App()
         <Route path="/kakao" element={<RedirectKakao />} />
         <Route path="/naver" element={<RedirectNaver />} />
         <Route path="/map" element={<Map />} />
-        <Route path="/chatroom" element={<ChatRoom />}></Route>
+        <Route path="/chatroom" element={<ChatRoom />} />
       </Routes>
     </BrowserRouter>
   );

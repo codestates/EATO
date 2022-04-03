@@ -1,9 +1,9 @@
-// .popWrap {
-//   position: relative;
-//   width: 100%;
-//   height: 2.6rem;
-//   z-index: 3;
-// }
+.popWrap {
+  position: relative;
+  width: 100%;
+  height: 2.6rem;
+  z-index: 3;
+}
 
 .input-content {
   display: flex;
@@ -12,17 +12,28 @@
   font-size: 1.25rem;
   align-items: center;
   margin-top: 0.3rem;
-  width: 100%;
+  width: 13rem;
   height: 120%;
   background-color: #ffffff;
   border-radius: 1rem;
   box-shadow: 2px 4px 10px 0 #a5a5a5;
 }
 
-.btnPop-box {
-  background-color: #f4f0f0;
-}
-.btnPop {
+.btn-pop {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.2rem;
   letter-spacing: 1.5rem;
   text-indent: 1.5rem;
+  height: 2rem;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  background-color: #ff4234;
+}
+.btn-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 2rem;
 }

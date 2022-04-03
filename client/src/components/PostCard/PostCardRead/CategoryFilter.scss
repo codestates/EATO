@@ -1,0 +1,89 @@
+.categoryFilter_wrap {
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 1rem;
+  justify-content: space-between;
+  .categoryFilter {
+    display: flex;
+    width: 100%;
+    margin: auto;
+    .categoryFilter_area {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      list-style: none;
+      margin: 0 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.15);
+      }
+      .categoryFilter_img {
+        width: 100%;
+      }
+      .categoryFilter_name {
+        width: 100%;
+        text-align: center;
+      }
+      .categoryFilter_clickedName {
+        width: 100%;
+        text-align: center;
+        color: #fd826e;
+      }
+    }
+  }
+}
+.filter-head {
+  width: 17rem;
+  height: 2.4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.filter-headContent {
+  cursor: pointer;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
+}
+.filter-headLists {
+  height: 8rem;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+}
+.filter-headItem {
+  cursor: pointer;
+  width: 8rem;
+  height: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.3rem;
+  text-indent: 0.3rem;
+  list-style: none;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  box-shadow: 2px 4px 10px 0 #a5a5a5;
+  z-index: 777;
+  &:hover {
+    color: #fffefe;
+    background-color: #ff4234;
+  }
+}

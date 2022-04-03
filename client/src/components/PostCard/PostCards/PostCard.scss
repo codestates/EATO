@@ -1,21 +1,58 @@
 .postCard {
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100vw;
+  align-items: center;
   background-color: #fff8ef;
 }
 
 .postCardWrap {
+  width: 65rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+.postCard-header {
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4rem 0 1rem;
+}
+
+.postCard-lists {
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.lists-empty {
+  width: 60%;
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-self: center;
+  font-size: 1.4rem;
+  letter-spacing: 0.5rem;
   margin-bottom: 5rem;
 }
 
-.postCards {
-  display: grid;
-  grid-template-columns: 5fr 5fr;
-  grid-gap: 3rem;
+.lists-emptyA {
+  display: flex;
   justify-content: center;
+  align-self: center;
+}
+.lists-emptyB {
+  display: flex;
+  justify-content: center;
+  align-self: center;
 }

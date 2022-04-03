@@ -23,7 +23,6 @@
     "recoil": "^0.6.1",
     "recoil-persist": "^4.0.0",
     "sass": "^1.49.7",
-    "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

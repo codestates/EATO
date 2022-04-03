@@ -1,11 +1,19 @@
 import React from "react";
 
-const PostCardDate = (props) => {
-  const date = props.date.toLocaleDateString("ko-kr");
+const PostCardDate = ({ meetDay }) => {
+  const strMeetDay = new Date(meetDay).toLocaleString("ko-Kr");
+  const time = new Date(meetDay).toLocaleString("ko-KR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const date = strMeetDay.slice(2, 12);
 
   return (
-    <div className="postCard-date">
-      <div className="postCard-date__D">{date}</div>
+    <div>
+      <div>
+        {date} &nbsp;
+        {time}
+      </div>
     </div>
   );
 };

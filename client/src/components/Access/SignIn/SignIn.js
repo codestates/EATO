@@ -9,7 +9,7 @@ import ForkW from "../../../images/fork_white.png";
 import ForkR from "../../../images/fork_red.png";
 import SocialLogBtn from "../SignUp/SocialLogBtn";
 
-axios.defaults.withCredentials = false;
+axios.defaults.withCredentials = true;
 
 const SignIn = () => {
   // true
@@ -42,7 +42,7 @@ const SignIn = () => {
   const onSubmit = (data) => {
     axios
       .post(
-        "http://localhost:3000/user/login",
+        `${process.env.REACT_APP_API_URL}/user/login`,
         { email: data.email, password: data.password },
         config
       )

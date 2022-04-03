@@ -218,11 +218,9 @@ module.exports = {
   // user/userInfo
   updateProfile: asyncHandler(async (req, res) => {
     const { nickname, location } = req.body;
-    const cookie = res.cookie.userId;
     if (nickname && location) {
       await User.findByIdAndUpdate(
-        { _id: ObjectId(req.params.userId) },
-
+        req.params.userId,
         { nickname: nickname, location: location },
         {
           new: true,
@@ -230,7 +228,10 @@ module.exports = {
       );
       res.status(200).json({
         message: "프로필 업데이트가 완료 되었습니다.",
-        userInfo: { nickname: nickname, location: location },
+        user: {
+          nickname: nickname,
+          location: location,
+        },
         cookie,
       });
     } else {
@@ -245,9 +246,8 @@ module.exports = {
   // user/userInfo
   deleteUser: asyncHandler(async (req, res) => {
     // 유저 본인이 탈퇴 요청
-    const { accesstoken } = req.headers;
-
-    const user = await User.findOne({ token: accesstoken });
+    const { userId } = req.params;
+    const user = await User.findOne({ _id: userId });
     if (user) {
       await user.deleteOne();
       return res.status(200).json({ message: console.log(user) });
