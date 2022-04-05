@@ -94,7 +94,7 @@
       font-size: 30px;
       font-weight: 500;
       @media screen and (max-width: 768px) {
-      font-size: 1.6rem;
+      font-size: 1.2rem;
       }
     }
 
@@ -180,13 +180,17 @@
 
 .mypage-container-bottom {
   padding: 0 15px;
+  @media screen and (max-width: 768px) {
+    padding: 0;
+    }
   .mypage-cb-title {
     display: flex;
     font-size: 20px;
     padding-left: 5px;
     @media screen and (max-width: 768px) {
-      font-size: 1.2rem;
-      }
+    font-size: 1.1rem;
+    padding-left: 0;
+  }
   }
 
   .mypage-chatpost-box {
@@ -294,6 +298,9 @@
         .mypage-cb-lb-fee {
           font-size: 24px;
           font-weight: bold;
+                  @media screen and (max-width: 768px) {
+                      font-size: 1rem;
+                    }
         }
       }
     }

@@ -116,7 +116,7 @@ module.exports = {
   // user/:kana
 
   kakaoSignin: asyncHandler(async (req, res) => {
-    const { kakaoClientId, kakaoClientSecret } = kakao;
+    console.log(req.body);
     const { authorizationCode } = req.body;
     try {
       const tokenResponse = await axios({
@@ -127,8 +127,8 @@ module.exports = {
         },
         params: {
           grant_type: "authorization_code",
-          client_id: kakaoClientId,
-          client_secret: kakaoClientSecret,
+          client_id: "fc0c438f31924f3cab594416ba440d09",
+          client_secret: "9n38xCjUgI",
           code: authorizationCode,
         },
       });
