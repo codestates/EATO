@@ -13,26 +13,24 @@
 }
 
 .mypage {
-  height: 86vh;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
   @media screen and (max-width: 1000px) {
-
   }
-.mypage-whole-container {
-  width: 54rem;
-  padding: 50px 60px;
-  border-radius: 15px;
-  box-shadow: 2px 4px 10px 0 #a5a5a5;
-  margin-bottom: 2rem;
-  @media screen and (max-width: 1000px) {
-    width: 80%;
-    padding: 20px;
-    margin-top: 2rem;
+  .mypage-whole-container {
+    width: 54rem;
+    padding: 50px 60px;
+    border-radius: 15px;
+    box-shadow: 2px 4px 10px 0 #a5a5a5;
+    margin-bottom: 2rem;
+    @media screen and (max-width: 1000px) {
+      width: 80%;
+      padding: 20px;
+      margin-top: 2rem;
+    }
   }
-}
 }
 .mypage-container-top {
   display: flex;
@@ -40,10 +38,9 @@
   align-items: center;
   @media screen and (max-width: 480px) {
     width: 100%;
-  flex-direction: column;
-
+    flex-direction: column;
   }
-  .mypage-img-box {      
+  .mypage-img-box {
     border-radius: 50%;
 
     .mypage-img {
@@ -79,22 +76,23 @@
   justify-content: center;
   padding-left: 35px;
   @media screen and (max-width: 480px) {
-  padding: 1rem 0 0 0;
-
+    width: 100%;
+    padding: 1rem 0 0 0;
   }
 }
 .mypage-ub-top-box {
   display: flex;
   margin-bottom: 10px;
-  place-items: center;
-  
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   .mypage-ub-tb-nickbox {
     width: 170px;
     .mypage-ub-tb-nickname {
       font-size: 30px;
       font-weight: 500;
       @media screen and (max-width: 768px) {
-      font-size: 1.2rem;
+        font-size: 1.2rem;
       }
     }
 
@@ -105,8 +103,9 @@
       font-size: 30px;
       font-weight: 500;
       @media screen and (max-width: 768px) {
-        font-size: 1.6rem;
-        }
+        font-size: 1.2rem;
+      }
+
       &::-webkit-input-placeholder {
         color: #c7c7c7;
       }
@@ -116,7 +115,7 @@
     padding: 1rem;
     display: flex;
     @media screen and (max-width: 768px) {
-    padding: 0;
+      padding: 0;
     }
     .mypage-ub-tb-edit-btn {
       @include edit-btn;
@@ -139,7 +138,6 @@
 .mypage-bb-location {
   width: 100%;
   height: 100%;
-
 }
 .mypage-bb-location-input {
   resize: none;
@@ -165,7 +163,6 @@
   gap: 1rem;
   @media screen and (max-width: 1000px) {
     display: none;
-
   }
   .mypage-pin {
     width: 63.25px;
@@ -182,15 +179,15 @@
   padding: 0 15px;
   @media screen and (max-width: 768px) {
     padding: 0;
-    }
+  }
   .mypage-cb-title {
     display: flex;
     font-size: 20px;
     padding-left: 5px;
     @media screen and (max-width: 768px) {
-    font-size: 1.1rem;
-    padding-left: 0;
-  }
+      font-size: 1.1rem;
+      padding-left: 0;
+    }
   }
 
   .mypage-chatpost-box {
@@ -284,7 +281,7 @@
         font-size: 1.1rem;
         @media screen and (max-width: 768px) {
           font-size: 1rem;
-          }
+        }
       }
 
       .mypage-cb-leftbox {
@@ -293,14 +290,14 @@
           font-size: 1.1rem;
           @media screen and (max-width: 768px) {
             font-size: 1rem;
-            }
+          }
         }
         .mypage-cb-lb-fee {
           font-size: 24px;
           font-weight: bold;
-                  @media screen and (max-width: 768px) {
-                      font-size: 1rem;
-                    }
+          @media screen and (max-width: 768px) {
+            font-size: 1rem;
+          }
         }
       }
     }
