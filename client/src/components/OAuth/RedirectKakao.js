@@ -11,12 +11,20 @@ export default function RedirectKakao() {
     // let client_id = process.env.REACT_APP_KAKAO_CLIENT_ID;
 
     axios
+      // .post(
+      //   `https://cors-anywhere.herokuapp.com/https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_REST_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&code=${code}&client_secret=Hl0YYxbzzA9dGvbXzFqVjarPzR1nmsSF`,
+      //   {
+      //     headers: {
+      //       "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+      //       withCredentials: true,
+      //     },
+      //   }
+      // )
       .post(
-        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_REST_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&code=${code}`,
+        `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.REACT_APP_KAKAO_REST_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&code=${code}&client_secret=Hl0YYxbzzA9dGvbXzFqVjarPzR1nmsSF`,
         {
           headers: {
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-            withCredentials: true,
           },
         }
       )
