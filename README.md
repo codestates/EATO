@@ -3,7 +3,6 @@
 
 ![메인페이지](https://user-images.githubusercontent.com/85715932/153204739-3d255d4b-0f09-4cdf-b8a6-d0cf69a54b83.png)
 
-구현하고 이미지 교체
 ## Project
 ![My project (1) 2 (1)](https://user-images.githubusercontent.com/87610758/153203352-ca91b859-5dfc-41dd-a6f9-ef3476458fc6.png)
 
