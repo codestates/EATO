@@ -1,5 +1,5 @@
 # EATO
-## [Project EATO](https:www.eato.link)
+## [Project EATO](http://eato-klj.s3-website.ap-northeast-2.amazonaws.com)
 
 ![메인페이지](https://user-images.githubusercontent.com/85715932/153204739-3d255d4b-0f09-4cdf-b8a6-d0cf69a54b83.png)
 
