@@ -44,7 +44,6 @@
 | :----------- | :------------: | :------------: | :------------: | :------------: |
 | 팀장👸🏼 | 정선우 | Front-End | [sunwoong3](https://github.com/sunwoong3) | sunw339@gmail.com |
 | 팀원 | 김제완 | Front-End | [Jaekomplett](https://github.com/Jaekomplett) | wanzekim@gmail.com |
-| 팀원 | 이상석 | Back-End | [leesangsuk-cloud](https://github.com/leesangsuk-cloud) | skysangsuk@gmail.com |
 | 팀원 | 이승섭 | Front-End | [seo-B](https://github.com/leesangsuk-cloud) | abejaseop@gmail.com |
 
 ## Tech Stack
